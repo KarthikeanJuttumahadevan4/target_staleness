@@ -1,5 +1,39 @@
 [
   {
+    "listing": "/UPDATED_MODEL/index.html",
+    "items": [
+      "/UPDATED_MODEL/00_Overview.html",
+      "/UPDATED_MODEL/01_Architecture.html",
+      "/UPDATED_MODEL/02_Intake_Extraction.html",
+      "/UPDATED_MODEL/03_VLM_Enrichment.html",
+      "/UPDATED_MODEL/04_Reconstruction.html",
+      "/UPDATED_MODEL/05_Retrieval.html",
+      "/UPDATED_MODEL/06_Model_Inventory.html",
+      "/UPDATED_MODEL/07_Extraction_Methods_and_Papers.html",
+      "/UPDATED_MODEL/ARCHITECTURE/00_README.html",
+      "/UPDATED_MODEL/ARCHITECTURE/01_Technical_Design.html",
+      "/UPDATED_MODEL/ARCHITECTURE/02_Requirements_Coverage.html",
+      "/UPDATED_MODEL/ARCHITECTURE/03_Coding_Implementation_Plan.html",
+      "/UPDATED_MODEL/ARCHITECTURE/04_Database_Design.html",
+      "/UPDATED_MODEL/ARCHITECTURE/05_Directory_Structure.html",
+      "/UPDATED_MODEL/ARCHITECTURE/06_API_Contracts.html",
+      "/UPDATED_MODEL/ARCHITECTURE/07_Milestones.html",
+      "/UPDATED_MODEL/ARCHITECTURE/08_Decisions_Log.html",
+      "/UPDATED_MODEL/ARCHITECTURE/09_Risk_Failure_Modes.html",
+      "/UPDATED_MODEL/ARCHITECTURE/10_Test_Plan.html",
+      "/UPDATED_MODEL/ARCHITECTURE/11_Handoff_Checklist.html",
+      "/UPDATED_MODEL/CODE_DIRECTIONS_AND_PRODUCTS/00_README.html",
+      "/UPDATED_MODEL/CODE_DIRECTIONS_AND_PRODUCTS/01_READINESS_REPORT.html",
+      "/UPDATED_MODEL/CODE_DIRECTIONS_AND_PRODUCTS/02_MODULE_SPECS.html",
+      "/UPDATED_MODEL/CODE_DIRECTIONS_AND_PRODUCTS/03_INTERFACES_MODELS.html",
+      "/UPDATED_MODEL/CODE_DIRECTIONS_AND_PRODUCTS/04_CODE_SCAFFOLDS.html",
+      "/UPDATED_MODEL/CODE_DIRECTIONS_AND_PRODUCTS/05_IMPLEMENTATION_ORDER.html",
+      "/UPDATED_MODEL/CODE_DIRECTIONS_AND_PRODUCTS/07_ACCEPTANCE_CHECKS.html",
+      "/UPDATED_MODEL/CODE_DIRECTIONS_AND_PRODUCTS/08_DEVELOPER_TASKS.html",
+      "/UPDATED_MODEL/CODE_DIRECTIONS_AND_PRODUCTS/09_Implementation_Complete.html"
+    ]
+  },
+  {
     "listing": "/index.html",
     "items": [
       "/lessons/template.html"

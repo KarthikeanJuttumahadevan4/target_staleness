@@ -1,0 +1,1118 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.19">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>retrieval – AI101</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="..//images/favicon.svg" rel="icon" type="image/svg+xml">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-b626d73c4c936ccc3cb08be7d45d1df6.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-020d25d76586e1017cbc2b913b3a2bf1.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-52c85c35cd3cfaec83d0f36150bfac8d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-020d25d76586e1017cbc2b913b3a2bf1.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+
+
+<meta property="og:title" content="AI101">
+<meta property="og:site_name" content="AI101">
+<link rel="canonical" href="https://karthik20062956.github.io/target_staleness/UPDATED_MODEL/05_Retrieval.html">
+</head>
+
+<body class="nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const queryPrefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+    const darkModeDefault = queryPrefersDark.matches;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    queryPrefersDark.addEventListener("change", e => {
+      if(window.localStorage.getItem("quarto-color-scheme") !== null)
+        return;
+      const alternate = e.matches
+      toggleColorMode(alternate);
+      localAlternateSentinel = e.matches ? 'alternate' : 'default'; // this is used alongside local storage!
+      toggleGiscusIfUsed(alternate, darkModeDefault);
+    });
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="https://usma-media.s3.amazonaws.com/inline-images/img/usma_logos/logo/wp_crest_new_only.png" alt="" class="navbar-logo light-content">
+    <img src="https://usma-media.s3.amazonaws.com/inline-images/img/usma_logos/logo/wp_crest_new_only.png" alt="" class="navbar-logo dark-content">
+    </a>
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">AI101</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../UPDATED_MODEL/index.html"> 
+<span class="menu-text">Model Docs</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="2">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#retrieval-hybrid-retrieval-3-modes-temporal-aware" id="toc-retrieval-hybrid-retrieval-3-modes-temporal-aware" class="nav-link active" data-scroll-target="#retrieval-hybrid-retrieval-3-modes-temporal-aware">05_Retrieval — Hybrid Retrieval (3 Modes, Temporal-Aware)</a>
+  <ul class="collapse">
+  <li><a href="#purpose-from-proposal" id="toc-purpose-from-proposal" class="nav-link" data-scroll-target="#purpose-from-proposal">Purpose (from Proposal)</a></li>
+  <li><a href="#git-projects-to-assemble" id="toc-git-projects-to-assemble" class="nav-link" data-scroll-target="#git-projects-to-assemble">Git Projects to Assemble</a>
+  <ul class="collapse">
+  <li><a href="#graphiti-core-retrieval-engine" id="toc-graphiti-core-retrieval-engine" class="nav-link" data-scroll-target="#graphiti-core-retrieval-engine">1. Graphiti (Core Retrieval Engine)</a></li>
+  <li><a href="#ragbrain-checked-generation-layer" id="toc-ragbrain-checked-generation-layer" class="nav-link" data-scroll-target="#ragbrain-checked-generation-layer">2. RAGBrain (Checked Generation Layer)</a></li>
+  <li><a href="#hirag-hierarchical-enhancement" id="toc-hirag-hierarchical-enhancement" class="nav-link" data-scroll-target="#hirag-hierarchical-enhancement">3. HiRAG (Hierarchical Enhancement)</a></li>
+  <li><a href="#helix-multi-hop-hallucination-detection" id="toc-helix-multi-hop-hallucination-detection" class="nav-link" data-scroll-target="#helix-multi-hop-hallucination-detection">4. Helix (Multi-Hop + Hallucination Detection)</a></li>
+  <li><a href="#engram-temporal-scoring" id="toc-engram-temporal-scoring" class="nav-link" data-scroll-target="#engram-temporal-scoring">5. Engram (Temporal Scoring)</a></li>
+  </ul></li>
+  <li><a href="#three-retrieval-modes-implementation" id="toc-three-retrieval-modes-implementation" class="nav-link" data-scroll-target="#three-retrieval-modes-implementation">Three Retrieval Modes (Implementation)</a>
+  <ul class="collapse">
+  <li><a href="#mode-1-pure-rag-vector-temporal-filter" id="toc-mode-1-pure-rag-vector-temporal-filter" class="nav-link" data-scroll-target="#mode-1-pure-rag-vector-temporal-filter">Mode 1: Pure RAG (Vector + temporal filter)</a></li>
+  <li><a href="#mode-2-rag-kg-validator-most-robust" id="toc-mode-2-rag-kg-validator-most-robust" class="nav-link" data-scroll-target="#mode-2-rag-kg-validator-most-robust">Mode 2: RAG + KG Validator (Most robust)</a></li>
+  <li><a href="#mode-3-kg-only-traversal-temporal-filter" id="toc-mode-3-kg-only-traversal-temporal-filter" class="nav-link" data-scroll-target="#mode-3-kg-only-traversal-temporal-filter">Mode 3: KG-Only (Traversal + temporal filter)</a></li>
+  </ul></li>
+  <li><a href="#temporal-query-support" id="toc-temporal-query-support" class="nav-link" data-scroll-target="#temporal-query-support">Temporal Query Support</a>
+  <ul class="collapse">
+  <li><a href="#default-currenttrue" id="toc-default-currenttrue" class="nav-link" data-scroll-target="#default-currenttrue">Default (current=true)</a></li>
+  <li><a href="#historical" id="toc-historical" class="nav-link" data-scroll-target="#historical">Historical</a></li>
+  <li><a href="#system-time-replay-audit" id="toc-system-time-replay-audit" class="nav-link" data-scroll-target="#system-time-replay-audit">System-time replay (audit)</a></li>
+  <li><a href="#include-history" id="toc-include-history" class="nav-link" data-scroll-target="#include-history">Include history</a></li>
+  </ul></li>
+  <li><a href="#fusion-methods" id="toc-fusion-methods" class="nav-link" data-scroll-target="#fusion-methods">Fusion Methods</a></li>
+  <li><a href="#citation-requirements-per-proposal" id="toc-citation-requirements-per-proposal" class="nav-link" data-scroll-target="#citation-requirements-per-proposal">Citation Requirements (per Proposal)</a></li>
+  <li><a href="#retrieval-quality-metrics-evaluation-band" id="toc-retrieval-quality-metrics-evaluation-band" class="nav-link" data-scroll-target="#retrieval-quality-metrics-evaluation-band">Retrieval Quality Metrics (Evaluation Band)</a></li>
+  <li><a href="#risks-mitigations" id="toc-risks-mitigations" class="nav-link" data-scroll-target="#risks-mitigations">Risks &amp; Mitigations</a></li>
+  <li><a href="#open-questions" id="toc-open-questions" class="nav-link" data-scroll-target="#open-questions">Open Questions</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content column-page-left" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+
+
+
+
+
+<section id="retrieval-hybrid-retrieval-3-modes-temporal-aware" class="level1">
+<h1>05_Retrieval — Hybrid Retrieval (3 Modes, Temporal-Aware)</h1>
+<section id="purpose-from-proposal" class="level2">
+<h2 class="anchored" data-anchor-id="purpose-from-proposal">Purpose (from Proposal)</h2>
+<p>All three retrieval modes must default to <strong>current=true</strong> facts:</p>
+<ol type="1">
+<li><strong>Pure RAG</strong> — vector search over current facts</li>
+<li><strong>RAG + KG Validator</strong> — hybrid hits, KG overrides stale</li>
+<li><strong>KG-only</strong> — graph traversal with <code>current=true</code> predicate</li>
+</ol>
+<p>Historical versions only on explicit request (<code>as_of</code> or <code>include_history=True</code>).</p>
+<hr>
+</section>
+<section id="git-projects-to-assemble" class="level2">
+<h2 class="anchored" data-anchor-id="git-projects-to-assemble">Git Projects to Assemble</h2>
+<section id="graphiti-core-retrieval-engine" class="level3">
+<h3 class="anchored" data-anchor-id="graphiti-core-retrieval-engine">1. Graphiti (Core Retrieval Engine)</h3>
+<ul>
+<li><strong>Repo:</strong> <a href="https://github.com/getzep/graphiti">github.com/getzep/graphiti</a></li>
+<li><strong>Key features:</strong>
+<ul>
+<li>Hybrid retrieval: vector + keyword + graph traversal</li>
+<li>Temporal filtering via search query params</li>
+<li>MultiHop traversal for complex questions</li>
+<li>Pluggable vector backends</li>
+</ul></li>
+<li><strong>Provides all three retrieval modes natively</strong></li>
+</ul>
+</section>
+<section id="ragbrain-checked-generation-layer" class="level3">
+<h3 class="anchored" data-anchor-id="ragbrain-checked-generation-layer">2. RAGBrain (Checked Generation Layer)</h3>
+<ul>
+<li><strong>Repo:</strong> <a href="https://github.com/Nagendhra-Madishetti/ragbrain">github.com/Nagendhra-Madishetti/ragbrain</a></li>
+<li><strong>Key features:</strong>
+<ul>
+<li>As-of retrieval (validity-filtered before ranking)</li>
+<li>Checked generation: claim-by-claim verification</li>
+<li>Citation-enriched answers</li>
+<li>System-time replay for audit</li>
+</ul></li>
+<li><strong>Use case:</strong> Add on top of Graphiti for verified answers</li>
+</ul>
+</section>
+<section id="hirag-hierarchical-enhancement" class="level3">
+<h3 class="anchored" data-anchor-id="hirag-hierarchical-enhancement">3. HiRAG (Hierarchical Enhancement)</h3>
+<ul>
+<li><strong>Repo:</strong> Code at <a href="https://arxiv.org/abs/2025.findings-emnlp.321">arxiv.org/abs/2025.findings-emnlp.321</a></li>
+<li><strong>Key features:</strong>
+<ul>
+<li>3-level context (global → bridge → local)</li>
+<li>Hierarchical KG with summary entities</li>
+<li>Bridges knowledge layer disparities</li>
+</ul></li>
+<li><strong>Use case:</strong> Enhance Graphiti retrieval with hierarchical context</li>
+</ul>
+</section>
+<section id="helix-multi-hop-hallucination-detection" class="level3">
+<h3 class="anchored" data-anchor-id="helix-multi-hop-hallucination-detection">4. Helix (Multi-Hop + Hallucination Detection)</h3>
+<ul>
+<li><strong>Repo:</strong> <a href="https://github.com/YashNuhash/Helix">github.com/YashNuhash/Helix</a></li>
+<li><strong>License:</strong> MIT</li>
+<li><strong>Key features:</strong>
+<ul>
+<li>Fuses LightRAG (dual-level retrieval) + Graphiti</li>
+<li>Multi-hop BFS with scoring</li>
+<li>Composite Fidelity Index (CFI) verification</li>
+</ul></li>
+<li><strong>Use case:</strong> Use CFI to score answer faithfulness</li>
+</ul>
+</section>
+<section id="engram-temporal-scoring" class="level3">
+<h3 class="anchored" data-anchor-id="engram-temporal-scoring">5. Engram (Temporal Scoring)</h3>
+<ul>
+<li><strong>Repo:</strong> <a href="https://github.com/jamjet-labs/engram">github.com/jamjet-labs/engram</a></li>
+<li><strong>Key features:</strong>
+<ul>
+<li>HybridRetriever (vector + keyword + temporal)</li>
+<li>Reader modes (recall vs synthesis)</li>
+<li>Active fact versioning (<code>supersede()</code> filters old by default)</li>
+</ul></li>
+<li><strong>Use case:</strong> Mature hybrid retrieval with temporal scoring</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="three-retrieval-modes-implementation" class="level2">
+<h2 class="anchored" data-anchor-id="three-retrieval-modes-implementation">Three Retrieval Modes (Implementation)</h2>
+<section id="mode-1-pure-rag-vector-temporal-filter" class="level3">
+<h3 class="anchored" data-anchor-id="mode-1-pure-rag-vector-temporal-filter">Mode 1: Pure RAG (Vector + temporal filter)</h3>
+<pre><code>INPUT: query
+  1. Encode query → embedding
+  2. Vector search top-K where metadata.current=true
+     (metadata stored at ingestion time by Graphiti/RAGBrain)
+  3. Return ranked hits with citations
+  4. LLM generates answer from hits</code></pre>
+<p><strong>Libraries:</strong> Graphiti.search(query, modes=[‘vector’]) <strong>Temporal filter:</strong> <code>current=true</code> metadata</p>
+<hr>
+</section>
+<section id="mode-2-rag-kg-validator-most-robust" class="level3">
+<h3 class="anchored" data-anchor-id="mode-2-rag-kg-validator-most-robust">Mode 2: RAG + KG Validator (Most robust)</h3>
+<pre><code>INPUT: query
+  1. Vector search top-K hits (without current filter initially)
+  2. For each hit:
+     - Lookup corresponding entity in KG
+     - Check KG.current flag
+     - IF current=false: discard hit, optionally surface superseded-by
+  3. KG traversal: expand neighborhood of valid entities
+  4. Combine surviving vector hits + KG facts
+  5. RRF fusion (Reciprocal Rank Fusion)
+  6. RAGBrain "checked generation":
+     - Generate answer candidate
+     - Verify each claim against retrieved facts
+     - Flag unsupported claims
+  7. Return answer with citations + confidence</code></pre>
+<p><strong>Libraries:</strong> - Graphiti (vector search + KG) - Helix (CFI scoring optional) - RAGBrain (checked generation)</p>
+<hr>
+</section>
+<section id="mode-3-kg-only-traversal-temporal-filter" class="level3">
+<h3 class="anchored" data-anchor-id="mode-3-kg-only-traversal-temporal-filter">Mode 3: KG-Only (Traversal + temporal filter)</h3>
+<pre><code>INPUT: query
+  1. NER on query → seed entities
+  2. Personalized PageRank / BFS from seed entities
+  3. Filter edges where current=true
+  4. Aggregate facts within N-hops
+  5. (Optional) HiRAG hierarchical expansion
+  6. LLM generates answer with citations</code></pre>
+<p><strong>Libraries:</strong> Graphiti (graph query) + HiRAG (hierarchical)</p>
+<hr>
+</section>
+</section>
+<section id="temporal-query-support" class="level2">
+<h2 class="anchored" data-anchor-id="temporal-query-support">Temporal Query Support</h2>
+<section id="default-currenttrue" class="level3">
+<h3 class="anchored" data-anchor-id="default-currenttrue">Default (current=true)</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> graph.query(<span class="st">"Who is CEO?"</span>, valid_at<span class="op">=</span><span class="st">"now"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="historical" class="level3">
+<h3 class="anchored" data-anchor-id="historical">Historical</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> graph.query(</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Who was CEO in 2023?"</span>,</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    valid_at<span class="op">=</span>datetime(<span class="dv">2023</span>, <span class="dv">6</span>, <span class="dv">1</span>)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="system-time-replay-audit" class="level3">
+<h3 class="anchored" data-anchor-id="system-time-replay-audit">System-time replay (audit)</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> graph.query(</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"What did we know about CEO on 2024-01-01?"</span>,</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    believed_at<span class="op">=</span>datetime(<span class="dv">2024</span>, <span class="dv">1</span>, <span class="dv">1</span>)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="include-history" class="level3">
+<h3 class="anchored" data-anchor-id="include-history">Include history</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> graph.query(</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Show all CEO versions"</span>,</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    include_history<span class="op">=</span><span class="va">True</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+</section>
+</section>
+<section id="fusion-methods" class="level2">
+<h2 class="anchored" data-anchor-id="fusion-methods">Fusion Methods</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 46%">
+<col style="width: 28%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Method</th>
+<th>Implementation</th>
+<th>Used In</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Reciprocal Rank Fusion (RRF)</strong></td>
+<td>Standard — fuse vector + keyword + KG ranks</td>
+<td>Mode 2</td>
+</tr>
+<tr class="even">
+<td><strong>Weighted Sum</strong></td>
+<td>(0.4 semantic) + (0.3 keyword) + (0.3 graph)</td>
+<td>Mode 1</td>
+</tr>
+<tr class="odd">
+<td><strong>Composite Score</strong> (context-graph)</td>
+<td>(0.3 recency) + (0.4 confidence) + (0.3 authority)</td>
+<td>Mode 3</td>
+</tr>
+<tr class="even">
+<td><strong>Graph Traversal</strong></td>
+<td>BFS/Dijkstra with temporal edge filtering</td>
+<td>Mode 3</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+<section id="citation-requirements-per-proposal" class="level2">
+<h2 class="anchored" data-anchor-id="citation-requirements-per-proposal">Citation Requirements (per Proposal)</h2>
+<p>Every answer MUST include: - <strong>Fact content</strong> (extracted knowledge) - <strong>Source file</strong> (provenance) - <strong>Extraction path</strong> (text/ocr/vlm/etc.) - <strong>Model used</strong> (for extraction) - <strong>As-of timestamp</strong> (when fact was valid) - <strong>Confidence score</strong> (optional but recommended)</p>
+<p>Example output:</p>
+<pre><code>Answer: Satya Nadella is CEO of Microsoft.
+Citation: Microsoft Annual Report 2024.pdf, p. 12
+Extracted via: vlm (Qwen2.5-VL-7B)
+As-of: 2024-01-15 (file modified)
+Confidence: 0.95
+Note: Previous CEO "Steve Ballmer" superseded on 2014-02-04.</code></pre>
+<hr>
+</section>
+<section id="retrieval-quality-metrics-evaluation-band" class="level2">
+<h2 class="anchored" data-anchor-id="retrieval-quality-metrics-evaluation-band">Retrieval Quality Metrics (Evaluation Band)</h2>
+<p>To be measured during Evaluation Band:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Metric</th>
+<th>Definition</th>
+<th>Target</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Temporal Correctness</strong></td>
+<td>% queries returning newest fact</td>
+<td>≥95%</td>
+</tr>
+<tr class="even">
+<td><strong>Faithfulness (CFI)</strong></td>
+<td>Verified claim ratio</td>
+<td>≥0.9</td>
+</tr>
+<tr class="odd">
+<td><strong>Hit@K</strong></td>
+<td>Top-K contains answer</td>
+<td>≥0.9</td>
+</tr>
+<tr class="even">
+<td><strong>MRR</strong></td>
+<td>Reciprocal rank of first hit</td>
+<td>≥0.8</td>
+</tr>
+<tr class="odd">
+<td><strong>Latency</strong></td>
+<td>Query → answer</td>
+<td>&lt;3s</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+<section id="risks-mitigations" class="level2">
+<h2 class="anchored" data-anchor-id="risks-mitigations">Risks &amp; Mitigations</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 35%">
+<col style="width: 64%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Risk</th>
+<th>Mitigation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>KG validator filters too aggressively (losing relevant hits)</td>
+<td>Tune KG matching (exact vs fuzzy entity match)</td>
+</tr>
+<tr class="even">
+<td>Stale vector hits even after supersession</td>
+<td>Re-index / delete old vectors on supersession</td>
+</tr>
+<tr class="odd">
+<td>Checked generation slows response</td>
+<td>Limit verify step; use smaller model for verification</td>
+</tr>
+<tr class="even">
+<td>CFI false positives</td>
+<td>Use NLI-based verification (LLMConflictResolver)</td>
+</tr>
+<tr class="odd">
+<td>Hierarchical expansion noise</td>
+<td>Tune LSH threshold (0.7 minimum similarity)</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+<section id="open-questions" class="level2">
+<h2 class="anchored" data-anchor-id="open-questions">Open Questions</h2>
+<ol type="1">
+<li>Reranking: cross-encoder vs LLM-as-reranker? Recommendation: ms-marco-MiniLM (fast)</li>
+<li>Knowledge cache: should frequently asked queries cache? TTL suggestion: 1 hour</li>
+<li>Failed entity resolution: fallback to vector-only search?</li>
+<li>Async retrieval or sync for audit trail?</li>
+<li>Should we expose <code>as_of</code> to end users, or auto-detect from query?</li>
+</ol>
+
+
+</section>
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a></div></div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/karthik20062956\.github\.io\/target_staleness\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>© 2026 United States Military Academy</p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>
