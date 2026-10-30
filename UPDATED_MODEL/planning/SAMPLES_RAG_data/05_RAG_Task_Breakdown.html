@@ -1,0 +1,2137 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.19">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>rag_task_breakdown – AI101</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<link href="../../..//images/favicon.svg" rel="icon" type="image/svg+xml">
+<script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-dark-b626d73c4c936ccc3cb08be7d45d1df6.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap-020d25d76586e1017cbc2b913b3a2bf1.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark-52c85c35cd3cfaec83d0f36150bfac8d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../../site_libs/bootstrap/bootstrap-020d25d76586e1017cbc2b913b3a2bf1.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+
+
+<meta property="og:title" content="AI101">
+<meta property="og:site_name" content="AI101">
+<link rel="canonical" href="https://KarthikeanJuttumahadevan4.github.io/target_staleness/UPDATED_MODEL/planning/SAMPLES_RAG_data/05_RAG_Task_Breakdown.html">
+</head>
+
+<body class="nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const queryPrefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+    const darkModeDefault = queryPrefersDark.matches;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    queryPrefersDark.addEventListener("change", e => {
+      if(window.localStorage.getItem("quarto-color-scheme") !== null)
+        return;
+      const alternate = e.matches
+      toggleColorMode(alternate);
+      localAlternateSentinel = e.matches ? 'alternate' : 'default'; // this is used alongside local storage!
+      toggleGiscusIfUsed(alternate, darkModeDefault);
+    });
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="https://usma-media.s3.amazonaws.com/inline-images/img/usma_logos/logo/wp_crest_new_only.png" alt="" class="navbar-logo light-content">
+    <img src="https://usma-media.s3.amazonaws.com/inline-images/img/usma_logos/logo/wp_crest_new_only.png" alt="" class="navbar-logo dark-content">
+    </a>
+    <a class="navbar-brand" href="../../../index.html">
+    <span class="navbar-title">AI101</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../UPDATED_MODEL/index.html"> 
+<span class="menu-text">Model Docs</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="2">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#rag_task_breakdown.md-implementation-task-breakdown" id="toc-rag_task_breakdown.md-implementation-task-breakdown" class="nav-link active" data-scroll-target="#rag_task_breakdown.md-implementation-task-breakdown">05_RAG_Task_Breakdown.md – Implementation Task Breakdown</a>
+  <ul class="collapse">
+  <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview">1. Overview</a>
+  <ul class="collapse">
+  <li><a href="#reference-documents" id="toc-reference-documents" class="nav-link" data-scroll-target="#reference-documents">1.1 Reference Documents</a></li>
+  <li><a href="#priority-definitions" id="toc-priority-definitions" class="nav-link" data-scroll-target="#priority-definitions">1.2 Priority Definitions</a></li>
+  <li><a href="#effort-estimates" id="toc-effort-estimates" class="nav-link" data-scroll-target="#effort-estimates">1.3 Effort Estimates</a></li>
+  </ul></li>
+  <li><a href="#task-grouping-by-role" id="toc-task-grouping-by-role" class="nav-link" data-scroll-target="#task-grouping-by-role">2. Task Grouping By Role</a>
+  <ul class="collapse">
+  <li><a href="#developer-tasks" id="toc-developer-tasks" class="nav-link" data-scroll-target="#developer-tasks">2.1 Developer Tasks</a></li>
+  <li><a href="#tester-tasks" id="toc-tester-tasks" class="nav-link" data-scroll-target="#tester-tasks">2.2 Tester Tasks</a></li>
+  <li><a href="#reviewer-tasks" id="toc-reviewer-tasks" class="nav-link" data-scroll-target="#reviewer-tasks">2.3 Reviewer Tasks</a></li>
+  </ul></li>
+  <li><a href="#phase-based-implementation-order" id="toc-phase-based-implementation-order" class="nav-link" data-scroll-target="#phase-based-implementation-order">3. Phase-Based Implementation Order</a></li>
+  <li><a href="#phase-1-infrastructure-core-pipeline-mvp---p0" id="toc-phase-1-infrastructure-core-pipeline-mvp---p0" class="nav-link" data-scroll-target="#phase-1-infrastructure-core-pipeline-mvp---p0">📌 Phase 1: Infrastructure &amp; Core Pipeline (MVP - P0)</a>
+  <ul class="collapse">
+  <li><a href="#developer-tasks-1" id="toc-developer-tasks-1" class="nav-link" data-scroll-target="#developer-tasks-1">Developer Tasks</a></li>
+  <li><a href="#tester-tasks-1" id="toc-tester-tasks-1" class="nav-link" data-scroll-target="#tester-tasks-1">Tester Tasks</a></li>
+  <li><a href="#reviewer-tasks-1" id="toc-reviewer-tasks-1" class="nav-link" data-scroll-target="#reviewer-tasks-1">Reviewer Tasks</a></li>
+  </ul></li>
+  <li><a href="#phase-2-comparison-module-p0" id="toc-phase-2-comparison-module-p0" class="nav-link" data-scroll-target="#phase-2-comparison-module-p0">📌 Phase 2: Comparison Module (P0)</a>
+  <ul class="collapse">
+  <li><a href="#developer-tasks-2" id="toc-developer-tasks-2" class="nav-link" data-scroll-target="#developer-tasks-2">Developer Tasks</a></li>
+  <li><a href="#tester-tasks-2" id="toc-tester-tasks-2" class="nav-link" data-scroll-target="#tester-tasks-2">Tester Tasks</a></li>
+  <li><a href="#reviewer-tasks-2" id="toc-reviewer-tasks-2" class="nav-link" data-scroll-target="#reviewer-tasks-2">Reviewer Tasks</a></li>
+  </ul></li>
+  <li><a href="#phase-3-quality-assurance-hardening-p1" id="toc-phase-3-quality-assurance-hardening-p1" class="nav-link" data-scroll-target="#phase-3-quality-assurance-hardening-p1">📌 Phase 3: Quality Assurance &amp; Hardening (P1)</a>
+  <ul class="collapse">
+  <li><a href="#developer-tasks-3" id="toc-developer-tasks-3" class="nav-link" data-scroll-target="#developer-tasks-3">Developer Tasks</a></li>
+  <li><a href="#tester-tasks-3" id="toc-tester-tasks-3" class="nav-link" data-scroll-target="#tester-tasks-3">Tester Tasks</a></li>
+  <li><a href="#reviewer-tasks-3" id="toc-reviewer-tasks-3" class="nav-link" data-scroll-target="#reviewer-tasks-3">Reviewer Tasks</a></li>
+  </ul></li>
+  <li><a href="#phase-4-documentation-polish-p2" id="toc-phase-4-documentation-polish-p2" class="nav-link" data-scroll-target="#phase-4-documentation-polish-p2">📌 Phase 4: Documentation &amp; Polish (P2)</a>
+  <ul class="collapse">
+  <li><a href="#developer-tasks-4" id="toc-developer-tasks-4" class="nav-link" data-scroll-target="#developer-tasks-4">Developer Tasks</a></li>
+  <li><a href="#tester-tasks-4" id="toc-tester-tasks-4" class="nav-link" data-scroll-target="#tester-tasks-4">Tester Tasks</a></li>
+  <li><a href="#reviewer-tasks-4" id="toc-reviewer-tasks-4" class="nav-link" data-scroll-target="#reviewer-tasks-4">Reviewer Tasks</a></li>
+  </ul></li>
+  <li><a href="#dependency-graph" id="toc-dependency-graph" class="nav-link" data-scroll-target="#dependency-graph">4. Dependency Graph</a></li>
+  <li><a href="#task-summary-by-role" id="toc-task-summary-by-role" class="nav-link" data-scroll-target="#task-summary-by-role">5. Task Summary by Role</a>
+  <ul class="collapse">
+  <li><a href="#developer-23-tasks" id="toc-developer-23-tasks" class="nav-link" data-scroll-target="#developer-23-tasks">5.1 Developer: 23 Tasks</a></li>
+  <li><a href="#tester-17-tasks" id="toc-tester-17-tasks" class="nav-link" data-scroll-target="#tester-17-tasks">5.2 Tester: 17 Tasks</a></li>
+  <li><a href="#reviewer-12-tasks" id="toc-reviewer-12-tasks" class="nav-link" data-scroll-target="#reviewer-12-tasks">5.3 Reviewer: 12 Tasks</a></li>
+  <li><a href="#total-44-producer-tasks" id="toc-total-44-producer-tasks" class="nav-link" data-scroll-target="#total-44-producer-tasks">5.4 Total: 44 Producer Tasks</a></li>
+  </ul></li>
+  <li><a href="#critical-path-analysis" id="toc-critical-path-analysis" class="nav-link" data-scroll-target="#critical-path-analysis">6. Critical Path Analysis</a></li>
+  <li><a href="#parallel-execution-strategy" id="toc-parallel-execution-strategy" class="nav-link" data-scroll-target="#parallel-execution-strategy">7. Parallel Execution Strategy</a>
+  <ul class="collapse">
+  <li><a href="#week-1-foundation" id="toc-week-1-foundation" class="nav-link" data-scroll-target="#week-1-foundation">Week 1: Foundation</a></li>
+  <li><a href="#week-2-comparison-hardening" id="toc-week-2-comparison-hardening" class="nav-link" data-scroll-target="#week-2-comparison-hardening">Week 2: Comparison + Hardening</a></li>
+  <li><a href="#week-3-polish" id="toc-week-3-polish" class="nav-link" data-scroll-target="#week-3-polish">Week 3: Polish</a></li>
+  </ul></li>
+  <li><a href="#role-specific-work-queues" id="toc-role-specific-work-queues" class="nav-link" data-scroll-target="#role-specific-work-queues">8. Role-Specific Work Queues</a>
+  <ul class="collapse">
+  <li><a href="#developer-work-queue-ordered-by-phase" id="toc-developer-work-queue-ordered-by-phase" class="nav-link" data-scroll-target="#developer-work-queue-ordered-by-phase">8.1 Developer Work Queue (Ordered by Phase)</a></li>
+  <li><a href="#tester-work-queue" id="toc-tester-work-queue" class="nav-link" data-scroll-target="#tester-work-queue">8.2 Tester Work Queue</a></li>
+  <li><a href="#reviewer-work-queue" id="toc-reviewer-work-queue" class="nav-link" data-scroll-target="#reviewer-work-queue">8.3 Reviewer Work Queue</a></li>
+  </ul></li>
+  <li><a href="#next-stage" id="toc-next-stage" class="nav-link" data-scroll-target="#next-stage">9. Next Stage</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content column-page-left" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+
+
+
+
+
+<section id="rag_task_breakdown.md-implementation-task-breakdown" class="level1">
+<h1>05_RAG_Task_Breakdown.md – Implementation Task Breakdown</h1>
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">1. Overview</h2>
+<p>This document breaks down the <strong>approved architecture</strong> (<code>04_RAG_Architecture.md</code>) into <strong>ordered, actionable implementation tasks</strong> grouped by role. Each task includes dependencies, priority, acceptance criteria, and effort estimates.</p>
+<section id="reference-documents" class="level3">
+<h3 class="anchored" data-anchor-id="reference-documents">1.1 Reference Documents</h3>
+<ul>
+<li><strong>01_RAG_Proposal.md</strong> – Core goals and workflow</li>
+<li><strong>02_RAG_Requirements_Analysis.md</strong> – Functional and non-functional requirements</li>
+<li><strong>03_RAG_Specifications.md</strong> – Technical specifications and interfaces</li>
+<li><strong>04_RAG_Architecture.md</strong> – Technology choices and data flow</li>
+</ul>
+</section>
+<section id="priority-definitions" class="level3">
+<h3 class="anchored" data-anchor-id="priority-definitions">1.2 Priority Definitions</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 29%">
+<col style="width: 35%">
+<col style="width: 35%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Priority</th>
+<th>Definition</th>
+<th>Color Code</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>P0</strong></td>
+<td>Critical path; blocks other tasks; required for MVP</td>
+<td>🔴</td>
+</tr>
+<tr class="even">
+<td><strong>P1</strong></td>
+<td>Important feature; needed for full functionality; can wait on P0</td>
+<td>🟡</td>
+</tr>
+<tr class="odd">
+<td><strong>P2</strong></td>
+<td>Nice-to-have; can be deferred post-MVP</td>
+<td>🟢</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="effort-estimates" class="level3">
+<h3 class="anchored" data-anchor-id="effort-estimates">1.3 Effort Estimates</h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Effort</th>
+<th>Definition</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>XS</strong></td>
+<td>&lt; 2 hours</td>
+</tr>
+<tr class="even">
+<td><strong>S</strong></td>
+<td>2-4 hours</td>
+</tr>
+<tr class="odd">
+<td><strong>M</strong></td>
+<td>0.5-1 day</td>
+</tr>
+<tr class="even">
+<td><strong>L</strong></td>
+<td>1-2 days</td>
+</tr>
+<tr class="odd">
+<td><strong>XL</strong></td>
+<td>2-5 days</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+</section>
+<section id="task-grouping-by-role" class="level2">
+<h2 class="anchored" data-anchor-id="task-grouping-by-role">2. Task Grouping By Role</h2>
+<section id="developer-tasks" class="level3">
+<h3 class="anchored" data-anchor-id="developer-tasks">2.1 Developer Tasks</h3>
+<p>Tasks that involve <strong>writing production code</strong> for the Independent RAG System.</p>
+</section>
+<section id="tester-tasks" class="level3">
+<h3 class="anchored" data-anchor-id="tester-tasks">2.2 Tester Tasks</h3>
+<p>Tasks that involve <strong>writing tests</strong> and <strong>validating functionality</strong>.</p>
+</section>
+<section id="reviewer-tasks" class="level3">
+<h3 class="anchored" data-anchor-id="reviewer-tasks">2.3 Reviewer Tasks</h3>
+<p>Tasks that involve <strong>code review</strong>, <strong>documentation review</strong>, and <strong>architectural validation</strong>.</p>
+<hr>
+</section>
+</section>
+<section id="phase-based-implementation-order" class="level2">
+<h2 class="anchored" data-anchor-id="phase-based-implementation-order">3. Phase-Based Implementation Order</h2>
+<p>The implementation is divided into <strong>4 phases</strong>, each with clear milestones. Tasks MUST be completed in phase order.</p>
+<hr>
+</section>
+<section id="phase-1-infrastructure-core-pipeline-mvp---p0" class="level2">
+<h2 class="anchored" data-anchor-id="phase-1-infrastructure-core-pipeline-mvp---p0">📌 Phase 1: Infrastructure &amp; Core Pipeline (MVP - P0)</h2>
+<p><strong>Milestone</strong>: Independent RAG system can ingest <code>samples5/</code>, chunk, embed, index, and retrieve. <strong>Duration</strong>: ~5-7 days <strong>Blocked By</strong>: None (foundation phase)</p>
+<section id="developer-tasks-1" class="level3">
+<h3 class="anchored" data-anchor-id="developer-tasks-1">Developer Tasks</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 4%">
+<col style="width: 7%">
+<col style="width: 15%">
+<col style="width: 16%">
+<col style="width: 12%">
+<col style="width: 9%">
+<col style="width: 25%">
+<col style="width: 8%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>ID</th>
+<th>Task</th>
+<th>Description</th>
+<th>Dependencies</th>
+<th>Priority</th>
+<th>Effort</th>
+<th>Acceptance Criteria</th>
+<th>Owner</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>DEV-001</strong></td>
+<td>Setup RAG_data directory structure</td>
+<td>Create all directories per Section 7 of 04_RAG_Architecture.md</td>
+<td>None</td>
+<td>P0</td>
+<td>XS</td>
+<td>All directories exist with <code>__init__.py</code> files</td>
+<td>Developer</td>
+</tr>
+<tr class="even">
+<td><strong>DEV-002</strong></td>
+<td>Create <code>config.py</code> and <code>config.yaml</code></td>
+<td>Implement configuration loading with env var overrides per Section 9</td>
+<td>DEV-001</td>
+<td>P0</td>
+<td>S</td>
+<td>Config loads from YAML, env vars override, validates</td>
+<td>Developer</td>
+</tr>
+<tr class="odd">
+<td><strong>DEV-003</strong></td>
+<td>Implement File Ingestor (<code>ingestion/file_ingestor.py</code>)</td>
+<td>Full implementation per Section 2.2.1 of 03_RAG_Specifications.md</td>
+<td>DEV-002</td>
+<td>P0</td>
+<td>M</td>
+<td>Ingests all file types in <code>samples5/</code>, calculates hashes, timestamps via extract.py, handles errors</td>
+<td>Developer</td>
+</tr>
+<tr class="even">
+<td><strong>DEV-004</strong></td>
+<td>Implement Text Chunker (<code>chunking/text_chunkers.py</code>)</td>
+<td>Token-based chunking with overlap per Algorithm 4.2</td>
+<td>DEV-002</td>
+<td>P0</td>
+<td>S</td>
+<td>Chunks text files correctly, preserves metadata, handles overlap</td>
+<td>Developer</td>
+</tr>
+<tr class="odd">
+<td><strong>DEV-005</strong></td>
+<td>Implement Table Chunker (<code>chunking/table_chunkers.py</code>)</td>
+<td>Row-based chunking for Excel and PDF tables per Algorithm 4.3</td>
+<td>DEV-002</td>
+<td>P0</td>
+<td>M</td>
+<td>Extracts table headers and rows, creates proper Chunk objects</td>
+<td>Developer</td>
+</tr>
+<tr class="even">
+<td><strong>DEV-006</strong></td>
+<td>Implement Embedder (<code>embedding/embedder.py</code>)</td>
+<td>Embedding generation with fallback per Section 2.2.3</td>
+<td>DEV-002</td>
+<td>P0</td>
+<td>M</td>
+<td>Loads all-MiniLM-L6-v2 or bge-small, batches chunks, L2-normalizes</td>
+<td>Developer</td>
+</tr>
+<tr class="odd">
+<td><strong>DEV-007</strong></td>
+<td>Implement Qdrant Client (<code>storage/qdrant_client.py</code>)</td>
+<td>Vector store interaction per Section 2.2.4</td>
+<td>DEV-002</td>
+<td>P0</td>
+<td>S</td>
+<td>Creates collection, indexes vectors with payloads, searches, deletes</td>
+<td>Developer</td>
+</tr>
+<tr class="even">
+<td><strong>DEV-008</strong></td>
+<td>Implement Fact Deducer (<code>deduction/fact_deducer.py</code>)</td>
+<td>Regex + table-based deduction per Algorithm 4.5</td>
+<td>DEV-005, DEV-006</td>
+<td>P0</td>
+<td>M</td>
+<td>Extracts facts from chunks, maps to predicates, calculates confidence</td>
+<td>Developer</td>
+</tr>
+<tr class="odd">
+<td><strong>DEV-009</strong></td>
+<td>Implement JSONL Storage (<code>storage/jsonl_store.py</code>)</td>
+<td>Persistent storage for deductions</td>
+<td>DEV-002</td>
+<td>P0</td>
+<td>S</td>
+<td>Reads/writes deductions.jsonl, maintains append-only log</td>
+<td>Developer</td>
+</tr>
+<tr class="even">
+<td><strong>DEV-010</strong></td>
+<td>Create Main Pipeline Script (<code>ingest_pipeline.py</code>)</td>
+<td>Orchestrates ingestion → chunking → embedding → deduction → storage</td>
+<td>DEV-003–DEV-009</td>
+<td>P0</td>
+<td>M</td>
+<td>CLI command: <code>python ingest_pipeline.py --batch</code> or <code>--watch</code></td>
+<td>Developer</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="tester-tasks-1" class="level3">
+<h3 class="anchored" data-anchor-id="tester-tasks-1">Tester Tasks</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 4%">
+<col style="width: 7%">
+<col style="width: 15%">
+<col style="width: 16%">
+<col style="width: 12%">
+<col style="width: 9%">
+<col style="width: 25%">
+<col style="width: 8%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>ID</th>
+<th>Task</th>
+<th>Description</th>
+<th>Dependencies</th>
+<th>Priority</th>
+<th>Effort</th>
+<th>Acceptance Criteria</th>
+<th>Owner</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>TEST-001</strong></td>
+<td>Unit tests for File Ingestor</td>
+<td>Test ingestion of all file types, error handling, hash calculation</td>
+<td>DEV-003</td>
+<td>P0</td>
+<td>S</td>
+<td>≥80% coverage of file_ingestor.py</td>
+<td>Tester</td>
+</tr>
+<tr class="even">
+<td><strong>TEST-002</strong></td>
+<td>Unit tests for Text Chunker</td>
+<td>Test chunking logic, overlap, metadata preservation</td>
+<td>DEV-004</td>
+<td>P0</td>
+<td>S</td>
+<td>≥80% coverage of text_chunkers.py</td>
+<td>Tester</td>
+</tr>
+<tr class="odd">
+<td><strong>TEST-003</strong></td>
+<td>Unit tests for Embedder</td>
+<td>Test embedding generation, batching, normalization</td>
+<td>DEV-006</td>
+<td>P0</td>
+<td>S</td>
+<td>≥80% coverage of embedder.py</td>
+<td>Tester</td>
+</tr>
+<tr class="even">
+<td><strong>TEST-004</strong></td>
+<td>Unit tests for Qdrant Client</td>
+<td>Test collection creation, indexing, search</td>
+<td>DEV-007</td>
+<td>P0</td>
+<td>S</td>
+<td>≥80% coverage of qdrant_client.py</td>
+<td>Tester</td>
+</tr>
+<tr class="odd">
+<td><strong>TEST-005</strong></td>
+<td>Unit tests for Fact Deducer</td>
+<td>Test fact extraction, predicate mapping, confidence</td>
+<td>DEV-008</td>
+<td>P0</td>
+<td>S</td>
+<td>≥80% coverage of fact_deducer.py</td>
+<td>Tester</td>
+</tr>
+<tr class="even">
+<td><strong>TEST-006</strong></td>
+<td>Integration test: Full Pipeline</td>
+<td>Test end-to-end ingestion of <code>samples5/</code></td>
+<td>DEV-010</td>
+<td>P0</td>
+<td>M</td>
+<td>All files ingested, chunks created, deductions stored</td>
+<td>Tester</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="reviewer-tasks-1" class="level3">
+<h3 class="anchored" data-anchor-id="reviewer-tasks-1">Reviewer Tasks</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 4%">
+<col style="width: 7%">
+<col style="width: 15%">
+<col style="width: 16%">
+<col style="width: 12%">
+<col style="width: 9%">
+<col style="width: 25%">
+<col style="width: 8%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>ID</th>
+<th>Task</th>
+<th>Description</th>
+<th>Dependencies</th>
+<th>Priority</th>
+<th>Effort</th>
+<th>Acceptance Criteria</th>
+<th>Owner</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>REV-001</strong></td>
+<td>Code Review: Infrastructure (config, ingestion, chunking)</td>
+<td>Review DEV-001 through DEV-005</td>
+<td>DEV-001–DEV-005</td>
+<td>P0</td>
+<td>M</td>
+<td>Code follows spec, no KG dependencies, proper error handling</td>
+<td>Reviewer</td>
+</tr>
+<tr class="even">
+<td><strong>REV-002</strong></td>
+<td>Code Review: Embedding &amp; Storage</td>
+<td>Review DEV-006 through DEV-009</td>
+<td>DEV-006–DEV-009</td>
+<td>P0</td>
+<td>M</td>
+<td>Embeddings correct, Qdrant client works, JSONL storage reliable</td>
+<td>Reviewer</td>
+</tr>
+<tr class="odd">
+<td><strong>REV-003</strong></td>
+<td>Code Review: Pipeline Orchestration</td>
+<td>Review DEV-010</td>
+<td>DEV-010</td>
+<td>P0</td>
+<td>S</td>
+<td>Pipeline integrates correctly, CLI works</td>
+<td>Reviewer</td>
+</tr>
+<tr class="even">
+<td><strong>REV-004</strong></td>
+<td>Architecture Validation</td>
+<td>Verify adherence to 04_RAG_Architecture.md</td>
+<td>All DEV tasks</td>
+<td>P0</td>
+<td>L</td>
+<td>All components match architecture, independence maintained</td>
+<td>Reviewer</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+</section>
+<section id="phase-2-comparison-module-p0" class="level2">
+<h2 class="anchored" data-anchor-id="phase-2-comparison-module-p0">📌 Phase 2: Comparison Module (P0)</h2>
+<p><strong>Milestone</strong>: System can compare RAG deductions with KG facts and detect inconsistencies. <strong>Duration</strong>: ~3-4 days <strong>Blocked By</strong>: Phase 1 completion</p>
+<section id="developer-tasks-2" class="level3">
+<h3 class="anchored" data-anchor-id="developer-tasks-2">Developer Tasks</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 4%">
+<col style="width: 7%">
+<col style="width: 15%">
+<col style="width: 16%">
+<col style="width: 12%">
+<col style="width: 9%">
+<col style="width: 25%">
+<col style="width: 8%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>ID</th>
+<th>Task</th>
+<th>Description</th>
+<th>Dependencies</th>
+<th>Priority</th>
+<th>Effort</th>
+<th>Acceptance Criteria</th>
+<th>Owner</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>DEV-011</strong></td>
+<td>Implement Aligner (<code>comparison/aligner.py</code>)</td>
+<td>Match RAG deductions to KG facts per Algorithm 6.1</td>
+<td>DEV-008, Phase 1</td>
+<td>P0</td>
+<td>L</td>
+<td>Exact, fuzzy, and semantic matching with configurable thresholds</td>
+<td>Developer</td>
+</tr>
+<tr class="even">
+<td><strong>DEV-012</strong></td>
+<td>Implement Inconsistency Detector (<code>comparison/detectors.py</code>)</td>
+<td>Detect all inconsistency types per Algorithm 6.2</td>
+<td>DEV-011</td>
+<td>P0</td>
+<td>M</td>
+<td>Identifies value conflicts, missing facts, temporal conflicts</td>
+<td>Developer</td>
+</tr>
+<tr class="odd">
+<td><strong>DEV-013</strong></td>
+<td>Implement Resolver (<code>resolution/resolver.py</code>)</td>
+<td>Apply rules R1-R7 per Algorithm 6.3</td>
+<td>DEV-012</td>
+<td>P0</td>
+<td>L</td>
+<td>Auto-resolves ≥80% of inconsistencies, escalates rest</td>
+<td>Developer</td>
+</tr>
+<tr class="even">
+<td><strong>DEV-014</strong></td>
+<td>Implement Reporter (<code>resolution/reports.py</code>)</td>
+<td>Generate human-readable escalation reports</td>
+<td>DEV-013</td>
+<td>P0</td>
+<td>M</td>
+<td>Reports contain both sides, evidence, recommendations</td>
+<td>Developer</td>
+</tr>
+<tr class="odd">
+<td><strong>DEV-015</strong></td>
+<td>Implement KG Fact Fetcher</td>
+<td>Utility to query KG facts via Neo4j driver</td>
+<td>DEV-011</td>
+<td>P0</td>
+<td>S</td>
+<td>Reads KG facts without writing; handles connection errors</td>
+<td>Developer</td>
+</tr>
+<tr class="even">
+<td><strong>DEV-016</strong></td>
+<td>Create Comparison Script (<code>compare.py</code>)</td>
+<td>Orchestrates alignment → detection → resolution</td>
+<td>DEV-011–DEV-015</td>
+<td>P0</td>
+<td>M</td>
+<td>CLI command: <code>python compare.py</code></td>
+<td>Developer</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="tester-tasks-2" class="level3">
+<h3 class="anchored" data-anchor-id="tester-tasks-2">Tester Tasks</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 4%">
+<col style="width: 7%">
+<col style="width: 15%">
+<col style="width: 16%">
+<col style="width: 12%">
+<col style="width: 9%">
+<col style="width: 25%">
+<col style="width: 8%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>ID</th>
+<th>Task</th>
+<th>Description</th>
+<th>Dependencies</th>
+<th>Priority</th>
+<th>Effort</th>
+<th>Acceptance Criteria</th>
+<th>Owner</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>TEST-007</strong></td>
+<td>Unit tests for Aligner</td>
+<td>Test exact, fuzzy, semantic matching</td>
+<td>DEV-011</td>
+<td>P0</td>
+<td>M</td>
+<td>≥80% coverage, thresholds configurable</td>
+<td>Tester</td>
+</tr>
+<tr class="even">
+<td><strong>TEST-008</strong></td>
+<td>Unit tests for Inconsistency Detector</td>
+<td>Test detection of all inconsistency types</td>
+<td>DEV-012</td>
+<td>P0</td>
+<td>M</td>
+<td>≥80% coverage, handles edge cases</td>
+<td>Tester</td>
+</tr>
+<tr class="odd">
+<td><strong>TEST-009</strong></td>
+<td>Unit tests for Resolver</td>
+<td>Test rule application and escalation</td>
+<td>DEV-013</td>
+<td>P0</td>
+<td>M</td>
+<td>All 7 rules tested, escalation triggered correctly</td>
+<td>Tester</td>
+</tr>
+<tr class="even">
+<td><strong>TEST-010</strong></td>
+<td>Unit tests for Reporter</td>
+<td>Test report generation format</td>
+<td>DEV-014</td>
+<td>P0</td>
+<td>S</td>
+<td>Reports match template in spec</td>
+<td>Tester</td>
+</tr>
+<tr class="odd">
+<td><strong>TEST-011</strong></td>
+<td>Integration test: Full Comparison</td>
+<td>Test end-to-end comparison with planted inconsistencies</td>
+<td>DEV-016</td>
+<td>P0</td>
+<td>L</td>
+<td>≥90% inconsistency detection rate, ≥80% auto-resolution rate</td>
+<td>Tester</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="reviewer-tasks-2" class="level3">
+<h3 class="anchored" data-anchor-id="reviewer-tasks-2">Reviewer Tasks</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 4%">
+<col style="width: 7%">
+<col style="width: 15%">
+<col style="width: 16%">
+<col style="width: 12%">
+<col style="width: 9%">
+<col style="width: 25%">
+<col style="width: 8%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>ID</th>
+<th>Task</th>
+<th>Description</th>
+<th>Dependencies</th>
+<th>Priority</th>
+<th>Effort</th>
+<th>Acceptance Criteria</th>
+<th>Owner</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>REV-005</strong></td>
+<td>Code Review: Comparison Components</td>
+<td>Review DEV-011 through DEV-015</td>
+<td>DEV-011–DEV-015</td>
+<td>P0</td>
+<td>L</td>
+<td>Aligner, Detector, Resolver, Reporter all functional</td>
+<td>Reviewer</td>
+</tr>
+<tr class="even">
+<td><strong>REV-006</strong></td>
+<td>Test Review: Comparison Module</td>
+<td>Verify TEST-007 through TEST-011</td>
+<td>TEST-007–TEST-011</td>
+<td>P0</td>
+<td>M</td>
+<td>Tests cover all inconsistency types and resolutions</td>
+<td>Reviewer</td>
+</tr>
+<tr class="odd">
+<td><strong>REV-007</strong></td>
+<td>Independence Audit</td>
+<td>Verify no KG dependencies in RAG pipeline</td>
+<td>All code</td>
+<td>P0</td>
+<td>L</td>
+<td>Zero imports from temporal/, ingestion/, indexing/; no Neo4j in RAG code</td>
+<td>Reviewer</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+</section>
+<section id="phase-3-quality-assurance-hardening-p1" class="level2">
+<h2 class="anchored" data-anchor-id="phase-3-quality-assurance-hardening-p1">📌 Phase 3: Quality Assurance &amp; Hardening (P1)</h2>
+<p><strong>Milestone</strong>: System is robust, well-tested, and production-ready. <strong>Duration</strong>: ~3 days <strong>Blocked By</strong>: Phase 2 completion</p>
+<section id="developer-tasks-3" class="level3">
+<h3 class="anchored" data-anchor-id="developer-tasks-3">Developer Tasks</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 4%">
+<col style="width: 7%">
+<col style="width: 15%">
+<col style="width: 16%">
+<col style="width: 12%">
+<col style="width: 9%">
+<col style="width: 25%">
+<col style="width: 8%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>ID</th>
+<th>Task</th>
+<th>Description</th>
+<th>Dependencies</th>
+<th>Priority</th>
+<th>Effort</th>
+<th>Acceptance Criteria</th>
+<th>Owner</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>DEV-017</strong></td>
+<td>Add incremental file watcher</td>
+<td>Implement <code>--watch</code> mode using watchdog</td>
+<td>DEV-003, DEV-010</td>
+<td>P1</td>
+<td>M</td>
+<td>Detects file changes, triggers re-ingestion</td>
+<td>Developer</td>
+</tr>
+<tr class="even">
+<td><strong>DEV-018</strong></td>
+<td>Add logging</td>
+<td>Structured logging for all components</td>
+<td>Phase 1 &amp; 2</td>
+<td>P1</td>
+<td>S</td>
+<td>Logs to file and console, configurable levels</td>
+<td>Developer</td>
+</tr>
+<tr class="odd">
+<td><strong>DEV-019</strong></td>
+<td>Add metrics collection</td>
+<td>Track ingestion stats, performance metrics</td>
+<td>Phase 1 &amp; 2</td>
+<td>P1</td>
+<td>M</td>
+<td>Reports: files processed, chunks created, time taken</td>
+<td>Developer</td>
+</tr>
+<tr class="even">
+<td><strong>DEV-020</strong></td>
+<td>Add CLI arguments</td>
+<td>Parse command-line arguments for all scripts</td>
+<td>DEV-010, DEV-016</td>
+<td>P1</td>
+<td>S</td>
+<td>Support <code>--batch</code>, <code>--watch</code>, <code>--config</code>, <code>--help</code></td>
+<td>Developer</td>
+</tr>
+<tr class="odd">
+<td><strong>DEV-021</strong></td>
+<td>Add input validation</td>
+<td>Validate all inputs (file paths, config values)</td>
+<td>Phase 1 &amp; 2</td>
+<td>P1</td>
+<td>S</td>
+<td>Graceful error messages for invalid inputs</td>
+<td>Developer</td>
+</tr>
+<tr class="even">
+<td><strong>DEV-022</strong></td>
+<td>Add retry logic</td>
+<td>Retry failed operations (Qdrant, file reads)</td>
+<td>Phase 1 &amp; 2</td>
+<td>P1</td>
+<td>S</td>
+<td>Configurable retry count and delay</td>
+<td>Developer</td>
+</tr>
+<tr class="odd">
+<td><strong>DEV-023</strong></td>
+<td>Add OCR support for scanned PDFs</td>
+<td>Integrate pytesseract for image-based PDFs</td>
+<td>DEV-003</td>
+<td>P1</td>
+<td>M</td>
+<td>Detects scanned PDFs, applies OCR, extracts text</td>
+<td>Developer</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="tester-tasks-3" class="level3">
+<h3 class="anchored" data-anchor-id="tester-tasks-3">Tester Tasks</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 4%">
+<col style="width: 7%">
+<col style="width: 15%">
+<col style="width: 16%">
+<col style="width: 12%">
+<col style="width: 9%">
+<col style="width: 25%">
+<col style="width: 8%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>ID</th>
+<th>Task</th>
+<th>Description</th>
+<th>Dependencies</th>
+<th>Priority</th>
+<th>Effort</th>
+<th>Acceptance Criteria</th>
+<th>Owner</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>TEST-012</strong></td>
+<td>Integration test: Incremental Updates</td>
+<td>Test watch mode with file modifications</td>
+<td>DEV-017</td>
+<td>P1</td>
+<td>M</td>
+<td>New/modified files re-processed, old files skipped</td>
+<td>Tester</td>
+</tr>
+<tr class="even">
+<td><strong>TEST-013</strong></td>
+<td>Performance test: ingestion throughput</td>
+<td>Measure files/minute on test dataset</td>
+<td>Phase 1</td>
+<td>P1</td>
+<td>M</td>
+<td>≥100 files/minute on standard hardware</td>
+<td>Tester</td>
+</tr>
+<tr class="odd">
+<td><strong>TEST-014</strong></td>
+<td>Performance test: query latency</td>
+<td>Measure P95 query time</td>
+<td>Phase 1</td>
+<td>P1</td>
+<td>S</td>
+<td>≤200ms P95 latency</td>
+<td>Tester</td>
+</tr>
+<tr class="even">
+<td><strong>TEST-015</strong></td>
+<td>Error handling test</td>
+<td>Test malformed files, missing dependencies</td>
+<td>Phase 1 &amp; 2</td>
+<td>P1</td>
+<td>S</td>
+<td>System handles errors gracefully without crashing</td>
+<td>Tester</td>
+</tr>
+<tr class="odd">
+<td><strong>TEST-016</strong></td>
+<td>OCR test</td>
+<td>Test fact extraction from scanned PDFs</td>
+<td>DEV-023</td>
+<td>P1</td>
+<td>M</td>
+<td>OCR text extracted and chunked correctly</td>
+<td>Tester</td>
+</tr>
+<tr class="even">
+<td><strong>TEST-017</strong></td>
+<td>End-to-end consistency test</td>
+<td>Run full pipeline, verify deductions match expectations</td>
+<td>Phase 1 &amp; 2</td>
+<td>P1</td>
+<td>L</td>
+<td>Deductions are accurate and complete for test dataset</td>
+<td>Tester</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="reviewer-tasks-3" class="level3">
+<h3 class="anchored" data-anchor-id="reviewer-tasks-3">Reviewer Tasks</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 4%">
+<col style="width: 7%">
+<col style="width: 15%">
+<col style="width: 16%">
+<col style="width: 12%">
+<col style="width: 9%">
+<col style="width: 25%">
+<col style="width: 8%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>ID</th>
+<th>Task</th>
+<th>Description</th>
+<th>Dependencies</th>
+<th>Priority</th>
+<th>Effort</th>
+<th>Acceptance Criteria</th>
+<th>Owner</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>REV-008</strong></td>
+<td>Code Review: Enhancements</td>
+<td>Review DEV-017 through DEV-023</td>
+<td>DEV-017–DEV-023</td>
+<td>P1</td>
+<td>L</td>
+<td>All P1 features implemented correctly</td>
+<td>Reviewer</td>
+</tr>
+<tr class="even">
+<td><strong>REV-009</strong></td>
+<td>Performance Review</td>
+<td>Verify performance meets targets</td>
+<td>TEST-013, TEST-014</td>
+<td>P1</td>
+<td>M</td>
+<td>Signed off on all performance criteria</td>
+<td>Reviewer</td>
+</tr>
+<tr class="odd">
+<td><strong>REV-010</strong></td>
+<td>Final Architecture Review</td>
+<td>Verify all components match spec</td>
+<td>All tasks</td>
+<td>P1</td>
+<td>XL</td>
+<td>Complete system walkthrough, no outstanding issues</td>
+<td>Reviewer</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+</section>
+<section id="phase-4-documentation-polish-p2" class="level2">
+<h2 class="anchored" data-anchor-id="phase-4-documentation-polish-p2">📌 Phase 4: Documentation &amp; Polish (P2)</h2>
+<p><strong>Milestone</strong>: System is fully documented and ready for handoff. <strong>Duration</strong>: ~2 days <strong>Blocked By</strong>: Phase 3 completion</p>
+<section id="developer-tasks-4" class="level3">
+<h3 class="anchored" data-anchor-id="developer-tasks-4">Developer Tasks</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 4%">
+<col style="width: 7%">
+<col style="width: 15%">
+<col style="width: 16%">
+<col style="width: 12%">
+<col style="width: 9%">
+<col style="width: 25%">
+<col style="width: 8%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>ID</th>
+<th>Task</th>
+<th>Description</th>
+<th>Dependencies</th>
+<th>Priority</th>
+<th>Effort</th>
+<th>Acceptance Criteria</th>
+<th>Owner</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>DEV-024</strong></td>
+<td>Write module docstrings</td>
+<td>Add docstrings to all public functions</td>
+<td>All code</td>
+<td>P2</td>
+<td>M</td>
+<td>All modules have docstrings, Google style</td>
+<td>Developer</td>
+</tr>
+<tr class="even">
+<td><strong>DEV-025</strong></td>
+<td>Write README.md</td>
+<td>Document setup, usage, examples</td>
+<td>All phases</td>
+<td>P2</td>
+<td>L</td>
+<td>Covers installation, running, troubleshooting</td>
+<td>Developer</td>
+</tr>
+<tr class="odd">
+<td><strong>DEV-026</strong></td>
+<td>Write development guide</td>
+<td>Document how to add new features</td>
+<td>All phases</td>
+<td>P2</td>
+<td>M</td>
+<td>Covers coding standards, testing, deployment</td>
+<td>Developer</td>
+</tr>
+<tr class="even">
+<td><strong>DEV-027</strong></td>
+<td>Add type stubs</td>
+<td>Add <code>.pyi</code> files for better IDE support</td>
+<td>All code</td>
+<td>P2</td>
+<td>S</td>
+<td>All public interfaces have type hints</td>
+<td>Developer</td>
+</tr>
+<tr class="odd">
+<td><strong>DEV-028</strong></td>
+<td>Create example files</td>
+<td>Add example files to <code>samples5/</code> for demo</td>
+<td>None</td>
+<td>P2</td>
+<td>S</td>
+<td>At least 5 example files covering all types</td>
+<td>Developer</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="tester-tasks-4" class="level3">
+<h3 class="anchored" data-anchor-id="tester-tasks-4">Tester Tasks</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 4%">
+<col style="width: 7%">
+<col style="width: 15%">
+<col style="width: 16%">
+<col style="width: 12%">
+<col style="width: 9%">
+<col style="width: 25%">
+<col style="width: 8%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>ID</th>
+<th>Task</th>
+<th>Description</th>
+<th>Dependencies</th>
+<th>Priority</th>
+<th>Effort</th>
+<th>Acceptance Criteria</th>
+<th>Owner</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>TEST-018</strong></td>
+<td>Manual testing: demo walkthrough</td>
+<td>Document end-to-end demo</td>
+<td>DEV-028</td>
+<td>P2</td>
+<td>M</td>
+<td>Step-by-step guide with expected outputs</td>
+<td>Tester</td>
+</tr>
+<tr class="even">
+<td><strong>TEST-019</strong></td>
+<td>Manual testing: edge cases</td>
+<td>Test unusual file types, large files</td>
+<td>Phase 1 &amp; 2</td>
+<td>P2</td>
+<td>L</td>
+<td>Document handling of edge cases</td>
+<td>Tester</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="reviewer-tasks-4" class="level3">
+<h3 class="anchored" data-anchor-id="reviewer-tasks-4">Reviewer Tasks</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 4%">
+<col style="width: 7%">
+<col style="width: 15%">
+<col style="width: 16%">
+<col style="width: 12%">
+<col style="width: 9%">
+<col style="width: 25%">
+<col style="width: 8%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>ID</th>
+<th>Task</th>
+<th>Description</th>
+<th>Dependencies</th>
+<th>Priority</th>
+<th>Effort</th>
+<th>Acceptance Criteria</th>
+<th>Owner</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>REV-011</strong></td>
+<td>Documentation Review</td>
+<td>Review all docs (README, guides, docstrings)</td>
+<td>DEV-024–DEV-027</td>
+<td>P2</td>
+<td>L</td>
+<td>Documentation is complete, accurate, and useful</td>
+<td>Reviewer</td>
+</tr>
+<tr class="even">
+<td><strong>REV-012</strong></td>
+<td>Final Sign-off</td>
+<td>Approve entire implementation</td>
+<td>All tasks</td>
+<td>P2</td>
+<td>XL</td>
+<td>System ready for production use</td>
+<td>Reviewer</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+</section>
+<section id="dependency-graph" class="level2">
+<h2 class="anchored" data-anchor-id="dependency-graph">4. Dependency Graph</h2>
+<pre><code>┌─────────────────────────────────────────────────────────────────────────────┐
+│                            DEPENDENCY GRAPH                                   │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+Phase 1 (P0 - Foundation)
+    │
+    ├── DEV-001 (Directory Structure)
+    │       │
+    │       ▼
+    │   ┌───DEV-002 (Config)
+    │   │   │
+    │   │   ├──▶ DEV-003 (File Ingestor)
+    │   │   │       │
+    │   │   │       └──▶ TEST-001
+    │   │   │
+    │   │   ├──▶ DEV-004 (Text Chunker) ──▶ TEST-002
+    │   │   ├──▶ DEV-005 (Table Chunker) ──▶ TEST-005
+    │   │   ├──▶ DEV-006 (Embedder) ───────▶ TEST-003
+    │   │   ├──▶ DEV-007 (Qdrant Client) ──▶ TEST-004
+    │   │   ├──▶ DEV-008 (Fact Deducer) ───▶ TEST-005
+    │   │   └──▶ DEV-009 (JSONL Store) ───▶ (no test)
+    │   │
+    │   └──▶ DEV-010 (Pipeline) ──────────▶ TEST-006
+    │           │
+    │           └──▶ REV-001, REV-002, REV-003, REV-004
+    │
+    └──▶ Phase 1 COMPLETE ✓
+
+Phase 2 (P0 - Comparison)
+    │
+    ├── DEV-011 (Aligner) ──────────▶ TEST-007
+    ├── DEV-012 (Detector) ─────────▶ TEST-008
+    ├── DEV-013 (Resolver) ─────────▶ TEST-009
+    ├── DEV-014 (Reporter) ─────────▶ TEST-010
+    ├── DEV-015 (KG Fetcher) ───────▶ (no test)
+    └── DEV-016 (Compare Script) ───▶ TEST-011
+            │
+            └──▶ REV-005, REV-006, REV-007
+
+Phase 3 (P1 - Hardening)
+    │
+    ├── DEV-017 (Watcher) ──────────▶ TEST-012
+    ├── DEV-018 (Logging) ──────────▶ (integrated tests)
+    ├── DEV-019 (Metrics) ──────────▶ TEST-013, TEST-014
+    ├── DEV-020 (CLI Args) ─────────▶ (integrated tests)
+    ├── DEV-021 (Validation) ────────▶ TEST-015
+    ├── DEV-022 (Retry Logic) ───────▶ TEST-015
+    └── DEV-023 (OCR Support) ───────▶ TEST-016
+            │
+            └──▶ REV-008, REV-009, REV-010
+
+Phase 4 (P2 - Polish)
+    │
+    ├── DEV-024, DEV-025, DEV-026, DEV-027, DEV-028
+    ├── TEST-018, TEST-019
+    └── REV-011, REV-012
+
+ Legend:
+     ▶ = Dependency (must complete before)
+     │ = Phase boundary</code></pre>
+<hr>
+</section>
+<section id="task-summary-by-role" class="level2">
+<h2 class="anchored" data-anchor-id="task-summary-by-role">5. Task Summary by Role</h2>
+<section id="developer-23-tasks" class="level3">
+<h3 class="anchored" data-anchor-id="developer-23-tasks">5.1 Developer: 23 Tasks</h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Phase</th>
+<th>P0</th>
+<th>P1</th>
+<th>P2</th>
+<th>Total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Count</td>
+<td>10</td>
+<td>7</td>
+<td>6</td>
+<td>23</td>
+</tr>
+<tr class="even">
+<td>Effort</td>
+<td>~6-8 days</td>
+<td>~3 days</td>
+<td>~2 days</td>
+<td>~11-13 days</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="tester-17-tasks" class="level3">
+<h3 class="anchored" data-anchor-id="tester-17-tasks">5.2 Tester: 17 Tasks</h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Phase</th>
+<th>P0</th>
+<th>P1</th>
+<th>P2</th>
+<th>Total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Count</td>
+<td>6</td>
+<td>6</td>
+<td>2</td>
+<td>14</td>
+</tr>
+<tr class="even">
+<td>Effort</td>
+<td>~3-4 days</td>
+<td>~4 days</td>
+<td>~1 day</td>
+<td>~8-9 days</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="reviewer-12-tasks" class="level3">
+<h3 class="anchored" data-anchor-id="reviewer-12-tasks">5.3 Reviewer: 12 Tasks</h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Phase</th>
+<th>P0</th>
+<th>P1</th>
+<th>P2</th>
+<th>Total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Count</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>9</td>
+</tr>
+<tr class="even">
+<td>Effort</td>
+<td>~1-2 days</td>
+<td>~1 day</td>
+<td>~1 day</td>
+<td>~3-4 days</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="total-44-producer-tasks" class="level3">
+<h3 class="anchored" data-anchor-id="total-44-producer-tasks">5.4 Total: 44 Producer Tasks</h3>
+<ul>
+<li><strong>P0 (Critical)</strong>: 20 tasks (~9-12 days)</li>
+<li><strong>P1 (Important)</strong>: 14 tasks (~7-8 days)</li>
+<li><strong>P2 (Nice-to-have)</strong>: 10 tasks (~4 days)</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="critical-path-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="critical-path-analysis">6. Critical Path Analysis</h2>
+<p>The <strong>critical path</strong> (longest sequence of dependent tasks) determines the minimum project duration:</p>
+<pre><code>DEV-001 (XS)
+    ▼
+DEV-002 (S) 
+    ▼
+DEV-003 (M) ──▶ TEST-001 (S)
+    ▼
+DEV-004 (S) ──▶ TEST-002 (S)
+    ▼
+DEV-005 (M) ──▶ TEST-005 (M)
+    ▼
+DEV-006 (M) ──▶ TEST-003 (S)
+    ▼
+DEV-008 (M) ──▶ TEST-005 (M)
+    ▼
+DEV-010 (M) ──▶ TEST-006 (M) ──▶ REV-004 (L)
+    ▼
+DEV-011 (L) ──▶ TEST-007 (M)
+    ▼
+DEV-012 (M) ──▶ TEST-008 (M)
+    ▼
+DEV-013 (L) ──▶ TEST-009 (M)
+    ▼
+DEV-016 (M) ──▶ TEST-011 (L) ──▶ REV-007 (L)
+    ▼
+REV-001 through REV-006 (L)</code></pre>
+<p><strong>Critical Path Duration</strong>: ~10-12 days (Developer + Tester working in parallel after initial tasks)</p>
+<hr>
+</section>
+<section id="parallel-execution-strategy" class="level2">
+<h2 class="anchored" data-anchor-id="parallel-execution-strategy">7. Parallel Execution Strategy</h2>
+<p>To minimize total time, tasks can be <strong>parallelized across roles</strong>:</p>
+<section id="week-1-foundation" class="level3">
+<h3 class="anchored" data-anchor-id="week-1-foundation">Week 1: Foundation</h3>
+<ul>
+<li><strong>Developer</strong>: DEV-001 through DEV-010 (Parallelizable: config, ingestor, chunkers, embedder, Qdrant, deducer, storage, pipeline)</li>
+<li><strong>Tester</strong>: Wait for components, then TEST-001 through TEST-006 (Parallel with each other)</li>
+<li><strong>Reviewer</strong>: Wait for code, then REV-001 through REV-004 (Parallel review)</li>
+</ul>
+</section>
+<section id="week-2-comparison-hardening" class="level3">
+<h3 class="anchored" data-anchor-id="week-2-comparison-hardening">Week 2: Comparison + Hardening</h3>
+<ul>
+<li><strong>Developer</strong>: DEV-011 through DEV-023 (Parallelizable: aligner, detector, resolver, reporter, KG fetcher, compare, watcher, logging, metrics, CLI, validation, retry, OCR)</li>
+<li><strong>Tester</strong>: TEST-007 through TEST-017 (Parallel with each other)</li>
+<li><strong>Reviewer</strong>: REV-005 through REV-010 (Parallel review)</li>
+</ul>
+</section>
+<section id="week-3-polish" class="level3">
+<h3 class="anchored" data-anchor-id="week-3-polish">Week 3: Polish</h3>
+<ul>
+<li><strong>Developer</strong>: DEV-024 through DEV-028</li>
+<li><strong>Tester</strong>: TEST-018, TEST-019</li>
+<li><strong>Reviewer</strong>: REV-011, REV-012</li>
+</ul>
+<p><strong>Optimistic Timeline</strong>: 2-3 weeks with parallel execution <strong>Conservative Timeline</strong>: 3-4 weeks with sequential execution</p>
+<hr>
+</section>
+</section>
+<section id="role-specific-work-queues" class="level2">
+<h2 class="anchored" data-anchor-id="role-specific-work-queues">8. Role-Specific Work Queues</h2>
+<section id="developer-work-queue-ordered-by-phase" class="level3">
+<h3 class="anchored" data-anchor-id="developer-work-queue-ordered-by-phase">8.1 Developer Work Queue (Ordered by Phase)</h3>
+<p><strong>Phase 1 (P0)</strong>: 1. [ ] DEV-001: Directory structure 2. [ ] DEV-002: Config system 3. [ ] DEV-003: File Ingestor 4. [ ] DEV-004: Text Chunker 5. [ ] DEV-005: Table Chunker 6. [ ] DEV-006: Embedder 7. [ ] DEV-007: Qdrant Client 8. [ ] DEV-008: Fact Deducer 9. [ ] DEV-009: JSONL Storage 10. [ ] DEV-010: Pipeline Script</p>
+<p><strong>Phase 2 (P0)</strong>: 11. [ ] DEV-011: Aligner 12. [ ] DEV-012: Inconsistency Detector 13. [ ] DEV-013: Resolver 14. [ ] DEV-014: Reporter 15. [ ] DEV-015: KG Fact Fetcher 16. [ ] DEV-016: Comparison Script</p>
+<p><strong>Phase 3 (P1)</strong>: 17. [ ] DEV-017: File watcher 18. [ ] DEV-018: Logging 19. [ ] DEV-019: Metrics 20. [ ] DEV-020: CLI arguments 21. [ ] DEV-021: Input validation 22. [ ] DEV-022: Retry logic 23. [ ] DEV-023: OCR support</p>
+<p><strong>Phase 4 (P2)</strong>: 24. [ ] DEV-024: Module docstrings 25. [ ] DEV-025: README.md 26. [ ] DEV-026: Development guide 27. [ ] DEV-027: Type stubs 28. [ ] DEV-028: Example files</p>
+<hr>
+</section>
+<section id="tester-work-queue" class="level3">
+<h3 class="anchored" data-anchor-id="tester-work-queue">8.2 Tester Work Queue</h3>
+<p><strong>Phase 1 (P0)</strong>: 1. [ ] TEST-001: File Ingestor tests 2. [ ] TEST-002: Text Chunker tests 3. [ ] TEST-003: Embedder tests 4. [ ] TEST-004: Qdrant Client tests 5. [ ] TEST-005: Fact Deducer tests 6. [ ] TEST-006: Full pipeline test</p>
+<p><strong>Phase 2 (P0)</strong>: 7. [ ] TEST-007: Aligner tests 8. [ ] TEST-008: Inconsistency Detector tests 9. [ ] TEST-009: Resolver tests 10. [ ] TEST-010: Reporter tests 11. [ ] TEST-011: Full comparison test</p>
+<p><strong>Phase 3 (P1)</strong>: 12. [ ] TEST-012: Incremental updates test 13. [ ] TEST-013: Ingestion throughput test 14. [ ] TEST-014: Query latency test 15. [ ] TEST-015: Error handling test 16. [ ] TEST-016: OCR test 17. [ ] TEST-017: End-to-end consistency test</p>
+<p><strong>Phase 4 (P2)</strong>: 18. [ ] TEST-018: Demo walkthrough 19. [ ] TEST-019: Edge cases test</p>
+<hr>
+</section>
+<section id="reviewer-work-queue" class="level3">
+<h3 class="anchored" data-anchor-id="reviewer-work-queue">8.3 Reviewer Work Queue</h3>
+<p><strong>Phase 1 (P0)</strong>: 1. [ ] REV-001: Infrastructure code review 2. [ ] REV-002: Embedding &amp; Storage code review 3. [ ] REV-003: Pipeline code review 4. [ ] REV-004: Architecture validation</p>
+<p><strong>Phase 2 (P0)</strong>: 5. [ ] REV-005: Comparison components code review 6. [ ] REV-006: Comparison tests review 7. [ ] REV-007: Independence audit</p>
+<p><strong>Phase 3 (P1)</strong>: 8. [ ] REV-008: Enhancements code review 9. [ ] REV-009: Performance review 10. [ ] REV-010: Final architecture review</p>
+<p><strong>Phase 4 (P2)</strong>: 11. [ ] REV-011: Documentation review 12. [ ] REV-012: Final sign-off</p>
+<hr>
+</section>
+</section>
+<section id="next-stage" class="level2">
+<h2 class="anchored" data-anchor-id="next-stage">9. Next Stage</h2>
+<p><strong>Awaiting human validation</strong> of this task breakdown before proceeding to <strong>Stage 6 – Tech Lead</strong> (<code>06_RAG_Tickets.md</code>).</p>
+<hr>
+<p><strong>Status</strong>: Draft awaiting explicit human approval</p>
+
+
+</section>
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a></div></div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/KarthikeanJuttumahadevan4\.github\.io\/target_staleness\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>© 2026 United States Military Academy</p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+<script src="../../../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

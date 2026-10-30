@@ -1,0 +1,1222 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.19">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>specs – AI101</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<link href="../../..//images/favicon.svg" rel="icon" type="image/svg+xml">
+<script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-dark-b626d73c4c936ccc3cb08be7d45d1df6.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap-020d25d76586e1017cbc2b913b3a2bf1.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark-52c85c35cd3cfaec83d0f36150bfac8d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../../site_libs/bootstrap/bootstrap-020d25d76586e1017cbc2b913b3a2bf1.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+
+
+<meta property="og:title" content="AI101">
+<meta property="og:site_name" content="AI101">
+<link rel="canonical" href="https://KarthikeanJuttumahadevan4.github.io/target_staleness/UPDATED_MODEL/planning/DOCUMENTATION_artifacts/specs.html">
+</head>
+
+<body class="nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const queryPrefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+    const darkModeDefault = queryPrefersDark.matches;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    queryPrefersDark.addEventListener("change", e => {
+      if(window.localStorage.getItem("quarto-color-scheme") !== null)
+        return;
+      const alternate = e.matches
+      toggleColorMode(alternate);
+      localAlternateSentinel = e.matches ? 'alternate' : 'default'; // this is used alongside local storage!
+      toggleGiscusIfUsed(alternate, darkModeDefault);
+    });
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="https://usma-media.s3.amazonaws.com/inline-images/img/usma_logos/logo/wp_crest_new_only.png" alt="" class="navbar-logo light-content">
+    <img src="https://usma-media.s3.amazonaws.com/inline-images/img/usma_logos/logo/wp_crest_new_only.png" alt="" class="navbar-logo dark-content">
+    </a>
+    <a class="navbar-brand" href="../../../index.html">
+    <span class="navbar-title">AI101</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../UPDATED_MODEL/index.html"> 
+<span class="menu-text">Model Docs</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="2">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#invoice-extractor---specification" id="toc-invoice-extractor---specification" class="nav-link active" data-scroll-target="#invoice-extractor---specification">Invoice Extractor - Specification</a>
+  <ul class="collapse">
+  <li><a href="#problem-statement" id="toc-problem-statement" class="nav-link" data-scroll-target="#problem-statement">Problem Statement</a></li>
+  <li><a href="#scope" id="toc-scope" class="nav-link" data-scroll-target="#scope">Scope</a>
+  <ul class="collapse">
+  <li><a href="#in-scope" id="toc-in-scope" class="nav-link" data-scroll-target="#in-scope">In-scope</a></li>
+  <li><a href="#out-of-scope" id="toc-out-of-scope" class="nav-link" data-scroll-target="#out-of-scope">Out-of-scope</a></li>
+  </ul></li>
+  <li><a href="#user-intent" id="toc-user-intent" class="nav-link" data-scroll-target="#user-intent">User Intent</a></li>
+  <li><a href="#research-findings-summary" id="toc-research-findings-summary" class="nav-link" data-scroll-target="#research-findings-summary">Research Findings Summary</a></li>
+  <li><a href="#functional-requirements" id="toc-functional-requirements" class="nav-link" data-scroll-target="#functional-requirements">Functional Requirements</a>
+  <ul class="collapse">
+  <li><a href="#fr1-cli-entry-point" id="toc-fr1-cli-entry-point" class="nav-link" data-scroll-target="#fr1-cli-entry-point">FR1: CLI Entry Point</a></li>
+  <li><a href="#fr2-file-type-detection" id="toc-fr2-file-type-detection" class="nav-link" data-scroll-target="#fr2-file-type-detection">FR2: File Type Detection</a></li>
+  <li><a href="#fr3-document-extraction-docling" id="toc-fr3-document-extraction-docling" class="nav-link" data-scroll-target="#fr3-document-extraction-docling">FR3: Document Extraction (docling)</a></li>
+  <li><a href="#fr4-environment-loading" id="toc-fr4-environment-loading" class="nav-link" data-scroll-target="#fr4-environment-loading">FR4: Environment Loading</a></li>
+  <li><a href="#fr5-llm-structuring-dspy" id="toc-fr5-llm-structuring-dspy" class="nav-link" data-scroll-target="#fr5-llm-structuring-dspy">FR5: LLM Structuring (dspy)</a></li>
+  <li><a href="#fr6-should-call-decision" id="toc-fr6-should-call-decision" class="nav-link" data-scroll-target="#fr6-should-call-decision">FR6: Should Call Decision</a></li>
+  <li><a href="#fr7-output-format" id="toc-fr7-output-format" class="nav-link" data-scroll-target="#fr7-output-format">FR7: Output Format</a></li>
+  <li><a href="#fr8-exit-codes" id="toc-fr8-exit-codes" class="nav-link" data-scroll-target="#fr8-exit-codes">FR8: Exit Codes</a></li>
+  </ul></li>
+  <li><a href="#non-functional-requirements" id="toc-non-functional-requirements" class="nav-link" data-scroll-target="#non-functional-requirements">Non-Functional Requirements</a>
+  <ul class="collapse">
+  <li><a href="#nfr1-performance" id="toc-nfr1-performance" class="nav-link" data-scroll-target="#nfr1-performance">NFR1: Performance</a></li>
+  <li><a href="#nfr2-reliability" id="toc-nfr2-reliability" class="nav-link" data-scroll-target="#nfr2-reliability">NFR2: Reliability</a></li>
+  <li><a href="#nfr3-security" id="toc-nfr3-security" class="nav-link" data-scroll-target="#nfr3-security">NFR3: Security</a></li>
+  <li><a href="#nfr4-observability" id="toc-nfr4-observability" class="nav-link" data-scroll-target="#nfr4-observability">NFR4: Observability</a></li>
+  </ul></li>
+  <li><a href="#constraints" id="toc-constraints" class="nav-link" data-scroll-target="#constraints">Constraints</a></li>
+  <li><a href="#dependencies-uv-managed" id="toc-dependencies-uv-managed" class="nav-link" data-scroll-target="#dependencies-uv-managed">Dependencies (uv-managed)</a>
+  <ul class="collapse">
+  <li><a href="#core" id="toc-core" class="nav-link" data-scroll-target="#core">Core</a></li>
+  <li><a href="#dev" id="toc-dev" class="nav-link" data-scroll-target="#dev">Dev</a></li>
+  <li><a href="#system-optional" id="toc-system-optional" class="nav-link" data-scroll-target="#system-optional">System (Optional)</a></li>
+  </ul></li>
+  <li><a href="#open-questions" id="toc-open-questions" class="nav-link" data-scroll-target="#open-questions">Open Questions</a>
+  <ul class="collapse">
+  <li><a href="#resolved-by-research" id="toc-resolved-by-research" class="nav-link" data-scroll-target="#resolved-by-research">Resolved by Research</a></li>
+  <li><a href="#remaining-questions" id="toc-remaining-questions" class="nav-link" data-scroll-target="#remaining-questions">Remaining Questions</a></li>
+  </ul></li>
+  <li><a href="#risks" id="toc-risks" class="nav-link" data-scroll-target="#risks">Risks</a></li>
+  <li><a href="#implementation-notes" id="toc-implementation-notes" class="nav-link" data-scroll-target="#implementation-notes">Implementation Notes</a>
+  <ul class="collapse">
+  <li><a href="#recommended-project-structure" id="toc-recommended-project-structure" class="nav-link" data-scroll-target="#recommended-project-structure">Recommended Project Structure</a></li>
+  <li><a href="#recommended-pyproject.toml" id="toc-recommended-pyproject.toml" class="nav-link" data-scroll-target="#recommended-pyproject.toml">Recommended pyproject.toml</a></li>
+  <li><a href="#recommended-.env.example" id="toc-recommended-.env.example" class="nav-link" data-scroll-target="#recommended-.env.example">Recommended .env.example</a></li>
+  <li><a href="#recommended-uv-commands" id="toc-recommended-uv-commands" class="nav-link" data-scroll-target="#recommended-uv-commands">Recommended uv Commands</a></li>
+  </ul></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content column-page-left" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+
+
+
+
+
+<section id="invoice-extractor---specification" class="level1">
+<h1>Invoice Extractor - Specification</h1>
+<section id="problem-statement" class="level2">
+<h2 class="anchored" data-anchor-id="problem-statement">Problem Statement</h2>
+<p>Users need a local CLI tool to extract structured invoice fields (vendor, invoice_date, total, notes) from heterogeneous files: PDFs, Excel spreadsheets, text, audio, and video. Existing tools are fragmented and require separate pipelines for each format. The tool must integrate with OpenAI-compatible LLM APIs, with clear provenance and error handling for scanned documents and missing dependencies.</p>
+</section>
+<section id="scope" class="level2">
+<h2 class="anchored" data-anchor-id="scope">Scope</h2>
+<section id="in-scope" class="level3">
+<h3 class="anchored" data-anchor-id="in-scope">In-scope</h3>
+<ul>
+<li>CLI <code>python3 extract.py &lt;file&gt;</code> supporting .pdf, .xlsx, .txt, audio (.wav/.mp3/.m4a/.ogg), video (.mp4/.mov/.mkv/.webm)</li>
+<li><strong>Document extraction via docling</strong> for unified handling of all file types</li>
+<li><strong>LLM structuring via dspy</strong> for reliable JSON extraction</li>
+<li>Output JSON to stdout, INGEST/CHARS metrics to stderr</li>
+<li>.env configuration for OPENAI_API_KEY, OPENAI_BASE_URL, MODEL</li>
+<li>Package management via <code>uv</code></li>
+</ul>
+</section>
+<section id="out-of-scope" class="level3">
+<h3 class="anchored" data-anchor-id="out-of-scope">Out-of-scope</h3>
+<ul>
+<li>Custom OCR/VLM pipelines (docling handles this internally)</li>
+<li>Multi-sheet Excel beyond what docling returns</li>
+<li>Streaming or batch processing</li>
+<li>Direct OpenAI client usage (dspy abstracts this)</li>
+<li>Ollama-specific integration</li>
+</ul>
+</section>
+</section>
+<section id="user-intent" class="level2">
+<h2 class="anchored" data-anchor-id="user-intent">User Intent</h2>
+<p>Run a single command on a file and receive structured invoice data as JSON, with ingestion method transparency and graceful degradation when dependencies are missing. The tool uses docling for document extraction and dspy with OpenAI-compatible APIs for structuring into invoice fields.</p>
+</section>
+<section id="research-findings-summary" class="level2">
+<h2 class="anchored" data-anchor-id="research-findings-summary">Research Findings Summary</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Library</th>
+<th>Purpose</th>
+<th>Decision</th>
+<th>Key Finding</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>docling</strong></td>
+<td>Document extraction</td>
+<td>Use</td>
+<td>Supports all required formats (PDF, XLSX, TXT, audio, video) with unified API. Uses Whisper for ASR, Tesseract for OCR.</td>
+</tr>
+<tr class="even">
+<td><strong>dspy</strong></td>
+<td>Structured LLM inference</td>
+<td>Use</td>
+<td>Configure with <code>dspy.LM('openai/model-name', api_key='...', api_base='...')</code>. Structured signatures, built-in error handling.</td>
+</tr>
+<tr class="odd">
+<td><strong>uv</strong></td>
+<td>Package management</td>
+<td>Use</td>
+<td><code>uv init</code>, <code>uv add</code>, <code>uv run</code> workflow. Auto-manages .venv, faster than pip.</td>
+</tr>
+</tbody>
+</table>
+<p>See <code>artifacts/library_research.md</code> for detailed Context7 findings.</p>
+</section>
+<section id="functional-requirements" class="level2">
+<h2 class="anchored" data-anchor-id="functional-requirements">Functional Requirements</h2>
+<section id="fr1-cli-entry-point" class="level3">
+<h3 class="anchored" data-anchor-id="fr1-cli-entry-point">FR1: CLI Entry Point</h3>
+<ul>
+<li>The CLI accepts exactly one positional argument: filepath.</li>
+<li>If no argument provided, prints usage to stderr and exits with code 1.</li>
+</ul>
+</section>
+<section id="fr2-file-type-detection" class="level3">
+<h3 class="anchored" data-anchor-id="fr2-file-type-detection">FR2: File Type Detection</h3>
+<ul>
+<li>Detect extension case-insensitively for informational logging only.</li>
+<li>All file type detection is delegated to docling’s <code>DocumentConverter.convert()</code>.</li>
+<li>docling natively supports all required formats via its <code>InputFormat</code> enum.</li>
+<li>If docling raises an exception for unsupported format: prints “unsupported” to stderr, prints <code>INGEST=unknown CHARS=0</code>, exits with code 2.</li>
+</ul>
+</section>
+<section id="fr3-document-extraction-docling" class="level3">
+<h3 class="anchored" data-anchor-id="fr3-document-extraction-docling">FR3: Document Extraction (docling)</h3>
+<ul>
+<li>Use <code>docling.DocumentConverter().convert(source=filepath)</code> for all formats.</li>
+<li>Extract text via <code>result.document.export_to_text()</code> or <code>export_to_markdown()</code>.</li>
+<li>ingest_path = standardized naming based on file extension or docling pipeline.</li>
+<li>For all formats, emit <code>INGEST=&lt;method&gt; CHARS=&lt;n&gt;</code> to stderr.</li>
+<li>Character count is based on the exported text length.</li>
+</ul>
+<section id="pdf-specifics" class="level4">
+<h4 class="anchored" data-anchor-id="pdf-specifics">PDF Specifics</h4>
+<ul>
+<li>docling handles both text-based and scanned PDFs via OCR.</li>
+<li>After extraction, if text length &lt; 80 characters:
+<ul>
+<li>Print warning “This PDF looks scanned. OCR may not have extracted sufficient text.” to stderr</li>
+<li>Exit with code 2</li>
+</ul></li>
+<li>This preserves the v1 behavior of rejecting likely scanned documents.</li>
+</ul>
+</section>
+<section id="excel-specifics" class="level4">
+<h4 class="anchored" data-anchor-id="excel-specifics">Excel Specifics</h4>
+<ul>
+<li>docling’s MsExcelDocumentBackend extracts first sheet by default.</li>
+<li>Convert to text/markdown for LLM input.</li>
+</ul>
+</section>
+<section id="audio-specifics" class="level4">
+<h4 class="anchored" data-anchor-id="audio-specifics">Audio Specifics</h4>
+<ul>
+<li>docling’s AsrPipeline uses Whisper models by default.</li>
+<li>Supports: .wav, .mp3, .m4a, .aac, .ogg, .flac</li>
+<li>ingest_path includes “asr” or specific whisper model used.</li>
+</ul>
+</section>
+<section id="video-specifics" class="level4">
+<h4 class="anchored" data-anchor-id="video-specifics">Video Specifics</h4>
+<ul>
+<li>docling’s VideoPipeline extracts audio, then uses AsrPipeline.</li>
+<li>Supports: .mp4, .avi, .mov, .mkv, .webm</li>
+<li>ingest_path includes “video_asr” or similar.</li>
+</ul>
+</section>
+</section>
+<section id="fr4-environment-loading" class="level3">
+<h3 class="anchored" data-anchor-id="fr4-environment-loading">FR4: Environment Loading</h3>
+<ul>
+<li>Load .env from script directory via python-dotenv.</li>
+<li>Required variables:
+<ul>
+<li><code>OPENAI_API_KEY</code>: API key for OpenAI-compatible endpoint</li>
+<li><code>OPENAI_BASE_URL</code>: URL of the OpenAI-compatible API endpoint (e.g., <code>http://localhost:11434/v1</code> or <code>https://api.openai.com/v1</code>)</li>
+<li><code>MODEL</code>: Model identifier to use (e.g., <code>gpt-3.5-turbo</code>, <code>llama3.2:latest</code>)</li>
+</ul></li>
+<li>has_key true if OPENAI_API_KEY is not None and not empty.</li>
+</ul>
+</section>
+<section id="fr5-llm-structuring-dspy" class="level3">
+<h3 class="anchored" data-anchor-id="fr5-llm-structuring-dspy">FR5: LLM Structuring (dspy)</h3>
+<ul>
+<li><p>If no API key: output null fields with notes = “no LLM API key configured”, exit normally.</p></li>
+<li><p>Configure dspy LM:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> dspy</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>lm <span class="op">=</span> dspy.LM(</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f'openai/</span><span class="sc">{</span>model<span class="sc">}</span><span class="ss">'</span>,</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    api_key<span class="op">=</span>OPENAI_API_KEY,</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    api_base<span class="op">=</span>OPENAI_BASE_URL</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>dspy.configure(lm<span class="op">=</span>lm)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+<li><p>Define extraction signature:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> typing <span class="im">import</span> Optional</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> ExtractInvoice(dspy.Signature):</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Extract invoice fields from document text."""</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    document_text: <span class="bu">str</span> <span class="op">=</span> dspy.InputField(desc<span class="op">=</span><span class="st">"Full text of the document"</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    source: <span class="bu">str</span> <span class="op">=</span> dspy.InputField(desc<span class="op">=</span><span class="st">"Original filename"</span>)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    ingest_method: <span class="bu">str</span> <span class="op">=</span> dspy.InputField(desc<span class="op">=</span><span class="st">"Extraction method used"</span>)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    vendor: Optional[<span class="bu">str</span>] <span class="op">=</span> dspy.OutputField(desc<span class="op">=</span><span class="st">"Name of the vendor"</span>)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    invoice_date: Optional[<span class="bu">str</span>] <span class="op">=</span> dspy.OutputField(desc<span class="op">=</span><span class="st">"Invoice date in YYYY-MM-DD format"</span>)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    total: Optional[<span class="bu">float</span>] <span class="op">=</span> dspy.OutputField(desc<span class="op">=</span><span class="st">"Total amount"</span>)</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    notes: Optional[<span class="bu">str</span>] <span class="op">=</span> dspy.OutputField(desc<span class="op">=</span><span class="st">"Additional notes or extraction warnings"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+<li><p>Use <code>dspy.Predict(ExtractInvoice)</code> for extraction.</p></li>
+</ul>
+<section id="error-handling" class="level4">
+<h4 class="anchored" data-anchor-id="error-handling">Error Handling</h4>
+<ul>
+<li><p>Wrap dspy call in try/except:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="cf">try</span>:</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    prediction <span class="op">=</span> extractor(</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>        document_text<span class="op">=</span>doc_text,</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>        source<span class="op">=</span>path.name,</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>        ingest_method<span class="op">=</span>ingest_path</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    result <span class="op">=</span> {</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>        <span class="st">"vendor"</span>: prediction.vendor,</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>        <span class="st">"invoice_date"</span>: prediction.invoice_date,</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>        <span class="st">"total"</span>: prediction.total,</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>        <span class="st">"notes"</span>: prediction.notes,</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="cf">except</span> dspy.ContextWindowExceededError:</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    notes <span class="op">=</span> <span class="st">"Document too large for model context window"</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    result <span class="op">=</span> {<span class="st">"vendor"</span>: <span class="va">None</span>, <span class="st">"invoice_date"</span>: <span class="va">None</span>, <span class="st">"total"</span>: <span class="va">None</span>, <span class="st">"notes"</span>: notes}</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="cf">except</span> dspy.LMRateLimitError <span class="im">as</span> e:</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    notes <span class="op">=</span> <span class="ss">f"Rate limited by </span><span class="sc">{</span>e<span class="sc">.</span>provider<span class="sc">}</span><span class="ss">; retry after </span><span class="sc">{</span>e<span class="sc">.</span>retry_after<span class="sc">}</span><span class="ss"> seconds"</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>    result <span class="op">=</span> {<span class="st">"vendor"</span>: <span class="va">None</span>, <span class="st">"invoice_date"</span>: <span class="va">None</span>, <span class="st">"total"</span>: <span class="va">None</span>, <span class="st">"notes"</span>: notes}</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="cf">except</span> dspy.LMError <span class="im">as</span> e:</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>    notes <span class="op">=</span> <span class="ss">f"LM failed: code=</span><span class="sc">{</span>e<span class="sc">.</span>code<span class="sc">}</span><span class="ss">, model=</span><span class="sc">{</span>e<span class="sc">.</span>model<span class="sc">}</span><span class="ss">"</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>    result <span class="op">=</span> {<span class="st">"vendor"</span>: <span class="va">None</span>, <span class="st">"invoice_date"</span>: <span class="va">None</span>, <span class="st">"total"</span>: <span class="va">None</span>, <span class="st">"notes"</span>: notes}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+</ul>
+</section>
+</section>
+<section id="fr6-should-call-decision" class="level3">
+<h3 class="anchored" data-anchor-id="fr6-should-call-decision">FR6: Should Call Decision</h3>
+<ul>
+<li>If docling extraction fails or returns empty content: do not call LLM, output nulls with extraction error in notes</li>
+<li>For all successful extractions: call dspy</li>
+<li>Special case: PDF with &lt;80 chars exits before LLM call (see FR3)</li>
+</ul>
+</section>
+<section id="fr7-output-format" class="level3">
+<h3 class="anchored" data-anchor-id="fr7-output-format">FR7: Output Format</h3>
+<p><strong>stdout</strong>: JSON with fields: - vendor: string | null - invoice_date: string | null (YYYY-MM-DD if possible) - total: number | null - notes: string | null (contains extraction method warnings and any dspy/LLM errors) - extracted_at: UTC ISO timestamp - ingest_path: string (standardized method identifier) - source: filename</p>
+<p><strong>stderr</strong>: <code>INGEST=&lt;method&gt; CHARS=&lt;n&gt;</code> line</p>
+</section>
+<section id="fr8-exit-codes" class="level3">
+<h3 class="anchored" data-anchor-id="fr8-exit-codes">FR8: Exit Codes</h3>
+<ul>
+<li>1: missing argument</li>
+<li>2: scanned PDF (insufficient text), unsupported file, or docling extraction failure</li>
+</ul>
+</section>
+</section>
+<section id="non-functional-requirements" class="level2">
+<h2 class="anchored" data-anchor-id="non-functional-requirements">Non-Functional Requirements</h2>
+<section id="nfr1-performance" class="level3">
+<h3 class="anchored" data-anchor-id="nfr1-performance">NFR1: Performance</h3>
+<ul>
+<li>docling extraction time depends on document size, type, and OCR requirements</li>
+<li>dspy call latency depends on LLM endpoint performance</li>
+<li>docling caches pipelines for repeated calls</li>
+</ul>
+</section>
+<section id="nfr2-reliability" class="level3">
+<h3 class="anchored" data-anchor-id="nfr2-reliability">NFR2: Reliability</h3>
+<ul>
+<li>Graceful degradation when docling cannot extract text</li>
+<li>Structured error handling from dspy</li>
+<li>No crash on malformed files</li>
+</ul>
+</section>
+<section id="nfr3-security" class="level3">
+<h3 class="anchored" data-anchor-id="nfr3-security">NFR3: Security</h3>
+<ul>
+<li>API keys loaded from .env, not logged or exposed in output</li>
+<li>No temp files written by our code (docling may use its own caching)</li>
+</ul>
+</section>
+<section id="nfr4-observability" class="level3">
+<h3 class="anchored" data-anchor-id="nfr4-observability">NFR4: Observability</h3>
+<ul>
+<li>INGEST and CHARS on stderr for each run</li>
+<li>Extraction errors and LLM errors captured in notes field</li>
+</ul>
+</section>
+</section>
+<section id="constraints" class="level2">
+<h2 class="anchored" data-anchor-id="constraints">Constraints</h2>
+<ul>
+<li>Python 3.10+</li>
+<li>Dependencies: docling, dspy, python-dotenv</li>
+<li>Optional system dependencies: libgl1, tesseract-ocr (for OCR), ffmpeg (for audio/video if docling requires it)</li>
+<li>Package management: uv (for venv creation, dependency installation, execution)</li>
+<li>OpenAI-compatible endpoint required for dspy</li>
+</ul>
+</section>
+<section id="dependencies-uv-managed" class="level2">
+<h2 class="anchored" data-anchor-id="dependencies-uv-managed">Dependencies (uv-managed)</h2>
+<section id="core" class="level3">
+<h3 class="anchored" data-anchor-id="core">Core</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode toml code-with-copy"><code class="sourceCode toml"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">[project]</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="dt">dependencies</span> <span class="op">=</span> <span class="op">[</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"docling[asr,tesserocr]"</span><span class="op">,</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"dspy"</span><span class="op">,</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">"python-dotenv"</span><span class="op">,</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="op">]</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="dev" class="level3">
+<h3 class="anchored" data-anchor-id="dev">Dev</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode toml code-with-copy"><code class="sourceCode toml"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">[dependency-groups]</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="dt">dev</span> <span class="op">=</span> <span class="op">[</span><span class="st">"pytest"</span><span class="op">,</span> <span class="st">"ruff"</span><span class="op">]</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="system-optional" class="level3">
+<h3 class="anchored" data-anchor-id="system-optional">System (Optional)</h3>
+<ul>
+<li><code>libgl1</code> - For OpenCV compatibility</li>
+<li><code>tesseract-ocr</code> - For OCR with Tesseract backend</li>
+<li><code>tesseract-ocr-eng</code> - English language data for Tesseract</li>
+</ul>
+</section>
+</section>
+<section id="open-questions" class="level2">
+<h2 class="anchored" data-anchor-id="open-questions">Open Questions</h2>
+<section id="resolved-by-research" class="level3">
+<h3 class="anchored" data-anchor-id="resolved-by-research">Resolved by Research</h3>
+<ol type="1">
+<li><strong>docling file type support</strong>: Confirmed - supports all required formats (PDF, XLSX, TXT, WAV, MP3, M4A, OGG, MP4, MOV, MKV, WEBM) via InputFormat enum.</li>
+<li><strong>docling OCR/ASR</strong>: Confirmed - uses Tesseract for OCR (with extras) and Whisper for ASR.</li>
+<li><strong>dspy OpenAI compatibility</strong>: Confirmed - use <code>dspy.LM('openai/model-name', api_key='...', api_base='...')</code></li>
+<li><strong>dspy signature usage</strong>: Confirmed - use <code>dspy.Signature</code> with <code>dspy.InputField</code>/<code>dspy.OutputField</code></li>
+<li><strong>dspy error handling</strong>: Confirmed - structured exceptions (<code>LMError</code>, <code>LMRateLimitError</code>, <code>ContextWindowExceededError</code>)</li>
+<li><strong>uv workflow</strong>: Confirmed - <code>uv venv</code>, <code>uv pip install</code>, <code>uv run</code>, <code>uv init</code>, <code>uv add</code>, <code>uv sync</code>, <code>uv lock</code></li>
+</ol>
+</section>
+<section id="remaining-questions" class="level3">
+<h3 class="anchored" data-anchor-id="remaining-questions">Remaining Questions</h3>
+<ol type="1">
+<li><strong>ingest_path identification</strong>: Should we use docling’s pipeline name or map from file extension? Recommendation: Use file extension for simplicity.</li>
+<li><strong>PDF threshold</strong>: Keep 80 characters or adjust for docling’s OCR quality? Recommendation: Keep 80.</li>
+<li><strong>Model default</strong>: What fallback MODEL if not set in .env? Recommendation: <code>gpt-3.5-turbo</code>.</li>
+<li><strong>Error note precedence</strong>: How to combine docling warnings with dspy errors? Recommendation: concatenate with semicolon separator.</li>
+<li><strong>Export format</strong>: <code>export_to_text()</code> or <code>export_to_markdown()</code>? Recommendation: <code>export_to_text()</code> for simplicity.</li>
+</ol>
+</section>
+</section>
+<section id="risks" class="level2">
+<h2 class="anchored" data-anchor-id="risks">Risks</h2>
+<ul>
+<li><strong>docling OCR quality</strong>: Tesseract OCR on scanned PDFs may still have issues; the &lt;80 char threshold catches obvious failures but may miss partial extractions</li>
+<li><strong>docling dependencies</strong>: System packages (tesseract, libgl1) may be missing on some systems</li>
+<li><strong>dspy compatibility</strong>: Non-OpenAI-compatible endpoints may have subtle differences that cause errors</li>
+<li><strong>context window</strong>: Large invoices or spreadsheets may exceed LLM context window; dspy’s truncation helps but may lose data</li>
+<li><strong>Cost</strong>: Using cloud LLM endpoints may incur costs; user must be aware</li>
+<li><strong>Rate limits</strong>: OpenAI-compatible endpoints may impose rate limits; dspy provides retry info in exceptions</li>
+<li><strong>docling pipeline load time</strong>: First call for ASR/OCR may be slow due to model loading</li>
+</ul>
+</section>
+<section id="implementation-notes" class="level2">
+<h2 class="anchored" data-anchor-id="implementation-notes">Implementation Notes</h2>
+<section id="recommended-project-structure" class="level3">
+<h3 class="anchored" data-anchor-id="recommended-project-structure">Recommended Project Structure</h3>
+<pre><code>mini-extract/
+├── .venv/                   # uv-managed virtual environment
+├── pyproject.toml          # Dependencies and project config
+├── uv.lock                 # Lockfile
+├── extract.py              # Main CLI script
+├── .env.example            # Example environment configuration
+├── README.md               # Documentation
+└── artifacts/              # Specs, proposals, research
+    ├── specs.md
+    ├── proposal.md
+    └── library_research.md</code></pre>
+</section>
+<section id="recommended-pyproject.toml" class="level3">
+<h3 class="anchored" data-anchor-id="recommended-pyproject.toml">Recommended pyproject.toml</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode toml code-with-copy"><code class="sourceCode toml"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">[project]</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="dt">name</span> <span class="op">=</span> <span class="st">"mini-extract"</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="dt">version</span> <span class="op">=</span> <span class="st">"0.1.0"</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="dt">description</span> <span class="op">=</span> <span class="st">"CLI tool to extract invoice data from files"</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="dt">requires-python</span> <span class="op">=</span> <span class="st">"&gt;=3.10"</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="dt">dependencies</span> <span class="op">=</span> <span class="op">[</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"docling[asr,tesserocr]"</span><span class="op">,</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"dspy"</span><span class="op">,</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"python-dotenv"</span><span class="op">,</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="op">]</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="kw">[dependency-groups]</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="dt">dev</span> <span class="op">=</span> <span class="op">[</span><span class="st">"pytest"</span><span class="op">,</span> <span class="st">"ruff"</span><span class="op">]</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="recommended-.env.example" class="level3">
+<h3 class="anchored" data-anchor-id="recommended-.env.example">Recommended .env.example</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># OpenAI-compatible API configuration</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="va">OPENAI_API_KEY</span><span class="op">=</span>your-api-key-here</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="va">OPENAI_BASE_URL</span><span class="op">=</span>http://localhost:11434/v1</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="va">MODEL</span><span class="op">=</span>llama3.2:latest</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="recommended-uv-commands" class="level3">
+<h3 class="anchored" data-anchor-id="recommended-uv-commands">Recommended uv Commands</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize and setup</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> init</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> add docling dspy python-dotenv</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> add <span class="at">-D</span> pytest ruff</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> sync</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Run</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> run python extract.py samples/invoice_1.pdf</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="co"># For development</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> run pytest</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> run ruff check .</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+
+
+</section>
+</section>
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a></div></div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/KarthikeanJuttumahadevan4\.github\.io\/target_staleness\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>© 2026 United States Military Academy</p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+<script src="../../../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

@@ -1,0 +1,1452 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.19">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>run_instructions – AI101</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<link href="../../..//images/favicon.svg" rel="icon" type="image/svg+xml">
+<script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-dark-b626d73c4c936ccc3cb08be7d45d1df6.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap-020d25d76586e1017cbc2b913b3a2bf1.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark-52c85c35cd3cfaec83d0f36150bfac8d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../../site_libs/bootstrap/bootstrap-020d25d76586e1017cbc2b913b3a2bf1.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+
+
+<meta property="og:title" content="AI101">
+<meta property="og:site_name" content="AI101">
+<link rel="canonical" href="https://KarthikeanJuttumahadevan4.github.io/target_staleness/UPDATED_MODEL/planning/SAMPLES_SAMPLES/RUN_INSTRUCTIONS.html">
+</head>
+
+<body class="nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const queryPrefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+    const darkModeDefault = queryPrefersDark.matches;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    queryPrefersDark.addEventListener("change", e => {
+      if(window.localStorage.getItem("quarto-color-scheme") !== null)
+        return;
+      const alternate = e.matches
+      toggleColorMode(alternate);
+      localAlternateSentinel = e.matches ? 'alternate' : 'default'; // this is used alongside local storage!
+      toggleGiscusIfUsed(alternate, darkModeDefault);
+    });
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="https://usma-media.s3.amazonaws.com/inline-images/img/usma_logos/logo/wp_crest_new_only.png" alt="" class="navbar-logo light-content">
+    <img src="https://usma-media.s3.amazonaws.com/inline-images/img/usma_logos/logo/wp_crest_new_only.png" alt="" class="navbar-logo dark-content">
+    </a>
+    <a class="navbar-brand" href="../../../index.html">
+    <span class="navbar-title">AI101</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../UPDATED_MODEL/index.html"> 
+<span class="menu-text">Model Docs</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="2">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#complete-run-instructions" id="toc-complete-run-instructions" class="nav-link active" data-scroll-target="#complete-run-instructions">Complete Run Instructions</a>
+  <ul class="collapse">
+  <li><a href="#how-to-create-all-sample-files-run-extraction-and-reproduce-results" id="toc-how-to-create-all-sample-files-run-extraction-and-reproduce-results" class="nav-link" data-scroll-target="#how-to-create-all-sample-files-run-extraction-and-reproduce-results">How to Create All Sample Files, Run Extraction, and Reproduce Results</a></li>
+  <li><a href="#quick-start-5-minutes" id="toc-quick-start-5-minutes" class="nav-link" data-scroll-target="#quick-start-5-minutes">⚡ Quick Start (5 Minutes)</a></li>
+  <li><a href="#complete-file-creation-guide" id="toc-complete-file-creation-guide" class="nav-link" data-scroll-target="#complete-file-creation-guide">📁 Complete File Creation Guide</a>
+  <ul class="collapse">
+  <li><a href="#file-1-text-file-with-embedded-markers-easiest" id="toc-file-1-text-file-with-embedded-markers-easiest" class="nav-link" data-scroll-target="#file-1-text-file-with-embedded-markers-easiest">File 1: Text File with Embedded Markers ✅ (Easiest)</a></li>
+  <li><a href="#file-2-word-document-with-track-changes" id="toc-file-2-word-document-with-track-changes" class="nav-link" data-scroll-target="#file-2-word-document-with-track-changes">File 2: Word Document with Track Changes</a></li>
+  <li><a href="#file-3-pdf-with-metadata" id="toc-file-3-pdf-with-metadata" class="nav-link" data-scroll-target="#file-3-pdf-with-metadata">File 3: PDF with Metadata</a></li>
+  <li><a href="#file-4-image-with-exif-metadata" id="toc-file-4-image-with-exif-metadata" class="nav-link" data-scroll-target="#file-4-image-with-exif-metadata">File 4: Image with EXIF Metadata</a></li>
+  <li><a href="#file-5-audio-file-with-id3-tags" id="toc-file-5-audio-file-with-id3-tags" class="nav-link" data-scroll-target="#file-5-audio-file-with-id3-tags">File 5: Audio File with ID3 Tags</a></li>
+  <li><a href="#file-6-video-file-with-metadata" id="toc-file-6-video-file-with-metadata" class="nav-link" data-scroll-target="#file-6-video-file-with-metadata">File 6: Video File with Metadata</a></li>
+  <li><a href="#file-7-git-repository-with-version-history" id="toc-file-7-git-repository-with-version-history" class="nav-link" data-scroll-target="#file-7-git-repository-with-version-history">File 7: Git Repository with Version History</a></li>
+  </ul></li>
+  <li><a href="#expected-results-summary-table" id="toc-expected-results-summary-table" class="nav-link" data-scroll-target="#expected-results-summary-table">📊 Expected Results Summary Table</a></li>
+  <li><a href="#complete-workflow" id="toc-complete-workflow" class="nav-link" data-scroll-target="#complete-workflow">🎯 Complete Workflow</a>
+  <ul class="collapse">
+  <li><a href="#step-1-create-directory-structure" id="toc-step-1-create-directory-structure" class="nav-link" data-scroll-target="#step-1-create-directory-structure">Step 1: Create Directory Structure</a></li>
+  <li><a href="#step-2-create-sample-files" id="toc-step-2-create-sample-files" class="nav-link" data-scroll-target="#step-2-create-sample-files">Step 2: Create Sample Files</a></li>
+  <li><a href="#step-3-save-extraction-script" id="toc-step-3-save-extraction-script" class="nav-link" data-scroll-target="#step-3-save-extraction-script">Step 3: Save Extraction Script</a></li>
+  <li><a href="#step-4-install-dependencies" id="toc-step-4-install-dependencies" class="nav-link" data-scroll-target="#step-4-install-dependencies">Step 4: Install Dependencies</a></li>
+  <li><a href="#step-5-run-extraction-on-all-files" id="toc-step-5-run-extraction-on-all-files" class="nav-link" data-scroll-target="#step-5-run-extraction-on-all-files">Step 5: Run Extraction on All Files</a></li>
+  <li><a href="#step-6-review-results" id="toc-step-6-review-results" class="nav-link" data-scroll-target="#step-6-review-results">Step 6: Review Results</a></li>
+  </ul></li>
+  <li><a href="#sample-output-text-file" id="toc-sample-output-text-file" class="nav-link" data-scroll-target="#sample-output-text-file">📋 Sample Output (Text File)</a></li>
+  <li><a href="#known-limitations-basic-version" id="toc-known-limitations-basic-version" class="nav-link" data-scroll-target="#known-limitations-basic-version">⚠️ Known Limitations (Basic Version)</a>
+  <ul class="collapse">
+  <li><a href="#how-to-fix" id="toc-how-to-fix" class="nav-link" data-scroll-target="#how-to-fix">How to Fix:</a></li>
+  </ul></li>
+  <li><a href="#success-criteria" id="toc-success-criteria" class="nav-link" data-scroll-target="#success-criteria">🎉 Success Criteria</a></li>
+  <li><a href="#full-documentation" id="toc-full-documentation" class="nav-link" data-scroll-target="#full-documentation">📚 Full Documentation</a></li>
+  <li><a href="#reproduction-instructions-summary" id="toc-reproduction-instructions-summary" class="nav-link" data-scroll-target="#reproduction-instructions-summary">🚀 Reproduction Instructions Summary</a></li>
+  <li><a href="#final-notes" id="toc-final-notes" class="nav-link" data-scroll-target="#final-notes">🎯 Final Notes</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content column-page-left" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+
+
+
+
+
+<section id="complete-run-instructions" class="level1">
+<h1>Complete Run Instructions</h1>
+<section id="how-to-create-all-sample-files-run-extraction-and-reproduce-results" class="level2">
+<h2 class="anchored" data-anchor-id="how-to-create-all-sample-files-run-extraction-and-reproduce-results">How to Create All Sample Files, Run Extraction, and Reproduce Results</h2>
+<p>This guide provides <strong>step-by-step instructions</strong> to: 1. Create all 7 sample file types 2. Run the extractor on each file 3. Reproduce the expected output 4. Verify the results</p>
+<hr>
+</section>
+<section id="quick-start-5-minutes" class="level2">
+<h2 class="anchored" data-anchor-id="quick-start-5-minutes">⚡ Quick Start (5 Minutes)</h2>
+<p>If you’re in a hurry, start with just the <strong>text file</strong> which requires NO special tools:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Create the samples4 directory</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> samples4</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Create a simple text file with embedded markers</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> <span class="op">&gt;</span> samples4/multi_edit_text.txt <span class="op">&lt;&lt; 'EOF'</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;!-- EDIT: 2024-02-02T20:31:00Z | AUTHOR: alice | TYPE: create | SECTION: header --&gt;</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="st"># Report</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="st">Initial content.</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;!-- EDIT: 2024-02-03T19:29:00Z | AUTHOR: bob | TYPE: add | SECTION: intro --&gt;</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="st">## Introduction</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="st">Added intro.</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;!-- EDIT: 2024-02-04T10:15:00Z | AUTHOR: alice | TYPE: modify | SECTION: title --&gt;</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="st"># Report v1.0</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="st">Updated.</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="op">EOF</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Save the extraction script</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Copy from EXTRACTION_SCRIPT.md to extract.py</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Run extraction</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> extract.py samples4/multi_edit_text.txt</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="co"># 5. See results in JSON format</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+</section>
+<section id="complete-file-creation-guide" class="level2">
+<h2 class="anchored" data-anchor-id="complete-file-creation-guide">📁 Complete File Creation Guide</h2>
+<section id="file-1-text-file-with-embedded-markers-easiest" class="level3">
+<h3 class="anchored" data-anchor-id="file-1-text-file-with-embedded-markers-easiest">File 1: Text File with Embedded Markers ✅ (Easiest)</h3>
+<p><strong>Filename</strong>: <code>samples4/multi_edit_text.txt</code></p>
+<p><strong>Creation</strong> (30 seconds):</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> <span class="op">&gt;</span> samples4/multi_edit_text.txt <span class="op">&lt;&lt; 'EOF'</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;!-- EDIT: 2024-02-02T20:31:00Z | AUTHOR: alice | TYPE: create | SECTION: header | DESCRIPTION: Initial document creation --&gt;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="st"># Project Report</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="st">This is the initial version of the project documentation.</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="st">The project aims to create a universal file metadata extractor.</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;!-- EDIT: 2024-02-03T19:29:00Z | AUTHOR: bob | TYPE: add | SECTION: introduction | DESCRIPTION: Added introduction section --&gt;</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="st">## Introduction</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="st">This section provides an overview of the extractor.</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="st">The extractor can handle multiple file types.</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="st">## Features</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="st">- Multi-format support</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="st">- Version history tracking</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;!-- EDIT: 2024-02-04T10:15:00Z | AUTHOR: alice | TYPE: modify | SECTION: title | DESCRIPTION: Updated title to include version --&gt;</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="st"># Project Report v1.0</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="st">This is the UPDATED version of the project documentation.</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="st">## Introduction</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="st">This section provides an overview of the extractor.</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a><span class="st">The extractor can handle multiple file types.</span></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a><span class="st">## Features</span></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a><span class="st">- Multi-format support</span></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a><span class="st">- Version history tracking</span></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;!-- EDIT: 2024-02-04T14:29:00Z | AUTHOR: alice | TYPE: add | SECTION: media | DESCRIPTION: Added media asset references --&gt;</span></span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a><span class="st">## Media Assets</span></span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a><span class="st">- Image: logo.png - Added 2024-02-04</span></span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a><span class="st">- Audio: intro.mp3 - Added 2024-02-04</span></span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a><span class="st">- Video: tutorial.mp4 - Added 2024-02-04</span></span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;!-- EDIT: 2024-02-05T09:00:00Z | AUTHOR: bob | TYPE: add | SECTION: conclusion | DESCRIPTION: Added conclusion section --&gt;</span></span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a><span class="st">## Conclusion</span></span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a><span class="st">This documentation covers all project assets and features.</span></span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a><span class="op">EOF</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Verification</strong>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Should show 5 markers</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-c</span> <span class="st">"EDIT:"</span> samples4/multi_edit_text.txt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Extraction Command</strong>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> extract.py samples4/multi_edit_text.txt <span class="at">--output</span> results/multi_edit_text.json</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Expected Results</strong>: - 5 edit nodes - 4 edges connecting them - All timestamps present (2024-02-02 to 2024-02-05) - Authors: alice, bob - Edit types: create, add, modify, add - All confidence: high</p>
+<hr>
+</section>
+<section id="file-2-word-document-with-track-changes" class="level3">
+<h3 class="anchored" data-anchor-id="file-2-word-document-with-track-changes">File 2: Word Document with Track Changes</h3>
+<p><strong>Filename</strong>: <code>samples4/tracked_changes.docx</code></p>
+<p><strong>Prerequisite</strong>: Microsoft Word or LibreOffice Writer</p>
+<p><strong>Creation Steps</strong> (5 minutes):</p>
+<ol type="1">
+<li><p><strong>Open Word</strong> and create a new document</p></li>
+<li><p><strong>Enable Track Changes</strong>:</p>
+<ul>
+<li>Go to <strong>Review</strong> tab</li>
+<li>Click <strong>Track Changes</strong> (ensure it’s ON)</li>
+</ul></li>
+<li><p><strong>Make edits with timestamps</strong>:</p>
+<pre><code># Step 1: Initial content
+Type: "Project Report"
+Type: "This is the initial content."
+SAVE the document
+
+# Step 2: Add image reference (simulating image insertion)
+After "initial content.", add: "Image 1 inserted here."
+SAVE
+
+# Step 3: Add another image
+At the end, add: "Image 2 inserted here."
+SAVE
+
+# Step 4: Modify title
+Change "Project Report" to "Project Report v1.0"
+SAVE</code></pre></li>
+<li><p><strong>Save as DOCX</strong>:</p>
+<ul>
+<li>File → Save As</li>
+<li>Filename: <code>tracked_changes.docx</code></li>
+<li>Location: <code>samples4/</code></li>
+<li>Format: Word Document (.docx)</li>
+</ul></li>
+</ol>
+<p><strong>Extraction Command</strong>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> extract.py samples4/tracked_changes.docx <span class="at">--output</span> results/tracked_changes.json</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Expected Results</strong>: - 4 edit nodes (initial, add image1, add image2, modify title) - 3 edges - Timestamps from Word’s revision history - Author names from Word - Source: word_track_changes (when implemented) or filesystem (basic version)</p>
+<p><strong>Note</strong>: The basic extraction script in EXTRACTION_SCRIPT.md uses filesystem fallback for Word docs. For full Word track changes support, additional code is needed (see artifacts/version_history_extractor.md).</p>
+<hr>
+</section>
+<section id="file-3-pdf-with-metadata" class="level3">
+<h3 class="anchored" data-anchor-id="file-3-pdf-with-metadata">File 3: PDF with Metadata</h3>
+<p><strong>Filename</strong>: <code>samples4/metadata.pdf</code></p>
+<p><strong>Prerequisite</strong>: Any PDF creator (Word, LibreOffice, online tool)</p>
+<p><strong>Creation Steps</strong> (3 minutes):</p>
+<ol type="1">
+<li><p><strong>Create a Word document</strong> with content:</p>
+<pre><code>PDF Test Document
+
+This PDF has embedded metadata.
+Created: 2024-02-01
+Modified: 2024-02-02
+Author: Test User</code></pre></li>
+<li><p><strong>Add document properties</strong>:</p>
+<ul>
+<li>File → Info (or File → Properties)</li>
+<li>Title: “Metadata Test Document”</li>
+<li>Author: “PDF Test User”</li>
+<li>Subject: “Testing PDF metadata extraction”</li>
+<li>Created: 2024-02-01T08:00:00Z</li>
+<li>Modified: 2024-02-02T09:00:00Z</li>
+</ul></li>
+<li><p><strong>Export as PDF</strong>:</p>
+<ul>
+<li>File → Export → Create PDF/XPS</li>
+<li>Filename: <code>metadata.pdf</code></li>
+<li>Location: <code>samples4/</code></li>
+</ul></li>
+</ol>
+<p><strong>Extraction Command</strong>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> extract.py samples4/metadata.pdf <span class="at">--output</span> results/metadata.json</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Expected Results</strong> (Basic version): - 1 node (filesystem metadata) - 0 edges - Timestamp: Last modified time - Source: filesystem - Confidence: low</p>
+<p><strong>Expected Results</strong> (Full version with PyPDF2): - 1 node with PDF author, creator, timestamps - Source: pdf_metadata - Confidence: high</p>
+<hr>
+</section>
+<section id="file-4-image-with-exif-metadata" class="level3">
+<h3 class="anchored" data-anchor-id="file-4-image-with-exif-metadata">File 4: Image with EXIF Metadata</h3>
+<p><strong>Filename</strong>: <code>samples4/exif_image.jpg</code></p>
+<p><strong>Prerequisite</strong>: Digital camera or phone</p>
+<p><strong>Creation Steps</strong> (Easiest - 1 minute):</p>
+<p><strong>Option A: Use your phone</strong> 1. Open your phone’s camera 2. Take a photo 3. Transfer to computer (email, cable, cloud) 4. Rename to <code>exif_image.jpg</code> 5. Place in <code>samples4/</code></p>
+<p><strong>Option B: Use a phone camera app</strong> - Most camera apps automatically embed EXIF data with timestamps</p>
+<p><strong>Option C: Use online EXIF editor</strong> 1. Go to https://exif.tools/ 2. Upload any image 3. Edit EXIF data: - DateTimeOriginal: 2024-02-03T10:00:00Z - DateTimeDigitized: 2024-02-03T10:00:00Z - Artist: Test Photographer - Copyright: Test Image 4. Download and save as <code>exif_image.jpg</code></p>
+<p><strong>Extraction Command</strong>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> extract.py samples4/exif_image.jpg <span class="at">--output</span> results/exif_image.json</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Expected Results</strong> (Basic version): - 1 node (filesystem metadata) - 0 edges - Timestamp: Last modified time - Source: filesystem - Confidence: low</p>
+<p><strong>Expected Results</strong> (Full version with Pillow): - 1 node with EXIF timestamps (DateTimeOriginal, DateTimeDigitized) - Source: exif_metadata - Confidence: high</p>
+<hr>
+</section>
+<section id="file-5-audio-file-with-id3-tags" class="level3">
+<h3 class="anchored" data-anchor-id="file-5-audio-file-with-id3-tags">File 5: Audio File with ID3 Tags</h3>
+<p><strong>Filename</strong>: <code>samples4/sample_audio.mp3</code></p>
+<p><strong>Prerequisite</strong>: Audio recording device or converter</p>
+<p><strong>Creation Steps</strong> (2 minutes):</p>
+<p><strong>Option A: Record on phone</strong> 1. Use voice recorder app 2. Record 10-30 seconds of audio 3. Transfer to computer 4. Rename to <code>sample_audio.mp3</code> 5. Place in <code>samples4/</code></p>
+<p><strong>Option B: Use online audio recorder</strong> 1. Go to https://vocaroo.com/ 2. Click “Click to Record” 3. Record a short message 4. Click “Save” → Download 5. Rename to <code>sample_audio.mp3</code> 6. Place in <code>samples4/</code></p>
+<p><strong>Option C: Convert existing audio</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># If you have any audio file (WAV, M4A, etc.)</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="ex">ffmpeg</span> <span class="at">-i</span> input.wav <span class="at">-c:a</span> libmp3lame <span class="at">-q:a</span> 2 samples4/sample_audio.mp3</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Extraction Command</strong>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> extract.py samples4/sample_audio.mp3 <span class="at">--output</span> results/sample_audio.json</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Expected Results</strong> (Basic version): - 1 node (filesystem metadata) - 0 edges - Timestamp: Last modified time - Source: filesystem - Confidence: low</p>
+<p><strong>Expected Results</strong> (Full version with pydub/mutagen): - 1 node with audio metadata (duration, bitrate, channels) - Source: audio_metadata - Confidence: medium</p>
+<hr>
+</section>
+<section id="file-6-video-file-with-metadata" class="level3">
+<h3 class="anchored" data-anchor-id="file-6-video-file-with-metadata">File 6: Video File with Metadata</h3>
+<p><strong>Filename</strong>: <code>samples4/sample_video.mp4</code></p>
+<p><strong>Prerequisite</strong>: Video recording device or converter</p>
+<p><strong>Creation Steps</strong> (1 minute):</p>
+<p><strong>Option A: Record on phone</strong> 1. Use phone’s video camera 2. Record 5-10 seconds 3. Transfer to computer 4. Rename to <code>sample_video.mp4</code> 5. Place in <code>samples4/</code></p>
+<p><strong>Option B: Use online video recorder</strong> 1. Go to https://record screen.io/ 2. Record a short video 3. Download 4. Rename to <code>sample_video.mp4</code> 5. Place in <code>samples4/</code></p>
+<p><strong>Option C: Convert existing video</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># If you have any video file</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="ex">ffmpeg</span> <span class="at">-i</span> input.avi <span class="at">-c:v</span> libx264 <span class="at">-c:a</span> aac samples4/sample_video.mp4</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Extraction Command</strong>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> extract.py samples4/sample_video.mp4 <span class="at">--output</span> results/sample_video.json</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Expected Results</strong> (Basic version): - 1 node (filesystem metadata) - 0 edges - Timestamp: Last modified time - Source: filesystem - Confidence: low</p>
+<p><strong>Expected Results</strong> (Full version with OpenCV): - 1 node with video metadata (duration, resolution, frames, fps) - Source: video_metadata - Confidence: medium</p>
+<hr>
+</section>
+<section id="file-7-git-repository-with-version-history" class="level3">
+<h3 class="anchored" data-anchor-id="file-7-git-repository-with-version-history">File 7: Git Repository with Version History</h3>
+<p><strong>Filename</strong>: <code>samples4/evolution.txt</code> in a git repo at <code>samples4_git/</code></p>
+<p><strong>Prerequisite</strong>: Git installed</p>
+<p><strong>Creation Steps</strong> (5 minutes):</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Navigate to samples4</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> samples4</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a git repository for version history</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> samples4_git</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> samples4_git</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> init</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Set up author info</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config user.name <span class="st">"Test User"</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config user.email <span class="st">"test@example.com"</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Create initial file with first commit (2024-02-01 08:00)</span></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Initial content"</span> <span class="op">&gt;</span> evolution.txt</span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add evolution.txt</span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Initial commit"</span> <span class="at">--date</span><span class="op">=</span><span class="st">"2024-02-01T08:00:00Z"</span></span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Second commit (2024-02-02 09:00) - Add section 1</span></span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="at">-e</span> <span class="st">"Initial content\n\nAdded section 1"</span> <span class="op">&gt;</span> evolution.txt</span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add evolution.txt</span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Add section 1"</span> <span class="at">--date</span><span class="op">=</span><span class="st">"2024-02-02T09:00:00Z"</span> <span class="at">--author</span><span class="op">=</span><span class="st">"Alice &lt;alice@example.com&gt;"</span></span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Third commit (2024-02-03 10:00) - Modify section 1</span></span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="at">-e</span> <span class="st">"Initial content\n\nModified section 1\n\nAdded section 2"</span> <span class="op">&gt;</span> evolution.txt</span>
+<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add evolution.txt</span>
+<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Modify section 1, add section 2"</span> <span class="at">--date</span><span class="op">=</span><span class="st">"2024-02-03T10:00:00Z"</span> <span class="at">--author</span><span class="op">=</span><span class="st">"Bob &lt;bob@example.com&gt;"</span></span>
+<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Fourth commit (2024-02-04 11:00) - Delete section 1</span></span>
+<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a> <span class="bu">echo</span> <span class="at">-e</span> <span class="st">"Initial content\n\nModified section 1\n\nAdded section 2"</span> <span class="op">&gt;</span> evolution.txt</span>
+<span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add evolution.txt</span>
+<span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Remove temp note"</span> <span class="at">--date</span><span class="op">=</span><span class="st">"2024-02-04T11:00:00Z"</span> <span class="at">--author</span><span class="op">=</span><span class="st">"Alice &lt;alice@example.com&gt;"</span></span>
+<span id="cb14-32"><a href="#cb14-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-33"><a href="#cb14-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Go back to project root</span></span>
+<span id="cb14-34"><a href="#cb14-34" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ..</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Extraction Command</strong>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> extract.py samples4/evolution.txt <span class="at">--git-repo</span> samples4/samples4_git <span class="at">--output</span> results/evolution.json</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Expected Results</strong> (Basic version): - 1 node (filesystem metadata only - git integration not in basic version) - 0 edges - Source: filesystem</p>
+<p><strong>Expected Results</strong> (Full version with GitPython): - 4 nodes (one per commit) - 3 edges - Timestamps: 2024-02-01T08:00:00Z to 2024-02-04T11:00:00Z - Authors: Test User, Alice, Bob - Edit types: create, add, modify, delete - Source: git - Confidence: high</p>
+<hr>
+</section>
+</section>
+<section id="expected-results-summary-table" class="level2">
+<h2 class="anchored" data-anchor-id="expected-results-summary-table">📊 Expected Results Summary Table</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 6%">
+<col style="width: 14%">
+<col style="width: 7%">
+<col style="width: 13%">
+<col style="width: 8%">
+<col style="width: 13%">
+<col style="width: 17%">
+<col style="width: 16%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>File</th>
+<th>Edits/Nodes</th>
+<th>Edges</th>
+<th>Timestamps</th>
+<th>Author</th>
+<th>Confidence</th>
+<th>Source (Basic)</th>
+<th>Source (Full)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Text with markers</td>
+<td>5</td>
+<td>4</td>
+<td>✅ Exact</td>
+<td>✅ Multi</td>
+<td>High</td>
+<td>embedded_marker</td>
+<td>embedded_marker</td>
+</tr>
+<tr class="even">
+<td>Word with track changes</td>
+<td>4</td>
+<td>3</td>
+<td>⚠️ File-level</td>
+<td>⚠️ Limited</td>
+<td>Low</td>
+<td>filesystem</td>
+<td>word_track_changes</td>
+</tr>
+<tr class="odd">
+<td>PDF with metadata</td>
+<td>1</td>
+<td>0</td>
+<td>✅ File-level</td>
+<td>⚠️ Limited</td>
+<td>Low</td>
+<td>filesystem</td>
+<td>pdf_metadata</td>
+</tr>
+<tr class="even">
+<td>Image with EXIF</td>
+<td>1</td>
+<td>0</td>
+<td>✅ File-level</td>
+<td>❌ No</td>
+<td>Low</td>
+<td>filesystem</td>
+<td>exif_metadata</td>
+</tr>
+<tr class="odd">
+<td>Audio MP3</td>
+<td>1</td>
+<td>0</td>
+<td>✅ File-level</td>
+<td>❌ No</td>
+<td>Low</td>
+<td>filesystem</td>
+<td>audio_metadata</td>
+</tr>
+<tr class="even">
+<td>Video MP4</td>
+<td>1</td>
+<td>0</td>
+<td>✅ File-level</td>
+<td>❌ No</td>
+<td>Low</td>
+<td>filesystem</td>
+<td>video_metadata</td>
+</tr>
+<tr class="odd">
+<td>Git version history</td>
+<td>4</td>
+<td>3</td>
+<td>✅ Commit</td>
+<td>✅ Multi</td>
+<td>High</td>
+<td>filesystem</td>
+<td>git</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+<section id="complete-workflow" class="level2">
+<h2 class="anchored" data-anchor-id="complete-workflow">🎯 Complete Workflow</h2>
+<section id="step-1-create-directory-structure" class="level3">
+<h3 class="anchored" data-anchor-id="step-1-create-directory-structure">Step 1: Create Directory Structure</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># From project root</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> samples4 results</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="step-2-create-sample-files" class="level3">
+<h3 class="anchored" data-anchor-id="step-2-create-sample-files">Step 2: Create Sample Files</h3>
+<p>Follow the instructions above for each file type you want to create.</p>
+<p><strong>Minimum recommended</strong>: Start with just <code>multi_edit_text.txt</code></p>
+<p><strong>For full testing</strong>: Create all 7 files</p>
+</section>
+<section id="step-3-save-extraction-script" class="level3">
+<h3 class="anchored" data-anchor-id="step-3-save-extraction-script">Step 3: Save Extraction Script</h3>
+<p>Copy the content from <code>EXTRACTION_SCRIPT.md</code> to <code>extract.py</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> samples4/EXTRACTION_SCRIPT.md extract.py.short</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Then manually copy the Python code from EXTRACTION_SCRIPT.md to extract.py</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Or use sed to extract just the code:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract Python code from markdown (partial solution)</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Then manually clean up</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="step-4-install-dependencies" class="level3">
+<h3 class="anchored" data-anchor-id="step-4-install-dependencies">Step 4: Install Dependencies</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Minimum for basic functionality</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install python-magic</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="co"># For full functionality (if implementing all extractors)</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install Pillow PyPDF2 pdfplumber python-docx openpyxl pydub networkx gitpython</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="step-5-run-extraction-on-all-files" class="level3">
+<h3 class="anchored" data-anchor-id="step-5-run-extraction-on-all-files">Step 5: Run Extraction on All Files</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a run script</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> <span class="op">&gt;</span> run_extraction.sh <span class="op">&lt;&lt; 'EOF'</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="st">#!/bin/bash</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="st"># Create results directory</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="st">mkdir -p results</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="st"># Run on all sample files</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="st">echo "=== Extracting: multi_edit_text.txt ==="</span></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="st">python extract.py samples4/multi_edit_text.txt --output results/multi_edit_text.json</span></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a><span class="st">echo ""</span></span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a><span class="st">echo "=== Extracting: tracked_changes.docx ==="</span></span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a><span class="st">python extract.py samples4/tracked_changes.docx --output results/tracked_changes.json</span></span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a><span class="st">echo ""</span></span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a><span class="st">echo "=== Extracting: metadata.pdf ==="</span></span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a><span class="st">python extract.py samples4/metadata.pdf --output results/metadata.json</span></span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a><span class="st">echo ""</span></span>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a><span class="st">echo "=== Extracting: exif_image.jpg ==="</span></span>
+<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a><span class="st">python extract.py samples4/exif_image.jpg --output results/exif_image.json</span></span>
+<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a><span class="st">echo ""</span></span>
+<span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a><span class="st">echo "=== Extracting: sample_audio.mp3 ==="</span></span>
+<span id="cb20-26"><a href="#cb20-26" aria-hidden="true" tabindex="-1"></a><span class="st">python extract.py samples4/sample_audio.mp3 --output results/sample_audio.json</span></span>
+<span id="cb20-27"><a href="#cb20-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-28"><a href="#cb20-28" aria-hidden="true" tabindex="-1"></a><span class="st">echo ""</span></span>
+<span id="cb20-29"><a href="#cb20-29" aria-hidden="true" tabindex="-1"></a><span class="st">echo "=== Extracting: sample_video.mp4 ==="</span></span>
+<span id="cb20-30"><a href="#cb20-30" aria-hidden="true" tabindex="-1"></a><span class="st">python extract.py samples4/sample_video.mp4 --output results/sample_video.json</span></span>
+<span id="cb20-31"><a href="#cb20-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-32"><a href="#cb20-32" aria-hidden="true" tabindex="-1"></a><span class="st">echo ""</span></span>
+<span id="cb20-33"><a href="#cb20-33" aria-hidden="true" tabindex="-1"></a><span class="st">echo "=== Extracting: evolution.txt (git) ==="</span></span>
+<span id="cb20-34"><a href="#cb20-34" aria-hidden="true" tabindex="-1"></a><span class="st">python extract.py samples4_git/evolution.txt --git-repo samples4_git --output results/evolution.json</span></span>
+<span id="cb20-35"><a href="#cb20-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-36"><a href="#cb20-36" aria-hidden="true" tabindex="-1"></a><span class="st">echo ""</span></span>
+<span id="cb20-37"><a href="#cb20-37" aria-hidden="true" tabindex="-1"></a><span class="st">echo "All extractions complete!"</span></span>
+<span id="cb20-38"><a href="#cb20-38" aria-hidden="true" tabindex="-1"></a><span class="op">EOF</span></span>
+<span id="cb20-39"><a href="#cb20-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-40"><a href="#cb20-40" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> +x run_extraction.sh</span>
+<span id="cb20-41"><a href="#cb20-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-42"><a href="#cb20-42" aria-hidden="true" tabindex="-1"></a><span class="co"># Run it</span></span>
+<span id="cb20-43"><a href="#cb20-43" aria-hidden="true" tabindex="-1"></a><span class="ex">./run_extraction.sh</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="step-6-review-results" class="level3">
+<h3 class="anchored" data-anchor-id="step-6-review-results">Step 6: Review Results</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># List all result files</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-lh</span> results/</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="co"># View a specific result</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"=== Text File Results ==="</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> results/multi_edit_text.json <span class="kw">|</span> <span class="ex">python</span> <span class="at">-m</span> json.tool <span class="kw">|</span> <span class="fu">head</span> <span class="at">-50</span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">""</span></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"=== Summary for all files ==="</span></span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> file <span class="kw">in</span> results/<span class="pp">*</span>.json<span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"File: </span><span class="va">$file</span><span class="st">"</span></span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>    <span class="ex">python</span> <span class="at">-c</span> <span class="st">"import json; d=json.load(open('</span><span class="va">$file</span><span class="st">')); print(f'  Nodes: {d[</span><span class="dt">\"</span><span class="st">knowledge_graph</span><span class="dt">\"</span><span class="st">][</span><span class="dt">\"</span><span class="st">total_nodes</span><span class="dt">\"</span><span class="st">]}, Edges: {d[</span><span class="dt">\"</span><span class="st">knowledge_graph</span><span class="dt">\"</span><span class="st">][</span><span class="dt">\"</span><span class="st">total_edges</span><span class="dt">\"</span><span class="st">]}')"</span></span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+</section>
+</section>
+<section id="sample-output-text-file" class="level2">
+<h2 class="anchored" data-anchor-id="sample-output-text-file">📋 Sample Output (Text File)</h2>
+<p>For <code>multi_edit_text.txt</code>, expected output:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"extraction_metadata"</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"file"</span><span class="fu">:</span> <span class="st">"samples4/multi_edit_text.txt"</span><span class="fu">,</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"timestamp"</span><span class="fu">:</span> <span class="st">"2026-10-05T12:34:56Z"</span><span class="fu">,</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"extractor_version"</span><span class="fu">:</span> <span class="st">"1.0.0"</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">},</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"file_metadata"</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"filesystem"</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"size_bytes"</span><span class="fu">:</span> <span class="dv">1234</span><span class="fu">,</span></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"created_time"</span><span class="fu">:</span> <span class="st">"2026-10-05T12:30:00Z"</span><span class="fu">,</span></span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"modified_time"</span><span class="fu">:</span> <span class="st">"2026-10-05T12:30:00Z"</span><span class="fu">,</span></span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"accessed_time"</span><span class="fu">:</span> <span class="st">"2026-10-05T12:34:56Z"</span></span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">},</span></span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"file_type"</span><span class="fu">:</span> <span class="st">"text/plain"</span><span class="fu">,</span></span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"text"</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"character_count"</span><span class="fu">:</span> <span class="dv">1234</span><span class="fu">,</span></span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"line_count"</span><span class="fu">:</span> <span class="dv">45</span><span class="fu">,</span></span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"word_count"</span><span class="fu">:</span> <span class="dv">200</span></span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">}</span></span>
+<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">},</span></span>
+<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"version_history"</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"edits"</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a>      <span class="fu">{</span></span>
+<span id="cb22-24"><a href="#cb22-24" aria-hidden="true" tabindex="-1"></a>        <span class="dt">"node_id"</span><span class="fu">:</span> <span class="st">"edit_20240202T203100Z_0"</span><span class="fu">,</span></span>
+<span id="cb22-25"><a href="#cb22-25" aria-hidden="true" tabindex="-1"></a>        <span class="dt">"node_type"</span><span class="fu">:</span> <span class="st">"edit"</span><span class="fu">,</span></span>
+<span id="cb22-26"><a href="#cb22-26" aria-hidden="true" tabindex="-1"></a>        <span class="dt">"timestamp"</span><span class="fu">:</span> <span class="st">"2024-02-02T20:31:00Z"</span><span class="fu">,</span></span>
+<span id="cb22-27"><a href="#cb22-27" aria-hidden="true" tabindex="-1"></a>        <span class="dt">"author"</span><span class="fu">:</span> <span class="st">"alice"</span><span class="fu">,</span></span>
+<span id="cb22-28"><a href="#cb22-28" aria-hidden="true" tabindex="-1"></a>        <span class="dt">"edit_type"</span><span class="fu">:</span> <span class="st">"create"</span><span class="fu">,</span></span>
+<span id="cb22-29"><a href="#cb22-29" aria-hidden="true" tabindex="-1"></a>        <span class="dt">"content_after"</span><span class="fu">:</span> <span class="st">"# Project Report</span><span class="ch">\n\n</span><span class="st">This is the initial version..."</span><span class="fu">,</span></span>
+<span id="cb22-30"><a href="#cb22-30" aria-hidden="true" tabindex="-1"></a>        <span class="dt">"source"</span><span class="fu">:</span> <span class="st">"embedded_marker"</span><span class="fu">,</span></span>
+<span id="cb22-31"><a href="#cb22-31" aria-hidden="true" tabindex="-1"></a>        <span class="dt">"evaluation_band"</span><span class="fu">:</span> <span class="st">"high"</span></span>
+<span id="cb22-32"><a href="#cb22-32" aria-hidden="true" tabindex="-1"></a>      <span class="fu">}</span><span class="ot">,</span></span>
+<span id="cb22-33"><a href="#cb22-33" aria-hidden="true" tabindex="-1"></a>      <span class="fu">{</span></span>
+<span id="cb22-34"><a href="#cb22-34" aria-hidden="true" tabindex="-1"></a>        <span class="dt">"node_id"</span><span class="fu">:</span> <span class="st">"edit_20240203T192900Z_1"</span><span class="fu">,</span></span>
+<span id="cb22-35"><a href="#cb22-35" aria-hidden="true" tabindex="-1"></a>        <span class="dt">"node_type"</span><span class="fu">:</span> <span class="st">"edit"</span><span class="fu">,</span></span>
+<span id="cb22-36"><a href="#cb22-36" aria-hidden="true" tabindex="-1"></a>        <span class="dt">"timestamp"</span><span class="fu">:</span> <span class="st">"2024-02-03T19:29:00Z"</span><span class="fu">,</span></span>
+<span id="cb22-37"><a href="#cb22-37" aria-hidden="true" tabindex="-1"></a>        <span class="dt">"author"</span><span class="fu">:</span> <span class="st">"bob"</span><span class="fu">,</span></span>
+<span id="cb22-38"><a href="#cb22-38" aria-hidden="true" tabindex="-1"></a>        <span class="dt">"edit_type"</span><span class="fu">:</span> <span class="st">"add"</span><span class="fu">,</span></span>
+<span id="cb22-39"><a href="#cb22-39" aria-hidden="true" tabindex="-1"></a>        <span class="dt">"content_after"</span><span class="fu">:</span> <span class="st">"## Introduction</span><span class="ch">\n\n</span><span class="st">This section provides..."</span><span class="fu">,</span></span>
+<span id="cb22-40"><a href="#cb22-40" aria-hidden="true" tabindex="-1"></a>        <span class="dt">"source"</span><span class="fu">:</span> <span class="st">"embedded_marker"</span><span class="fu">,</span></span>
+<span id="cb22-41"><a href="#cb22-41" aria-hidden="true" tabindex="-1"></a>        <span class="dt">"evaluation_band"</span><span class="fu">:</span> <span class="st">"high"</span></span>
+<span id="cb22-42"><a href="#cb22-42" aria-hidden="true" tabindex="-1"></a>      <span class="fu">}</span></span>
+<span id="cb22-43"><a href="#cb22-43" aria-hidden="true" tabindex="-1"></a>    <span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb22-44"><a href="#cb22-44" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"edit_count"</span><span class="fu">:</span> <span class="dv">5</span></span>
+<span id="cb22-45"><a href="#cb22-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">},</span></span>
+<span id="cb22-46"><a href="#cb22-46" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"knowledge_graph"</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb22-47"><a href="#cb22-47" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"nodes"</span><span class="fu">:</span> <span class="dv">5</span><span class="fu">,</span></span>
+<span id="cb22-48"><a href="#cb22-48" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"edges"</span><span class="fu">:</span> <span class="dv">4</span><span class="fu">,</span></span>
+<span id="cb22-49"><a href="#cb22-49" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"total_nodes"</span><span class="fu">:</span> <span class="dv">5</span><span class="fu">,</span></span>
+<span id="cb22-50"><a href="#cb22-50" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"total_edges"</span><span class="fu">:</span> <span class="dv">4</span></span>
+<span id="cb22-51"><a href="#cb22-51" aria-hidden="true" tabindex="-1"></a>  <span class="fu">},</span></span>
+<span id="cb22-52"><a href="#cb22-52" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"summary"</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb22-53"><a href="#cb22-53" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"total_edits"</span><span class="fu">:</span> <span class="dv">5</span><span class="fu">,</span></span>
+<span id="cb22-54"><a href="#cb22-54" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"total_nodes"</span><span class="fu">:</span> <span class="dv">5</span><span class="fu">,</span></span>
+<span id="cb22-55"><a href="#cb22-55" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"total_edges"</span><span class="fu">:</span> <span class="dv">4</span><span class="fu">,</span></span>
+<span id="cb22-56"><a href="#cb22-56" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"sources_used"</span><span class="fu">:</span> <span class="ot">[</span><span class="st">"embedded_marker"</span><span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb22-57"><a href="#cb22-57" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"confidence_distribution"</span><span class="fu">:</span> <span class="fu">{</span><span class="dt">"high"</span><span class="fu">:</span> <span class="dv">5</span><span class="fu">,</span> <span class="dt">"medium"</span><span class="fu">:</span> <span class="dv">0</span><span class="fu">,</span> <span class="dt">"low"</span><span class="fu">:</span> <span class="dv">0</span><span class="fu">}</span></span>
+<span id="cb22-58"><a href="#cb22-58" aria-hidden="true" tabindex="-1"></a>  <span class="fu">}</span></span>
+<span id="cb22-59"><a href="#cb22-59" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+</section>
+<section id="known-limitations-basic-version" class="level2">
+<h2 class="anchored" data-anchor-id="known-limitations-basic-version">⚠️ Known Limitations (Basic Version)</h2>
+<p>The basic extraction script from <code>EXTRACTION_SCRIPT.md</code> has these limitations:</p>
+<ol type="1">
+<li><strong>Only text files with markers</strong> get full edit history</li>
+<li><strong>Binary files</strong> (Word, PDF, images, audio, video) only get filesystem metadata</li>
+<li><strong>No git integration</strong> in basic version</li>
+<li><strong>No Word track changes</strong> parsing in basic version</li>
+</ol>
+<section id="how-to-fix" class="level3">
+<h3 class="anchored" data-anchor-id="how-to-fix">How to Fix:</h3>
+<p>For <strong>full functionality</strong>, you need to:</p>
+<ol type="1">
+<li><p><strong>Install additional dependencies</strong>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install Pillow PyPDF2 pdfplumber python-docx openpyxl pydub networkx gitpython lxml</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+<li><p><strong>Implement additional extractors</strong> (code is templated in):</p>
+<ul>
+<li><code>artifacts/extraction_engine.md</code> - Full extraction engine</li>
+<li><code>artifacts/version_history_extractor.md</code> - Version history extractor</li>
+<li><code>artifacts/main_extractor.md</code> - Complete main extractor</li>
+</ul></li>
+<li><p><strong>Merge the full code</strong> into <code>extract.py</code></p></li>
+</ol>
+<hr>
+</section>
+</section>
+<section id="success-criteria" class="level2">
+<h2 class="anchored" data-anchor-id="success-criteria">🎉 Success Criteria</h2>
+<p>You’ve successfully reproduced the results when:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>File</th>
+<th>Success Criteria</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Text</td>
+<td>5 nodes, 4 edges, all timestamps correct</td>
+</tr>
+<tr class="even">
+<td>Word</td>
+<td>File exists and can be read (even if basic)</td>
+</tr>
+<tr class="odd">
+<td>PDF</td>
+<td>File exists and can be read</td>
+</tr>
+<tr class="even">
+<td>Image</td>
+<td>File exists and can be read</td>
+</tr>
+<tr class="odd">
+<td>Audio</td>
+<td>File exists and can be read</td>
+</tr>
+<tr class="even">
+<td>Video</td>
+<td>File exists and can be read</td>
+</tr>
+<tr class="odd">
+<td>Git</td>
+<td>File exists and git repo has history</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+<section id="full-documentation" class="level2">
+<h2 class="anchored" data-anchor-id="full-documentation">📚 Full Documentation</h2>
+<p>For complete details on each component:</p>
+<ul>
+<li><strong>Project Overview</strong>: <a href="../README.md">../README.md</a></li>
+<li><strong>Proposal</strong>: <a href="../artifacts/proposal.md">../artifacts/proposal.md</a></li>
+<li><strong>Specifications</strong>: <a href="../artifacts/specs.md">../artifacts/specs.md</a></li>
+<li><strong>Quick Start</strong>: <a href="../QUICKSTART.md">../QUICKSTART.md</a></li>
+<li><strong>Implementation Roadmap</strong>: <a href="../artifacts/IMPLEMENTATION_ROADMAP.md">../artifacts/IMPLEMENTATION_ROADMAP.md</a></li>
+<li><strong>Full Extraction Engine</strong>: <a href="../artifacts/extraction_engine.md">../artifacts/extraction_engine.md</a></li>
+</ul>
+<hr>
+</section>
+<section id="reproduction-instructions-summary" class="level2">
+<h2 class="anchored" data-anchor-id="reproduction-instructions-summary">🚀 Reproduction Instructions Summary</h2>
+<ol type="1">
+<li><strong>Create directory</strong>: <code>mkdir -p samples4 results</code></li>
+<li><strong>Create text file</strong>: <code>cat &gt; samples4/multi_edit_text.txt &lt;&lt; 'EOF'...</code></li>
+<li><strong>Save extract.py</strong>: Copy from <code>EXTRACTION_SCRIPT.md</code></li>
+<li><strong>Install dependencies</strong>: <code>pip install python-magic</code></li>
+<li><strong>Run</strong>: <code>python extract.py samples4/multi_edit_text.txt</code></li>
+<li><strong>Verify</strong>: Check JSON output has 5 nodes, 4 edges</li>
+<li><strong>Expand</strong>: Add more file types as needed</li>
+</ol>
+<hr>
+</section>
+<section id="final-notes" class="level2">
+<h2 class="anchored" data-anchor-id="final-notes">🎯 Final Notes</h2>
+<ul>
+<li><strong>Start simple</strong>: Text file with embedded markers is the easiest</li>
+<li><strong>Build gradually</strong>: Add one file type at a time</li>
+<li><strong>Verify at each step</strong>: Make sure each file works before adding more</li>
+<li><strong>Use the templates</strong>: The full code is in <code>artifacts/</code> directory</li>
+</ul>
+<p><strong>The text file example should work immediately with the basic script. This gives you a working proof of concept.</strong></p>
+
+
+</section>
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a></div></div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/KarthikeanJuttumahadevan4\.github\.io\/target_staleness\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>© 2026 United States Military Academy</p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+<script src="../../../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

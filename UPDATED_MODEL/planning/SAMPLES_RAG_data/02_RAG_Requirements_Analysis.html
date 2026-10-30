@@ -1,0 +1,1684 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.19">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>rag_requirements_analysis – AI101</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<link href="../../..//images/favicon.svg" rel="icon" type="image/svg+xml">
+<script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-dark-b626d73c4c936ccc3cb08be7d45d1df6.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap-020d25d76586e1017cbc2b913b3a2bf1.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark-52c85c35cd3cfaec83d0f36150bfac8d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../../site_libs/bootstrap/bootstrap-020d25d76586e1017cbc2b913b3a2bf1.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+
+
+<meta property="og:title" content="AI101">
+<meta property="og:site_name" content="AI101">
+<link rel="canonical" href="https://KarthikeanJuttumahadevan4.github.io/target_staleness/UPDATED_MODEL/planning/SAMPLES_RAG_data/02_RAG_Requirements_Analysis.html">
+</head>
+
+<body class="nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const queryPrefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+    const darkModeDefault = queryPrefersDark.matches;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    queryPrefersDark.addEventListener("change", e => {
+      if(window.localStorage.getItem("quarto-color-scheme") !== null)
+        return;
+      const alternate = e.matches
+      toggleColorMode(alternate);
+      localAlternateSentinel = e.matches ? 'alternate' : 'default'; // this is used alongside local storage!
+      toggleGiscusIfUsed(alternate, darkModeDefault);
+    });
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="https://usma-media.s3.amazonaws.com/inline-images/img/usma_logos/logo/wp_crest_new_only.png" alt="" class="navbar-logo light-content">
+    <img src="https://usma-media.s3.amazonaws.com/inline-images/img/usma_logos/logo/wp_crest_new_only.png" alt="" class="navbar-logo dark-content">
+    </a>
+    <a class="navbar-brand" href="../../../index.html">
+    <span class="navbar-title">AI101</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../UPDATED_MODEL/index.html"> 
+<span class="menu-text">Model Docs</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="2">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#rag_requirements_analysis.md-independent-rag-requirements-analysis" id="toc-rag_requirements_analysis.md-independent-rag-requirements-analysis" class="nav-link active" data-scroll-target="#rag_requirements_analysis.md-independent-rag-requirements-analysis">02_RAG_Requirements_Analysis.md – Independent RAG Requirements Analysis</a>
+  <ul class="collapse">
+  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">1. Introduction</a>
+  <ul class="collapse">
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">1.1 References</a></li>
+  <li><a href="#terminology" id="toc-terminology" class="nav-link" data-scroll-target="#terminology">1.2 Terminology</a></li>
+  </ul></li>
+  <li><a href="#functional-requirements" id="toc-functional-requirements" class="nav-link" data-scroll-target="#functional-requirements">2. Functional Requirements</a>
+  <ul class="collapse">
+  <li><a href="#ingestion" id="toc-ingestion" class="nav-link" data-scroll-target="#ingestion">2.1 Ingestion</a></li>
+  <li><a href="#chunking" id="toc-chunking" class="nav-link" data-scroll-target="#chunking">2.2 Chunking</a></li>
+  <li><a href="#embedding" id="toc-embedding" class="nav-link" data-scroll-target="#embedding">2.3 Embedding</a></li>
+  <li><a href="#retrieval" id="toc-retrieval" class="nav-link" data-scroll-target="#retrieval">2.4 Retrieval</a></li>
+  <li><a href="#fact-deduction" id="toc-fact-deduction" class="nav-link" data-scroll-target="#fact-deduction">2.5 Fact Deduction</a></li>
+  </ul></li>
+  <li><a href="#data-schema-for-comparison" id="toc-data-schema-for-comparison" class="nav-link" data-scroll-target="#data-schema-for-comparison">3. Data Schema for Comparison</a>
+  <ul class="collapse">
+  <li><a href="#rag-deduction-schema-full" id="toc-rag-deduction-schema-full" class="nav-link" data-scroll-target="#rag-deduction-schema-full">3.1 RAG Deduction Schema (Full)</a></li>
+  <li><a href="#kg-fact-schema-for-reference" id="toc-kg-fact-schema-for-reference" class="nav-link" data-scroll-target="#kg-fact-schema-for-reference">3.2 KG Fact Schema (for reference)</a></li>
+  <li><a href="#alignment-mapping" id="toc-alignment-mapping" class="nav-link" data-scroll-target="#alignment-mapping">3.3 Alignment Mapping</a></li>
+  </ul></li>
+  <li><a href="#comparison-and-alignment-logic" id="toc-comparison-and-alignment-logic" class="nav-link" data-scroll-target="#comparison-and-alignment-logic">4. Comparison and Alignment Logic</a>
+  <ul class="collapse">
+  <li><a href="#alignment-strategy" id="toc-alignment-strategy" class="nav-link" data-scroll-target="#alignment-strategy">4.1 Alignment Strategy</a></li>
+  <li><a href="#inconsistency-detection" id="toc-inconsistency-detection" class="nav-link" data-scroll-target="#inconsistency-detection">4.2 Inconsistency Detection</a></li>
+  </ul></li>
+  <li><a href="#inconsistency-resolution" id="toc-inconsistency-resolution" class="nav-link" data-scroll-target="#inconsistency-resolution">5. Inconsistency Resolution</a>
+  <ul class="collapse">
+  <li><a href="#automatic-resolution-rules-expanded" id="toc-automatic-resolution-rules-expanded" class="nav-link" data-scroll-target="#automatic-resolution-rules-expanded">5.1 Automatic Resolution Rules (Expanded)</a></li>
+  <li><a href="#resolution-workflow" id="toc-resolution-workflow" class="nav-link" data-scroll-target="#resolution-workflow">5.2 Resolution Workflow</a></li>
+  <li><a href="#human-escalation-report-expanded-format" id="toc-human-escalation-report-expanded-format" class="nav-link" data-scroll-target="#human-escalation-report-expanded-format">5.3 Human Escalation Report (Expanded Format)</a></li>
+  <li><a href="#resolution-logging" id="toc-resolution-logging" class="nav-link" data-scroll-target="#resolution-logging">5.4 Resolution Logging</a></li>
+  </ul></li>
+  <li><a href="#non-functional-requirements" id="toc-non-functional-requirements" class="nav-link" data-scroll-target="#non-functional-requirements">6. Non-Functional Requirements</a>
+  <ul class="collapse">
+  <li><a href="#performance" id="toc-performance" class="nav-link" data-scroll-target="#performance">6.1 Performance</a></li>
+  <li><a href="#independence-from-neo4j" id="toc-independence-from-neo4j" class="nav-link" data-scroll-target="#independence-from-neo4j">6.2 Independence from Neo4j</a></li>
+  <li><a href="#testability" id="toc-testability" class="nav-link" data-scroll-target="#testability">6.3 Testability</a></li>
+  <li><a href="#reliability" id="toc-reliability" class="nav-link" data-scroll-target="#reliability">6.4 Reliability</a></li>
+  <li><a href="#maintainability" id="toc-maintainability" class="nav-link" data-scroll-target="#maintainability">6.5 Maintainability</a></li>
+  </ul></li>
+  <li><a href="#open-questions" id="toc-open-questions" class="nav-link" data-scroll-target="#open-questions">7. Open Questions</a></li>
+  <li><a href="#risks-and-mitigations" id="toc-risks-and-mitigations" class="nav-link" data-scroll-target="#risks-and-mitigations">8. Risks and Mitigations</a></li>
+  <li><a href="#next-stage" id="toc-next-stage" class="nav-link" data-scroll-target="#next-stage">9. Next Stage</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content column-page-left" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+
+
+
+
+
+<section id="rag_requirements_analysis.md-independent-rag-requirements-analysis" class="level1">
+<h1>02_RAG_Requirements_Analysis.md – Independent RAG Requirements Analysis</h1>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">1. Introduction</h2>
+<p>This document expands on the approved <strong>01_RAG_Proposal.md</strong> by specifying detailed functional and non-functional requirements for the Independent RAG System. It defines the ingestion pipeline, data schemas, comparison logic, and inconsistency resolution workflow required to build a RAG system that operates completely independently of the Knowledge Graph (KG) and can later be compared against it.</p>
+<section id="references" class="level3">
+<h3 class="anchored" data-anchor-id="references">1.1 References</h3>
+<ul>
+<li><strong>01_RAG_Proposal.md</strong> – Approved proposal outlining the core goal and high-level workflow.</li>
+<li><strong>extract.py</strong> – Existing timestamp extraction utility to be reused for <code>as_of</code> timestamps.</li>
+</ul>
+</section>
+<section id="terminology" class="level3">
+<h3 class="anchored" data-anchor-id="terminology">1.2 Terminology</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 35%">
+<col style="width: 64%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Term</th>
+<th>Definition</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>RAG Deduction</strong></td>
+<td>A structured fact extracted or inferred by the independent RAG system.</td>
+</tr>
+<tr class="even">
+<td><strong>KG Fact</strong></td>
+<td>A fact stored in the existing Temporal Knowledge Graph.</td>
+</tr>
+<tr class="odd">
+<td><strong>Chunk</strong></td>
+<td>A contiguous segment of a source document used for embedding.</td>
+</tr>
+<tr class="even">
+<td><strong>Vector Index</strong></td>
+<td>A standalone search index (e.g., Qdrant) storing embeddings and metadata.</td>
+</tr>
+<tr class="odd">
+<td><strong>Provenance</strong></td>
+<td>Metadata tracking the source file, extraction path, and timestamp for a deduction.</td>
+</tr>
+<tr class="even">
+<td><strong>Temporal Validity</strong></td>
+<td>The <code>as_of</code> timestamp determining which version of a fact is current.</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+</section>
+<section id="functional-requirements" class="level2">
+<h2 class="anchored" data-anchor-id="functional-requirements">2. Functional Requirements</h2>
+<section id="ingestion" class="level3">
+<h3 class="anchored" data-anchor-id="ingestion">2.1 Ingestion</h3>
+<section id="fr-ing-001-file-ingestion" class="level4">
+<h4 class="anchored" data-anchor-id="fr-ing-001-file-ingestion"><strong>FR-ING-001: File Ingestion</strong></h4>
+<p>The system <strong>shall</strong> ingest files from the <code>samples5/</code> directory <strong>without</strong> accessing any KG services (Neo4j, KG schema, or KG APIs).</p>
+<ul>
+<li><strong>Supported File Types</strong>: <code>.txt</code>, <code>.pdf</code>, <code>.docx</code>, <code>.xlsx</code>, <code>.pptx</code></li>
+<li><strong>Input Sources</strong>: File system path (<code>samples5/</code>)</li>
+<li><strong>Trigger Modes</strong>:
+<ul>
+<li>Batch mode ( voll ingestion of existing files)</li>
+<li>Watch mode (incremental updates via file system watcher)</li>
+</ul></li>
+</ul>
+</section>
+<section id="fr-ing-002-file-validation" class="level4">
+<h4 class="anchored" data-anchor-id="fr-ing-002-file-validation"><strong>FR-ING-002: File Validation</strong></h4>
+<p>The system <strong>shall</strong> validate each file before processing: - Check file exists and is readable - Verify file size &gt; 0 bytes - Detect file type mismatches (e.g., <code>.pdf</code> extension but not a PDF) - <strong>On Failure</strong>: Skip the file and log an error with file path and reason.</p>
+</section>
+<section id="fr-ing-003-timestamp-extraction" class="level4">
+<h4 class="anchored" data-anchor-id="fr-ing-003-timestamp-extraction"><strong>FR-ING-003: Timestamp Extraction</strong></h4>
+<p>The system <strong>shall</strong> use <code>extract.py</code> to obtain the <strong>modification/edit timestamp</strong> for each file: - Primary: Extract timestamp from file metadata or embedded markers - Fallback: Use <code>os.path.getmtime</code> if <code>extract.py</code> fails - <strong>Output</strong>: <code>as_of</code> (ISO 8601 datetime string) + <code>timestamp_fallback</code> (boolean)</p>
+</section>
+<section id="fr-ing-004-incremental-detection" class="level4">
+<h4 class="anchored" data-anchor-id="fr-ing-004-incremental-detection"><strong>FR-ING-004: Incremental Detection</strong></h4>
+<p>The system <strong>shall</strong> support incremental ingestion: - Track previously ingested files by <code>file_path</code> + <code>file_hash</code> (SHA-256) - Skip files with unchanged hashes - Re-process files with new hashes or new <code>as_of</code> timestamps</p>
+<hr>
+</section>
+</section>
+<section id="chunking" class="level3">
+<h3 class="anchored" data-anchor-id="chunking">2.2 Chunking</h3>
+<section id="fr-chk-001-chunking-strategy" class="level4">
+<h4 class="anchored" data-anchor-id="fr-chk-001-chunking-strategy"><strong>FR-CHK-001: Chunking Strategy</strong></h4>
+<p>The system <strong>shall</strong> split source documents into semantic chunks to balance context and granularity: - <strong>Text Files</strong>: Split by paragraphs or sentences (min 50 tokens, max 512 tokens) - <strong>PDFs</strong>: Split by pages or logical sections - <strong>Excel</strong>: Split by sheets, then by rows (treat each row as a record) - <strong>Word</strong>: Split by paragraphs or headings - <strong>PowerPoint</strong>: Split by slides, then by bullet points</p>
+</section>
+<section id="fr-chk-002-overlap-for-context" class="level4">
+<h4 class="anchored" data-anchor-id="fr-chk-002-overlap-for-context"><strong>FR-CHK-002: Overlap for Context</strong></h4>
+<p>The system <strong>shall</strong> include overlap between chunks to preserve context: - <strong>Default Overlap</strong>: 20% of chunk size (configurable) - <strong>Minimum Overlap</strong>: 1 sentence or 10 tokens</p>
+</section>
+<section id="fr-chk-003-metadata-preservation" class="level4">
+<h4 class="anchored" data-anchor-id="fr-chk-003-metadata-preservation"><strong>FR-CHK-003: Metadata Preservation</strong></h4>
+<p>Each chunk <strong>shall</strong> carry metadata for traceability:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"chunk_id"</span><span class="fu">:</span> <span class="st">"&lt;file_path&gt;_&lt;hash&gt;_&lt;index&gt;"</span><span class="fu">,</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"file_path"</span><span class="fu">:</span> <span class="st">"samples5/invoices/INV-2024-001.pdf"</span><span class="fu">,</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"file_hash"</span><span class="fu">:</span> <span class="st">"sha256:abc123"</span><span class="fu">,</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"as_of"</span><span class="fu">:</span> <span class="st">"2024-09-01T00:00:00+00:00"</span><span class="fu">,</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"chunk_index"</span><span class="fu">:</span> <span class="dv">0</span><span class="fu">,</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"total_chunks"</span><span class="fu">:</span> <span class="dv">5</span><span class="fu">,</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"start_offset"</span><span class="fu">:</span> <span class="dv">0</span><span class="fu">,</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"end_offset"</span><span class="fu">:</span> <span class="dv">512</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="fr-chk-004-table-handling" class="level4">
+<h4 class="anchored" data-anchor-id="fr-chk-004-table-handling"><strong>FR-CHK-004: Table Handling</strong></h4>
+<p>The system <strong>shall</strong> preserve table structure: - Excel: Treat each row as a separate chunk with column headers as metadata - PDF Tables: Extract as markdown tables or structured objects - <strong>Output</strong>: Include <code>table_headers</code> and <code>row_number</code> in metadata</p>
+<hr>
+</section>
+</section>
+<section id="embedding" class="level3">
+<h3 class="anchored" data-anchor-id="embedding">2.3 Embedding</h3>
+<section id="fr-emb-001-embedding-model" class="level4">
+<h4 class="anchored" data-anchor-id="fr-emb-001-embedding-model"><strong>FR-EMB-001: Embedding Model</strong></h4>
+<p>The system <strong>shall</strong> use a <strong>local</strong> embedding model (no external API calls): - <strong>Model Options</strong>: <code>sentence-transformers/all-MiniLM-L6-v2</code> (preferred, if available locally) - <strong>Fallback</strong>: <code>BAAI/bge-small-en-v1.5</code> (if installed in local environment) - <strong>Dimensions</strong>: 384 (all-MiniLM-L6-v2) or 512 (bge-small) - <strong>Normalization</strong>: L2-normalize embeddings before indexing</p>
+</section>
+<section id="fr-emb-002-embedding-generation" class="level4">
+<h4 class="anchored" data-anchor-id="fr-emb-002-embedding-generation"><strong>FR-EMB-002: Embedding Generation</strong></h4>
+<p>The system <strong>shall</strong> generate embeddings for: - Each chunk (primary) - Each deducted fact (optional, for fact-level retrieval) - <strong>Batch Processing</strong>: Embed multiple chunks in a single batch for efficiency</p>
+</section>
+<section id="fr-emb-003-embedding-storage" class="level4">
+<h4 class="anchored" data-anchor-id="fr-emb-003-embedding-storage"><strong>FR-EMB-003: Embedding Storage</strong></h4>
+<p>The system <strong>shall</strong> store embeddings in a <strong>standalone vector index</strong> (independent of Neo4j): - <strong>Vector Store</strong>: Qdrant (already available in environment) - <strong>Collection Name</strong>: <code>rag_deductions</code> - <strong>Payload Schema</strong>: Includes all chunk metadata + deducted facts</p>
+<hr>
+</section>
+</section>
+<section id="retrieval" class="level3">
+<h3 class="anchored" data-anchor-id="retrieval">2.4 Retrieval</h3>
+<section id="fr-ret-001-query-processing" class="level4">
+<h4 class="anchored" data-anchor-id="fr-ret-001-query-processing"><strong>FR-RET-001: Query Processing</strong></h4>
+<p>The system <strong>shall</strong> accept free-form text queries: - <strong>Input</strong>: User query (string) - <strong>Preprocessing</strong>: Lowercase, remove stopwords, extract keywords - <strong>Embedding</strong>: Generate query embedding using same model as ingestion</p>
+</section>
+<section id="fr-ret-002-vector-search" class="level4">
+<h4 class="anchored" data-anchor-id="fr-ret-002-vector-search"><strong>FR-RET-002: Vector Search</strong></h4>
+<p>The system <strong>shall</strong> perform similarity search: - <strong>Algorithm</strong>: Cosine similarity (default) or dot product - <strong>Top-K</strong>: Return top 10 chunks by default (configurable) - <strong>Filters</strong>: Support filtering by <code>file_path</code>, <code>as_of</code> range, or metadata</p>
+</section>
+<section id="fr-ret-003-result-ranking" class="level4">
+<h4 class="anchored" data-anchor-id="fr-ret-003-result-ranking"><strong>FR-RET-003: Result Ranking</strong></h4>
+<p>The system <strong>shall</strong> rank results by: 1. Similarity score (primary) 2. Temporal recency (<code>as_of</code> timestamp, secondary) 3. Confidence score (if available from fact deduction)</p>
+</section>
+<section id="fr-ret-004-deduction-generation" class="level4">
+<h4 class="anchored" data-anchor-id="fr-ret-004-deduction-generation"><strong>FR-RET-004: Deduction Generation</strong></h4>
+<p>The system <strong>shall</strong> generate structured deductions from retrieved chunks: - <strong>Method</strong>: Use regex patterns, keyword extraction, or lightweight LLM (if available) - <strong>Fallback</strong>: Return raw text if structured deduction fails - <strong>Minimum Confidence</strong>: 0.7 (configurable threshold)</p>
+<hr>
+</section>
+</section>
+<section id="fact-deduction" class="level3">
+<h3 class="anchored" data-anchor-id="fact-deduction">2.5 Fact Deduction</h3>
+<section id="fr-ded-001-deduction-schema" class="level4">
+<h4 class="anchored" data-anchor-id="fr-ded-001-deduction-schema"><strong>FR-DED-001: Deduction Schema</strong></h4>
+<p>All deductions <strong>shall</strong> conform to the following schema (designed for comparison with KG facts):</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"deduction_id"</span><span class="fu">:</span> <span class="st">"&lt;unique_id&gt;"</span><span class="fu">,</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"source_file_path"</span><span class="fu">:</span> <span class="st">"samples5/invoices/INV-2024-001.pdf"</span><span class="fu">,</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"chunk_id"</span><span class="fu">:</span> <span class="st">"INV-2024-001_abc123_0"</span><span class="fu">,</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"as_of"</span><span class="fu">:</span> <span class="st">"2024-09-01T00:00:00+00:00"</span><span class="fu">,</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"subject_entity"</span><span class="fu">:</span> <span class="st">"Product_X"</span><span class="fu">,</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"predicate"</span><span class="fu">:</span> <span class="st">"has_price"</span><span class="fu">,</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"object_value"</span><span class="fu">:</span> <span class="st">"100"</span><span class="fu">,</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"object_type"</span><span class="fu">:</span> <span class="st">"numeric"</span><span class="fu">,</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"extraction_method"</span><span class="fu">:</span> <span class="st">"regex"</span><span class="fu">,</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"confidence"</span><span class="fu">:</span> <span class="fl">0.95</span><span class="fu">,</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"provenance"</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"extraction_path"</span><span class="fu">:</span> <span class="st">"text"</span><span class="fu">,</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"model_used"</span><span class="fu">:</span> <span class="st">"sentence-transformers/all-MiniLM-L6-v2"</span><span class="fu">,</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"raw_text"</span><span class="fu">:</span> <span class="st">"Product X price is 100"</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">}</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="fr-ded-002-entity-normalization" class="level4">
+<h4 class="anchored" data-anchor-id="fr-ded-002-entity-normalization"><strong>FR-DED-002: Entity Normalization</strong></h4>
+<p>The system <strong>shall</strong> normalize entities for comparison: - <strong>Text Normalization</strong>: Lowercase, strip whitespace, remove punctuation - <strong>Numeric Extraction</strong>: Extract numbers from text (e.g., “$100” → <code>100</code>) - <strong>Entity Resolution</strong>: Map raw text to canonical entities (e.g., “Prod X” → “Product_X”)</p>
+</section>
+<section id="fr-ded-003-predicate-mapping" class="level4">
+<h4 class="anchored" data-anchor-id="fr-ded-003-predicate-mapping"><strong>FR-DED-003: Predicate Mapping</strong></h4>
+<p>The system <strong>shall</strong> map natural language to standard predicates: | Natural Language | Predicate | Example | |—————–|———–|———| | <code>price is</code>, <code>cost</code> | <code>has_price</code> | “Product X price is 100” | | <code>date</code>, <code>as of</code> | <code>has_date</code> | “Report date 2024-10-01” | | <code>headcount</code>, <code>employees</code> | <code>has_headcount</code> | “Headcount: 150” | | <code>budget</code>, <code>allocated</code> | <code>has_budget</code> | “Budget Q3: $450000” |</p>
+</section>
+<section id="fr-ded-004-deduction-storage" class="level4">
+<h4 class="anchored" data-anchor-id="fr-ded-004-deduction-storage"><strong>FR-DED-004: Deduction Storage</strong></h4>
+<p>The system <strong>shall</strong> store deductions in two places: 1. <strong>Vector Index Payload</strong> (for retrieval efficiency) 2. <strong>JSON Lines File</strong> (for persistence and comparison): <code>RAG_data/deductions.jsonl</code></p>
+<hr>
+</section>
+</section>
+</section>
+<section id="data-schema-for-comparison" class="level2">
+<h2 class="anchored" data-anchor-id="data-schema-for-comparison">3. Data Schema for Comparison</h2>
+<section id="rag-deduction-schema-full" class="level3">
+<h3 class="anchored" data-anchor-id="rag-deduction-schema-full">3.1 RAG Deduction Schema (Full)</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"deduction_id"</span><span class="fu">:</span> <span class="st">"string (UUID)"</span><span class="fu">,</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"source_file_path"</span><span class="fu">:</span> <span class="st">"string"</span><span class="fu">,</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"chunk_id"</span><span class="fu">:</span> <span class="st">"string"</span><span class="fu">,</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"as_of"</span><span class="fu">:</span> <span class="st">"ISO 8601 datetime string"</span><span class="fu">,</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"subject_entity"</span><span class="fu">:</span> <span class="st">"string"</span><span class="fu">,</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"subject_entity_type"</span><span class="fu">:</span> <span class="st">"string (optional, e.g., 'product', 'report')"</span><span class="fu">,</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"predicate"</span><span class="fu">:</span> <span class="st">"string"</span><span class="fu">,</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"object_value"</span><span class="fu">:</span> <span class="st">"string | number | boolean"</span><span class="fu">,</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"object_type"</span><span class="fu">:</span> <span class="st">"string (enum: 'text', 'numeric', 'boolean', 'date')"</span><span class="fu">,</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"extraction_method"</span><span class="fu">:</span> <span class="st">"string (enum: 'regex', 'keyword', 'table', 'llm')"</span><span class="fu">,</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"confidence"</span><span class="fu">:</span> <span class="st">"float (0.0-1.0)"</span><span class="fu">,</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"provenance"</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"extraction_path"</span><span class="fu">:</span> <span class="st">"string (enum: 'text', 'pdf_text', 'ocr', 'excel_table', 'docx_text', 'pptx_text')"</span><span class="fu">,</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"model_used"</span><span class="fu">:</span> <span class="st">"string"</span><span class="fu">,</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"raw_text"</span><span class="fu">:</span> <span class="st">"string"</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">},</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"metadata"</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"file_hash"</span><span class="fu">:</span> <span class="st">"string"</span><span class="fu">,</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"chunk_index"</span><span class="fu">:</span> <span class="st">"int"</span><span class="fu">,</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"total_chunks"</span><span class="fu">:</span> <span class="st">"int"</span><span class="fu">,</span></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"page_number"</span><span class="fu">:</span> <span class="st">"int (optional)"</span><span class="fu">,</span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"table_headers"</span><span class="fu">:</span> <span class="st">"list (optional)"</span><span class="fu">,</span></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"row_number"</span><span class="fu">:</span> <span class="st">"int (optional)"</span></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">}</span></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="kg-fact-schema-for-reference" class="level3">
+<h3 class="anchored" data-anchor-id="kg-fact-schema-for-reference">3.2 KG Fact Schema (for reference)</h3>
+<p>From existing Temporal KG system:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"fact_id"</span><span class="fu">:</span> <span class="st">"string"</span><span class="fu">,</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"entity_id"</span><span class="fu">:</span> <span class="st">"string"</span><span class="fu">,</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"predicate"</span><span class="fu">:</span> <span class="st">"string"</span><span class="fu">,</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"object_value"</span><span class="fu">:</span> <span class="st">"string"</span><span class="fu">,</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"as_of"</span><span class="fu">:</span> <span class="st">"ISO 8601 datetime string"</span><span class="fu">,</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"current"</span><span class="fu">:</span> <span class="st">"boolean"</span><span class="fu">,</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"superseded_by"</span><span class="fu">:</span> <span class="st">"string (optional)"</span><span class="fu">,</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"supersedes"</span><span class="fu">:</span> <span class="st">"list (optional)"</span><span class="fu">,</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"valid_from"</span><span class="fu">:</span> <span class="st">"ISO 8601 datetime string (optional)"</span><span class="fu">,</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"valid_to"</span><span class="fu">:</span> <span class="st">"ISO 8601 datetime string (optional)"</span><span class="fu">,</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"provenance_id"</span><span class="fu">:</span> <span class="st">"string"</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="alignment-mapping" class="level3">
+<h3 class="anchored" data-anchor-id="alignment-mapping">3.3 Alignment Mapping</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 39%">
+<col style="width: 35%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>RAG Field</th>
+<th>KG Field</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>deduction_id</code></td>
+<td><code>fact_id</code></td>
+<td>Both are unique identifiers</td>
+</tr>
+<tr class="even">
+<td><code>source_file_path</code></td>
+<td>(from Provenance)</td>
+<td>RAG uses direct path, KG uses provenance node</td>
+</tr>
+<tr class="odd">
+<td><code>as_of</code></td>
+<td><code>as_of</code></td>
+<td>Direct match</td>
+</tr>
+<tr class="even">
+<td><code>subject_entity</code></td>
+<td><code>entity_id</code></td>
+<td>May require normalization</td>
+</tr>
+<tr class="odd">
+<td><code>predicate</code></td>
+<td><code>predicate</code></td>
+<td>Direct match</td>
+</tr>
+<tr class="even">
+<td><code>object_value</code></td>
+<td><code>object_value</code></td>
+<td>May require type coercion</td>
+</tr>
+<tr class="odd">
+<td><code>object_type</code></td>
+<td>(N/A)</td>
+<td>RAG-specific metadata</td>
+</tr>
+<tr class="even">
+<td><code>confidence</code></td>
+<td>(N/A)</td>
+<td>RAG-specific metadata</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+</section>
+<section id="comparison-and-alignment-logic" class="level2">
+<h2 class="anchored" data-anchor-id="comparison-and-alignment-logic">4. Comparison and Alignment Logic</h2>
+<section id="alignment-strategy" class="level3">
+<h3 class="anchored" data-anchor-id="alignment-strategy">4.1 Alignment Strategy</h3>
+<section id="fr-cmp-001-key-based-alignment" class="level4">
+<h4 class="anchored" data-anchor-id="fr-cmp-001-key-based-alignment"><strong>FR-CMP-001: Key-Based Alignment</strong></h4>
+<p>The system <strong>shall</strong> align RAG deductions with KG facts using composite keys: 1. <strong>Exact Match</strong>: <code>subject_entity</code> + <code>predicate</code> + <code>source_file_path</code> 2. <strong>Fuzzy Match</strong>: <code>subject_entity</code> + <code>predicate</code> (ignoring source) 3. <strong>Semantic Match</strong>: Use embeddings to find similar facts (similarity &gt; 0.85)</p>
+</section>
+<section id="fr-cmp-002-value-normalization-for-comparison" class="level4">
+<h4 class="anchored" data-anchor-id="fr-cmp-002-value-normalization-for-comparison"><strong>FR-CMP-002: Value Normalization for Comparison</strong></h4>
+<p>Before comparison, the system <strong>shall</strong> normalize values: - <strong>Numeric</strong>: Extract first number from string (e.g., “$100” → <code>100</code>, “Price: 100 USD” → <code>100</code>) - <strong>Currency</strong>: Strip currency symbols and normalize to base unit - <strong>Dates</strong>: Parse all date formats to ISO 8601 - <strong>Text</strong>: Lowercase, remove punctuation, strip whitespace</p>
+</section>
+<section id="fr-cmp-003-confidence-thresholds" class="level4">
+<h4 class="anchored" data-anchor-id="fr-cmp-003-confidence-thresholds"><strong>FR-CMP-003: Confidence Thresholds</strong></h4>
+<p>Alignment <strong>shall</strong> require minimum confidence scores: - <strong>Exact Match</strong>: Confidence = 1.0 (always align) - <strong>Fuzzy Match</strong>: Confidence ≥ 0.9 - <strong>Semantic Match</strong>: Confidence ≥ 0.85</p>
+</section>
+<section id="fr-cmp-004-multi-match-handling" class="level4">
+<h4 class="anchored" data-anchor-id="fr-cmp-004-multi-match-handling"><strong>FR-CMP-004: Multi-Match Handling</strong></h4>
+<p>If multiple KG facts match a single RAG deduction: 1. Prefer facts with matching <code>source_file_path</code> 2. If still multiple, prefer <code>current=true</code> facts 3. If still multiple, prefer most recent <code>as_of</code></p>
+<hr>
+</section>
+</section>
+<section id="inconsistency-detection" class="level3">
+<h3 class="anchored" data-anchor-id="inconsistency-detection">4.2 Inconsistency Detection</h3>
+<section id="fr-cmp-005-inconsistency-types" class="level4">
+<h4 class="anchored" data-anchor-id="fr-cmp-005-inconsistency-types"><strong>FR-CMP-005: Inconsistency Types</strong></h4>
+<p>The system <strong>shall</strong> classify inconsistencies into types:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 30%">
+<col style="width: 27%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Type</th>
+<th>Condition</th>
+<th>Severity</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Exact Match</strong></td>
+<td>Values match after normalization</td>
+<td>INFO</td>
+<td>Both: <code>price=100</code></td>
+</tr>
+<tr class="even">
+<td><strong>Value Conflict</strong></td>
+<td>Same key, different values</td>
+<td>HIGH</td>
+<td>RAG: <code>100</code>, KG: <code>120</code></td>
+</tr>
+<tr class="odd">
+<td><strong>RAG Missing</strong></td>
+<td>RAG has no deduction for a KG fact</td>
+<td>MEDIUM</td>
+<td>KG: <code>price=100</code>, RAG: ∅</td>
+</tr>
+<tr class="even">
+<td><strong>KG Missing</strong></td>
+<td>KG has no fact for a RAG deduction</td>
+<td>MEDIUM</td>
+<td>RAG: <code>price=100</code>, KG: ∅</td>
+</tr>
+<tr class="odd">
+<td><strong>Temporal Conflict</strong></td>
+<td>Same value, different <code>as_of</code></td>
+<td>MEDIUM</td>
+<td>RAG: <code>as_of=2024-10-01</code>, KG: <code>as_of=2024-09-01</code></td>
+</tr>
+<tr class="even">
+<td><strong>Type Mismatch</strong></td>
+<td>Same key, different <code>object_type</code></td>
+<td>LOW</td>
+<td>RAG: numeric <code>100</code>, KG: text <code>"100 USD"</code></td>
+</tr>
+<tr class="odd">
+<td><strong>Interpretation Conflict</strong></td>
+<td>Same source text, different deduced facts</td>
+<td>MEDIUM</td>
+<td>RAG: <code>price=100</code>, KG: <code>cost=100</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="fr-cmp-006-grouping-by-entity" class="level4">
+<h4 class="anchored" data-anchor-id="fr-cmp-006-grouping-by-entity"><strong>FR-CMP-006: Grouping by Entity</strong></h4>
+<p>The system <strong>shall</strong> group inconsistencies by <code>subject_entity</code> + <code>predicate</code> for efficient reporting.</p>
+<hr>
+</section>
+</section>
+</section>
+<section id="inconsistency-resolution" class="level2">
+<h2 class="anchored" data-anchor-id="inconsistency-resolution">5. Inconsistency Resolution</h2>
+<section id="automatic-resolution-rules-expanded" class="level3">
+<h3 class="anchored" data-anchor-id="automatic-resolution-rules-expanded">5.1 Automatic Resolution Rules (Expanded)</h3>
+<p>The following rules <strong>shall</strong> be applied in priority order.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 19%">
+<col style="width: 33%">
+<col style="width: 17%">
+<col style="width: 12%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Rule ID</th>
+<th>Condition</th>
+<th>Resolution Action</th>
+<th>Priority</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>R1</strong></td>
+<td>Values match after normalization (<code>value_r == value_k</code>)</td>
+<td><strong>No action</strong> (mark as <code>CONSISTENT</code>)</td>
+<td>N/A</td>
+<td>Always apply first</td>
+</tr>
+<tr class="even">
+<td><strong>R2</strong></td>
+<td>Same <code>source_file_path</code>, same <code>predicate</code>, <strong>RAG <code>as_of</code> &gt; KG <code>as_of</code></strong></td>
+<td><strong>Prefer RAG</strong>: Mark KG fact as superseded, adopt RAG value</td>
+<td><strong>P0</strong></td>
+<td>Temporal validity</td>
+</tr>
+<tr class="odd">
+<td><strong>R3</strong></td>
+<td>Same <code>source_file_path</code>, same <code>predicate</code>, <strong>KG <code>as_of</code> &gt; RAG <code>as_of</code></strong></td>
+<td><strong>Prefer KG</strong>: Discard RAG deduction, keep KG fact</td>
+<td><strong>P0</strong></td>
+<td>Temporal validity</td>
+</tr>
+<tr class="even">
+<td><strong>R4</strong></td>
+<td>Same <code>source_file_path</code>, same <code>predicate</code>, <strong>RAG has explicit table data</strong> (extraction_path=excel_table)</td>
+<td><strong>Prefer RAG</strong>: Table data &gt; text inference</td>
+<td><strong>P1</strong></td>
+<td>Structured &gt; unstructured</td>
+</tr>
+<tr class="odd">
+<td><strong>R5</strong></td>
+<td>Same <code>source_file_path</code>, same <code>predicate</code>, <strong>KG has explicit provenance chain</strong> (<code>supersedes</code> exists)</td>
+<td><strong>Prefer KG</strong>: KG has stronger audit trail</td>
+<td><strong>P1</strong></td>
+<td>Audit reliability</td>
+</tr>
+<tr class="even">
+<td><strong>R6</strong></td>
+<td>Numeric conflict, <strong>RAG value is extracted from table</strong>, KG from text</td>
+<td><strong>Prefer RAG</strong>: Table extraction &gt; regex</td>
+<td><strong>P2</strong></td>
+<td>Precision preference</td>
+</tr>
+<tr class="odd">
+<td><strong>R7</strong></td>
+<td>Date conflict, <strong>RAG date parsed from ISO format</strong>, KG from natural text</td>
+<td><strong>Prefer RAG</strong>: Structured date &gt; inferred date</td>
+<td><strong>P2</strong></td>
+<td>Precision preference</td>
+</tr>
+<tr class="even">
+<td><strong>R8</strong></td>
+<td>All else</td>
+<td><strong>Escalate to Human</strong></td>
+<td><strong>P3</strong></td>
+<td>Requires manual review</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="resolution-workflow" class="level3">
+<h3 class="anchored" data-anchor-id="resolution-workflow">5.2 Resolution Workflow</h3>
+<pre><code>For each inconsistency:
+    1. Apply rules R1-R8 in priority order
+    2. If a rule matches:
+          - Apply resolution action
+          - Log: {inconsistency_id, rule_applied, action_taken, timestamp}
+          - Mark as RESOLVED
+    3. If no rule matches:
+          - Generate Human Escalation Report
+          - Mark as ESCALATED
+          - PAUSE processing (require human decision)</code></pre>
+</section>
+<section id="human-escalation-report-expanded-format" class="level3">
+<h3 class="anchored" data-anchor-id="human-escalation-report-expanded-format">5.3 Human Escalation Report (Expanded Format)</h3>
+<p>The system <strong>shall</strong> generate reports in the following format:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Inconsistency Report #&lt;UUID&gt;</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">## 📋 Summary</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Status**: ⏳ Awaiting Human Decision</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Reported At**: <span class="dt">&lt;</span><span class="kw">ISO</span><span class="ot"> </span><span class="er">8601</span><span class="ot"> timestamp</span><span class="dt">&gt;</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Severity**: HIGH | MEDIUM | LOW</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="fu">## 🔍 Conflict Details</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Conflict Type**: <span class="dt">&lt;</span><span class="kw">Value</span><span class="ot"> Conflict </span><span class="er">|</span><span class="ot"> Missing Fact </span><span class="er">|</span><span class="ot"> Temporal Conflict </span><span class="er">|</span><span class="ot"> </span><span class="er">...</span><span class="dt">&gt;</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Entity**: <span class="in">`&lt;subject_entity&gt;`</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Predicate**: <span class="in">`&lt;predicate&gt;`</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="fu">## 📊 RAG Deduction</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**ID**: <span class="in">`&lt;deduction_id&gt;`</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Value**: <span class="in">`&lt;object_value&gt;`</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Type**: <span class="in">`&lt;object_type&gt;`</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Extraction Method**: <span class="in">`&lt;extraction_method&gt;`</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Confidence**: <span class="in">`&lt;confidence&gt;`</span></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Source File**: <span class="in">`&lt;source_file_path&gt;`</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**As Of**: <span class="in">`&lt;as_of&gt;`</span></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Extraction Path**: <span class="in">`&lt;extraction_path&gt;`</span></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Raw Text**: ```<span class="dt">&lt;</span><span class="kw">raw_text</span><span class="dt">&gt;</span>```</span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a><span class="fu">## 💾 KG Fact</span></span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**ID**: <span class="in">`&lt;fact_id&gt;`</span></span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Value**: <span class="in">`&lt;object_value&gt;`</span></span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Current**: <span class="in">`&lt;current&gt;`</span></span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**As Of**: <span class="in">`&lt;as_of&gt;`</span></span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Valid From**: <span class="in">`&lt;valid_from&gt;`</span></span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Valid To**: <span class="in">`&lt;valid_to&gt;`</span></span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Supersedes**: <span class="in">`&lt;supersedes&gt;`</span></span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Source**: (from provenance)</span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a><span class="fu">## ⚖️ Resolution Attempt</span></span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Rules Applied**: <span class="co">[</span><span class="ot">R1, R2, R3</span><span class="co">]</span></span>
+<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Blocking Rule**: <span class="dt">&lt;</span><span class="kw">rule_id</span><span class="dt">&gt;</span></span>
+<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Reason**: <span class="dt">&lt;</span><span class="kw">human-readable</span><span class="ot"> explanation</span><span class="dt">&gt;</span></span>
+<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a><span class="fu">## 🤔 Recommended Action</span></span>
+<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Option 1**: Prefer RAG value</span>
+<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>**Pros**: <span class="dt">&lt;</span><span class="kw">reasoning</span><span class="dt">&gt;</span></span>
+<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>**Cons**: <span class="dt">&lt;</span><span class="kw">downsides</span><span class="dt">&gt;</span></span>
+<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Option 2**: Prefer KG value</span>
+<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>**Pros**: <span class="dt">&lt;</span><span class="kw">reasoning</span><span class="dt">&gt;</span></span>
+<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>**Cons**: <span class="dt">&lt;</span><span class="kw">downsides</span><span class="dt">&gt;</span></span>
+<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Option 3**: Manual correction</span>
+<span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>**Pros**: Highest accuracy</span>
+<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>**Cons**: Time-consuming</span>
+<span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-50"><a href="#cb6-50" aria-hidden="true" tabindex="-1"></a><span class="fu">## 📝 Human Decision</span></span>
+<span id="cb6-51"><a href="#cb6-51" aria-hidden="true" tabindex="-1"></a><span class="co">[ ]</span> Approve Option 1</span>
+<span id="cb6-52"><a href="#cb6-52" aria-hidden="true" tabindex="-1"></a><span class="co">[ ]</span> Approve Option 2</span>
+<span id="cb6-53"><a href="#cb6-53" aria-hidden="true" tabindex="-1"></a><span class="co">[ ]</span> Approve Option 3</span>
+<span id="cb6-54"><a href="#cb6-54" aria-hidden="true" tabindex="-1"></a><span class="co">[ ]</span> Reject (provide feedback below)</span>
+<span id="cb6-55"><a href="#cb6-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-56"><a href="#cb6-56" aria-hidden="true" tabindex="-1"></a>**Comments**: ________________________________</span>
+<span id="cb6-57"><a href="#cb6-57" aria-hidden="true" tabindex="-1"></a>**Decision By**: _____________________________</span>
+<span id="cb6-58"><a href="#cb6-58" aria-hidden="true" tabindex="-1"></a>**Decision At**: _____________________________</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="resolution-logging" class="level3">
+<h3 class="anchored" data-anchor-id="resolution-logging">5.4 Resolution Logging</h3>
+<p>All resolutions <strong>shall</strong> be logged to <code>RAG_data/resolution_log.jsonl</code> with schema:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"report_id"</span><span class="fu">:</span> <span class="st">"UUID"</span><span class="fu">,</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"inconsistency_id"</span><span class="fu">:</span> <span class="st">"UUID"</span><span class="fu">,</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"rule_applied"</span><span class="fu">:</span> <span class="st">"R2"</span><span class="fu">,</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"action"</span><span class="fu">:</span> <span class="st">"PREFER_RAG"</span><span class="fu">,</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"timestamp"</span><span class="fu">:</span> <span class="st">"ISO 8601"</span><span class="fu">,</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"resolved_by"</span><span class="fu">:</span> <span class="st">"auto | human"</span><span class="fu">,</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"notes"</span><span class="fu">:</span> <span class="st">"string"</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+</section>
+</section>
+<section id="non-functional-requirements" class="level2">
+<h2 class="anchored" data-anchor-id="non-functional-requirements">6. Non-Functional Requirements</h2>
+<section id="performance" class="level3">
+<h3 class="anchored" data-anchor-id="performance">6.1 Performance</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 38%">
+<col style="width: 23%">
+<col style="width: 38%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Requirement</th>
+<th>Target</th>
+<th>Measurement</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Ingestion Throughput</strong></td>
+<td>≥ 100 files/minute</td>
+<td>Files ingested / time</td>
+</tr>
+<tr class="even">
+<td><strong>Indexing Latency</strong></td>
+<td>≤ 500ms per file</td>
+<td>Time to embed + index</td>
+</tr>
+<tr class="odd">
+<td><strong>Query Latency</strong></td>
+<td>≤ 200ms (P95)</td>
+<td>Time from query to first result</td>
+</tr>
+<tr class="even">
+<td><strong>Memory Usage</strong></td>
+<td>≤ 4GB for 10,000 files</td>
+<td>Max RSS during ingestion</td>
+</tr>
+<tr class="odd">
+<td><strong>Vector Index Size</strong></td>
+<td>≤ 500MB for 10,000 chunks</td>
+<td>On-disk size</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="independence-from-neo4j" class="level3">
+<h3 class="anchored" data-anchor-id="independence-from-neo4j">6.2 Independence from Neo4j</h3>
+<p>The system <strong>shall NOT</strong>: - Import any KG-specific modules (e.g., <code>temporal.temporal_kg</code>) - Connect to Neo4j (<code>bolt://</code>) at any point - Use KG schema definitions or constraints - Depend on KG being available or running</p>
+<p><strong>Verification</strong>: All imports <strong>shall</strong> be scanned to ensure no KG dependencies exist.</p>
+</section>
+<section id="testability" class="level3">
+<h3 class="anchored" data-anchor-id="testability">6.3 Testability</h3>
+<section id="nfr-test-001-unit-tests" class="level4">
+<h4 class="anchored" data-anchor-id="nfr-test-001-unit-tests"><strong>NFR-TEST-001: Unit Tests</strong></h4>
+<ul>
+<li>All core functions <strong>shall</strong> have unit tests</li>
+<li>Minimum test coverage: <strong>80%</strong></li>
+<li>Tests <strong>shall</strong> use mock data (no real KG required)</li>
+</ul>
+</section>
+<section id="nfr-test-002-integration-tests" class="level4">
+<h4 class="anchored" data-anchor-id="nfr-test-002-integration-tests"><strong>NFR-TEST-002: Integration Tests</strong></h4>
+<ul>
+<li>Tests <strong>shall</strong> verify end-to-end workflow:
+<ul>
+<li>Ingest <code>samples5/</code> → Generate deductions → Store in vector index</li>
+<li>Query → Retrieve deductions → Compare against planted KG facts</li>
+<li>Detect planted inconsistencies → Apply auto-resolution</li>
+</ul></li>
+<li>Tests <strong>shall</strong> start/stop a local Qdrant instance for isolation</li>
+</ul>
+</section>
+<section id="nfr-test-003-inconsistency-detection-tests" class="level4">
+<h4 class="anchored" data-anchor-id="nfr-test-003-inconsistency-detection-tests"><strong>NFR-TEST-003: Inconsistency Detection Tests</strong></h4>
+<ul>
+<li><strong>Test Dataset</strong>: Create a controlled dataset with known inconsistencies</li>
+<li><strong>Expected Detection Rate</strong>: ≥ 90% of planted inconsistencies</li>
+<li><strong>Expected Auto-Resolution Rate</strong>: ≥ 80% of detected inconsistencies</li>
+</ul>
+</section>
+<section id="nfr-test-004-regression-tests" class="level4">
+<h4 class="anchored" data-anchor-id="nfr-test-004-regression-tests"><strong>NFR-TEST-004: Regression Tests</strong></h4>
+<ul>
+<li>Deductions <strong>shall</strong> remain stable for unchanged input files</li>
+<li>Re-running ingestion on same files <strong>shall</strong> produce identical deductions</li>
+</ul>
+</section>
+</section>
+<section id="reliability" class="level3">
+<h3 class="anchored" data-anchor-id="reliability">6.4 Reliability</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 61%">
+<col style="width: 38%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Requirement</th>
+<th>Target</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Error Handling</strong></td>
+<td>No crashes on malformed files</td>
+</tr>
+<tr class="even">
+<td><strong>Retry Logic</strong></td>
+<td>Automatic retry for transient failures (max 3 attempts)</td>
+</tr>
+<tr class="odd">
+<td><strong>Data Integrity</strong></td>
+<td>SHA-256 verification of all stored deductions</td>
+</tr>
+<tr class="even">
+<td><strong>backup</strong></td>
+<td>Daily JSONL dump of all deductions</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="maintainability" class="level3">
+<h3 class="anchored" data-anchor-id="maintainability">6.5 Maintainability</h3>
+<ul>
+<li><strong>Code Style</strong>: Follow PEP 8 guidelines</li>
+<li><strong>Documentation</strong>: All public functions <strong>shall</strong> have docstrings</li>
+<li><strong>Configuration</strong>: All parameters (chunk size, overlap, etc.) <strong>shall</strong> be configurable via environment variables</li>
+<li><strong>Modularity</strong>: Each component (ingestion, chunking, embedding, retrieval) <strong>shall</strong> be in its own module</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="open-questions" class="level2">
+<h2 class="anchored" data-anchor-id="open-questions">7. Open Questions</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 8%">
+<col style="width: 19%">
+<col style="width: 17%">
+<col style="width: 36%">
+<col style="width: 17%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>ID</th>
+<th>Question</th>
+<th>Impact</th>
+<th>Proposed Answer</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>OQ-001</strong></td>
+<td>Which embedding model is available in the local environment?</td>
+<td>High</td>
+<td>Use <code>sentence-transformers/all-MiniLM-L6-v2</code> if installed, else <code>BAAI/bge-small-en-v1.5</code></td>
+<td>Requires verification</td>
+</tr>
+<tr class="even">
+<td><strong>OQ-002</strong></td>
+<td>Should the vector index be ephemeral (in-memory) or persistent (on-disk)?</td>
+<td>Medium</td>
+<td>On-disk for durability and testing</td>
+<td><strong>Open</strong></td>
+</tr>
+<tr class="odd">
+<td><strong>OQ-003</strong></td>
+<td>What confidence threshold should be used for fact deduction?</td>
+<td>Medium</td>
+<td>Start with 0.7, tune based on test data</td>
+<td><strong>Open</strong></td>
+</tr>
+<tr class="even">
+<td><strong>OQ-004</strong></td>
+<td>Should we support incremental updates or only batch ingestion?</td>
+<td>Medium</td>
+<td>Support both via file watcher</td>
+<td><strong>Open</strong></td>
+</tr>
+<tr class="odd">
+<td><strong>OQ-005</strong></td>
+<td>How to handle files that fail to embed (e.g., corrupt PDFs)?</td>
+<td>Low</td>
+<td>Log error, skip file, continue processing</td>
+<td><strong>Open</strong></td>
+</tr>
+<tr class="even">
+<td><strong>OQ-006</strong></td>
+<td>What chunk size and overlap provide optimal retrieval quality?</td>
+<td>Medium</td>
+<td>512 tokens, 20% overlap (configurable)</td>
+<td><strong>Open</strong></td>
+</tr>
+<tr class="odd">
+<td><strong>OQ-007</strong></td>
+<td>Should we include the raw chunk text in the deduction schema?</td>
+<td>Low</td>
+<td>Yes, for debugging and human review</td>
+<td><strong>Open</strong></td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+<section id="risks-and-mitigations" class="level2">
+<h2 class="anchored" data-anchor-id="risks-and-mitigations">8. Risks and Mitigations</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 9%">
+<col style="width: 13%">
+<col style="width: 30%">
+<col style="width: 18%">
+<col style="width: 27%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>ID</th>
+<th>Risk</th>
+<th>Probability</th>
+<th>Impact</th>
+<th>Mitigation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>RK-001</strong></td>
+<td>Embedding model not available locally</td>
+<td>Medium</td>
+<td>High</td>
+<td>Document exact model requirements; use fallback model</td>
+</tr>
+<tr class="even">
+<td><strong>RK-002</strong></td>
+<td>Vector index grows too large for memory</td>
+<td>Medium</td>
+<td>Medium</td>
+<td>Use Qdrant’s on-disk storage; implement pagination</td>
+</tr>
+<tr class="odd">
+<td><strong>RK-003</strong></td>
+<td>Low precision/recall in fact deduction</td>
+<td>High</td>
+<td>High</td>
+<td>Use rule-based extraction first, add LLM if needed; tune thresholds</td>
+</tr>
+<tr class="even">
+<td><strong>RK-004</strong></td>
+<td>Inconsistency detection misses semantic conflicts</td>
+<td>Medium</td>
+<td>High</td>
+<td>Implement fuzzy matching with configurable similarity thresholds</td>
+</tr>
+<tr class="odd">
+<td><strong>RK-005</strong></td>
+<td>Performance bottlenecks in ingestion</td>
+<td>Medium</td>
+<td>Medium</td>
+<td>Batch processing; parallel chunking/embedding</td>
+</tr>
+<tr class="even">
+<td><strong>RK-006</strong></td>
+<td>KG schema changes break comparison logic</td>
+<td>Low</td>
+<td>High</td>
+<td>Freeze KG schema version for comparison; use flexible mapping</td>
+</tr>
+<tr class="odd">
+<td><strong>RK-007</strong></td>
+<td>Human escalation reports are too verbose</td>
+<td>Low</td>
+<td>Medium</td>
+<td>Implement templates; allow customization</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+<section id="next-stage" class="level2">
+<h2 class="anchored" data-anchor-id="next-stage">9. Next Stage</h2>
+<p><strong>Awaiting human validation</strong> of this requirements analysis before proceeding to <strong>Stage 3 – Specifications</strong> (<code>03_RAG_Specifications.md</code>).</p>
+<hr>
+<p><strong>Status</strong>: Draft awaiting explicit human approval</p>
+
+
+</section>
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a></div></div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/KarthikeanJuttumahadevan4\.github\.io\/target_staleness\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>© 2026 United States Military Academy</p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+<script src="../../../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

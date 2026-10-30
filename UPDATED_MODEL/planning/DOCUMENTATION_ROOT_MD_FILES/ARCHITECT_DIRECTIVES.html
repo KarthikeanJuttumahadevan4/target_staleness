@@ -1,0 +1,1467 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.19">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>architect_directives – AI101</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<link href="../../..//images/favicon.svg" rel="icon" type="image/svg+xml">
+<script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-dark-b626d73c4c936ccc3cb08be7d45d1df6.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap-020d25d76586e1017cbc2b913b3a2bf1.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark-52c85c35cd3cfaec83d0f36150bfac8d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../../site_libs/bootstrap/bootstrap-020d25d76586e1017cbc2b913b3a2bf1.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+
+
+<meta property="og:title" content="AI101">
+<meta property="og:site_name" content="AI101">
+<link rel="canonical" href="https://KarthikeanJuttumahadevan4.github.io/target_staleness/UPDATED_MODEL/planning/DOCUMENTATION_ROOT_MD_FILES/ARCHITECT_DIRECTIVES.html">
+</head>
+
+<body class="nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const queryPrefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+    const darkModeDefault = queryPrefersDark.matches;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    queryPrefersDark.addEventListener("change", e => {
+      if(window.localStorage.getItem("quarto-color-scheme") !== null)
+        return;
+      const alternate = e.matches
+      toggleColorMode(alternate);
+      localAlternateSentinel = e.matches ? 'alternate' : 'default'; // this is used alongside local storage!
+      toggleGiscusIfUsed(alternate, darkModeDefault);
+    });
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="https://usma-media.s3.amazonaws.com/inline-images/img/usma_logos/logo/wp_crest_new_only.png" alt="" class="navbar-logo light-content">
+    <img src="https://usma-media.s3.amazonaws.com/inline-images/img/usma_logos/logo/wp_crest_new_only.png" alt="" class="navbar-logo dark-content">
+    </a>
+    <a class="navbar-brand" href="../../../index.html">
+    <span class="navbar-title">AI101</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../UPDATED_MODEL/index.html"> 
+<span class="menu-text">Model Docs</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="2">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#architect-directives---actions-required-before-query-to-output" id="toc-architect-directives---actions-required-before-query-to-output" class="nav-link active" data-scroll-target="#architect-directives---actions-required-before-query-to-output">📋 ARCHITECT DIRECTIVES - Actions Required Before Query-to-Output</a>
+  <ul class="collapse">
+  <li><a href="#purpose" id="toc-purpose" class="nav-link" data-scroll-target="#purpose">Purpose</a></li>
+  <li><a href="#current-state" id="toc-current-state" class="nav-link" data-scroll-target="#current-state">🎯 Current State</a>
+  <ul class="collapse">
+  <li><a href="#what-exists-and-works" id="toc-what-exists-and-works" class="nav-link" data-scroll-target="#what-exists-and-works">✅ <strong>What EXISTS and Works</strong></a></li>
+  <li><a href="#whats-missing-blocking-query-to-output" id="toc-whats-missing-blocking-query-to-output" class="nav-link" data-scroll-target="#whats-missing-blocking-query-to-output">❌ <strong>What’s MISSING (Blocking Query-to-Output)</strong></a></li>
+  </ul></li>
+  <li><a href="#critical-path-analysis" id="toc-critical-path-analysis" class="nav-link" data-scroll-target="#critical-path-analysis">🚨 Critical Path Analysis</a></li>
+  <li><a href="#deliberate-directives-for-architect" id="toc-deliberate-directives-for-architect" class="nav-link" data-scroll-target="#deliberate-directives-for-architect">📋 DELIBERATE DIRECTIVES FOR ARCHITECT</a>
+  <ul class="collapse">
+  <li><a href="#priority-1-unblock-data-ingestion-m1-m3" id="toc-priority-1-unblock-data-ingestion-m1-m3" class="nav-link" data-scroll-target="#priority-1-unblock-data-ingestion-m1-m3">🔴 <strong>PRIORITY 1: Unblock Data Ingestion (M1-M3)</strong></a></li>
+  <li><a href="#priority-2-unblock-knowledge-storage-m4" id="toc-priority-2-unblock-knowledge-storage-m4" class="nav-link" data-scroll-target="#priority-2-unblock-knowledge-storage-m4">🟡 <strong>PRIORITY 2: Unblock Knowledge Storage (M4)</strong></a></li>
+  <li><a href="#priority-3-unblock-query-processing-m5-m6" id="toc-priority-3-unblock-query-processing-m5-m6" class="nav-link" data-scroll-target="#priority-3-unblock-query-processing-m5-m6">🟢 <strong>PRIORITY 3: Unblock Query Processing (M5-M6)</strong></a></li>
+  <li><a href="#priority-4-ui-integration-m7-m8" id="toc-priority-4-ui-integration-m7-m8" class="nav-link" data-scroll-target="#priority-4-ui-integration-m7-m8">🔵 <strong>PRIORITY 4: UI Integration (M7-M8)</strong></a></li>
+  </ul></li>
+  <li><a href="#implementation-order-summary" id="toc-implementation-order-summary" class="nav-link" data-scroll-target="#implementation-order-summary">📊 Implementation Order Summary</a>
+  <ul class="collapse">
+  <li><a href="#phase-1-data-ingestion-week-1---unblocks-query-input" id="toc-phase-1-data-ingestion-week-1---unblocks-query-input" class="nav-link" data-scroll-target="#phase-1-data-ingestion-week-1---unblocks-query-input">Phase 1: Data Ingestion (Week 1) - <strong>UNBLOCKS QUERY INPUT</strong></a></li>
+  <li><a href="#phase-2-knowledge-storage-week-1-2---unblocks-data-for-retrieval" id="toc-phase-2-knowledge-storage-week-1-2---unblocks-data-for-retrieval" class="nav-link" data-scroll-target="#phase-2-knowledge-storage-week-1-2---unblocks-data-for-retrieval">Phase 2: Knowledge Storage (Week 1-2) - <strong>UNBLOCKS DATA FOR RETRIEVAL</strong></a></li>
+  <li><a href="#phase-3-query-processing-week-2---unblocks-answer-generation" id="toc-phase-3-query-processing-week-2---unblocks-answer-generation" class="nav-link" data-scroll-target="#phase-3-query-processing-week-2---unblocks-answer-generation">Phase 3: Query Processing (Week 2) - <strong>UNBLOCKS ANSWER GENERATION</strong></a></li>
+  <li><a href="#phase-4-ui-integration-week-2-3---unblocks-visible-output" id="toc-phase-4-ui-integration-week-2-3---unblocks-visible-output" class="nav-link" data-scroll-target="#phase-4-ui-integration-week-2-3---unblocks-visible-output">Phase 4: UI Integration (Week 2-3) - <strong>UNBLOCKS VISIBLE OUTPUT</strong></a></li>
+  </ul></li>
+  <li><a href="#minimum-viable-path-to-query-to-output" id="toc-minimum-viable-path-to-query-to-output" class="nav-link" data-scroll-target="#minimum-viable-path-to-query-to-output">🎯 Minimum Viable Path to Query-to-Output</a>
+  <ul class="collapse">
+  <li><a href="#day-1-data-ingestion" id="toc-day-1-data-ingestion" class="nav-link" data-scroll-target="#day-1-data-ingestion">Day 1: Data Ingestion</a></li>
+  <li><a href="#day-2-knowledge-query" id="toc-day-2-knowledge-query" class="nav-link" data-scroll-target="#day-2-knowledge-query">Day 2: Knowledge &amp; Query</a></li>
+  <li><a href="#day-3-output" id="toc-day-3-output" class="nav-link" data-scroll-target="#day-3-output">Day 3: Output</a></li>
+  </ul></li>
+  <li><a href="#what-the-architect-should-do-first" id="toc-what-the-architect-should-do-first" class="nav-link" data-scroll-target="#what-the-architect-should-do-first">🚨 What the Architect Should Do FIRST</a></li>
+  <li><a href="#acceptance-criteria" id="toc-acceptance-criteria" class="nav-link" data-scroll-target="#acceptance-criteria">✅ Acceptance Criteria</a></li>
+  <li><a href="#summary-directives-priority-order" id="toc-summary-directives-priority-order" class="nav-link" data-scroll-target="#summary-directives-priority-order">📋 Summary: Directives Priority Order</a></li>
+  <li><a href="#final-note" id="toc-final-note" class="nav-link" data-scroll-target="#final-note">🎯 Final Note</a></li>
+  <li><a href="#need-clarification" id="toc-need-clarification" class="nav-link" data-scroll-target="#need-clarification">📞 Need Clarification?</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content column-page-left" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+
+
+
+
+
+<section id="architect-directives---actions-required-before-query-to-output" class="level1">
+<h1>📋 ARCHITECT DIRECTIVES - Actions Required Before Query-to-Output</h1>
+<section id="purpose" class="level2">
+<h2 class="anchored" data-anchor-id="purpose">Purpose</h2>
+<p>This document provides <strong>deliberate, actionable directions</strong> for the architect to complete before the system can accept a query through the UI and produce visible output. The temporal core is implemented, but the <strong>data ingestion pipeline and UI integration are incomplete</strong>.</p>
+<hr>
+</section>
+<section id="current-state" class="level2">
+<h2 class="anchored" data-anchor-id="current-state">🎯 Current State</h2>
+<section id="what-exists-and-works" class="level3">
+<h3 class="anchored" data-anchor-id="what-exists-and-works">✅ <strong>What EXISTS and Works</strong></h3>
+<ul>
+<li>Temporal Core: <code>src/temporal/*</code> (timestamp extraction, KG schema, conflict resolution)</li>
+<li>Retrieval Modules: <code>src/retrieval/*</code> (pure_rag, rag_kg_validator, kg_only, hybrid)</li>
+<li>API Server: <code>src/api/server.py</code>, <code>main.py</code></li>
+<li>Configuration: <code>src/config.py</code>, <code>src/models.py</code></li>
+<li>Sample Files: <code>SAMPLES/</code> directory with test documents</li>
+</ul>
+</section>
+<section id="whats-missing-blocking-query-to-output" class="level3">
+<h3 class="anchored" data-anchor-id="whats-missing-blocking-query-to-output">❌ <strong>What’s MISSING (Blocking Query-to-Output)</strong></h3>
+<ol type="1">
+<li><strong>Intake Pipeline</strong> - No files are being ingested</li>
+<li><strong>Extraction Pipeline</strong> - No document processing</li>
+<li><strong>Database Connection</strong> - Neo4j and Qdrant not integrated</li>
+<li><strong>Indexing Pipeline</strong> - No vectors in Qdrant</li>
+<li><strong>Generation Pipeline</strong> - No answer generation</li>
+<li><strong>UI-to-API Integration</strong> - No visible output path</li>
+</ol>
+<hr>
+</section>
+</section>
+<section id="critical-path-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="critical-path-analysis">🚨 Critical Path Analysis</h2>
+<p>For a user query to produce visible output, the following <strong>must</strong> be completed in order:</p>
+<pre><code>USER QUERY → UI → API (main.py) → RETRIEVAL → GENERATION → OUTPUT
+                     ↑
+DATA: KG (Neo4j) + Vectors (Qdrant) ← INDEXING ← RECONSTRUCTION ← EXTRACTION ← INTAKE ← samples5/</code></pre>
+<p><strong>Blockers:</strong> INTAKE, EXTRACTION, INDEXING, GENERATION, and UI connections are all missing or incomplete.</p>
+<hr>
+</section>
+<section id="deliberate-directives-for-architect" class="level2">
+<h2 class="anchored" data-anchor-id="deliberate-directives-for-architect">📋 DELIBERATE DIRECTIVES FOR ARCHITECT</h2>
+<section id="priority-1-unblock-data-ingestion-m1-m3" class="level3">
+<h3 class="anchored" data-anchor-id="priority-1-unblock-data-ingestion-m1-m3">🔴 <strong>PRIORITY 1: Unblock Data Ingestion (M1-M3)</strong></h3>
+<p>Without data ingestion, queries have nothing to retrieve. These must be completed first.</p>
+<section id="d1.-implement-intake-module-srcintake" class="level4">
+<h4 class="anchored" data-anchor-id="d1.-implement-intake-module-srcintake">D1. Implement Intake Module (<code>src/intake/</code>)</h4>
+<p><strong>Status:</strong> ❌ NOT IMPLEMENTED<br>
+<strong>Blocked:</strong> Nothing - all dependencies available<br>
+<strong>Effort:</strong> 2-4 hours</p>
+<p><strong>Actions:</strong> 1. Create <code>src/intake/__init__.py</code> 2. Create <code>src/intake/watcher.py</code> - File system watcher using <code>watchdog</code> - Monitor <code>samples5/</code> directory for new/modified files - Emit <code>FileEvent(path, event_type, mtime)</code> to queue 3. Create <code>src/intake/queue.py</code> - SQLite-based job queue - Table: <code>jobs(id, file_path, status, created_at, updated_at)</code> - Methods: <code>enqueue(file_path)</code>, <code>dequeue()</code>, <code>mark_completed(job_id)</code> - Ensure idempotency: same file processed once 4. Create <code>src/intake/router.py</code> - Format routing - Input: file path - Output: handler (text, ocr, audio, video, archive) - Use <code>python-magic</code> for MIME detection - Map to extraction paths</p>
+<p><strong>Verification:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test: Drop a file into samples5/, verify it appears in queue</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> samples5</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"test document"</span> <span class="op">&gt;</span> samples5/test_doc.txt</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Should see: Job enqueued for samples5/test_doc.txt</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Reference:</strong> - <code>UPDATED_MODEL/ARCHITECTURE/01_Technical_Design.md</code> - Section 2 (Intake) - <code>UPDATED_MODEL/CODE DIRECTIONS AND PRODUCTS/04_CODE_SCAFFOLDS.md</code> - Intake templates</p>
+<hr>
+</section>
+<section id="d2.-implement-extraction-module-srcextraction" class="level4">
+<h4 class="anchored" data-anchor-id="d2.-implement-extraction-module-srcextraction">D2. Implement Extraction Module (<code>src/extraction/</code>)</h4>
+<p><strong>Status:</strong> ❌ EXISTS BUT INCOMPLETE (only multi_path_extractor.py)<br>
+<strong>Blocked:</strong> Needs Intake (D1) to feed it files<br>
+<strong>Effort:</strong> 4-6 hours</p>
+<p><strong>Actions:</strong> 1. Create <code>src/extraction/dispatcher.py</code> - Orchestrator - Input: file from intake queue - Output: <code>NormalizedExtract</code> object - Coordinate all extraction paths - Call <code>extract.py</code> for timestamp extraction (reuse existing)</p>
+<ol start="2" type="1">
+<li><p>Create individual extractors:</p>
+<ul>
+<li><code>src/extraction/text.py</code> - Docling text extraction</li>
+<li><code>src/extraction/tables.py</code> - Docling table extraction</li>
+<li><code>src/extraction/vlm.py</code> - VLM enrichment (Qwen2.5-VL or GPT-4o)</li>
+<li><code>src/extraction/audio.py</code> - Whisper via Docling</li>
+<li><code>src/extraction/video.py</code> - Frame extraction + audio</li>
+<li><code>src/extraction/ocr.py</code> - Tesseract fallback</li>
+<li><code>src/extraction/archives.py</code> - ZIP/TAR extraction (depth ≤3)</li>
+</ul></li>
+<li><p>Define <code>NormalizedExtract</code> model:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> NormalizedExtract(BaseModel):</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    doc_id: UUID</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    source_path: <span class="bu">str</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    valid_at: datetime  <span class="co"># from extract.py</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    ingest_method: <span class="bu">str</span>  <span class="co"># "text"|"ocr"|"audio"|"video"|"vlm"|"table"</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    text: <span class="bu">str</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    entities: <span class="bu">list</span>[Entity]</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    relations: <span class="bu">list</span>[Relation]</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    metadata: <span class="bu">dict</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+</ol>
+<p><strong>Verification:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test: Process queued file, verify NormalizedExtract output</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Should produce: doc_id, valid_at timestamp, extracted text</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Reference:</strong> - <code>02_Intake_Extraction.md</code> - Extraction details - <code>src/extraction/multi_path_extractor.py</code> - Existing code to reuse/extend</p>
+<hr>
+</section>
+<section id="d3.-implement-reconstruction-module-srcreconstruction" class="level4">
+<h4 class="anchored" data-anchor-id="d3.-implement-reconstruction-module-srcreconstruction">D3. Implement Reconstruction Module (<code>src/reconstruction/</code>)</h4>
+<p><strong>Status:</strong> ⏳ PARTIAL (entity_resolver.py and conflict_resolver.py exist)<br>
+<strong>Blocked:</strong> Needs Extraction (D2) output<br>
+<strong>Effort:</strong> 2-3 hours</p>
+<p><strong>Actions:</strong> 1. Verify <code>src/reconstruction/entity_resolver.py</code> - Entity resolution - Use Semantica for fuzzy matching - Merge entities across extraction paths - Input: <code>NormalizedExtract</code> from Extraction - Output: Merged entities with canonical IDs</p>
+<ol start="2" type="1">
+<li>Verify <code>src/reconstruction/conflict_resolver.py</code> - Supersession
+<ul>
+<li>Already exists and works independently</li>
+<li>Ensure integration with Temporal KG</li>
+<li>Input: Conflicting facts</li>
+<li>Output: Resolved facts with current flags</li>
+</ul></li>
+<li>Create pipeline integration:
+<ul>
+<li>Connect Extraction → Entity Resolution → Conflict Resolution → Temporal KG</li>
+<li>Implement <code>process_extract(extract: NormalizedExtract) → list[Fact]</code></li>
+</ul></li>
+</ol>
+<p><strong>Verification:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test: Extract file, resolve entities, resolve conflicts</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Input: Document with conflicting information</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Output: Single current fact, superseded history</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+</section>
+</section>
+<section id="priority-2-unblock-knowledge-storage-m4" class="level3">
+<h3 class="anchored" data-anchor-id="priority-2-unblock-knowledge-storage-m4">🟡 <strong>PRIORITY 2: Unblock Knowledge Storage (M4)</strong></h3>
+<p>Data must be stored in KG and vector index before retrieval can work.</p>
+<section id="d4.-set-up-and-integrate-databases" class="level4">
+<h4 class="anchored" data-anchor-id="d4.-set-up-and-integrate-databases">D4. Set Up and Integrate Databases</h4>
+<p><strong>Status:</strong> ❌ NOT INTEGRATED<br>
+<strong>Blocked:</strong> Nothing - can be done in parallel with D1-D3<br>
+<strong>Effort:</strong> 2-3 hours (setup + integration)</p>
+<p><strong>Actions:</strong> 1. <strong>Neo4j Setup:</strong> - Install Neo4j 5.x locally or in Docker - Create <code>data/neo4j</code> directory - Configure connection in <code>.env</code>: <code>NEO4J_URI=bolt://localhost:7687      NEO4J_USER=neo4j      NEO4J_PASSWORD=password</code></p>
+<ol start="2" type="1">
+<li><strong>Qdrant Setup:</strong>
+<ul>
+<li><p>Docker: <code>docker run -p 6333:6333 -v data/qdrant:/qdrant/storage qdrant/qdrant</code></p></li>
+<li><p>Configure in <code>.env</code>:</p>
+<pre><code>QDRANT_URL=http://localhost:6333</code></pre></li>
+</ul></li>
+<li><strong>Initialize Temporal KG Schema:</strong>
+<ul>
+<li>Run <code>src/temporal/kg_schema.init_schema()</code> on startup</li>
+<li>Create nodes: Entity, Fact, Provenance</li>
+<li>Create relationships: has_fact, supersedes, derived_from</li>
+<li>Ensure idempotency (can run multiple times safely)</li>
+</ul></li>
+</ol>
+<p><strong>Verification:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test Neo4j connection</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-c</span> <span class="st">"from neo4j import GraphDatabase; driver = GraphDatabase.driver('bolt://localhost:7687'); driver.verify_connectivity()"</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Test Qdrant connection  </span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-c</span> <span class="st">"from qdrant_client import QdrantClient; client = QdrantClient('localhost', 6333); print(client.get_collections())"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+</section>
+<section id="d5.-implement-indexing-module-srcindexing" class="level4">
+<h4 class="anchored" data-anchor-id="d5.-implement-indexing-module-srcindexing">D5. Implement Indexing Module (<code>src/indexing/</code>)</h4>
+<p><strong>Status:</strong> ❌ NOT IMPLEMENTED<br>
+<strong>Blocked:</strong> Needs Databases (D4) and Reconstruction (D3)<br>
+<strong>Effort:</strong> 2-3 hours</p>
+<p><strong>Actions:</strong> 1. Create <code>src/indexing/vector_indexer.py</code>: - Use Qdrant client - Embed facts using <code>all-mpnet-base-v2</code> (offline) - Store only <code>current=true</code> facts by default - Support filtering by <code>as_of</code> timestamp - Implement <code>index_fact(fact: RetrievedFact)</code> and <code>search(query: str, as_of: datetime)</code></p>
+<ol start="2" type="1">
+<li>Create <code>src/indexing/hierarchical_indexer.py</code>:
+<ul>
+<li>Implement HiRAG community summaries</li>
+<li>Group facts by entity type, org_unit, classification</li>
+<li>Create hierarchical index for efficient retrieval</li>
+</ul></li>
+</ol>
+<p><strong>Verification:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test: Index a fact, search for it</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Should: Store embedding, retrieve matching facts</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Reference:</strong> - <code>05_Retrieval.md</code> - Indexing requirements - <code>ARCHITECTURE/04_Database_Design.md</code> - Schema details</p>
+<hr>
+</section>
+</section>
+<section id="priority-3-unblock-query-processing-m5-m6" class="level3">
+<h3 class="anchored" data-anchor-id="priority-3-unblock-query-processing-m5-m6">🟢 <strong>PRIORITY 3: Unblock Query Processing (M5-M6)</strong></h3>
+<p>With data indexed, retrieval and generation can work.</p>
+<section id="d6.-connect-retrieval-to-indexed-data" class="level4">
+<h4 class="anchored" data-anchor-id="d6.-connect-retrieval-to-indexed-data">D6. Connect Retrieval to Indexed Data</h4>
+<p><strong>Status:</strong> ❌ EXISTS BUT NOT CONNECTED<br>
+<strong>Blocked:</strong> Needs Indexing (D5)<br>
+<strong>Effort:</strong> 2-3 hours</p>
+<p><strong>Actions:</strong> 1. Update <code>src/retrieval/pure_rag.py</code>: - Connect to Qdrant vector index - Filter by <code>current=true</code> (default) - Re-rank by recency: <code>score' = score * recency_weight(as_of)</code> - Return <code>RetrievedFact</code> objects</p>
+<ol start="2" type="1">
+<li>Update <code>src/retrieval/kg_only.py</code>:
+<ul>
+<li>Connect to Neo4j KG</li>
+<li>Query: <code>MATCH (e)-[f]-&gt;() WHERE f.current=true AND e.name = ...</code></li>
+<li>Return facts with temporal metadata</li>
+</ul></li>
+<li>Update <code>src/retrieval/rag_kg_validator.py</code>:
+<ul>
+<li>Use Pure RAG for candidate generation</li>
+<li>Query KG for current fact verification</li>
+<li>Override stale RAG hits with KG facts</li>
+<li>Use RRF (Reciprocal Rank Fusion) for fusion</li>
+</ul></li>
+<li>Update <code>src/retrieval/hybrid.py</code>:
+<ul>
+<li>Orchestrate all 3 modes</li>
+<li>Ensure consistent temporal filtering</li>
+</ul></li>
+</ol>
+<p><strong>Verification:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test each retrieval mode individually</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-c</span> <span class="st">"from src.retrieval.pure_rag import PureRAGRetriever; r = PureRAGRetriever(); print(r.search('test query'))"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+</section>
+<section id="d7.-implement-generation-module-srcgeneration" class="level4">
+<h4 class="anchored" data-anchor-id="d7.-implement-generation-module-srcgeneration">D7. Implement Generation Module (<code>src/generation/</code>)</h4>
+<p><strong>Status:</strong> ❌ NOT IMPLEMENTED<br>
+<strong>Blocked:</strong> Needs Retrieval (D6)<br>
+<strong>Effort:</strong> 2-3 hours</p>
+<p><strong>Actions:</strong> 1. Create <code>src/generation/answer_gen.py</code>: - Use DSPy for answer generation - Input: Retrieved facts + query - Output: Answer with citations - Use checked generation (verify facts before answering)</p>
+<ol start="2" type="1">
+<li>Create <code>src/generation/citations.py</code>:
+<ul>
+<li><p>Format citations per spec:</p>
+<pre><code>Fact: &lt;content&gt;
+Source: &lt;file&gt;, p.&lt;n&gt;
+Extracted via: &lt;path&gt; (&lt;model&gt;)
+As-of: &lt;timestamp&gt;
+Confidence: &lt;score&gt;</code></pre></li>
+<li><p>Generate citation strings for each fact</p></li>
+</ul></li>
+</ol>
+<p><strong>Verification:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test: Query → Retrieved Facts → Answer + Citations</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Should: Return structured answer with citations</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+</section>
+<section id="d8.-complete-api-integration" class="level4">
+<h4 class="anchored" data-anchor-id="d8.-complete-api-integration">D8. Complete API Integration</h4>
+<p><strong>Status:</strong> ❌ PARTIAL (server exists but handlers incomplete)<br>
+<strong>Blocked:</strong> Needs Generation (D7)<br>
+<strong>Effort:</strong> 1-2 hours</p>
+<p><strong>Actions:</strong> 1. Update <code>src/api/server.py</code>: - Implement <code>POST /query</code> endpoint: ```python <span class="citation" data-cites="app.post">@app.post</span>(“/query”) async def query_endpoint(query_request: QueryRequest): # 1. Route to retrieval mode if query_request.mode == “pure_rag”: facts = pure_rag_retriever.search(query_request.question, query_request.as_of) elif query_request.mode == “rag_kg_validator”: facts = rag_kg_retriever.search(query_request.question, query_request.as_of) elif query_request.mode == “kg_only”: facts = kg_only_retriever.search(query_request.question, query_request.as_of)</p>
+<pre><code>     # 2. Generate answer
+     answer = answer_generator.generate(query_request.question, facts)
+     
+     # 3. Add audit
+     audit_id = audit_logger.log_query(query_request, answer, facts)
+     
+     return QueryResponse(
+         answer=answer.answer,
+         facts=facts,
+         audit_id=audit_id,
+         confidence=answer.confidence
+     )
+ ```</code></pre>
+<ol start="2" type="1">
+<li>Implement <code>GET /health</code> and <code>GET /ready</code> endpoints:
+<ul>
+<li><code>/health</code>: Basic service health</li>
+<li><code>/ready</code>: Check all dependencies (Neo4j, Qdrant, models)</li>
+</ul></li>
+</ol>
+<p><strong>Verification:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test: Start server, send query</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> main.py <span class="at">--port</span> 8000 <span class="kw">&amp;</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-X</span> POST http://localhost:8000/query <span class="at">-H</span> <span class="st">"Content-Type: application/json"</span> <span class="at">-d</span> <span class="st">'{"question": "test", "mode": "kg_only"}'</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+</section>
+</section>
+<section id="priority-4-ui-integration-m7-m8" class="level3">
+<h3 class="anchored" data-anchor-id="priority-4-ui-integration-m7-m8">🔵 <strong>PRIORITY 4: UI Integration (M7-M8)</strong></h3>
+<section id="d9.-connect-ui-to-api" class="level4">
+<h4 class="anchored" data-anchor-id="d9.-connect-ui-to-api">D9. Connect UI to API</h4>
+<p><strong>Status:</strong> ❌ UI EXISTS BUT NOT CONNECTED (<code>USER_INTERFACE/app.py</code>, <code>ui_streamlit.py</code>)<br>
+<strong>Blocked:</strong> Needs API (D8)<br>
+<strong>Effort:</strong> 1-2 hours</p>
+<p><strong>Actions:</strong> 1. Choose UI framework: - Option A: Streamlit (<code>ui_streamlit.py</code>) - Quick demo - Option B: FastAPI frontend (<code>USER_INTERFACE/app.py</code>) - Production</p>
+<ol start="2" type="1">
+<li><p>Streamlit (Recommended for quick demo):</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ui_streamlit.py</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> streamlit <span class="im">as</span> st</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>API_BASE <span class="op">=</span> <span class="st">"http://localhost:8000"</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>st.title(<span class="st">"Temporal KG-RAG Query Demo"</span>)</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>question <span class="op">=</span> st.text_input(<span class="st">"Enter your query:"</span>)</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>mode <span class="op">=</span> st.selectbox(<span class="st">"Retrieval Mode:"</span>, [<span class="st">"pure_rag"</span>, <span class="st">"rag_kg_validator"</span>, <span class="st">"kg_only"</span>])</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> st.button(<span class="st">"Search"</span>):</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>    response <span class="op">=</span> requests.post(<span class="ss">f"</span><span class="sc">{</span>API_BASE<span class="sc">}</span><span class="ss">/query"</span>, json<span class="op">=</span>{</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>        <span class="st">"question"</span>: question,</span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>        <span class="st">"mode"</span>: mode,</span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>        <span class="st">"as_of"</span>: <span class="va">None</span>,</span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>        <span class="st">"include_history"</span>: <span class="va">False</span></span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>    })</span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>    result <span class="op">=</span> response.json()</span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>    st.subheader(<span class="st">"Answer:"</span>)</span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>    st.write(result[<span class="st">"answer"</span>])</span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a>    st.subheader(<span class="st">"Citations:"</span>)</span>
+<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> fact <span class="kw">in</span> result[<span class="st">"facts"</span>]:</span>
+<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a>        st.write(<span class="ss">f"- </span><span class="sc">{</span>fact[<span class="st">'content'</span>]<span class="sc">}</span><span class="ss"> (Source: </span><span class="sc">{</span>fact[<span class="st">'source'</span>]<span class="sc">}</span><span class="ss">, As-of: </span><span class="sc">{</span>fact[<span class="st">'as_of'</span>]<span class="sc">}</span><span class="ss">)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+<li><p>Run UI:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># For Streamlit</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="ex">streamlit</span> run ui_streamlit.py</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co"># For FastAPI</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> USER_INTERFACE/app.py <span class="at">--port</span> 8501</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+</ol>
+<p><strong>Verification:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test: Open browser, enter query, see answer with citations</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Should: Display answer + facts + timestamps in browser</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+</section>
+</section>
+</section>
+<section id="implementation-order-summary" class="level2">
+<h2 class="anchored" data-anchor-id="implementation-order-summary">📊 Implementation Order Summary</h2>
+<section id="phase-1-data-ingestion-week-1---unblocks-query-input" class="level3">
+<h3 class="anchored" data-anchor-id="phase-1-data-ingestion-week-1---unblocks-query-input">Phase 1: Data Ingestion (Week 1) - <strong>UNBLOCKS QUERY INPUT</strong></h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Directive</th>
+<th>Module</th>
+<th>Status</th>
+<th>Effort</th>
+<th>Dependencies</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>D1</td>
+<td>Intake</td>
+<td>❌</td>
+<td>2-4h</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td>D2</td>
+<td>Extraction</td>
+<td>❌</td>
+<td>4-6h</td>
+<td>D1</td>
+</tr>
+<tr class="odd">
+<td>D3</td>
+<td>Reconstruction</td>
+<td>⏳</td>
+<td>2-3h</td>
+<td>D2</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="phase-2-knowledge-storage-week-1-2---unblocks-data-for-retrieval" class="level3">
+<h3 class="anchored" data-anchor-id="phase-2-knowledge-storage-week-1-2---unblocks-data-for-retrieval">Phase 2: Knowledge Storage (Week 1-2) - <strong>UNBLOCKS DATA FOR RETRIEVAL</strong></h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Directive</th>
+<th>Module</th>
+<th>Status</th>
+<th>Effort</th>
+<th>Dependencies</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>D4</td>
+<td>Databases</td>
+<td>❌</td>
+<td>2-3h</td>
+<td>None (parallel)</td>
+</tr>
+<tr class="even">
+<td>D5</td>
+<td>Indexing</td>
+<td>❌</td>
+<td>2-3h</td>
+<td>D3, D4</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="phase-3-query-processing-week-2---unblocks-answer-generation" class="level3">
+<h3 class="anchored" data-anchor-id="phase-3-query-processing-week-2---unblocks-answer-generation">Phase 3: Query Processing (Week 2) - <strong>UNBLOCKS ANSWER GENERATION</strong></h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Directive</th>
+<th>Module</th>
+<th>Status</th>
+<th>Effort</th>
+<th>Dependencies</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>D6</td>
+<td>Retrieval</td>
+<td>❌</td>
+<td>2-3h</td>
+<td>D5</td>
+</tr>
+<tr class="even">
+<td>D7</td>
+<td>Generation</td>
+<td>❌</td>
+<td>2-3h</td>
+<td>D6</td>
+</tr>
+<tr class="odd">
+<td>D8</td>
+<td>API Integration</td>
+<td>❌</td>
+<td>1-2h</td>
+<td>D7</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="phase-4-ui-integration-week-2-3---unblocks-visible-output" class="level3">
+<h3 class="anchored" data-anchor-id="phase-4-ui-integration-week-2-3---unblocks-visible-output">Phase 4: UI Integration (Week 2-3) - <strong>UNBLOCKS VISIBLE OUTPUT</strong></h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Directive</th>
+<th>Module</th>
+<th>Status</th>
+<th>Effort</th>
+<th>Dependencies</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>D9</td>
+<td>UI Connection</td>
+<td>❌</td>
+<td>1-2h</td>
+<td>D8</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+</section>
+<section id="minimum-viable-path-to-query-to-output" class="level2">
+<h2 class="anchored" data-anchor-id="minimum-viable-path-to-query-to-output">🎯 Minimum Viable Path to Query-to-Output</h2>
+<p><strong>Fastest path to demo (2-3 days of work):</strong></p>
+<section id="day-1-data-ingestion" class="level3">
+<h3 class="anchored" data-anchor-id="day-1-data-ingestion">Day 1: Data Ingestion</h3>
+<ol type="1">
+<li><strong>D1</strong> - Implement Intake (2-4h)</li>
+<li><strong>D4</strong> - Set up Databases (2-3h, parallel)</li>
+<li><strong>D2</strong> - Implement Extraction (4-6h)</li>
+</ol>
+</section>
+<section id="day-2-knowledge-query" class="level3">
+<h3 class="anchored" data-anchor-id="day-2-knowledge-query">Day 2: Knowledge &amp; Query</h3>
+<ol start="4" type="1">
+<li><strong>D3</strong> - Connect Reconstruction (2-3h)</li>
+<li><strong>D5</strong> - Implement Indexing (2-3h)</li>
+<li><strong>D6</strong> - Connect Retrieval (2-3h)</li>
+</ol>
+</section>
+<section id="day-3-output" class="level3">
+<h3 class="anchored" data-anchor-id="day-3-output">Day 3: Output</h3>
+<ol start="7" type="1">
+<li><strong>D7</strong> - Implement Generation (2-3h)</li>
+<li><strong>D8</strong> - Complete API (1-2h)</li>
+<li><strong>D9</strong> - Connect UI (1-2h)</li>
+</ol>
+<p><strong>Milestone:</strong> User can drop file in <code>samples5/</code>, open UI, enter query, see answer with citations.</p>
+<hr>
+</section>
+</section>
+<section id="what-the-architect-should-do-first" class="level2">
+<h2 class="anchored" data-anchor-id="what-the-architect-should-do-first">🚨 What the Architect Should Do FIRST</h2>
+<p><strong>Before anything else, the architect must:</strong></p>
+<ol type="1">
+<li><p><strong>Read these files:</strong></p>
+<ul>
+<li><code>UPDATED_MODEL/ARCHITECTURE/01_Technical_Design.md</code> - System architecture</li>
+<li><code>UPDATED_MODEL/ARCHITECTURE/05_Directory_Structure.md</code> - Where files go</li>
+<li><code>UPDATED_MODEL/CODE DIRECTIONS AND PRODUCTS/04_CODE_SCAFFOLDS.md</code> - Code templates</li>
+<li><code>UPDATED_MODEL/ARCHITECTURE/10_Test_Plan.md</code> - Test requirements</li>
+</ul></li>
+<li><p><strong>Verify current state:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Confirm these exist</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-la</span> src/temporal/</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-la</span> src/retrieval/</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-la</span> src/api/</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Confirm these don't exist</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-la</span> src/intake/ <span class="dv">2</span><span class="op">&gt;&amp;</span><span class="dv">1</span> <span class="kw">|</span> <span class="fu">grep</span> <span class="st">"No such"</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-la</span> src/extraction/ <span class="dv">2</span><span class="op">&gt;&amp;</span><span class="dv">1</span> <span class="kw">|</span> <span class="fu">grep</span> <span class="st">"No such"</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-la</span> src/indexing/ <span class="dv">2</span><span class="op">&gt;&amp;</span><span class="dv">1</span> <span class="kw">|</span> <span class="fu">grep</span> <span class="st">"No such"</span></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-la</span> src/generation/ <span class="dv">2</span><span class="op">&gt;&amp;</span><span class="dv">1</span> <span class="kw">|</span> <span class="fu">grep</span> <span class="st">"No such"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+<li><p><strong>Start with D1 (Intake) immediately</strong> - This is the/first blocker</p></li>
+</ol>
+<hr>
+</section>
+<section id="acceptance-criteria" class="level2">
+<h2 class="anchored" data-anchor-id="acceptance-criteria">✅ Acceptance Criteria</h2>
+<p><strong>Before declaring “ready for demo”, verify:</strong></p>
+<ol type="1">
+<li><p><strong>Data Flow Test:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Drop file in samples5/</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> SAMPLES/invoice_1.pdf samples5/</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Wait for processing (should be automatic)</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="fu">sleep</span> 5</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Query via API</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-X</span> POST http://localhost:8000/query <span class="dt">\</span></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">-H</span> <span class="st">"Content-Type: application/json"</span> <span class="dt">\</span></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">-d</span> <span class="st">'{"question": "What is the invoice total?", "mode": "kg_only"}'</span></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Should return: Answer with citations and timestamps</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+<li><p><strong>UI Test:</strong></p>
+<ul>
+<li>Open UI in browser</li>
+<li>Enter query: “What documents are in the system?”</li>
+<li>Select mode: “pure_rag”</li>
+<li>Click Search</li>
+<li><strong>Should see:</strong> Answer text + citations with source files and timestamps</li>
+</ul></li>
+<li><p><strong>Temporal Test:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Add older file</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">touch</span> <span class="at">-d</span> <span class="st">"2024-01-01"</span> SAMPLES/old_invoice.pdf</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> SAMPLES/old_invoice.pdf samples5/</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Add newer file with conflicting info</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="fu">touch</span> <span class="at">-d</span> <span class="st">"2024-02-01"</span> SAMPLES/new_invoice.pdf</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> SAMPLES/new_invoice.pdf samples5/</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Query should return newest info</span></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-X</span> POST http://localhost:8000/query <span class="dt">\</span></span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">-H</span> <span class="st">"Content-Type: application/json"</span> <span class="dt">\</span></span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">-d</span> <span class="st">'{"question": "What is the current invoice total?", "mode": "pure_rag"}'</span></span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Should return: Newest invoice data, not old</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+</ol>
+<hr>
+</section>
+<section id="summary-directives-priority-order" class="level2">
+<h2 class="anchored" data-anchor-id="summary-directives-priority-order">📋 Summary: Directives Priority Order</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 22%">
+<col style="width: 16%">
+<col style="width: 18%">
+<col style="width: 22%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Priority</th>
+<th>Directive</th>
+<th>Module</th>
+<th>Purpose</th>
+<th>Blocking?</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>🔴 1</td>
+<td>D1</td>
+<td>Intake</td>
+<td>Files get into system</td>
+<td><strong>YES</strong> - First blocker</td>
+</tr>
+<tr class="even">
+<td>🔴 2</td>
+<td>D4</td>
+<td>Databases</td>
+<td>Store KG and vectors</td>
+<td><strong>YES</strong> - Parallel with D1</td>
+</tr>
+<tr class="odd">
+<td>🔴 3</td>
+<td>D2</td>
+<td>Extraction</td>
+<td>Parse file content</td>
+<td><strong>YES</strong> - Needs D1</td>
+</tr>
+<tr class="even">
+<td>🔴 4</td>
+<td>D3</td>
+<td>Reconstruction</td>
+<td>Resolve entities/conflicts</td>
+<td><strong>YES</strong> - Needs D2</td>
+</tr>
+<tr class="odd">
+<td>🟡 5</td>
+<td>D5</td>
+<td>Indexing</td>
+<td>Make data searchable</td>
+<td><strong>YES</strong> - Needs D3, D4</td>
+</tr>
+<tr class="even">
+<td>🟡 6</td>
+<td>D6</td>
+<td>Retrieval</td>
+<td>Connect to indexed data</td>
+<td><strong>YES</strong> - Needs D5</td>
+</tr>
+<tr class="odd">
+<td>🟡 7</td>
+<td>D7</td>
+<td>Generation</td>
+<td>Create answers</td>
+<td><strong>YES</strong> - Needs D6</td>
+</tr>
+<tr class="even">
+<td>🟡 8</td>
+<td>D8</td>
+<td>API Integration</td>
+<td>Expose query endpoint</td>
+<td><strong>YES</strong> - Needs D7</td>
+</tr>
+<tr class="odd">
+<td>🟢 9</td>
+<td>D9</td>
+<td>UI Connection</td>
+<td>Visible output</td>
+<td><strong>YES</strong> - Final step</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+<section id="final-note" class="level2">
+<h2 class="anchored" data-anchor-id="final-note">🎯 Final Note</h2>
+<p><strong>The temporal core is complete, but the pipeline is empty.</strong></p>
+<p>Without implementing <strong>D1-D5</strong>, there is no data in the system. Without <strong>D6-D9</strong>, there is no way to query that data through the UI.</p>
+<p><strong>The architect’s first task is D1 (Intake) - everything else depends on getting data into the system.</strong></p>
+<p>Once D1-D9 are complete, you will be able to: ✅ Drop files into <code>samples5/</code> ✅ See them automatically processed ✅ Open the UI ✅ Enter a query ✅ <strong>See an answer with citations and timestamps</strong></p>
+<hr>
+</section>
+<section id="need-clarification" class="level2">
+<h2 class="anchored" data-anchor-id="need-clarification">📞 Need Clarification?</h2>
+<p>If any directive is unclear, the architect should refer to: - <code>UPDATED_MODEL/ARCHITECTURE/01_Technical_Design.md</code> - System overview - <code>UPDATED_MODEL/ARCHITECTURE/04_Database_Design.md</code> - Schema details - <code>UPDATED_MODEL/ARCHITECTURE/06_API_Contracts.md</code> - API specifications - <code>UPDATED_MODEL/CODE DIRECTIONS AND PRODUCTS/04_CODE_SCAFFOLDS.md</code> - Code templates</p>
+<p>Each of these files contains detailed specifications that the architect can use to implement the directives above.</p>
+
+
+</section>
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a></div></div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/KarthikeanJuttumahadevan4\.github\.io\/target_staleness\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>© 2026 United States Military Academy</p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+<script src="../../../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

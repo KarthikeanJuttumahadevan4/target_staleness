@@ -1,0 +1,1675 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.19">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>setup_phase1 – AI101</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<link href="../../..//images/favicon.svg" rel="icon" type="image/svg+xml">
+<script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-dark-b626d73c4c936ccc3cb08be7d45d1df6.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap-020d25d76586e1017cbc2b913b3a2bf1.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark-52c85c35cd3cfaec83d0f36150bfac8d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../../site_libs/bootstrap/bootstrap-020d25d76586e1017cbc2b913b3a2bf1.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+
+
+<meta property="og:title" content="AI101">
+<meta property="og:description" content="Introduction to Python">
+<meta property="og:site_name" content="AI101">
+<link rel="canonical" href="https://KarthikeanJuttumahadevan4.github.io/target_staleness/UPDATED_MODEL/planning/SAMPLES_RAG_data/SETUP_PHASE1.html">
+</head>
+
+<body class="nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const queryPrefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+    const darkModeDefault = queryPrefersDark.matches;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    queryPrefersDark.addEventListener("change", e => {
+      if(window.localStorage.getItem("quarto-color-scheme") !== null)
+        return;
+      const alternate = e.matches
+      toggleColorMode(alternate);
+      localAlternateSentinel = e.matches ? 'alternate' : 'default'; // this is used alongside local storage!
+      toggleGiscusIfUsed(alternate, darkModeDefault);
+    });
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="https://usma-media.s3.amazonaws.com/inline-images/img/usma_logos/logo/wp_crest_new_only.png" alt="" class="navbar-logo light-content">
+    <img src="https://usma-media.s3.amazonaws.com/inline-images/img/usma_logos/logo/wp_crest_new_only.png" alt="" class="navbar-logo dark-content">
+    </a>
+    <a class="navbar-brand" href="../../../index.html">
+    <span class="navbar-title">AI101</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../UPDATED_MODEL/index.html"> 
+<span class="menu-text">Model Docs</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="2">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#setup_phase1.md-complete-phase-1-file-creation-script" id="toc-setup_phase1.md-complete-phase-1-file-creation-script" class="nav-link active" data-scroll-target="#setup_phase1.md-complete-phase-1-file-creation-script">SETUP_PHASE1.md – Complete Phase 1 File Creation Script</a>
+  <ul class="collapse">
+  <li><a href="#step-1-create-config.yaml" id="toc-step-1-create-config.yaml" class="nav-link" data-scroll-target="#step-1-create-config.yaml">📦 Step 1: Create config.yaml</a></li>
+  <li><a href="#step-2-create-config.py" id="toc-step-2-create-config.py" class="nav-link" data-scroll-target="#step-2-create-config.py">📦 Step 2: Create config.py</a></li>
+  <li><a href="#step-3-create-requirements.txt" id="toc-step-3-create-requirements.txt" class="nav-link" data-scroll-target="#step-3-create-requirements.txt">📦 Step 3: Create requirements.txt</a></li>
+  <li><a href="#step-4-create-file_ingestor.py" id="toc-step-4-create-file_ingestor.py" class="nav-link" data-scroll-target="#step-4-create-file_ingestor.py">📦 Step 4: Create file_ingestor.py</a></li>
+  <li><a href="#continue-with-next-files" id="toc-continue-with-next-files" class="nav-link" data-scroll-target="#continue-with-next-files">📦 Continue with Next Files</a>
+  <ul class="collapse">
+  <li><a href="#step-5-create-text_chunkers.py" id="toc-step-5-create-text_chunkers.py" class="nav-link" data-scroll-target="#step-5-create-text_chunkers.py">Step 5: Create text_chunkers.py</a></li>
+  <li><a href="#step-6-create-table_chunkers.py-simple-version" id="toc-step-6-create-table_chunkers.py-simple-version" class="nav-link" data-scroll-target="#step-6-create-table_chunkers.py-simple-version">Step 6: Create table_chunkers.py (simple version)</a></li>
+  <li><a href="#step-7-create-embedder.py" id="toc-step-7-create-embedder.py" class="nav-link" data-scroll-target="#step-7-create-embedder.py">Step 7: Create embedder.py</a></li>
+  <li><a href="#step-8-create-qdrant_client.py" id="toc-step-8-create-qdrant_client.py" class="nav-link" data-scroll-target="#step-8-create-qdrant_client.py">Step 8: Create qdrant_client.py</a></li>
+  </ul></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content column-page-left" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+
+
+
+
+
+<section id="setup_phase1.md-complete-phase-1-file-creation-script" class="level1">
+<h1>SETUP_PHASE1.md – Complete Phase 1 File Creation Script</h1>
+<p><strong>Purpose</strong>: This document contains <strong>all fish-compatible commands</strong> needed to create every file for Phase 1 of the Independent RAG System implementation.<br>
+<strong>Status</strong>: All files ready to be created.</p>
+<p>Copy and paste each section into your terminal to create all files.</p>
+<hr>
+<section id="step-1-create-config.yaml" class="level2">
+<h2 class="anchored" data-anchor-id="step-1-create-config.yaml">📦 Step 1: Create config.yaml</h2>
+<pre class="fish"><code>bash -c 'cat &gt; RAG_data/config.yaml &lt;&lt; "YAMLEOF"
+# Independent RAG System Configuration
+# All values can be overridden via environment variables using the RAG_ prefix.
+# Example: RAG_INGESTION_BASE_PATH=/custom/path
+
+# File Ingestion Configuration
+ingestion:
+  base_path: "samples5"
+  watch_mode: false
+  allowed_extensions:
+    - ".txt"
+    - ".pdf"
+    - ".docx"
+    - ".xlsx"
+    - ".pptx"
+  batch_size: 100
+
+# Text Chunking Configuration
+chunking:
+  chunk_size: 512
+  overlap: 102
+  min_chunk_size: 50
+
+# Embedding Configuration
+embedding:
+  model_name: "all-MiniLM-L6-v2"
+  fallback_model: "BAAI/bge-small-en-v1.5"
+  batch_size: 32
+  normalize: true
+
+# Vector Store (Qdrant) Configuration
+vector_store:
+  host: "localhost"
+  port: 6333
+  collection_name: "rag_deductions"
+  vector_size: 384
+  distance: "Cosine"
+
+# Fact Deduction Configuration
+deduction:
+  confidence_threshold: 0.7
+  predicate_map:
+    price: "has_price"
+    cost: "has_price"
+    amount: "has_price"
+    headcount: "has_headcount"
+    employees: "has_headcount"
+    budget: "has_budget"
+    date: "has_date"
+    as of: "has_date"
+    effective: "has_date"
+
+# RAG vs KG Comparison Configuration
+comparison:
+  similarity_threshold: 0.85
+  confidence_threshold: 0.9
+
+# Inconsistency Resolution Configuration
+resolution:
+  rules:
+    - "R1"
+    - "R2"
+    - "R3"
+    - "R4"
+    - "R5"
+    - "R6"
+    - "R7"
+
+# Directory Configuration
+directories:
+  output: "RAG_data/output"
+  logs: "RAG_data/logs"
+  deductions_file: "RAG_data/deductions.jsonl"
+  resolution_log: "RAG_data/resolution_log.jsonl"
+
+# Performance Configuration
+performance:
+  max_file_size_mb: 100
+  max_concurrent_files: 10
+  query_timeout_ms: 500
+YAMLEOF'
+
+echo "✓ Created RAG_data/config.yaml"</code></pre>
+<hr>
+</section>
+<section id="step-2-create-config.py" class="level2">
+<h2 class="anchored" data-anchor-id="step-2-create-config.py">📦 Step 2: Create config.py</h2>
+<pre class="fish"><code>bash -c 'cat &gt; RAG_data/src/config.py &lt;&lt; "PYEOF"
+"""
+Configuration management for the Independent RAG System.
+"""
+
+import os
+from dataclasses import dataclass, field
+from typing import Any, Dict, List, Optional
+import yaml
+
+
+@dataclass
+class IngestionConfig:
+    base_path: str = "samples5"
+    watch_mode: bool = False
+    allowed_extensions: List[str] = field(default_factory=lambda: [".txt", ".pdf", ".docx", ".xlsx", ".pptx"])
+    batch_size: int = 100
+
+
+@dataclass
+class ChunkingConfig:
+    chunk_size: int = 512
+    overlap: int = 102
+    min_chunk_size: int = 50
+
+
+@dataclass
+class EmbeddingConfig:
+    model_name: str = "all-MiniLM-L6-v2"
+    fallback_model: str = "BAAI/bge-small-en-v1.5"
+    batch_size: int = 32
+    normalize: bool = True
+
+
+@dataclass
+class VectorStoreConfig:
+    host: str = "localhost"
+    port: int = 6333
+    collection_name: str = "rag_deductions"
+    vector_size: int = 384
+    distance: str = "Cosine"
+
+
+@dataclass
+class DeductionConfig:
+    confidence_threshold: float = 0.7
+    predicate_map: Dict[str, str] = field(default_factory=lambda: {
+        "price": "has_price", "cost": "has_price", "amount": "has_price",
+        "headcount": "has_headcount", "employees": "has_headcount",
+        "budget": "has_budget", "date": "has_date", "as of": "has_date", "effective": "has_date",
+    })
+
+
+@dataclass
+class ComparisonConfig:
+    similarity_threshold: float = 0.85
+    confidence_threshold: float = 0.9
+
+
+@dataclass
+class ResolutionConfig:
+    rules: List[str] = field(default_factory=lambda: ["R1", "R2", "R3", "R4", "R5", "R6", "R7"])
+
+
+@dataclass
+class DirectoryConfig:
+    output: str = "RAG_data/output"
+    logs: str = "RAG_data/logs"
+    deductions_file: str = "RAG_data/deductions.jsonl"
+    resolution_log: str = "RAG_data/resolution_log.jsonl"
+
+
+@dataclass
+class PerformanceConfig:
+    max_file_size_mb: int = 100
+    max_concurrent_files: int = 10
+    query_timeout_ms: int = 500
+
+
+@dataclass
+class Config:
+    ingestion: IngestionConfig = field(default_factory=IngestionConfig)
+    chunking: ChunkingConfig = field(default_factory=ChunkingConfig)
+    embedding: EmbeddingConfig = field(default_factory=EmbeddingConfig)
+    vector_store: VectorStoreConfig = field(default_factory=VectorStoreConfig)
+    deduction: DeductionConfig = field(default_factory=DeductionConfig)
+    comparison: ComparisonConfig = field(default_factory=ComparisonConfig)
+    resolution: ResolutionConfig = field(default_factory=ResolutionConfig)
+    directories: DirectoryConfig = field(default_factory=DirectoryConfig)
+    performance: PerformanceConfig = field(default_factory=PerformanceConfig)
+
+    def to_dict(self) -&gt; Dict[str, Any]:
+        return {
+            "ingestion": {k: v for k, v in self.ingestion.__dict__.items() if not k.startswith("_")},
+            "chunking": {k: v for k, v in self.chunking.__dict__.items() if not k.startswith("_")},
+            "embedding": {k: v for k, v in self.embedding.__dict__.items() if not k.startswith("_")},
+            "vector_store": {k: v for k, v in self.vector_store.__dict__.items() if not k.startswith("_")},
+            "deduction": {k: v for k, v in self.deduction.__dict__.items() if not k.startswith("_")},
+            "comparison": {k: v for k, v in self.comparison.__dict__.items() if not k.startswith("_")},
+            "resolution": {k: v for k, v in self.resolution.__dict__.items() if not k.startswith("_")},
+            "directories": {k: v for k, v in self.directories.__dict__.items() if not k.startswith("_")},
+            "performance": {k: v for k, v in self.performance.__dict__.items() if not k.startswith("_")},
+        }
+
+    @classmethod
+    def from_dict(cls, d: Dict[str, Any]) -&gt; "Config":
+        return cls(
+            ingestion=IngestionConfig(**d.get("ingestion", {})),
+            chunking=ChunkingConfig(**d.get("chunking", {})),
+            embedding=EmbeddingConfig(**d.get("embedding", {})),
+            vector_store=VectorStoreConfig(**d.get("vector_store", {})),
+            deduction=DeductionConfig(**d.get("deduction", {})),
+            comparison=ComparisonConfig(**d.get("comparison", {})),
+            resolution=ResolutionConfig(**d.get("resolution", {})),
+            directories=DirectoryConfig(**d.get("directories", {})),
+            performance=PerformanceConfig(**d.get("performance", {})),
+        )
+
+
+class ConfigError(Exception):
+    """Raised when configuration is invalid."""
+    pass
+
+
+def _parse_env_value(value: str, default: Any) -&gt; Any:
+    if isinstance(default, bool):
+        return value.lower() in ("true", "1", "yes", "on")
+    elif isinstance(default, int):
+        return int(value)
+    elif isinstance(default, float):
+        return float(value)
+    elif isinstance(default, list):
+        if value.startswith("["):
+            import json
+            return json.loads(value)
+        return [v.strip() for v in value.split(",") if v.strip()]
+    elif isinstance(default, dict):
+        if value.startswith("{"):
+            import json
+            return json.loads(value)
+        result = {}
+        for pair in value.split(","):
+            if "=" in pair:
+                k, v = pair.split("=", 1)
+                result[k.strip()] = v.strip()
+        return result
+    else:
+        return value
+
+
+def _get_env_overrides() -&gt; Dict[str, Any]:
+    overrides = {}
+    for key, value in os.environ.items():
+        if not key.startswith("RAG_"):
+            continue
+        config_key = key[4:].lower().replace("__", ".").replace("_", ".")
+        overrides[config_key] = value
+    return overrides
+
+
+def _apply_overrides(config_dict: Dict[str, Any], overrides: Dict[str, Any]) -&gt; Dict[str, Any]:
+    result = {}
+    for k, v in config_dict.items():
+        result[k] = v.copy() if isinstance(v, dict) else v
+    for key, value in overrides.items():
+        parts = key.split(".")
+        current = result
+        for part in parts[:-1]:
+            if part not in current:
+                current[part] = {}
+            current = current[part]
+            if not isinstance(current, dict):
+                raise ConfigError(f"Cannot override {key}: {\".\".join(parts[:-1])} is not a dict")
+        final_key = parts[-1]
+        default_val = current.get(final_key, value)
+        current[final_key] = _parse_env_value(value, default_val)
+    return result
+
+
+def _validate_config(config_dict: Dict[str, Any]) -&gt; None:
+    errors = []
+    ingestion = config_dict.get("ingestion", {})
+    if ingestion.get("batch_size", 0) &lt;= 0:
+        errors.append("ingestion.batch_size must be &gt; 0")
+    chunking = config_dict.get("chunking", {})
+    cs = chunking.get("chunk_size", 0)
+    ov = chunking.get("overlap", 0)
+    mc = chunking.get("min_chunk_size", 0)
+    if cs &lt;= 0: errors.append("chunking.chunk_size must be &gt; 0")
+    if ov &lt; 0: errors.append("chunking.overlap must be &gt;= 0")
+    if mc &lt;= 0: errors.append("chunking.min_chunk_size must be &gt; 0")
+    if ov &gt;= cs: errors.append("chunking.overlap must be &lt; chunking.chunk_size")
+    emb = config_dict.get("embedding", {})
+    if emb.get("batch_size", 0) &lt;= 0:
+        errors.append("embedding.batch_size must be &gt; 0")
+    vs_cfg = config_dict.get("vector_store", {})
+    p = vs_cfg.get("port", 0)
+    if p &lt;= 0 or p &gt; 65535:
+        errors.append("vector_store.port must be between 1 and 65535")
+    if vs_cfg.get("vector_size", 0) &lt;= 0:
+        errors.append("vector_store.vector_size must be &gt; 0")
+    if vs_cfg.get("distance", "").upper() not in ("COSINE", "DOT", "EUCLIDEAN"):
+        errors.append("vector_store.distance must be COSINE, DOT, or EUCLIDEAN")
+    ded = config_dict.get("deduction", {})
+    ct = ded.get("confidence_threshold", 0)
+    if not (0.0 &lt;= ct &lt;= 1.0): errors.append("deduction.confidence_threshold must be between 0.0 and 1.0")
+    cmp = config_dict.get("comparison", {})
+    st = cmp.get("similarity_threshold", 0)
+    if not (0.0 &lt;= st &lt;= 1.0): errors.append("comparison.similarity_threshold must be between 0.0 and 1.0")
+    ct2 = cmp.get("confidence_threshold", 0)
+    if not (0.0 &lt;= ct2 &lt;= 1.0): errors.append("comparison.confidence_threshold must be between 0.0 and 1.0")
+    per = config_dict.get("performance", {})
+    if per.get("max_file_size_mb", 0) &lt;= 0: errors.append("performance.max_file_size_mb must be &gt; 0")
+    if per.get("max_concurrent_files", 0) &lt;= 0: errors.append("performance.max_concurrent_files must be &gt; 0")
+    if per.get("query_timeout_ms", 0) &lt;= 0: errors.append("performance.query_timeout_ms must be &gt; 0")
+    if errors:
+        raise ConfigError("Config validation failed: " + "; ".join(errors))
+
+
+_config_cache: Optional[Config] = None
+
+
+def get_config(config_path: Optional[str] = None) -&gt; Config:
+    global _config_cache
+    if _config_cache is not None:
+        return _config_cache
+    if config_path is None:
+        config_path = os.path.join(os.getcwd(), "RAG_data", "config.yaml")
+    if not os.path.exists(config_path):
+        raise FileNotFoundError(f"Configuration file not found: {config_path}")
+    with open(config_path, "r") as f:
+        config_dict = yaml.safe_load(f) or {}
+    env_overrides = _get_env_overrides()
+    config_dict = _apply_overrides(config_dict, env_overrides)
+    _validate_config(config_dict)
+    _config_cache = Config.from_dict(config_dict)
+    return _config_cache
+
+
+def reload_config() -&gt; Config:
+    global _config_cache
+    _config_cache = None
+    return get_config()
+
+
+def reset_config() -&gt; None:
+    global _config_cache
+    _config_cache = None
+PYEOF'
+
+echo "✓ Created RAG_data/src/config.py"</code></pre>
+<hr>
+</section>
+<section id="step-3-create-requirements.txt" class="level2">
+<h2 class="anchored" data-anchor-id="step-3-create-requirements.txt">📦 Step 3: Create requirements.txt</h2>
+<pre class="fish"><code>bash -c 'cat &gt; RAG_data/requirements.txt &lt;&lt; "TEXTEOF"
+# Independent RAG System Dependencies
+PyYAML&gt;=6.0
+Sentence-Transformers&gt;=2.2.2
+qdrant-client&gt;=1.8.0
+pdfplumber&gt;=0.10.0
+python-docx&gt;=1.1.0
+openpyxl&gt;=3.1.0
+python-pptx&gt;=0.6.21
+pytesseract&gt;=0.3.10
+pdf2image&gt;=1.16.0
+Pillow&gt;=9.0.0
+watchdog&gt;=4.0.0
+TEXTEOF'
+
+echo "✓ Created RAG_data/requirements.txt"</code></pre>
+<hr>
+</section>
+<section id="step-4-create-file_ingestor.py" class="level2">
+<h2 class="anchored" data-anchor-id="step-4-create-file_ingestor.py">📦 Step 4: Create file_ingestor.py</h2>
+<pre class="fish"><code>bash -c 'cat &gt; RAG_data/src/ingestion/file_ingestor.py &lt;&lt; "PYEOF"
+"""File Ingestor for the Independent RAG System."""
+
+import hashlib
+import os
+from dataclasses import dataclass, field
+from datetime import datetime
+from pathlib import Path
+from typing import Any, Dict, List, Optional
+
+from src.config import get_config
+
+
+@dataclass
+class Chunk:
+    chunk_id: str
+    content: str
+    file_path: str
+    file_hash: str
+    as_of: datetime
+    chunk_index: int
+    total_chunks: int
+    start_offset: int
+    end_offset: int
+    metadata: Dict[str, Any]
+
+
+@dataclass
+class IngestionResult:
+    file_path: str
+    file_hash: str
+    as_of: datetime
+    timestamp_fallback: bool
+    success: bool
+    error: Optional[str] = None
+    chunks: List[Chunk] = field(default_factory=list)
+
+
+class FileIngestor:
+    def __init__(self, base_path: Optional[str] = None, config_path: Optional[str] = None):
+        from src.config import get_config
+        self.config = get_config(config_path)
+        if base_path is None:
+            self.base_path = Path(self.config.ingestion.base_path)
+        else:
+            self.base_path = Path(base_path)
+        self.ingested_files: Dict[str, str] = {}  # file_path -&gt; hash
+
+    @staticmethod
+    def calculate_hash(file_path: str) -&gt; str:
+        """Calculate SHA-256 hash of a file."""
+        sha256 = hashlib.sha256()
+        with open(file_path, "rb") as f:
+            for chunk in iter(lambda: f.read(8192), b""):
+                sha256.update(chunk)
+        return sha256.hexdigest()
+
+    @staticmethod
+    def get_timestamp(file_path: str) -&gt; tuple:
+        """Get file modification timestamp using extract.py fallback to os.path.getmtime."""
+        from src.temporal.timestamp_extractor import TimestampExtractor
+        extractor = TimestampExtractor()
+        try:
+            as_of, fallback = extractor.get_as_of(Path(file_path))
+            return as_of, fallback
+        except Exception:
+            import os
+            mtime = os.path.getmtime(file_path)
+            return datetime.fromtimestamp(mtime), True
+
+    def ingest_one(self, file_path: str) -&gt; IngestionResult:
+        """Ingest a single file."""
+        from src.chunking.text_chunkers import TextChunker
+        from src.chunking.table_chunkers import TableChunker
+        
+        file_path = Path(file_path)
+        
+        if not file_path.exists():
+            return IngestionResult(
+                file_path=str(file_path),
+                file_hash="",
+                as_of=datetime.now(),
+                timestamp_fallback=True,
+                success=False,
+                error=f"File not found: {file_path}"
+            )
+        
+        if not file_path.is_file():
+            return IngestionResult(
+                file_path=str(file_path),
+                file_hash="",
+                as_of=datetime.now(),
+                timestamp_fallback=True,
+                success=False,
+                error=f"Not a file: {file_path}"
+            )
+        
+        extension = file_path.suffix.lower()
+        if extension not in self.config.ingestion.allowed_extensions:
+            return IngestionResult(
+                file_path=str(file_path), file_hash="", as_of=datetime.now(),
+                timestamp_fallback=True, success=False,
+                error=f"Extension not allowed: {extension}"
+            )
+        
+        try:
+            file_hash = self.calculate_hash(str(file_path))
+            as_of, timestamp_fallback = self.get_timestamp(str(file_path))
+            
+            # Check if already ingested
+            if str(file_path) in self.ingested_files:
+                if self.ingested_files[str(file_path)] == file_hash:
+                    return IngestionResult(
+                        file_path=str(file_path), file_hash=file_hash,
+                        as_of=as_of, timestamp_fallback=timestamp_fallback,
+                        success=True, error=None, chunks=[]
+                    )
+            
+            # Extract text based on file type
+            raw_text = self._extract_text(file_path, extension)
+            if raw_text is None:
+                return IngestionResult(
+                    file_path=str(file_path), file_hash=file_hash,
+                    as_of=as_of, timestamp_fallback=timestamp_fallback,
+                    success=False, error=f"Failed to extract text from {file_path}"
+                )
+            
+            # Chunk the text
+            chunker = TableChunker() if extension in (".xlsx",) else TextChunker()
+            metadata = {
+                "file_path": str(file_path),
+                "file_hash": file_hash,
+                "as_of": as_of,
+                "extraction_path": "excel_table" if extension == ".xlsx" else "text"
+            }
+            chunks = chunker.chunk(raw_text, metadata)
+            
+            # Update ingested files tracker
+            self.ingested_files[str(file_path)] = file_hash
+            
+            return IngestionResult(
+                file_path=str(file_path), file_hash=file_hash,
+                as_of=as_of, timestamp_fallback=timestamp_fallback,
+                success=True, error=None, chunks=chunks
+            )
+            
+        except Exception as e:
+            return IngestionResult(
+                file_path=str(file_path), file_hash="",
+                as_of=datetime.now(), timestamp_fallback=True,
+                success=False, error=str(e)
+            )
+
+    def _extract_text(self, file_path: Path, extension: str) -&gt; Optional[str]:
+        """Extract text from file based on extension."""
+        try:
+            if extension == ".txt":
+                return file_path.read_text(encoding="utf-8", errors="ignore")
+            elif extension == ".pdf":
+                try:
+                    import pdfplumber
+                    text = ""
+                    with pdfplumber.open(str(file_path)) as pdf:
+                        for page in pdf.pages:
+                            page_text = page.extract_text()
+                            if page_text:
+                                text += page_text + "\n"
+                    return text if text.strip() else None
+                except Exception:
+                    return None
+            elif extension == ".docx":
+                try:
+                    from docx import Document
+                    doc = Document(str(file_path))
+                    return "\n".join([p.text for p in doc.paragraphs])
+                except Exception:
+                    return None
+            elif extension == ".xlsx":
+                try:
+                    # For tables, we return structured data
+                    import openpyxl
+                    wb = openpyxl.load_workbook(str(file_path), read_only=True)
+                    texts = []
+                    for sheet in wb:
+                        for row in sheet.iter_rows(values_only=True):
+                            texts.append(", ".join(str(cell) if cell else "" for cell in row))
+                    return "\n".join(texts)
+                except Exception:
+                    return None
+            elif extension == ".pptx":
+                try:
+                    from pptx import Presentation
+                    prs = Presentation(str(file_path))
+                    texts = []
+                    for slide in prs.slides:
+                        for shape in slide.shapes:
+                            if hasattr(shape, "text"):
+                                texts.append(shape.text)
+                    return "\n".join(texts)
+                except Exception:
+                    return None
+            else:
+                return None
+        except Exception:
+            return None
+
+    def ingest_all(self) -&gt; List[IngestionResult]:
+        """Ingest all files in base_path recursively."""
+        results = []
+        for p in self.base_path.rglob("*"):
+            if p.is_file():
+                result = self.ingest_one(str(p))
+                results.append(result)
+        return results
+PYEOF'
+
+echo "✓ Created RAG_data/src/ingestion/file_ingestor.py"</code></pre>
+<hr>
+</section>
+<section id="continue-with-next-files" class="level2">
+<h2 class="anchored" data-anchor-id="continue-with-next-files">📦 Continue with Next Files</h2>
+<p>Continue with these commands in the same session. Each section creates one or more files.</p>
+<section id="step-5-create-text_chunkers.py" class="level3">
+<h3 class="anchored" data-anchor-id="step-5-create-text_chunkers.py">Step 5: Create text_chunkers.py</h3>
+<pre class="fish"><code>bash -c 'cat &gt; RAG_data/src/chunking/text_chunkers.py &lt;&lt; "PYEOF"
+"""Text Chunking utilities for the Independent RAG System."""
+
+import re
+from dataclasses import dataclass
+from datetime import datetime
+from typing import Any, Dict, List
+
+
+@dataclass
+class Chunk:
+    chunk_id: str
+    content: str
+    file_path: str
+    file_hash: str
+    as_of: datetime
+    chunk_index: int
+    total_chunks: int
+    start_offset: int
+    end_offset: int
+    metadata: Dict[str, Any]
+
+
+class TextChunker:
+    def __init__(self, chunk_size: int = 512, overlap: int = 102, min_chunk_size: int = 50):
+        self.chunk_size = chunk_size
+        self.overlap = overlap
+        self.min_chunk_size = min_chunk_size
+
+    def _tokenize(self, text: str) -&gt; List[str]:
+        """Simple tokenizer: split on whitespace."""
+        return text.split()
+
+    def chunk(self, text: str, metadata: Dict[str, Any]) -&gt; List[Chunk]:
+        """Split text into chunks with overlap."""
+        tokens = self._tokenize(text)
+        if not tokens:
+            return []
+        
+        effective_chunk_size = self.chunk_size - self.overlap
+        if effective_chunk_size &lt;= 0:
+            effective_chunk_size = self.chunk_size
+        
+        chunks = []
+        index = 0
+        chunk_idx = 0
+        total = len(tokens)
+        
+        while index &lt; total:
+            end = min(index + self.chunk_size, total)
+            chunk_tokens = tokens[index:end]
+            
+            # Check if chunk is too small and we can merge with previous
+            if len(chunk_tokens) &lt; self.min_chunk_size and chunk_idx &gt; 0:
+                index = end
+                continue
+            
+            content = " ".join(chunk_tokens)
+            chunk_id = f"{metadata.get('file_path', 'unknown')}_{index}_{chunk_idx}"
+            
+            chunk = Chunk(
+                chunk_id=chunk_id,
+                content=content,
+                file_path=metadata.get("file_path", ""),
+                file_hash=metadata.get("file_hash", ""),
+                as_of=metadata.get("as_of", datetime.now()),
+                chunk_index=chunk_idx,
+                total_chunks=0,  # Will be updated
+                start_offset=index,
+                end_offset=end,
+                metadata=metadata
+            )
+            chunks.append(chunk)
+            
+            index += effective_chunk_size
+            chunk_idx += 1
+        
+        # Update total_chunks for all chunks
+        for c in chunks:
+            c.total_chunks = len(chunks)
+        
+        return chunks
+
+
+class TableChunker:
+    def __init__(self):
+        pass
+
+    def chunk(self, data: str, metadata: Dict[str, Any]) -&gt; List[Chunk]:
+        """Split table data into row-based chunks."""
+        lines = data.strip().split("\n")
+        if not lines:
+            return []
+        
+        # Try to parse as CSV or table
+        chunks = []
+        for idx, line in enumerate(lines):
+            content = line.strip()
+            if not content:
+                continue
+            
+            chunk_id = f"{metadata.get('file_path', 'unknown')}_row_{idx}"
+            metadata_copy = metadata.copy()
+            metadata_copy["row_number"] = idx
+            metadata_copy["extraction_path"] = "excel_table"
+            
+            chunk = Chunk(
+                chunk_id=chunk_id,
+                content=content,
+                file_path=metadata.get("file_path", ""),
+                file_hash=metadata.get("file_hash", ""),
+                as_of=metadata.get("as_of", datetime.now()),
+                chunk_index=idx,
+                total_chunks=0,
+                start_offset=idx,
+                end_offset=idx + 1,
+                metadata=metadata_copy
+            )
+            chunks.append(chunk)
+        
+        for c in chunks:
+            c.total_chunks = len(chunks)
+        
+        return chunks
+PYEOF'
+
+echo "✓ Created RAG_data/src/chunking/text_chunkers.py"</code></pre>
+</section>
+<section id="step-6-create-table_chunkers.py-simple-version" class="level3">
+<h3 class="anchored" data-anchor-id="step-6-create-table_chunkers.py-simple-version">Step 6: Create table_chunkers.py (simple version)</h3>
+<pre class="fish"><code>bash -c 'cat &gt; RAG_data/src/chunking/table_chunkers.py &lt;&lt; "PYEOF"
+"""Table Chunking utilities for the Independent RAG System."""
+
+from datetime import datetime
+from typing import Any, Dict, List
+
+
+class TableChunker:
+    def __init__(self):
+        pass
+
+    def chunk_table(self, data: List[List[str]], headers: List[str], metadata: Dict[str, Any]) -&gt; List:
+        """Split table rows into chunks."""
+        from src.chunking.text_chunkers import Chunk
+        chunks = []
+        for row_index, row in enumerate(data):
+            content = " | ".join(row)
+            metadata_copy = metadata.copy()
+            metadata_copy["table_headers"] = headers
+            metadata_copy["row_number"] = row_index
+            metadata_copy["extraction_path"] = "excel_table"
+            
+            chunk = Chunk(
+                chunk_id=f"{metadata.get('file_path', 'unknown')}_row_{row_index}",
+                content=content,
+                file_path=metadata.get("file_path", ""),
+                file_hash=metadata.get("file_hash", ""),
+                as_of=metadata.get("as_of", datetime.now()),
+                chunk_index=row_index,
+                total_chunks=0,
+                start_offset=row_index,
+                end_offset=row_index + 1,
+                metadata=metadata_copy
+            )
+            chunks.append(chunk)
+        
+        for c in chunks:
+            c.total_chunks = len(chunks)
+        
+        return chunks
+PYEOF'
+
+echo "✓ Created RAG_data/src/chunking/table_chunkers.py"</code></pre>
+</section>
+<section id="step-7-create-embedder.py" class="level3">
+<h3 class="anchored" data-anchor-id="step-7-create-embedder.py">Step 7: Create embedder.py</h3>
+<pre class="fish"><code>bash -c 'cat &gt; RAG_data/src/embedding/embedder.py &lt;&lt; "PYEOF"
+"""Embedding utilities for the Independent RAG System."""
+
+from typing import List
+
+
+class Embedder:
+    def __init__(self, model_name: str = None, batch_size: int = 32):
+        from src.config import get_config
+        config = get_config()
+        self.model_name = model_name or config.embedding.model_name
+        self.fallback_model = config.embedding.fallback_model
+        self.batch_size = batch_size or config.embedding.batch_size
+        self.normalize = config.embedding.normalize
+        self._model = None
+
+    def load_model(self):
+        """Load the embedding model."""
+        try:
+            from sentence_transformers import SentenceTransformer
+            self._model = SentenceTransformer(self.model_name)
+        except (ImportError, OSError):
+            try:
+                from sentence_transformers import SentenceTransformer
+                self._model = SentenceTransformer(self.fallback_model)
+            except Exception as e:
+                raise ImportError(f"Cannot load embedding model: {e}")
+
+    def embed(self, texts: List[str]) -&gt; List[List[float]]:
+        """Generate embeddings for a list of texts."""
+        if not texts:
+            return []
+        if self._model is None:
+            self.load_model()
+        embeddings = self._model.encode(texts, batch_size=self.batch_size, normalize_embeddings=self.normalize)
+        return embeddings.tolist()
+
+    def embed_single(self, text: str) -&gt; List[float]:
+        """Generate embedding for a single text."""
+        return self.embed([text])[0]
+PYEOF'
+
+echo "✓ Created RAG_data/src/embedding/embedder.py"</code></pre>
+</section>
+<section id="step-8-create-qdrant_client.py" class="level3">
+<h3 class="anchored" data-anchor-id="step-8-create-qdrant_client.py">Step 8: Create qdrant_client.py</h3>
+<pre class="fish"><code>bash -c 'cat &gt; RAG_data/src/storage/qdrant_client.py &lt;&lt; "PYEOF"
+"""Qdrant client for vector storage."""
+
+from typing import Any, Dict, List, Optional
+
+
+class VectorSearcher:
+    def __init__(self, host: str = None, port: int = None, collection_name: str = None):
+        from src.config import get_config
+        config = get_config()
+        self.host = host or config.vector_store.host
+        self.port = port or config.vector_store.port
+        self.collection_name = collection_name or config.vector_store.collection_name
+        self._client = None
+
+    def _get_client(self):
+        """Lazy initialization of Qdrant client."""
+        if self._client is None:
+            from qdrant_client import QdrantClient
+            self._client = QdrantClient(host=self.host, port=self.port, prefer_grpc=False)
+        return self._client
+
+    def initialize_collection(self, vector_size: int = None, distance: str = None):
+        """Create the collection if it does not exist."""
+        from src.config import get_config
+        config = get_config()
+        vs = vector_size or config.vector_store.vector_size
+        dist = distance or config.vector_store.distance
+        client = self._get_client()
+        client.recreate_collection(
+            collection_name=self.collection_name,
+            vectors_config={
+                "size": vs,
+                "distance": dist
+            }
+        )
+
+    def index(self, vectors: List[List[float]], payloads: List[Dict[str, Any]], ids: Optional[List[str]] = None):
+        """Index vectors with payloads."""
+        client = self._get_client()
+        points = []
+        for i, (vector, payload) in enumerate(zip(vectors, payloads)):
+            point_id = ids[i] if ids else None
+            points.append({
+                "id": point_id,
+                "vector": vector,
+                "payload": payload
+            })
+        client.upload_points(
+            collection_name=self.collection_name,
+            points=points,
+            batch_size=100
+        )
+
+    def search(self, query_vector: List[float], limit: int = 10, filters: Optional[Dict] = None):
+        """Search the vector index."""
+        client = self._get_client()
+        results = client.search(
+            collection_name=self.collection_name,
+            query_vector=query_vector,
+            limit=limit,
+            with_payload=True,
+            with_vectors=True
+        )
+        return {
+            "id": r.id,
+            "score": r.score,
+            "payload": r.payload,
+            "vector": r.vector
+        } for r in results
+
+    def delete_by_file(self, file_path: str):
+        """Delete all entries for a specific file."""
+        client = self._get_client()
+        client.delete(
+            collection_name=self.collection_name,
+            points_selector={"must": [{"key": "file_path", "match": {"value": file_path}}]}
+        )
+PYEOF'
+
+echo "✓ Created RAG_data/src/storage/qdrant_client.py"</code></pre>
+<hr>
+<p><strong>⚠️ IMPORTANT</strong>: Run all commands from <code>/home/karthikean.juttumaha/mini-extract/</code> in sequence. After creation, verify with:</p>
+<pre class="fish"><code>echo "=== Files Created ==="
+find RAG_data -name "*.py" -type f | sort
+echo ""
+echo "=== All Files ==="
+find RAG_data -type f | sort</code></pre>
+<p><strong>Continue to Part 2 for remaining files (fact_deducer.py, jsonl_store.py, ingest_pipeline.py, tests)</strong></p>
+
+
+</section>
+</section>
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a></div></div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/KarthikeanJuttumahadevan4\.github\.io\/target_staleness\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>© 2026 United States Military Academy</p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+<script src="../../../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

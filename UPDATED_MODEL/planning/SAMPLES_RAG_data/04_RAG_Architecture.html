@@ -1,0 +1,1862 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.19">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>rag_architecture – AI101</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<link href="../../..//images/favicon.svg" rel="icon" type="image/svg+xml">
+<script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-dark-b626d73c4c936ccc3cb08be7d45d1df6.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap-020d25d76586e1017cbc2b913b3a2bf1.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark-52c85c35cd3cfaec83d0f36150bfac8d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../../site_libs/bootstrap/bootstrap-020d25d76586e1017cbc2b913b3a2bf1.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+
+
+<meta property="og:title" content="AI101">
+<meta property="og:site_name" content="AI101">
+<link rel="canonical" href="https://KarthikeanJuttumahadevan4.github.io/target_staleness/UPDATED_MODEL/planning/SAMPLES_RAG_data/04_RAG_Architecture.html">
+</head>
+
+<body class="nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const queryPrefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+    const darkModeDefault = queryPrefersDark.matches;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    queryPrefersDark.addEventListener("change", e => {
+      if(window.localStorage.getItem("quarto-color-scheme") !== null)
+        return;
+      const alternate = e.matches
+      toggleColorMode(alternate);
+      localAlternateSentinel = e.matches ? 'alternate' : 'default'; // this is used alongside local storage!
+      toggleGiscusIfUsed(alternate, darkModeDefault);
+    });
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="https://usma-media.s3.amazonaws.com/inline-images/img/usma_logos/logo/wp_crest_new_only.png" alt="" class="navbar-logo light-content">
+    <img src="https://usma-media.s3.amazonaws.com/inline-images/img/usma_logos/logo/wp_crest_new_only.png" alt="" class="navbar-logo dark-content">
+    </a>
+    <a class="navbar-brand" href="../../../index.html">
+    <span class="navbar-title">AI101</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../UPDATED_MODEL/index.html"> 
+<span class="menu-text">Model Docs</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="2">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#rag_architecture.md-independent-rag-architecture-design" id="toc-rag_architecture.md-independent-rag-architecture-design" class="nav-link active" data-scroll-target="#rag_architecture.md-independent-rag-architecture-design">04_RAG_Architecture.md – Independent RAG Architecture &amp; Design</a>
+  <ul class="collapse">
+  <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview">1. Overview</a>
+  <ul class="collapse">
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">1.1 References</a></li>
+  <li><a href="#document-structure" id="toc-document-structure" class="nav-link" data-scroll-target="#document-structure">1.2 Document Structure</a></li>
+  </ul></li>
+  <li><a href="#high-level-component-diagram" id="toc-high-level-component-diagram" class="nav-link" data-scroll-target="#high-level-component-diagram">2. High-Level Component Diagram</a></li>
+  <li><a href="#technology-choices-justifications" id="toc-technology-choices-justifications" class="nav-link" data-scroll-target="#technology-choices-justifications">3. Technology Choices &amp; Justifications</a>
+  <ul class="collapse">
+  <li><a href="#vector-store-qdrant" id="toc-vector-store-qdrant" class="nav-link" data-scroll-target="#vector-store-qdrant">3.1 Vector Store: Qdrant</a></li>
+  <li><a href="#embedding-model-sentence-transformersall-minilm-l6-v2" id="toc-embedding-model-sentence-transformersall-minilm-l6-v2" class="nav-link" data-scroll-target="#embedding-model-sentence-transformersall-minilm-l6-v2">3.2 Embedding Model: sentence-transformers/all-MiniLM-L6-v2</a></li>
+  <li><a href="#file-parsers-specialized-libraries" id="toc-file-parsers-specialized-libraries" class="nav-link" data-scroll-target="#file-parsers-specialized-libraries">3.3 File Parsers: Specialized Libraries</a></li>
+  <li><a href="#timestamp-extraction-extract.py" id="toc-timestamp-extraction-extract.py" class="nav-link" data-scroll-target="#timestamp-extraction-extract.py">3.4 Timestamp Extraction: extract.py</a></li>
+  <li><a href="#programming-language-framework" id="toc-programming-language-framework" class="nav-link" data-scroll-target="#programming-language-framework">3.5 Programming Language &amp; Framework</a></li>
+  </ul></li>
+  <li><a href="#data-flow-architecture" id="toc-data-flow-architecture" class="nav-link" data-scroll-target="#data-flow-architecture">4. Data Flow Architecture</a>
+  <ul class="collapse">
+  <li><a href="#end-to-end-data-flow" id="toc-end-to-end-data-flow" class="nav-link" data-scroll-target="#end-to-end-data-flow">4.1 End-to-End Data Flow</a></li>
+  <li><a href="#phase-1-independent-rag-ingestion-pipeline" id="toc-phase-1-independent-rag-ingestion-pipeline" class="nav-link" data-scroll-target="#phase-1-independent-rag-ingestion-pipeline">4.2 Phase 1: Independent RAG Ingestion Pipeline</a></li>
+  <li><a href="#phase-2-comparison-module" id="toc-phase-2-comparison-module" class="nav-link" data-scroll-target="#phase-2-comparison-module">4.3 Phase 2: Comparison Module</a></li>
+  <li><a href="#critical-data-transformations" id="toc-critical-data-transformations" class="nav-link" data-scroll-target="#critical-data-transformations">4.4 Critical Data Transformations</a></li>
+  </ul></li>
+  <li><a href="#independence-from-knowledge-graph" id="toc-independence-from-knowledge-graph" class="nav-link" data-scroll-target="#independence-from-knowledge-graph">5. Independence from Knowledge Graph</a>
+  <ul class="collapse">
+  <li><a href="#physical-separation" id="toc-physical-separation" class="nav-link" data-scroll-target="#physical-separation">5.1 Physical Separation</a></li>
+  <li><a href="#dependency-isolation" id="toc-dependency-isolation" class="nav-link" data-scroll-target="#dependency-isolation">5.2 Dependency Isolation</a></li>
+  <li><a href="#runtime-independence" id="toc-runtime-independence" class="nav-link" data-scroll-target="#runtime-independence">5.3 Runtime Independence</a></li>
+  <li><a href="#data-format-independence" id="toc-data-format-independence" class="nav-link" data-scroll-target="#data-format-independence">5.4 Data Format Independence</a></li>
+  </ul></li>
+  <li><a href="#deployment-runtime-considerations" id="toc-deployment-runtime-considerations" class="nav-link" data-scroll-target="#deployment-runtime-considerations">6. Deployment &amp; Runtime Considerations</a>
+  <ul class="collapse">
+  <li><a href="#execution-modes" id="toc-execution-modes" class="nav-link" data-scroll-target="#execution-modes">6.1 Execution Modes</a></li>
+  <li><a href="#runtime-dependencies" id="toc-runtime-dependencies" class="nav-link" data-scroll-target="#runtime-dependencies">6.2 Runtime Dependencies</a></li>
+  <li><a href="#resource-requirements" id="toc-resource-requirements" class="nav-link" data-scroll-target="#resource-requirements">6.3 Resource Requirements</a></li>
+  <li><a href="#startup-sequence" id="toc-startup-sequence" class="nav-link" data-scroll-target="#startup-sequence">6.4 Startup Sequence</a></li>
+  <li><a href="#error-handling-recovery" id="toc-error-handling-recovery" class="nav-link" data-scroll-target="#error-handling-recovery">6.5 Error Handling &amp; Recovery</a></li>
+  </ul></li>
+  <li><a href="#key-design-trade-offs" id="toc-key-design-trade-offs" class="nav-link" data-scroll-target="#key-design-trade-offs">7. Key Design Trade-offs</a>
+  <ul class="collapse">
+  <li><a href="#trade-off-1-accuracy-vs.-speed-embedding-model" id="toc-trade-off-1-accuracy-vs.-speed-embedding-model" class="nav-link" data-scroll-target="#trade-off-1-accuracy-vs.-speed-embedding-model">7.1 Trade-off 1: Accuracy vs.&nbsp;Speed (Embedding Model)</a></li>
+  <li><a href="#trade-off-2-chunk-size-vs.-context" id="toc-trade-off-2-chunk-size-vs.-context" class="nav-link" data-scroll-target="#trade-off-2-chunk-size-vs.-context">7.2 Trade-off 2: Chunk Size vs.&nbsp;Context</a></li>
+  <li><a href="#trade-off-3-structured-vs.-unstructured-deduction" id="toc-trade-off-3-structured-vs.-unstructured-deduction" class="nav-link" data-scroll-target="#trade-off-3-structured-vs.-unstructured-deduction">7.3 Trade-off 3: Structured vs.&nbsp;Unstructured Deduction</a></li>
+  <li><a href="#trade-off-4-qdrant-vs.-in-memory-vector-store" id="toc-trade-off-4-qdrant-vs.-in-memory-vector-store" class="nav-link" data-scroll-target="#trade-off-4-qdrant-vs.-in-memory-vector-store">7.4 Trade-off 4: Qdrant vs.&nbsp;In-Memory Vector Store</a></li>
+  <li><a href="#trade-off-5-full-independence-vs.-timestamp-reuse" id="toc-trade-off-5-full-independence-vs.-timestamp-reuse" class="nav-link" data-scroll-target="#trade-off-5-full-independence-vs.-timestamp-reuse">7.5 Trade-off 5: Full Independence vs.&nbsp;Timestamp Reuse</a></li>
+  <li><a href="#trade-off-6-jsonl-vs.-database-for-deductions" id="toc-trade-off-6-jsonl-vs.-database-for-deductions" class="nav-link" data-scroll-target="#trade-off-6-jsonl-vs.-database-for-deductions">7.6 Trade-off 6: JSONL vs.&nbsp;Database for Deductions</a></li>
+  </ul></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">8. Summary</a></li>
+  <li><a href="#next-stage" id="toc-next-stage" class="nav-link" data-scroll-target="#next-stage">9. Next Stage</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content column-page-left" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+
+
+
+
+
+<section id="rag_architecture.md-independent-rag-architecture-design" class="level1">
+<h1>04_RAG_Architecture.md – Independent RAG Architecture &amp; Design</h1>
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">1. Overview</h2>
+<p>This document presents the <strong>concrete architecture and design decisions</strong> for the Independent RAG System, as specified in <code>03_RAG_Specifications.md</code>. It defines the technology stack, data flow, component interactions, and how complete independence from the Knowledge Graph is achieved.</p>
+<section id="references" class="level3">
+<h3 class="anchored" data-anchor-id="references">1.1 References</h3>
+<ul>
+<li><strong>01_RAG_Proposal.md</strong> – Core goal and high-level workflow</li>
+<li><strong>02_RAG_Requirements_Analysis.md</strong> – Detailed functional/non-functional requirements</li>
+<li><strong>03_RAG_Specifications.md</strong> – Technical specifications, interfaces, and algorithms</li>
+</ul>
+</section>
+<section id="document-structure" class="level3">
+<h3 class="anchored" data-anchor-id="document-structure">1.2 Document Structure</h3>
+<ol type="1">
+<li><strong>High-Level Component Diagram</strong> – Visual (textual) representation of the architecture</li>
+<li><strong>Technology Choices &amp; Justifications</strong> – Specific libraries and their rationale</li>
+<li><strong>Data Flow</strong> – End-to-end path from ingestion to comparison</li>
+<li><strong>Independence From Knowledge Graph</strong> – Architectural guarantees</li>
+<li><strong>Deployment &amp; Runtime</strong> – Execution environment and constraints</li>
+<li><strong>Design Trade-offs</strong> – Key decisions and their implications</li>
+</ol>
+<hr>
+</section>
+</section>
+<section id="high-level-component-diagram" class="level2">
+<h2 class="anchored" data-anchor-id="high-level-component-diagram">2. High-Level Component Diagram</h2>
+<pre><code>┌─────────────────────────────────────────────────────────────────────────────┐
+│                          INDEPENDENT RAG SYSTEM                              │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                              │
+│  ┌─────────────────┐     ┌─────────────────┐     ┌─────────────────┐      │
+│  │   samples5/     │────▶│ File Ingestor   │────▶│   Chunkers      │      │
+│  │   (Source)      │     │ (ingestor.py)   │     │ (text_chunkers, │      │
+│  └─────────────────┘     └─────────────────┘     │  table_chunkers) │      │
+│                                                    └────────┬────────┘      │
+│                                                             │                │
+│                    ┌────────────────────────────────────────┼────────────┐  │
+│                    ▼                                        ▼            │  │
+│  ┌────────────────────────┐      ┌─────────────────────────────┐         │  │
+│  │  Embedder              │      │ Fact Deducer                 │         │  │
+│  │ (embedder.py)           │      │ (fact_deducer.py)            │         │  │
+│  │ - all-MiniLM-L6-v2      │      │ - Regex patterns             │         │  │
+│  │ - BAAI/bge-small (fall) │      │ - Table extraction            │         │  │
+│  └────────────────────────┘      └─────────────┬───────────────┘         │  │
+│                                                    │                     │  │
+│                                                    ▼                     │  │
+│                                             ┌──────────────────┐       │  │
+│                                             │   Deductions     │       │  │
+│                                             │ (RAGDeduction)   │       │  │
+│                                             └────────┬─────────┘       │  │
+│                                                      │                 │  │
+│                          ┌───────────────────────────────┼────────────┐  │  │
+│                          ▼                               ▼            │  │  │
+│  ┌─────────────────────────┐       ┌───────────────────────┐          │  │
+│  │  Vector Store           │       │  JSONL Store          │          │  │
+│  │ (Qdrant:6333)            │       │ (deductions.jsonl)    │          │  │
+│  │ - Collection:           │       │                       │          │  │
+│  │   rag_deductions        │       │                       │          │  │
+│  │ - Payload:              │       │                       │          │  │
+│  │   Chunks + Deductions   │       │                       │          │  │
+│  └─────────────────────────┘       └───────────────────────┘          │  │
+│                                                                          │  │
+└─────────────────────────────────────────────────────────────────────────────┘
+                                      │
+                                      ▼
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                         COMPARISON MODULE                                   │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                              │
+│  ┌─────────────────┐     ┌─────────────────┐     ┌─────────────────┐      │
+│  │ RAG Deductions  │────▶│    Aligner      │────▶│   Detector      │      │
+│  │ (From JSONL)    │     │ (aligner.py)    │     │ (detectors.py)  │      │
+│  └─────────────────┘     └────────┬────────┘     └────────┬────────┘      │
+│                                            │                     │              │
+│                                            ▼                     ▼              │
+│                                   ┌──────────────────────────────┐          │
+│                                   │   Inconsistencies            │          │
+│                                   └──────────────┬───────────────┘          │
+│                                                  │                         │
+│                                  ┌───────────────▼───────────────┐        │
+│                                  ▼                               ▼        │
+│                         ┌───────────────┐             ┌───────────────┐  │
+│                         │   Resolver    │             │   Reporter    │  │
+│                         │ (resolver.py) │             │ (reports.py)  │  │
+│                         └───────────────┘             └───────────────┘  │
+│                                                                              │
+└─────────────────────────────────────────────────────────────────────────────┘
+                                      │
+                                      ▼
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                              OUTPUTS                                                │
+├─────────────────────────────────────────────────────────────────────────────┤
+│  - deductions.jsonl (RAG facts)                                            │
+│  - resolution_log.jsonl (resolution history)                                │
+│  - inconsistency_reports/ (human escalation reports)                        │
+└─────────────────────────────────────────────────────────────────────────────┘</code></pre>
+<p><strong>Key</strong>: <code>────▶</code> = Data flow, <code>│</code> = Separator, Boxes = Components</p>
+<hr>
+</section>
+<section id="technology-choices-justifications" class="level2">
+<h2 class="anchored" data-anchor-id="technology-choices-justifications">3. Technology Choices &amp; Justifications</h2>
+<section id="vector-store-qdrant" class="level3">
+<h3 class="anchored" data-anchor-id="vector-store-qdrant">3.1 Vector Store: Qdrant</h3>
+<p><strong>Decision</strong>: Use <strong>Qdrant</strong> (version 1.8.0+)</p>
+<p><strong>Justification</strong>: | Criteria | Qdrant | Alternatives | Winner | |———-|——–|————–|——–| | <strong>Availability</strong> | Already running in environment (<code>localhost:6333</code>) | FAISS, Weaviate | Qdrant | | <strong>Independence</strong> | Standalone, no KG dependency | Neo4j Vector | Qdrant | | <strong>Performance</strong> | Optimized for cosine similarity | All similar | Qdrant | | <strong>Payload Storage</strong> | Rich payload support for metadata | FAISS limited | Qdrant | | <strong>Persistence</strong> | On-disk storage, crash-safe | FAISS in-memory | Qdrant | | <strong>Scalability</strong> | Handles 10K+ vectors efficiently | All similar | Qdrant |</p>
+<p><strong>Configuration</strong>: - Collection: <code>rag_deductions</code> - Vector size: 384 (all-MiniLM-L6-v2) or 512 (bge-small) - Distance: Cosine - Optimizers: Single segment for simplicity - WAL: Enabled for durability</p>
+<p><strong>Usage</strong>: - Primary index: Chunk embeddings for retrieval - Secondary indices: <code>file_path</code>, <code>as_of</code>, <code>subject_entity</code> for filtering</p>
+<hr>
+</section>
+<section id="embedding-model-sentence-transformersall-minilm-l6-v2" class="level3">
+<h3 class="anchored" data-anchor-id="embedding-model-sentence-transformersall-minilm-l6-v2">3.2 Embedding Model: sentence-transformers/all-MiniLM-L6-v2</h3>
+<p><strong>Decision</strong>: Use <strong>sentence-transformers/all-MiniLM-L6-v2</strong> as primary, <strong>BAAI/bge-small-en-v1.5</strong> as fallback</p>
+<p><strong>Justification</strong>: | Model | Size | Dimensions | Speed | Accuracy | Local? | |——-|——|————|——-|———-|——–| | all-MiniLM-L6-v2 | 80MB | 384 | Fast | High | ✅ Checked | | bge-small-en | 100MB | 512 | Fast | High | ⚠️ Verify | | all-mpnet-base-v2 | 420MB | 768 | Medium | Higher | ❌ Too large |</p>
+<p><strong>Why all-MiniLM-L6-v2</strong>: - <strong>Small footprint</strong> (80MB) – suitable for development environment - <strong>Good performance</strong> on STS benchmark (85.9%) - <strong>Fast inference</strong> – critical for batch ingestion - <strong>Widely used</strong> – well-tested, stable - <strong>Lazy loading</strong> – only loads when needed, reducing startup time</p>
+<p><strong>Fallback Logic</strong>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="cf">try</span>:</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="im">from</span> sentence_transformers <span class="im">import</span> SentenceTransformer</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    model <span class="op">=</span> SentenceTransformer(<span class="st">'all-MiniLM-L6-v2'</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="cf">except</span> <span class="pp">ImportError</span>:</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span>:</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>        model <span class="op">=</span> SentenceTransformer(<span class="st">'BAAI/bge-small-en-v1.5'</span>)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">except</span> <span class="pp">ImportError</span>:</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">raise</span> <span class="pp">ImportError</span>(<span class="st">"No embedding model available. Install sentence-transformers or bge."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+</section>
+<section id="file-parsers-specialized-libraries" class="level3">
+<h3 class="anchored" data-anchor-id="file-parsers-specialized-libraries">3.3 File Parsers: Specialized Libraries</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 31%">
+<col style="width: 25%">
+<col style="width: 42%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>File Type</th>
+<th>Library</th>
+<th>Justification</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>PDF</strong></td>
+<td><code>pdfplumber</code></td>
+<td>Accurate text extraction with layout preservation; handles tables</td>
+</tr>
+<tr class="even">
+<td><strong>PDF (Scanned/OCR)</strong></td>
+<td><code>pdf2image</code> + <code>pytesseract</code></td>
+<td>OCR for image-based PDFs; fallback when pdfplumber fails</td>
+</tr>
+<tr class="odd">
+<td><strong>Word (DOCX)</strong></td>
+<td><code>python-docx</code></td>
+<td>Native support for DOCX format; preserves formatting</td>
+</tr>
+<tr class="even">
+<td><strong>Excel (XLSX/XLS)</strong></td>
+<td><code>openpyxl</code></td>
+<td>Full Excel support; handles formulas (as values)</td>
+</tr>
+<tr class="odd">
+<td><strong>PowerPoint (PPTX)</strong></td>
+<td><code>python-pptx</code></td>
+<td>Extracts text from slides and shapes</td>
+</tr>
+<tr class="even">
+<td><strong>Text (TXT)</strong></td>
+<td>Built-in <code>pathlib</code></td>
+<td>Simple file read</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Extraction Strategy</strong>: 1. Try primary parser based on file extension 2. If fails (e.g., corrupt PDF), try fallback 3. If all fail, log error and skip file 4. Always preserve raw text for provenance</p>
+<hr>
+</section>
+<section id="timestamp-extraction-extract.py" class="level3">
+<h3 class="anchored" data-anchor-id="timestamp-extraction-extract.py">3.4 Timestamp Extraction: extract.py</h3>
+<p><strong>Decision</strong>: Reuse existing <code>extract.py</code> from parent project</p>
+<p><strong>Justification</strong>: - Already proven and tested in production - Provides <code>as_of</code> timestamps from file metadata and embedded markers - Includes fallback to <code>os.path.getmtime</code> - Maintains consistency with KG system timestamps</p>
+<p><strong>Integration</strong>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> src.temporal.timestamp_extractor <span class="im">import</span> TimestampExtractor</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>extractor <span class="op">=</span> TimestampExtractor()</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>as_of, fallback <span class="op">=</span> extractor.get_as_of(file_path)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Note</strong>: This is the <strong>only</strong> dependency on the parent project’s code. It is <strong>not</strong> a KG dependency – <code>timestamp_extractor.py</code> only uses filesystem operations and metadata parsing, no Neo4j or KG schema.</p>
+<hr>
+</section>
+<section id="programming-language-framework" class="level3">
+<h3 class="anchored" data-anchor-id="programming-language-framework">3.5 Programming Language &amp; Framework</h3>
+<p><strong>Decision</strong>: Pure Python 3.10+</p>
+<p><strong>Justification</strong>: - <strong>Environment constraint</strong>: Must use existing environment (no new tool installs via network) - <strong>Compatibility</strong>: All selected libraries support Python 3.10+ - <strong>No Framework Overhead</strong>: Avoids dependency on FastAPI/Flask for simplicity - <strong>Script-based</strong>: Allows easy integration with existing fish/bash scripts</p>
+<p><strong>Structure</strong>: - Modular Python packages (PEP 420 namespace packages) - Type hints (PEP 484) for interface clarity - No external web framework (CLI-first design)</p>
+<hr>
+</section>
+</section>
+<section id="data-flow-architecture" class="level2">
+<h2 class="anchored" data-anchor-id="data-flow-architecture">4. Data Flow Architecture</h2>
+<section id="end-to-end-data-flow" class="level3">
+<h3 class="anchored" data-anchor-id="end-to-end-data-flow">4.1 End-to-End Data Flow</h3>
+<pre><code>┌─────────┐     ┌─────────────┐     ┌──────────────┐     ┌──────────────┐
+│  File   │────▶│ Ingestor ▶  │────▶│   Chunker    │────▶│   Embedder   │
+│ (samples│     │ (Validation │     │ (Text/Table) │     │ (Vectorize)  │
+│ 5/)     │     │  + Timestamp)│     │              │     │              │
+└─────────┘     └─────────────┘     └──────────────┘     └──────────────┘
+         │                       │                      │
+         │                       ▼                      ▼
+         │              ┌──────────────────────────────────────┐
+         │              │           Chunk Store                │
+         │              │  (In-memory cache during pipeline)   │
+         │              └──────────────┬──────────────┬───────┘
+         │                             │              │
+         │                             ▼              ▼
+         │              ┌──────────────────┐ ┌──────────────────┐
+         │              │ Vector Store     │ │  Deduction       │
+         │              │ (Qdrant:6333)    │ │  (fact_deducer)  │
+         │              │ - embeddings     │ │ - structured     │
+         │              │ - metadata       │ │   facts          │
+         │              └──────────────────┘ └──────────┬───────┘
+         │                                                  │
+         │                                                  ▼
+         │                           ┌──────────────────────────────┐
+         │                           │   Deductions Storage         │
+         │                           │ - deductions.jsonl           │
+         │                           │ - Qdrant payloads            │
+         │                           └──────────────────────────────┘
+         │
+         ▼
+┌─────────────────────────────────────────────────────────────────────────┐
+│                    INDEPENDENT OPERATION COMPLETE                        │
+│           (No KG accessed. Vector index + JSONL file ready.)            │
+└─────────────────────────────────────────────────────────────────────────┘
+                                    │
+                                    ▼
+                              (Later...)
+                                    │
+┌─────────────────────────────────────────────────────────────────────────┐
+│                    COMPARISON PHASE                                       │
+│           (Reads RAG deductions + KG facts from separate sources)       │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                           │
+│  ┌─────────────┐     ┌─────────────┐     ┌────────────────────────────┐  │
+│  │ RAG        │     │ KG Facts    │     │        Aligner             │  │
+│  │ Deductions │────▶│ (from       │────▶│ (Match by entity+predicate) │  │
+│  │ (JSONL)    │     │  Neo4j*     │     │                           │  │
+│  └─────────────┘     └─────────────┘     └───────────┬──────────────┘  │
+│                                                      │                  │
+│                      ┌───────────────────────────────────▼───────┐     │
+│                      │             Inconsistencies                 │     │
+│                      └───────────────────┬───────────────┬─────────┘     │
+│                                          │               │               │
+│                                          ▼               ▼               │
+│                                 ┌─────────────┐ ┌─────────────┐          │
+│                                 │  Resolver   │ │  Reporter   │          │
+│                                 │ (Auto-      │ │ (Human      │          │
+│                                 │  resolve)   │ │  reports)   │          │
+│                                 └─────────────┘ └─────────────┘          │
+│                                                                           │
+└─────────────────────────────────────────────────────────────────────────┘
+
+*NOTE: KG Facts are read from Neo4j ONLY in the Comparison Module.
+      The Independent RAG pipeline itself NEVER accesses Neo4j.</code></pre>
+</section>
+<section id="phase-1-independent-rag-ingestion-pipeline" class="level3">
+<h3 class="anchored" data-anchor-id="phase-1-independent-rag-ingestion-pipeline">4.2 Phase 1: Independent RAG Ingestion Pipeline</h3>
+<p><strong>Input</strong>: <code>samples5/</code> directory <strong>Output</strong>: - Qdrant collection: <code>rag_deductions</code> (embeddings + payloads) - File: <code>RAG_data/deductions.jsonl</code> (all deductions)</p>
+<p><strong>Steps</strong>: 1. <strong>File Ingestor</strong> walks <code>samples5/</code> directory 2. For each file: a. Calculate SHA-256 hash b. Extract timestamp via <code>extract.py</code> → <code>as_of</code> c.&nbsp;If hash unchanged and <code>as_of</code> unchanged → skip d.&nbsp;Else → extract raw text using type-specific parser 3. <strong>Chunker</strong> splits raw text into semantic chunks 4. <strong>Embedder</strong> generates embeddings for each chunk 5. <strong>Fact Deducer</strong> extracts structured facts from chunks 6. Store: - Chunk + embedding → Qdrant - Deduction → Qdrant payload + <code>deductions.jsonl</code></p>
+</section>
+<section id="phase-2-comparison-module" class="level3">
+<h3 class="anchored" data-anchor-id="phase-2-comparison-module">4.3 Phase 2: Comparison Module</h3>
+<p><strong>Input</strong>: - RAG deductions from <code>deductions.jsonl</code> or Qdrant - KG facts from Neo4j query</p>
+<p><strong>Output</strong>: - Inconsistency reports (if any) - Resolution log (<code>resolution_log.jsonl</code>)</p>
+<p><strong>Steps</strong>: 1. Load RAG deductions from JSONL 2. Query KG for facts (via Neo4j driver) 3. <strong>Aligner</strong> matches deductions to facts 4. <strong>Detector</strong> identifies inconsistencies 5. <strong>Resolver</strong> applies automatic rules or escalates 6. Log all resolutions</p>
+</section>
+<section id="critical-data-transformations" class="level3">
+<h3 class="anchored" data-anchor-id="critical-data-transformations">4.4 Critical Data Transformations</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 18%">
+<col style="width: 18%">
+<col style="width: 42%">
+<col style="width: 21%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Stage</th>
+<th>Input</th>
+<th>Transformation</th>
+<th>Output</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Ingestion</td>
+<td>File</td>
+<td>Parse + Timestamp</td>
+<td>Raw text + metadata</td>
+</tr>
+<tr class="even">
+<td>Chunking</td>
+<td>Raw text</td>
+<td>Split + Overlap</td>
+<td>Chunks</td>
+</tr>
+<tr class="odd">
+<td>Embedding</td>
+<td>Chunks</td>
+<td>Vectorize</td>
+<td>Embeddings</td>
+</tr>
+<tr class="even">
+<td>Deduction</td>
+<td>Chunks</td>
+<td>Regex/Table extraction</td>
+<td>RAGDeduction</td>
+</tr>
+<tr class="odd">
+<td>Storage</td>
+<td>Embeddings + Deductions</td>
+<td>Index in Qdrant</td>
+<td>Searchable vector store</td>
+</tr>
+<tr class="even">
+<td>Alignment</td>
+<td>RAGDeduction + KGFact</td>
+<td>Match + Normalize</td>
+<td>Alignment</td>
+</tr>
+<tr class="odd">
+<td>Detection</td>
+<td>Alignment</td>
+<td>Compare values/timestamps</td>
+<td>Inconsistency</td>
+</tr>
+<tr class="even">
+<td>Resolution</td>
+<td>Inconsistency</td>
+<td>Apply rules</td>
+<td>ResolutionResult</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+</section>
+<section id="independence-from-knowledge-graph" class="level2">
+<h2 class="anchored" data-anchor-id="independence-from-knowledge-graph">5. Independence from Knowledge Graph</h2>
+<p>This section details <strong>architectural guarantees</strong> that the Independent RAG System <strong>never</strong> accesses or depends on the Knowledge Graph.</p>
+<section id="physical-separation" class="level3">
+<h3 class="anchored" data-anchor-id="physical-separation">5.1 Physical Separation</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 32%">
+<col style="width: 35%">
+<col style="width: 32%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Component</th>
+<th>KG Access?</th>
+<th>Rationale</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>File Ingestor</td>
+<td>❌ No</td>
+<td>Only accesses filesystem (<code>samples5/</code>)</td>
+</tr>
+<tr class="even">
+<td>Chunkers</td>
+<td>❌ No</td>
+<td>Pure text manipulation, no external calls</td>
+</tr>
+<tr class="odd">
+<td>Embedder</td>
+<td>❌ No</td>
+<td>Local model inference, no network</td>
+</tr>
+<tr class="even">
+<td>Vector Store (Qdrant)</td>
+<td>❌ No</td>
+<td>Separate service on port 6333, not 7687</td>
+</tr>
+<tr class="odd">
+<td>Fact Deducer</td>
+<td>❌ No</td>
+<td>Regex/table parsing, no KG schema</td>
+</tr>
+<tr class="even">
+<td>JSONL Storage</td>
+<td>❌ No</td>
+<td>Local file, independent format</td>
+</tr>
+<tr class="odd">
+<td><strong>Comparison Module</strong></td>
+<td>✅ <strong>Yes</strong> (INTENTIONAL)</td>
+<td>Only reads KG facts for comparison (via Neo4j driver)</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dependency-isolation" class="level3">
+<h3 class="anchored" data-anchor-id="dependency-isolation">5.2 Dependency Isolation</h3>
+<p><strong>Allowed Dependencies</strong>:</p>
+<pre><code>RAG_data/
+├── src/
+│   ├── timestamp_extractor.py  # From parent project (filesystem only)
+│   └── extract.py              # FROM parent project (filesystem only)
+│
+└── All other code: ZERO dependencies on src/temporal/ or src/ingestion/</code></pre>
+<p><strong>Dependency Check</strong>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Verify no KG imports</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-r</span> <span class="st">"from temporal"</span> RAG_data/src/ <span class="kw">&amp;&amp;</span> <span class="bu">echo</span> <span class="st">"ERROR: KG dependency detected!"</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-r</span> <span class="st">"from ingestion"</span> RAG_data/src/ <span class="kw">&amp;&amp;</span> <span class="bu">echo</span> <span class="st">"ERROR: KG dependency detected!"</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-r</span> <span class="st">"from indexing"</span> RAG_data/src/ <span class="kw">&amp;&amp;</span> <span class="bu">echo</span> <span class="st">"ERROR: KG dependency detected!"</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-r</span> <span class="st">"neo4j"</span> RAG_data/src/ <span class="at">--include</span><span class="op">=</span><span class="st">"*.py"</span> <span class="kw">&amp;&amp;</span> <span class="bu">echo</span> <span class="st">"ERROR: Neo4j dependency detected!"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="runtime-independence" class="level3">
+<h3 class="anchored" data-anchor-id="runtime-independence">5.3 Runtime Independence</h3>
+<ul>
+<li><strong>Qdrant</strong>: Runs on separate port (6333) from Neo4j (7687)</li>
+<li><strong>No Shared State</strong>: RAG deductions stored separately from KG facts</li>
+<li><strong>Independent Lifecycle</strong>: RAG pipeline can run while KG is down</li>
+<li><strong>Read-Only KG Access</strong>: Comparison module only <strong>reads</strong> from KG, never writes</li>
+</ul>
+</section>
+<section id="data-format-independence" class="level3">
+<h3 class="anchored" data-anchor-id="data-format-independence">5.4 Data Format Independence</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 28%">
+<col style="width: 26%">
+<col style="width: 28%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Field</th>
+<th>RAG Format</th>
+<th>KG Format</th>
+<th>Conversion</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Entity</td>
+<td><code>subject_entity</code> (string)</td>
+<td><code>entity_id</code> (string)</td>
+<td>Direct mapping</td>
+</tr>
+<tr class="even">
+<td>Predicate</td>
+<td><code>predicate</code> (string)</td>
+<td><code>predicate</code> (string)</td>
+<td>Direct mapping</td>
+</tr>
+<tr class="odd">
+<td>Value</td>
+<td><code>object_value</code> (string)</td>
+<td><code>object_value</code> (string)</td>
+<td>Normalization required</td>
+</tr>
+<tr class="even">
+<td>Timestamp</td>
+<td><code>as_of</code> (ISO string)</td>
+<td><code>as_of</code> (ISO string)</td>
+<td>Direct mapping</td>
+</tr>
+<tr class="odd">
+<td>Provenance</td>
+<td>Inline in deduction</td>
+<td>Separate node</td>
+<td>Flattened for RAG</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Key Difference</strong>: RAG stores provenance inline; KG uses separate nodes. The Comparison Module handles this mapping.</p>
+<hr>
+</section>
+</section>
+<section id="deployment-runtime-considerations" class="level2">
+<h2 class="anchored" data-anchor-id="deployment-runtime-considerations">6. Deployment &amp; Runtime Considerations</h2>
+<section id="execution-modes" class="level3">
+<h3 class="anchored" data-anchor-id="execution-modes">6.1 Execution Modes</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 15%">
+<col style="width: 26%">
+<col style="width: 23%">
+<col style="width: 34%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Mode</th>
+<th>Use Case</th>
+<th>Trigger</th>
+<th>Persistence</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Batch Ingestion</strong></td>
+<td>Initial load or full refresh</td>
+<td>CLI command</td>
+<td>Full overwrite</td>
+</tr>
+<tr class="even">
+<td><strong>Incremental Ingestion</strong></td>
+<td>New/modified files</td>
+<td>File watcher</td>
+<td>Append only</td>
+</tr>
+<tr class="odd">
+<td><strong>Query Mode</strong></td>
+<td>Retrieval without ingestion</td>
+<td>CLI/API</td>
+<td>Read-only</td>
+</tr>
+<tr class="even">
+<td><strong>Comparison Mode</strong></td>
+<td>Detect inconsistencies</td>
+<td>CLI command</td>
+<td>Read KG + RAG</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="runtime-dependencies" class="level3">
+<h3 class="anchored" data-anchor-id="runtime-dependencies">6.2 Runtime Dependencies</h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Dependency</th>
+<th>Source</th>
+<th>Required</th>
+<th>Fallback</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Python</td>
+<td>System</td>
+<td>✅ Yes</td>
+<td>N/A</td>
+</tr>
+<tr class="even">
+<td>Qdrant</td>
+<td>Local service</td>
+<td>✅ Yes</td>
+<td>In-memory (dev only)</td>
+</tr>
+<tr class="odd">
+<td>pdfplumber</td>
+<td>pip package</td>
+<td>⚠️ If PDFs exist</td>
+<td>Skip PDFs</td>
+</tr>
+<tr class="even">
+<td>python-docx</td>
+<td>pip package</td>
+<td>⚠️ If DOCX exists</td>
+<td>Skip DOCX</td>
+</tr>
+<tr class="odd">
+<td>openpyxl</td>
+<td>pip package</td>
+<td>⚠️ If XLSX exists</td>
+<td>Skip XLSX</td>
+</tr>
+<tr class="even">
+<td>python-pptx</td>
+<td>pip package</td>
+<td>⚠️ If PPTX exists</td>
+<td>Skip PPTX</td>
+</tr>
+<tr class="odd">
+<td>pytesseract</td>
+<td>pip package</td>
+<td>⚠️ If OCR needed</td>
+<td>Skip OCR PDFs</td>
+</tr>
+<tr class="even">
+<td>sentence-transformers</td>
+<td>pip package</td>
+<td>✅ Yes (primary)</td>
+<td>BAAI/bge</td>
+</tr>
+<tr class="odd">
+<td>url</td>
+<td>Built-in</td>
+<td>✅ Yes</td>
+<td>N/A</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="resource-requirements" class="level3">
+<h3 class="anchored" data-anchor-id="resource-requirements">6.3 Resource Requirements</h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Resource</th>
+<th>Minimum</th>
+<th>Recommended</th>
+<th>Scaling</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>CPU Cores</strong></td>
+<td>2</td>
+<td>4+</td>
+<td>Linear</td>
+</tr>
+<tr class="even">
+<td><strong>RAM</strong></td>
+<td>4GB</td>
+<td>8GB</td>
+<td>Linear with file count</td>
+</tr>
+<tr class="odd">
+<td><strong>Disk Space</strong></td>
+<td>500MB</td>
+<td>2GB</td>
+<td>Linear with file size</td>
+</tr>
+<tr class="even">
+<td><strong>Qdrant Memory</strong></td>
+<td>1GB</td>
+<td>2GB</td>
+<td>Linear with vector count</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Estimates for 10,000 files</strong>: - Average file size: 1MB - Average chunks per file: 10 - Total chunks: 100,000 - Vector size: 384 floats × 4 bytes = 1.5KB per vector - Total vector storage: ~150MB - Total payload storage: ~500MB - <strong>Total</strong>: ~650MB</p>
+</section>
+<section id="startup-sequence" class="level3">
+<h3 class="anchored" data-anchor-id="startup-sequence">6.4 Startup Sequence</h3>
+<pre><code>1. Check Qdrant service is running:
+   - Host: localhost
+   - Port: 6333
+   - Health check: GET http://localhost:6333/readyz
+
+2. Load configuration from:
+   - config.yaml
+   - Environment variables (override)
+   - Command-line arguments (override)
+
+3. Initialize Vector Store:
+   - Create collection 'rag_deductions' if not exists
+   - Verify vector size matches model output
+
+4. Load embedding model:
+   - Try all-MiniLM-L6-v2
+   - Fallback to BAAI/bge-small-en-v1.5
+   - Lazy load on first use
+
+5. Start processing:
+   - Batch mode: iterate over base_path
+   - Watch mode: start file watcher</code></pre>
+</section>
+<section id="error-handling-recovery" class="level3">
+<h3 class="anchored" data-anchor-id="error-handling-recovery">6.5 Error Handling &amp; Recovery</h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Error Type</th>
+<th>Recovery Strategy</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Qdrant unavailable</td>
+<td>Retry 3× with 5s delay, then fail</td>
+</tr>
+<tr class="even">
+<td>File read error</td>
+<td>Skip file, log error, continue</td>
+</tr>
+<tr class="odd">
+<td>Model load error</td>
+<td>Try fallback, then fail</td>
+</tr>
+<tr class="even">
+<td>Embedding error</td>
+<td>Skip chunk, log warning, continue</td>
+</tr>
+<tr class="odd">
+<td>Deduction error</td>
+<td>Skip chunk, log warning, continue</td>
+</tr>
+<tr class="even">
+<td>Comparison error</td>
+<td>Skip comparison, log error, continue</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Crash Recovery</strong>: - All state stored in Qdrant + JSONL files (durable) - Re-running ingestion with same files → detects unchanged hashes → skips - Incomplete files (from crash) → re-processed on next run</p>
+<hr>
+</section>
+</section>
+<section id="key-design-trade-offs" class="level2">
+<h2 class="anchored" data-anchor-id="key-design-trade-offs">7. Key Design Trade-offs</h2>
+<section id="trade-off-1-accuracy-vs.-speed-embedding-model" class="level3">
+<h3 class="anchored" data-anchor-id="trade-off-1-accuracy-vs.-speed-embedding-model">7.1 Trade-off 1: Accuracy vs.&nbsp;Speed (Embedding Model)</h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Option</th>
+<th>Accuracy</th>
+<th>Speed</th>
+<th>Memory</th>
+<th>Decision</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>all-mpnet-base-v2</td>
+<td>⭐⭐⭐⭐⭐</td>
+<td>⭐⭐</td>
+<td>420MB</td>
+<td>❌ Too large</td>
+</tr>
+<tr class="even">
+<td>all-MiniLM-L6-v2</td>
+<td>⭐⭐⭐⭐</td>
+<td>⭐⭐⭐⭐</td>
+<td>80MB</td>
+<td>✅ <strong>Chosen</strong></td>
+</tr>
+<tr class="odd">
+<td>BAAI/bge-small</td>
+<td>⭐⭐⭐⭐</td>
+<td>⭐⭐⭐⭐</td>
+<td>100MB</td>
+<td>✅ Fallback</td>
+</tr>
+<tr class="even">
+<td>Custom tiny model</td>
+<td>⭐⭐</td>
+<td>⭐⭐⭐⭐⭐</td>
+<td>10MB</td>
+<td>❌ Accuracy too low</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Rationale</strong>: all-MiniLM-L6-v2 provides excellent balance for development. Production can upgrade if needed. <strong>Impact</strong>: Slightly lower accuracy than larger models, but acceptable for proof-of-concept. <strong>Mitigation</strong>: Use table-based deduction for high-precision data (bypasses embedding accuracy).</p>
+<hr>
+</section>
+<section id="trade-off-2-chunk-size-vs.-context" class="level3">
+<h3 class="anchored" data-anchor-id="trade-off-2-chunk-size-vs.-context">7.2 Trade-off 2: Chunk Size vs.&nbsp;Context</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 35%">
+<col style="width: 17%">
+<col style="width: 17%">
+<col style="width: 29%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Chunk Size</th>
+<th>Pros</th>
+<th>Cons</th>
+<th>Decision</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>256 tokens</td>
+<td>Fine-grained, precise retrieval</td>
+<td>Loses context, more chunks</td>
+<td>❌ Too small</td>
+</tr>
+<tr class="even">
+<td><strong>512 tokens</strong></td>
+<td><strong>Balanced context, good retrieval</strong></td>
+<td><strong>Moderate chunk count</strong></td>
+<td>✅ <strong>Chosen</strong></td>
+</tr>
+<tr class="odd">
+<td>1024 tokens</td>
+<td>Full context, fewer chunks</td>
+<td>Poor retrieval precision, expensive</td>
+<td>❌ Too large</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Rationale</strong>: 512 tokens is the “sweet spot” for most embedding models and retrieval tasks. <strong>Impact</strong>: May miss very long-document context. <strong>Mitigation</strong>: Use 20% overlap to preserve context across chunk boundaries.</p>
+<hr>
+</section>
+<section id="trade-off-3-structured-vs.-unstructured-deduction" class="level3">
+<h3 class="anchored" data-anchor-id="trade-off-3-structured-vs.-unstructured-deduction">7.3 Trade-off 3: Structured vs.&nbsp;Unstructured Deduction</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 31%">
+<col style="width: 18%">
+<col style="width: 18%">
+<col style="width: 31%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Approach</th>
+<th>Pros</th>
+<th>Cons</th>
+<th>Decision</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Regex + Table Extraction</strong></td>
+<td>Fast, deterministic, no LLM needed</td>
+<td>Limited to known patterns</td>
+<td>✅ <strong>Primary</strong></td>
+</tr>
+<tr class="even">
+<td>LLM-based Extraction</td>
+<td>Handles novel patterns, high accuracy</td>
+<td>Slow, requires LLM, non-deterministic</td>
+<td>⚠️ Future</td>
+</tr>
+<tr class="odd">
+<td>Hybrid</td>
+<td>Best of both</td>
+<td>Complex implementation</td>
+<td>❌ Later phase</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Rationale</strong>: Regex + table extraction is sufficient forstructured data (invoices, reports) and fast for batch processing. <strong>Impact</strong>: May miss complex relationships in unstructured text. <strong>Mitigation</strong>: Include raw text in deductions for human review of ambiguous cases.</p>
+<hr>
+</section>
+<section id="trade-off-4-qdrant-vs.-in-memory-vector-store" class="level3">
+<h3 class="anchored" data-anchor-id="trade-off-4-qdrant-vs.-in-memory-vector-store">7.4 Trade-off 4: Qdrant vs.&nbsp;In-Memory Vector Store</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 26%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Option</th>
+<th>Pros</th>
+<th>Cons</th>
+<th>Decision</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Qdrant</strong></td>
+<td>Persistent, scalable, filterable, production-ready</td>
+<td>External dependency</td>
+<td>✅ <strong>Chosen</strong></td>
+</tr>
+<tr class="even">
+<td>FAISS</td>
+<td>Fast, in-process</td>
+<td>In-memory only, limited filtering</td>
+<td>❌ No persistence</td>
+</tr>
+<tr class="odd">
+<td>Weaviate</td>
+<td>Rich features, filtering</td>
+<td>Heavier, new dependency</td>
+<td>❌ Not available</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Rationale</strong>: Qdrant is already available in the environment and provides all needed features. <strong>Impact</strong>: Adds external service dependency. <strong>Mitigation</strong>: Qdrant is lightweight; can run locally alongside Neo4j.</p>
+<hr>
+</section>
+<section id="trade-off-5-full-independence-vs.-timestamp-reuse" class="level3">
+<h3 class="anchored" data-anchor-id="trade-off-5-full-independence-vs.-timestamp-reuse">7.5 Trade-off 5: Full Independence vs.&nbsp;Timestamp Reuse</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 26%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Option</th>
+<th>Pros</th>
+<th>Cons</th>
+<th>Decision</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Reuse extract.py</strong></td>
+<td>Consistent timestamps with KG, proven code</td>
+<td>Coupling to parent project</td>
+<td>✅ <strong>Chosen</strong></td>
+</tr>
+<tr class="even">
+<td>Duplicate extract.py</td>
+<td>Full isolation</td>
+<td>Code duplication, maintenance burden</td>
+<td>❌ Worse</td>
+</tr>
+<tr class="odd">
+<td>Custom implementation</td>
+<td>Full control</td>
+<td>Risk of inconsistency</td>
+<td>❌ Risky</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Rationale</strong>: <code>extract.py</code> only deals with file metadata, not KG. Reusing it ensures temporal consistency. <strong>Impact</strong>: Coupling to parent project’s file structure. <strong>Mitigation</strong>: Isolate <code>extract.py</code> usage to a single wrapper class; document the dependency.</p>
+<hr>
+</section>
+<section id="trade-off-6-jsonl-vs.-database-for-deductions" class="level3">
+<h3 class="anchored" data-anchor-id="trade-off-6-jsonl-vs.-database-for-deductions">7.6 Trade-off 6: JSONL vs.&nbsp;Database for Deductions</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 26%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Option</th>
+<th>Pros</th>
+<th>Cons</th>
+<th>Decision</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>JSONL</strong></td>
+<td>Simple, human-readable, easy backup</td>
+<td>No querying, slower for large datasets</td>
+<td>✅ <strong>Primary</strong></td>
+</tr>
+<tr class="even">
+<td>SQLite</td>
+<td>Queryable, fast, ACID</td>
+<td>More complex, new dependency</td>
+<td>⚠️ Alternative</td>
+</tr>
+<tr class="odd">
+<td>Qdrant Payload</td>
+<td>Already stored, filterable</td>
+<td>Harder to backup/export</td>
+<td>⚠️ Secondary</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Rationale</strong>: JSONL is simplest for persistence and human debugging. Qdrant payloads are used for retrieval. <strong>Impact</strong>: Slower for large-scale comparison operations. <strong>Mitigation</strong>: For production, can add SQLite as optional storage.</p>
+<hr>
+</section>
+</section>
+<section id="summary" class="level2">
+<h2 class="anchored" data-anchor-id="summary">8. Summary</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 27%">
+<col style="width: 34%">
+<col style="width: 37%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Aspect</th>
+<th>Decision</th>
+<th>Rationale</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Architecture</strong></td>
+<td>Modular pipeline</td>
+<td>Clean separation of concerns, testability</td>
+</tr>
+<tr class="even">
+<td><strong>Vector Store</strong></td>
+<td>Qdrant</td>
+<td>Available, persistent, filterable</td>
+</tr>
+<tr class="odd">
+<td><strong>Embedding Model</strong></td>
+<td>all-MiniLM-L6-v2</td>
+<td>Balanced accuracy/speed/size</td>
+</tr>
+<tr class="even">
+<td><strong>File Parsers</strong></td>
+<td>Specialized libraries</td>
+<td>Reliable extraction for each format</td>
+</tr>
+<tr class="odd">
+<td><strong>Timestamp Source</strong></td>
+<td>extract.py</td>
+<td>Consistency with KG system</td>
+</tr>
+<tr class="even">
+<td><strong>Storage</strong></td>
+<td>Qdrant + JSONL</td>
+<td>Retrieval + persistence</td>
+</tr>
+<tr class="odd">
+<td><strong>KG Independence</strong></td>
+<td>Physical + dependency isolation</td>
+<td>Guaranteed no KG access in RAG pipeline</td>
+</tr>
+<tr class="even">
+<td><strong>Configuration</strong></td>
+<td>YAML + env vars</td>
+<td>Flexibility without code changes</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+<section id="next-stage" class="level2">
+<h2 class="anchored" data-anchor-id="next-stage">9. Next Stage</h2>
+<p><strong>Awaiting human validation</strong> of this architecture and design before proceeding to <strong>Stage 5 – Planner</strong> (<code>05_RAG_Task_Breakdown.md</code>).</p>
+<hr>
+<p><strong>Status</strong>: Draft awaiting explicit human approval</p>
+
+
+</section>
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a></div></div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/KarthikeanJuttumahadevan4\.github\.io\/target_staleness\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>© 2026 United States Military Academy</p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+<script src="../../../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

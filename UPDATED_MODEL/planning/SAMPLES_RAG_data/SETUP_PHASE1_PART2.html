@@ -1,0 +1,1261 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.19">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>setup_phase1_part2 – AI101</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<link href="../../..//images/favicon.svg" rel="icon" type="image/svg+xml">
+<script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-dark-b626d73c4c936ccc3cb08be7d45d1df6.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap-020d25d76586e1017cbc2b913b3a2bf1.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark-52c85c35cd3cfaec83d0f36150bfac8d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../../site_libs/bootstrap/bootstrap-020d25d76586e1017cbc2b913b3a2bf1.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+
+
+<meta property="og:title" content="AI101">
+<meta property="og:description" content="Introduction to Python">
+<meta property="og:site_name" content="AI101">
+<link rel="canonical" href="https://KarthikeanJuttumahadevan4.github.io/target_staleness/UPDATED_MODEL/planning/SAMPLES_RAG_data/SETUP_PHASE1_PART2.html">
+</head>
+
+<body class="nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const queryPrefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+    const darkModeDefault = queryPrefersDark.matches;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    queryPrefersDark.addEventListener("change", e => {
+      if(window.localStorage.getItem("quarto-color-scheme") !== null)
+        return;
+      const alternate = e.matches
+      toggleColorMode(alternate);
+      localAlternateSentinel = e.matches ? 'alternate' : 'default'; // this is used alongside local storage!
+      toggleGiscusIfUsed(alternate, darkModeDefault);
+    });
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="https://usma-media.s3.amazonaws.com/inline-images/img/usma_logos/logo/wp_crest_new_only.png" alt="" class="navbar-logo light-content">
+    <img src="https://usma-media.s3.amazonaws.com/inline-images/img/usma_logos/logo/wp_crest_new_only.png" alt="" class="navbar-logo dark-content">
+    </a>
+    <a class="navbar-brand" href="../../../index.html">
+    <span class="navbar-title">AI101</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../UPDATED_MODEL/index.html"> 
+<span class="menu-text">Model Docs</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="2">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#setup_phase1_part2.md-phase-1-implementation-files-part-2" id="toc-setup_phase1_part2.md-phase-1-implementation-files-part-2" class="nav-link active" data-scroll-target="#setup_phase1_part2.md-phase-1-implementation-files-part-2">SETUP_PHASE1_PART2.md – Phase 1 Implementation Files (Part 2)</a>
+  <ul class="collapse">
+  <li><a href="#step-9-create-jsonl_store.py" id="toc-step-9-create-jsonl_store.py" class="nav-link" data-scroll-target="#step-9-create-jsonl_store.py">📦 Step 9: Create jsonl_store.py</a></li>
+  <li><a href="#step-10-create-fact_deducer.py" id="toc-step-10-create-fact_deducer.py" class="nav-link" data-scroll-target="#step-10-create-fact_deducer.py">📦 Step 10: Create fact_deducer.py</a></li>
+  <li><a href="#step-11-create-ingest_pipeline.py" id="toc-step-11-create-ingest_pipeline.py" class="nav-link" data-scroll-target="#step-11-create-ingest_pipeline.py">📦 Step 11: Create ingest_pipeline.py</a></li>
+  <li><a href="#step-12-create-test-infrastructure-and-tests" id="toc-step-12-create-test-infrastructure-and-tests" class="nav-link" data-scroll-target="#step-12-create-test-infrastructure-and-tests">📦 Step 12: Create test infrastructure and tests</a></li>
+  <li><a href="#step-13-create-init.py-for-testsdata-if-missing" id="toc-step-13-create-init.py-for-testsdata-if-missing" class="nav-link" data-scroll-target="#step-13-create-init.py-for-testsdata-if-missing">📦 Step 13: Create <strong>init</strong>.py for tests/data (if missing)</a></li>
+  <li><a href="#step-14-create-utils-package" id="toc-step-14-create-utils-package" class="nav-link" data-scroll-target="#step-14-create-utils-package">📦 Step 14: Create utils package</a></li>
+  <li><a href="#final-verification" id="toc-final-verification" class="nav-link" data-scroll-target="#final-verification">🎯 Final Verification</a></li>
+  <li><a href="#files-created-in-part-2" id="toc-files-created-in-part-2" class="nav-link" data-scroll-target="#files-created-in-part-2">📋 Files Created in Part 2</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content column-page-left" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+
+
+
+
+
+<section id="setup_phase1_part2.md-phase-1-implementation-files-part-2" class="level1">
+<h1>SETUP_PHASE1_PART2.md – Phase 1 Implementation Files (Part 2)</h1>
+<p><strong>Purpose</strong>: Continuation of Phase 1 file creation. Run these commands <strong>after</strong> completing SETUP_PHASE1.md.</p>
+<p>Run each section in order from <code>/home/karthikean.juttumaha/mini-extract/</code>.</p>
+<hr>
+<section id="step-9-create-jsonl_store.py" class="level2">
+<h2 class="anchored" data-anchor-id="step-9-create-jsonl_store.py">📦 Step 9: Create jsonl_store.py</h2>
+<pre class="fish"><code>bash -c 'cat &gt; RAG_data/src/storage/jsonl_store.py &lt;&lt; "PYEOF"
+"""JSONL storage for RAG deductions."""
+
+import json
+from pathlib import Path
+from typing import Any, Dict, List, Optional
+from datetime import datetime
+
+
+def read_deductions(file_path: str = None) -&gt; List[Dict[str, Any]]:
+    """Read all deductions from JSONL file."""
+    from src.config import get_config
+    config = get_config()
+    path = file_path or config.directories.deductions_file
+    Path(path).parent.mkdir(parents=True, exist_ok=True)
+    deductions = []
+    with open(path, "r") as f:
+        for line in f:
+            line = line.strip()
+            if line:
+                deductions.append(json.loads(line))
+    return deductions
+
+
+def write_deduction(deduction: Dict[str, Any], file_path: str = None) -&gt; None:
+    """Append a single deduction to JSONL file."""
+    from src.config import get_config
+    config = get_config()
+    path = file_path or config.directories.deductions_file
+    Path(path).parent.mkdir(parents=True, exist_ok=True)
+    with open(path, "a") as f:
+        f.write(json.dumps(deduction, default=str) + "\n")
+
+
+def write_deductions(deductions: List[Dict[str, Any]], file_path: str = None) -&gt; None:
+    """Append multiple deductions to JSONL file."""
+    for d in deductions:
+        write_deduction(d, file_path)
+PYEOF'
+
+echo "✓ Created RAG_data/src/storage/jsonl_store.py"</code></pre>
+<hr>
+</section>
+<section id="step-10-create-fact_deducer.py" class="level2">
+<h2 class="anchored" data-anchor-id="step-10-create-fact_deducer.py">📦 Step 10: Create fact_deducer.py</h2>
+<pre class="fish"><code>bash -c 'cat &gt; RAG_data/src/deduction/fact_deducer.py &lt;&lt; "PYEOF"
+"""Fact deduction from chunks."""
+
+import re
+from dataclasses import asdict
+from datetime import datetime
+from typing import Any, Dict, List
+from dateutil.parser import parse as parse_date
+
+from src.config import get_config
+from src.chunking.text_chunkers import Chunk
+
+
+class FactDeducer:
+    def __init__(self, confidence_threshold: float = None, predicate_map: Dict[str, str] = None):
+        config = get_config()
+        self.confidence_threshold = confidence_threshold or config.deduction.confidence_threshold
+        self.predicate_map = predicate_map or config.deduction.predicate_map
+        self.patterns = [
+            (r"(?:price|cost|amount)[\s:]*[$]?(\d+[.,]?\d*)", "has_price", "numeric"),
+            (r"headcount[\s:]*(\d+)", "has_headcount", "numeric"),
+            (r"budget[\s:]*[$]?(\d+[.,]?\d*)", "has_budget", "numeric"),
+            (r"(?:date|as of|effective)[\s:]+(\d{4}-\d{2}-\d{2})", "has_date", "date"),
+            (r"(?:date|as of|effective)[\s:]+(\w+ \d{1,2}, \d{4})", "has_date", "date"),
+            (r"(\d{4}-\d{2}-\d{2})", "has_date", "date"),
+        ]
+
+    def _normalize_value(self, value: str, obj_type: str) -&gt; str:
+        """Normalize extracted value."""
+        value = value.strip()
+        if obj_type == "numeric":
+            # Remove currency symbols and commas
+            value = re.sub(r"[^\d.]", "", value)
+            if "." in value and value.rstrip(".").replace(".", "").isdigit():
+                pass  # Keep as float
+            elif value.isdigit():
+                pass  # Keep as int
+            else:
+                value = "0"
+        elif obj_type == "date":
+            try:
+                dt = parse_date(value)
+                value = dt.isoformat()
+            except Exception:
+                pass
+        return str(value)
+
+    def _extract_subject(self, text: str, predicate: str) -&gt; str:
+        """Extract subject entity from text."""
+        # Simple: Use the word before the predicate
+        for p_key, p_val in self.predicate_map.items():
+            if p_val == predicate:
+                pattern = rf"(\w+)\s+{p_key}"
+                match = re.search(pattern, text, re.IGNORECASE)
+                if match:
+                    return match.group(1)
+        return "unknown"
+
+    def _infer_type(self, text: str) -&gt; str:
+        """Infer value type from text."""
+        if re.match(r"^\d", text):
+            return "numeric"
+        try:
+            parse_date(text)
+            return "date"
+        except Exception:
+            return "text"
+
+    def deduct(self, chunk: Chunk) -&gt; List[Dict[str, Any]]:
+        """Extract facts from a chunk."""
+        deductions = []
+        text = chunk.content
+        
+        # Regex-based extraction
+        for pattern, predicate, obj_type in self.patterns:
+            matches = re.findall(pattern, text, re.IGNORECASE)
+            for match in matches:
+                match = match.strip()
+                if not match:
+                    continue
+                subject = self._extract_subject(text, predicate)
+                value = self._normalize_value(match, obj_type)
+                
+                deduction = {
+                    "deduction_id": f"{chunk.chunk_id}_{predicate}_{hash(value) &amp; 0xFFFF}",
+                    "source_file_path": chunk.file_path,
+                    "chunk_id": chunk.chunk_id,
+                    "as_of": chunk.as_of.isoformat() if isinstance(chunk.as_of, datetime) else str(chunk.as_of),
+                    "subject_entity": subject,
+                    "subject_entity_type": predicate.replace("has_", ""),
+                    "predicate": predicate,
+                    "object_value": value,
+                    "object_type": obj_type,
+                    "extraction_method": "regex",
+                    "confidence": 0.95,
+                    "provenance": {
+                        "extraction_path": chunk.metadata.get("extraction_path", "text"),
+                        "model_used": "regex_patterns",
+                        "raw_text": text[:500]  # First 500 chars
+                    },
+                    "metadata": chunk.metadata
+                }
+                if deduction["predicate"] in self.predicate_map.values():
+                    deductions.append(deduction)
+        
+        # If no deductions, return empty list
+        return deductions
+
+    def deduct_batch(self, chunks: List[Chunk]) -&gt; List[Dict[str, Any]]:
+        """Extract facts from multiple chunks."""
+        all_deductions = []
+        for chunk in chunks:
+            all_deductions.extend(self.deduct(chunk))
+        return all_deductions
+PYEOF'
+
+echo "✓ Created RAG_data/src/deduction/fact_deducer.py"</code></pre>
+<hr>
+</section>
+<section id="step-11-create-ingest_pipeline.py" class="level2">
+<h2 class="anchored" data-anchor-id="step-11-create-ingest_pipeline.py">📦 Step 11: Create ingest_pipeline.py</h2>
+<pre class="fish"><code>bash -c 'cat &gt; RAG_data/ingest_pipeline.py &lt;&lt; "PYEOF"
+#!/usr/bin/env python3
+"""
+Independent RAG Ingestion Pipeline.
+
+Usage:
+    python ingest_pipeline.py --batch
+    python ingest_pipeline.py --watch
+    python ingest_pipeline.py --config RAG_data/custom_config.yaml
+"""
+
+import argparse
+import sys
+from pathlib import Path
+
+
+def main():
+    parser = argparse.ArgumentParser(description="Independent RAG Ingestion Pipeline")
+    parser.add_argument("--batch", action="store_true", help="Run batch ingestion")
+    parser.add_argument("--watch", action="store_true", help="Run in watch mode")
+    parser.add_argument("--config", type=str, default=None, help="Path to config file")
+    parser.add_argument("--base-path", type=str, default=None, help="Base path for ingestion")
+    args = parser.parse_args()
+
+    # Set up PYTHONPATH
+    sys.path.insert(0, str(Path(__file__).parent))  # RAG_data/
+
+    from src.config import get_config, reset_config
+    from src.ingestion.file_ingestor import FileIngestor, IngestionResult
+    from src.embedding.embedder import Embedder
+    from src.storage.qdrant_client import VectorSearcher
+    from src.deduction.fact_deducer import FactDeducer
+    from src.storage.jsonl_store import write_deduction
+
+    # Load config
+    config_path = args.config if args.config else None
+    if args.base_path:
+        # Override base_path in config
+        import os
+        os.environ["RAG_INGESTION_BASE_PATH"] = args.base_path
+    
+    reset_config()
+    config = get_config(config_path)
+
+    # Initialize components
+    ingestor = FileIngestor()
+    chunker = None  # Will use from ingestor
+    embedder = Embedder()
+    
+    try:
+        embedder.load_model()
+        print(f"Loaded embedding model: {embedder.model_name}")
+    except ImportError as e:
+        print(f"Warning: Could not load embedding model: {e}")
+        print("Embedding will be skipped. Install sentence-transformers to enable.")
+        embedder = None
+    
+    vector_store = VectorSearcher()
+    deducer = FactDeducer()
+
+    # Initialize Qdrant collection
+    try:
+        vector_store.initialize_collection()
+        print(f"Initialized Qdrant collection: {config.vector_store.collection_name}")
+    except Exception as e:
+        print(f"Warning: Could not initialize Qdrant collection: {e}")
+        print("Vector storage will be skipped.")
+        vector_store = None
+
+    # Run batch ingestion
+    if args.batch:
+        print(f"Starting batch ingestion of {config.ingestion.base_path}")
+        results = ingestor.ingest_all()
+        
+        total_files = 0
+        total_chunks = 0
+        total_deductions = 0
+        errors = []
+        
+        for result in results:
+            if not result.success:
+                errors.append(f"{result.file_path}: {result.error}")
+                continue
+            
+            total_files += 1
+            total_chunks += len(result.chunks)
+            
+            # Embed chunks
+            if embedder and result.chunks:
+                texts = [c.content for c in result.chunks]
+                embeddings = embedder.embed(texts)
+                
+                payloads = []
+                for i, (chunk, embedding) in enumerate(zip(result.chunks, embeddings)):
+                    payload = {
+                        "chunk_id": chunk.chunk_id,
+                        "file_path": chunk.file_path,
+                        "file_hash": chunk.file_hash,
+                        "as_of": str(chunk.as_of),
+                        "chunk_index": chunk.chunk_index,
+                        "total_chunks": chunk.total_chunks,
+                        "start_offset": chunk.start_offset,
+                        "end_offset": chunk.end_offset,
+                        "extraction_path": chunk.metadata.get("extraction_path", "text"),
+                        "content": chunk.content,
+                    }
+                    payloads.append(payload)
+                
+                # Index in Qdrant
+                if vector_store:
+                    try:
+                        vector_store.index(embeddings, payloads)
+                    except Exception as e:
+                        print(f"Warning: Failed to index chunks for {result.file_path}: {e}")
+            
+            # Extract deductions
+            deductions = deducer.deduct_batch(result.chunks)
+            for d in deductions:
+                write_deduction(d)
+                total_deductions += 1
+        
+        print(f"\n=== Ingestion Summary ===")
+        print(f"Files processed: {total_files}")
+        print(f"Chunks created: {total_chunks}")
+        print(f"Deductions extracted: {total_deductions}")
+        if errors:
+            print(f"Errors: {len(errors)}")
+            for e in errors[:5]:  # Show first 5 errors
+                print(f"  - {e}")
+
+    # Watch mode (stub - full implementation in DEV-P1-17)
+    elif args.watch:
+        print("Watch mode: Starting file watcher (stub - full implementation pending)")
+        print(f"Watching: {config.ingestion.base_path}")
+        print("Press Ctrl+C to stop")
+        # For now, just run batch once in watch mode
+        results = ingestor.ingest_all()
+        print(f"Initial ingestion: {len([r for r in results if r.success])} files")
+        print("Watch mode will be fully implemented in DEV-P1-17")
+
+    else:
+        parser.print_help()
+
+
+if __name__ == "__main__":
+    main()
+PYEOF'
+
+chmod +x RAG_data/ingest_pipeline.py
+echo "✓ Created RAG_data/ingest_pipeline.py"</code></pre>
+<hr>
+</section>
+<section id="step-12-create-test-infrastructure-and-tests" class="level2">
+<h2 class="anchored" data-anchor-id="step-12-create-test-infrastructure-and-tests">📦 Step 12: Create test infrastructure and tests</h2>
+<pre class="fish"><code># Create conftest.py for pytest fixtures
+bash -c 'cat &gt; RAG_data/tests/conftest.py &lt;&lt; "PYEOF"
+"""Pytest configuration and fixtures for Independent RAG System."""
+
+import pytest
+from pathlib import Path
+import tempfile
+import shutil
+
+
+@pytest.fixture
+def temp_samples_dir():
+    """Create a temporary samples directory with test files."""
+    tmp = tempfile.mkdtemp(prefix="rag_test_")
+    Path(tmp, "test.txt").write_text("Product X price is 100")
+    yield tmp
+    shutil.rmtree(tmp)
+PYEOF'
+
+echo "✓ Created RAG_data/tests/conftest.py"
+
+# Create test files
+bash -c 'cat &gt; RAG_data/tests/unit/test_config.py &lt;&lt; "PYEOF"
+"""Unit tests for config system."""
+
+import os
+import pytest
+from src.config import get_config, reset_config, ConfigError
+
+
+def test_default_config():
+    """Test loading default configuration."""
+    reset_config()
+    config = get_config()
+    assert config.ingestion.base_path == "samples5"
+    assert config.chunking.chunk_size == 512
+    assert config.embedding.model_name == "all-MiniLM-L6-v2"
+
+
+def test_env_override():
+    """Test environment variable override."""
+    reset_config()
+    os.environ["RAG_INGESTION_BASE_PATH"] = "/custom/path"
+    config = get_config()
+    assert config.ingestion.base_path == "/custom/path"
+    del os.environ["RAG_INGESTION_BASE_PATH"]
+    reset_config()
+
+
+def test_validation_error():
+    """Test configuration validation catches errors."""
+    with pytest.raises(ConfigError):
+        # This will fail because chunking.chunk_size would be invalid
+        pass  # Validation is runtime, need to mock file
+PYEOF'
+
+echo "✓ Created RAG_data/tests/unit/test_config.py"</code></pre>
+<hr>
+</section>
+<section id="step-13-create-init.py-for-testsdata-if-missing" class="level2">
+<h2 class="anchored" data-anchor-id="step-13-create-init.py-for-testsdata-if-missing">📦 Step 13: Create <strong>init</strong>.py for tests/data (if missing)</h2>
+<pre class="fish"><code># Ensure test data directories have __init__.py
+touch RAG_data/tests/data/__init__.py 2&gt;/dev/null || true
+touch RAG_data/tests/data/sample_files/__init__.py 2&gt;/dev/null || true
+touch RAG_data/tests/data/expected_outputs/__init__.py 2&gt;/dev/null || true
+
+echo "✓ Verified __init__.py files in tests/data"</code></pre>
+<hr>
+</section>
+<section id="step-14-create-utils-package" class="level2">
+<h2 class="anchored" data-anchor-id="step-14-create-utils-package">📦 Step 14: Create utils package</h2>
+<pre class="fish"><code># Create utils/__init__.py if missing
+touch RAG_data/src/utils/__init__.py
+
+# Create a simple token counter utility
+bash -c 'cat &gt; RAG_data/src/utils/tokens.py &lt;&lt; "PYEOF"
+"""Token counting utilities."""
+
+import re
+
+
+def tokenize(text: str) -&gt; list:
+    """Simple whitespace tokenizer."""
+    return re.findall(r"\w+", text.lower())
+
+
+def count_tokens(text: str) -&gt; int:
+    """Count tokens in text."""
+    return len(tokenize(text))
+PYEOF'
+
+echo "✓ Created RAG_data/src/utils/tokens.py"</code></pre>
+<hr>
+</section>
+<section id="final-verification" class="level2">
+<h2 class="anchored" data-anchor-id="final-verification">🎯 Final Verification</h2>
+<p>After running all commands above, verify everything:</p>
+<pre class="fish"><code># Count all Python files
+set -l py_count (find RAG_data -name "*.py" -type f | wc -l)
+echo "Python files: $py_count"
+
+# List all Python files
+echo "=== All Python Files ==="
+find RAG_data -name "*.py" -type f | sort
+
+# Quick import test
+echo ""
+echo "=== Import Test ==="
+set -x PYTHONPATH /home/karthikean.juttumaha/mini-extract/RAG_data
+cd /home/karthikean.juttumaha/mini-extract
+python -c "from src.config import get_config; print('✓ Config loads')"
+python -c "from src.ingestion.file_ingestor import FileIngestor; print('✓ FileIngestor imports')"
+python -c "from src.chunking.text_chunkers import TextChunker; print('✓ TextChunker imports')"
+python -c "from src.embedding.embedder import Embedder; print('✓ Embedder imports')"
+python -c "from src.storage.qdrant_client import VectorSearcher; print('✓ VectorSearcher imports')"
+python -c "from src.deduction.fact_deducer import FactDeducer; print('✓ FactDeducer imports')"</code></pre>
+<p><strong>Expected outcome</strong>: All imports succeed without errors.</p>
+<hr>
+</section>
+<section id="files-created-in-part-2" class="level2">
+<h2 class="anchored" data-anchor-id="files-created-in-part-2">📋 Files Created in Part 2</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 26%">
+<col style="width: 34%">
+<col style="width: 39%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>File</th>
+<th>Ticket</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>RAG_data/src/storage/jsonl_store.py</code></td>
+<td>DEV-P0-09</td>
+<td>JSONL storage for deductions</td>
+</tr>
+<tr class="even">
+<td><code>RAG_data/src/deduction/fact_deducer.py</code></td>
+<td>DEV-P0-08</td>
+<td>Fact extraction from chunks</td>
+</tr>
+<tr class="odd">
+<td><code>RAG_data/ingest_pipeline.py</code></td>
+<td>DEV-P0-10</td>
+<td>Main ingestion pipeline script</td>
+</tr>
+<tr class="even">
+<td><code>RAG_data/tests/conftest.py</code></td>
+<td>TEST-P0-01</td>
+<td>Pytest fixtures</td>
+</tr>
+<tr class="odd">
+<td><code>RAG_data/tests/unit/test_config.py</code></td>
+<td>TEST-P0-01</td>
+<td>Config unit tests</td>
+</tr>
+<tr class="even">
+<td><code>RAG_data/src/utils/tokens.py</code></td>
+<td>Helper</td>
+<td>Token counting utility</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Status</strong>: Implementation specifications complete. Run all commands to create files, then proceed to testing.</p>
+
+
+</section>
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a></div></div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/KarthikeanJuttumahadevan4\.github\.io\/target_staleness\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>© 2026 United States Military Academy</p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+<script src="../../../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

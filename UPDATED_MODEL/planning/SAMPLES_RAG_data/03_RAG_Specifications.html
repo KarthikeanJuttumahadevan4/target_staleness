@@ -1,0 +1,2505 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.19">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>rag_specifications – AI101</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<link href="../../..//images/favicon.svg" rel="icon" type="image/svg+xml">
+<script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-dark-b626d73c4c936ccc3cb08be7d45d1df6.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap-020d25d76586e1017cbc2b913b3a2bf1.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark-52c85c35cd3cfaec83d0f36150bfac8d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../../site_libs/bootstrap/bootstrap-020d25d76586e1017cbc2b913b3a2bf1.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+
+
+<meta property="og:title" content="AI101">
+<meta property="og:site_name" content="AI101">
+<link rel="canonical" href="https://KarthikeanJuttumahadevan4.github.io/target_staleness/UPDATED_MODEL/planning/SAMPLES_RAG_data/03_RAG_Specifications.html">
+</head>
+
+<body class="nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const queryPrefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+    const darkModeDefault = queryPrefersDark.matches;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    queryPrefersDark.addEventListener("change", e => {
+      if(window.localStorage.getItem("quarto-color-scheme") !== null)
+        return;
+      const alternate = e.matches
+      toggleColorMode(alternate);
+      localAlternateSentinel = e.matches ? 'alternate' : 'default'; // this is used alongside local storage!
+      toggleGiscusIfUsed(alternate, darkModeDefault);
+    });
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="https://usma-media.s3.amazonaws.com/inline-images/img/usma_logos/logo/wp_crest_new_only.png" alt="" class="navbar-logo light-content">
+    <img src="https://usma-media.s3.amazonaws.com/inline-images/img/usma_logos/logo/wp_crest_new_only.png" alt="" class="navbar-logo dark-content">
+    </a>
+    <a class="navbar-brand" href="../../../index.html">
+    <span class="navbar-title">AI101</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../UPDATED_MODEL/index.html"> 
+<span class="menu-text">Model Docs</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="2">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#rag_specifications.md-independent-rag-technical-specifications" id="toc-rag_specifications.md-independent-rag-technical-specifications" class="nav-link active" data-scroll-target="#rag_specifications.md-independent-rag-technical-specifications">03_RAG_Specifications.md – Independent RAG Technical Specifications</a>
+  <ul class="collapse">
+  <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview">1. Overview</a>
+  <ul class="collapse">
+  <li><a href="#document-structure" id="toc-document-structure" class="nav-link" data-scroll-target="#document-structure">1.1 document structure</a></li>
+  <li><a href="#dependencies" id="toc-dependencies" class="nav-link" data-scroll-target="#dependencies">1.2 dependeNCIES</a></li>
+  </ul></li>
+  <li><a href="#component-specifications" id="toc-component-specifications" class="nav-link" data-scroll-target="#component-specifications">2. Component Specifications</a>
+  <ul class="collapse">
+  <li><a href="#module-hierarchy" id="toc-module-hierarchy" class="nav-link" data-scroll-target="#module-hierarchy">2.1 Module Hierarchy</a></li>
+  <li><a href="#component-interfaces" id="toc-component-interfaces" class="nav-link" data-scroll-target="#component-interfaces">2.2 Component Interfaces</a></li>
+  </ul></li>
+  <li><a href="#data-models-and-type-definitions" id="toc-data-models-and-type-definitions" class="nav-link" data-scroll-target="#data-models-and-type-definitions">3. Data Models and Type Definitions</a>
+  <ul class="collapse">
+  <li><a href="#rag-deduction-schema-python-typeddict" id="toc-rag-deduction-schema-python-typeddict" class="nav-link" data-scroll-target="#rag-deduction-schema-python-typeddict">3.1 RAG Deduction Schema (Python TypedDict)</a></li>
+  <li><a href="#kg-fact-schema-typeddict" id="toc-kg-fact-schema-typeddict" class="nav-link" data-scroll-target="#kg-fact-schema-typeddict">3.2 KG Fact Schema (TypedDict)</a></li>
+  <li><a href="#json-schemas-for-validation" id="toc-json-schemas-for-validation" class="nav-link" data-scroll-target="#json-schemas-for-validation">3.3 JSON Schemas (for validation)</a></li>
+  </ul></li>
+  <li><a href="#algorithms" id="toc-algorithms" class="nav-link" data-scroll-target="#algorithms">4. Algorithms</a>
+  <ul class="collapse">
+  <li><a href="#file-ingestion-algorithm" id="toc-file-ingestion-algorithm" class="nav-link" data-scroll-target="#file-ingestion-algorithm">4.1 File Ingestion Algorithm</a></li>
+  <li><a href="#chunking-algorithm" id="toc-chunking-algorithm" class="nav-link" data-scroll-target="#chunking-algorithm">4.2 Chunking Algorithm</a></li>
+  <li><a href="#table-chunking-algorithm" id="toc-table-chunking-algorithm" class="nav-link" data-scroll-target="#table-chunking-algorithm">4.3 Table Chunking Algorithm</a></li>
+  <li><a href="#embedding-algorithm" id="toc-embedding-algorithm" class="nav-link" data-scroll-target="#embedding-algorithm">4.4 Embedding Algorithm</a></li>
+  <li><a href="#fact-deduction-algorithm" id="toc-fact-deduction-algorithm" class="nav-link" data-scroll-target="#fact-deduction-algorithm">4.5 Fact Deduction Algorithm</a></li>
+  <li><a href="#retrieval-algorithm" id="toc-retrieval-algorithm" class="nav-link" data-scroll-target="#retrieval-algorithm">4.6 Retrieval Algorithm</a></li>
+  </ul></li>
+  <li><a href="#vector-store-schema" id="toc-vector-store-schema" class="nav-link" data-scroll-target="#vector-store-schema">5. Vector Store Schema</a>
+  <ul class="collapse">
+  <li><a href="#qdrant-collection-configuration" id="toc-qdrant-collection-configuration" class="nav-link" data-scroll-target="#qdrant-collection-configuration">5.1 Qdrant Collection Configuration</a></li>
+  <li><a href="#payload-schema" id="toc-payload-schema" class="nav-link" data-scroll-target="#payload-schema">5.2 Payload Schema</a></li>
+  </ul></li>
+  <li><a href="#comparison-and-resolution-algorithm" id="toc-comparison-and-resolution-algorithm" class="nav-link" data-scroll-target="#comparison-and-resolution-algorithm">6. Comparison and Resolution Algorithm</a>
+  <ul class="collapse">
+  <li><a href="#alignment-algorithm" id="toc-alignment-algorithm" class="nav-link" data-scroll-target="#alignment-algorithm">6.1 Alignment Algorithm</a></li>
+  <li><a href="#inconsistency-detection-algorithm" id="toc-inconsistency-detection-algorithm" class="nav-link" data-scroll-target="#inconsistency-detection-algorithm">6.2 Inconsistency Detection Algorithm</a></li>
+  <li><a href="#resolution-algorithm" id="toc-resolution-algorithm" class="nav-link" data-scroll-target="#resolution-algorithm">6.3 Resolution Algorithm</a></li>
+  </ul></li>
+  <li><a href="#file-and-module-layout" id="toc-file-and-module-layout" class="nav-link" data-scroll-target="#file-and-module-layout">7. File and Module Layout</a></li>
+  <li><a href="#acceptance-criteria-and-test-scenarios" id="toc-acceptance-criteria-and-test-scenarios" class="nav-link" data-scroll-target="#acceptance-criteria-and-test-scenarios">8. Acceptance Criteria and Test Scenarios</a>
+  <ul class="collapse">
+  <li><a href="#acceptance-criteria" id="toc-acceptance-criteria" class="nav-link" data-scroll-target="#acceptance-criteria">8.1 Acceptance Criteria</a></li>
+  <li><a href="#test-scenarios" id="toc-test-scenarios" class="nav-link" data-scroll-target="#test-scenarios">8.2 Test Scenarios</a></li>
+  </ul></li>
+  <li><a href="#configuration-parameters" id="toc-configuration-parameters" class="nav-link" data-scroll-target="#configuration-parameters">9. Configuration Parameters</a>
+  <ul class="collapse">
+  <li><a href="#configuration-file-config.yaml" id="toc-configuration-file-config.yaml" class="nav-link" data-scroll-target="#configuration-file-config.yaml">9.1 Configuration File (<code>config.yaml</code>)</a></li>
+  <li><a href="#environment-variables" id="toc-environment-variables" class="nav-link" data-scroll-target="#environment-variables">9.2 Environment Variables</a></li>
+  </ul></li>
+  <li><a href="#next-stage" id="toc-next-stage" class="nav-link" data-scroll-target="#next-stage">10. Next Stage</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content column-page-left" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+
+
+
+
+
+<section id="rag_specifications.md-independent-rag-technical-specifications" class="level1">
+<h1>03_RAG_Specifications.md – Independent RAG Technical Specifications</h1>
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">1. Overview</h2>
+<p>This document translates the <strong>approved requirements</strong> in <code>02_RAG_Requirements_Analysis.md</code> into precise technical specifications. It defines exact interfaces, data contracts, algorithms, and configuration for the Independent RAG System.</p>
+<section id="document-structure" class="level3">
+<h3 class="anchored" data-anchor-id="document-structure">1.1 document structure</h3>
+<ul>
+<li><strong>Section 2</strong>: Component architecture and interfaces</li>
+<li><strong>Section 3</strong>: Data models and type definitions</li>
+<li><strong>Section 4</strong>: Algorithms (chunking, embedding, retrieval, deduction)</li>
+<li><strong>Section 5</strong>: Vector store schema and payloads</li>
+<li><strong>Section 6</strong>: Comparison and resolution algorithms</li>
+<li><strong>Section 7</strong>: File and module layout</li>
+<li><strong>Section 8</strong>: Acceptance criteria and test scenarios</li>
+<li><strong>Section 9</strong>: Configuration parameters</li>
+</ul>
+</section>
+<section id="dependencies" class="level3">
+<h3 class="anchored" data-anchor-id="dependencies">1.2 dependeNCIES</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 29%">
+<col style="width: 21%">
+<col style="width: 24%">
+<col style="width: 24%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Component</th>
+<th>Source</th>
+<th>Version</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Qdrant</td>
+<td>Local</td>
+<td>v1.8.0+</td>
+<td>Vector store for embeddings and payloads</td>
+</tr>
+<tr class="even">
+<td>sentence-transformers</td>
+<td>Local</td>
+<td>all-MiniLM-L6-v2</td>
+<td>Embedding model (primary)</td>
+</tr>
+<tr class="odd">
+<td>BAAI/bge-small-en</td>
+<td>Local</td>
+<td>v1.5</td>
+<td>Embedding model (fallback)</td>
+</tr>
+<tr class="even">
+<td>pdfplumber</td>
+<td>Local</td>
+<td>latest</td>
+<td>PDF text extraction</td>
+</tr>
+<tr class="odd">
+<td>python-docx</td>
+<td>Local</td>
+<td>latest</td>
+<td>DOCX text extraction</td>
+</tr>
+<tr class="even">
+<td>openpyxl</td>
+<td>Local</td>
+<td>latest</td>
+<td>Excel data extraction</td>
+</tr>
+<tr class="odd">
+<td>python-pptx</td>
+<td>Local</td>
+<td>latest</td>
+<td>PPTX text extraction</td>
+</tr>
+<tr class="even">
+<td>pytesseract</td>
+<td>Local</td>
+<td>latest</td>
+<td>OCR for scanned PDFs</td>
+</tr>
+<tr class="odd">
+<td>extract.py</td>
+<td>Local</td>
+<td>existing</td>
+<td>Timestamp extraction</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+</section>
+<section id="component-specifications" class="level2">
+<h2 class="anchored" data-anchor-id="component-specifications">2. Component Specifications</h2>
+<section id="module-hierarchy" class="level3">
+<h3 class="anchored" data-anchor-id="module-hierarchy">2.1 Module Hierarchy</h3>
+<pre><code>RAG_data/
+├── src/
+│   ├── ingestion/
+│   │   ├── __init__.py
+│   │   ├── file_ingestor.py       # FR-ING-001, FR-ING-002, FR-ING-003, FR-ING-004
+│   │   └── config.py
+│   │
+│   ├── chunking/
+│   │   ├── __init__.py
+│   │   ├── text_chunkers.py        # FR-CHK-001, FR-CHK-002, FR-CHK-003
+│   │   └── table_chunkers.py       # FR-CHK-004
+│   │
+│   ├── embedding/
+│   │   ├── __init__.py
+│   │   ├── embedder.py             # FR-EMB-001, FR-EMB-002
+│   │   └── models.py
+│   │
+│   ├── retrieval/
+│   │   ├── __init__.py
+│   │   ├── vector_searcher.py      # FR-RET-001, FR-RET-002, FR-RET-003
+│   │   └── deducer.py              # FR-RET-004
+│   │
+│   ├── deduction/
+│   │   ├── __init__.py
+│   │   ├── fact_deducer.py         # FR-DED-001, FR-DED-002, FR-DED-003
+│   │   └── normalizer.py
+│   │
+│   ├── comparison/
+│   │   ├── __init__.py
+│   │   ├── aligner.py              # FR-CMP-001, FR-CMP-002, FR-CMP-003, FR-CMP-004
+│   │   └── detectors.py
+│   │
+│   ├── resolution/
+│   │   ├── __init__.py
+│   │   ├── resolver.py             # Section 5 rules
+│   │   └── reports.py
+│   │
+│   ├── storage/
+│   │   ├── __init__.py
+│   │   ├── qdrant_client.py
+│   │   └── jsonl_store.py
+│   │
+│   └── config.py
+│
+├── tests/
+│   ├── unit/
+│   ├── integration/
+│   └── data/
+│
+├── deductions.jsonl               # FR-DED-004
+├── resolution_log.jsonl           # Section 5.4
+└── config.yaml</code></pre>
+<hr>
+</section>
+<section id="component-interfaces" class="level3">
+<h3 class="anchored" data-anchor-id="component-interfaces">2.2 Component Interfaces</h3>
+<section id="file-ingestor-ingestion.file_ingestor.py" class="level4">
+<h4 class="anchored" data-anchor-id="file-ingestor-ingestion.file_ingestor.py"><strong>2.2.1 File Ingestor (<code>ingestion.file_ingestor.py</code>)</strong></h4>
+<p><strong>Class</strong>: <code>FileIngestor</code></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> FileIngestor:</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>                 base_path: <span class="bu">str</span> <span class="op">=</span> <span class="st">"samples5"</span>,</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>                 watch: <span class="bu">bool</span> <span class="op">=</span> <span class="va">False</span>,</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>                 allowed_extensions: List[<span class="bu">str</span>] <span class="op">=</span> [<span class="st">".txt"</span>, <span class="st">".pdf"</span>, <span class="st">".docx"</span>, <span class="st">".xlsx"</span>, <span class="st">".pptx"</span>]):</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co">        Ingests files from base_path.</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co">        </span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co">        Args:</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co">            base_path: Directory to ingest from</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co">            watch: If True, runs in watch mode (incremental)</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co">            allowed_extensions: File extensions to process</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co">        """</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> ingest_all(<span class="va">self</span>) <span class="op">-&gt;</span> List[IngestionResult]:</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="co">        Batch ingest all files in base_path.</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="co">        </span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="co">        Returns:</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="co">            List of IngestionResult objects (one per file)</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="co">            </span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="co">        Raises:</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="co">            FileNotFoundError: If base_path does not exist</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="co">            PermissionError: If files cannot be read</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="co">        """</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> ingest_one(<span class="va">self</span>, file_path: <span class="bu">str</span>) <span class="op">-&gt;</span> IngestionResult:</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""</span></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a><span class="co">        Ingest a single file.</span></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a><span class="co">        </span></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a><span class="co">        Args:</span></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a><span class="co">            file_path: Absolute path to the file</span></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a><span class="co">            </span></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a><span class="co">        Returns:</span></span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a><span class="co">            IngestionResult object</span></span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a><span class="co">        """</span></span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> start_watcher(<span class="va">self</span>, callback: Callable[[<span class="bu">str</span>], <span class="va">None</span>]) <span class="op">-&gt;</span> <span class="va">None</span>:</span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""</span></span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a><span class="co">        Start file system watcher (if watch=True).</span></span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a><span class="co">        </span></span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a><span class="co">        Args:</span></span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a><span class="co">            callback: Function(event_type: str, file_path: str) called on file changes</span></span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a><span class="co">        """</span></span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> stop_watcher(<span class="va">self</span>) <span class="op">-&gt;</span> <span class="va">None</span>:</span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""Stop the file system watcher."""</span></span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> IngestionResult:</span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>    file_path: <span class="bu">str</span></span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>    file_hash: <span class="bu">str</span></span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>    as_of: datetime</span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a>    timestamp_fallback: <span class="bu">bool</span></span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a>    success: <span class="bu">bool</span></span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a>    error: Optional[<span class="bu">str</span>]</span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a>    chunks: List[Chunk]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Algorithms</strong>: See Section 4.1</p>
+<hr>
+</section>
+<section id="text-chunkers-chunking.text_chunkers.py" class="level4">
+<h4 class="anchored" data-anchor-id="text-chunkers-chunking.text_chunkers.py"><strong>2.2.2 Text Chunkers (<code>chunking.text_chunkers.py</code>)</strong></h4>
+<p><strong>Class</strong>: <code>TextChunker</code></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> TextChunker:</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>,</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>                 chunk_size: <span class="bu">int</span> <span class="op">=</span> <span class="dv">512</span>,</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>                 overlap: <span class="bu">int</span> <span class="op">=</span> <span class="dv">102</span>,</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>                 min_chunk_size: <span class="bu">int</span> <span class="op">=</span> <span class="dv">50</span>):</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co">        Splits text into chunks with overlap.</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co">        </span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co">        Args:</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co">            chunk_size: Maximum tokens per chunk</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="co">            overlap: Number of overlapping tokens</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="co">            min_chunk_size: Minimum tokens per chunk (smaller chunks are merged)</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="co">        """</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> chunk_text(<span class="va">self</span>, text: <span class="bu">str</span>, metadata: Dict[<span class="bu">str</span>, Any]) <span class="op">-&gt;</span> List[Chunk]:</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="co">        Split plain text into chunks.</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="co">        </span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="co">        Args:</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="co">            text: Raw text content</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="co">            metadata: File-level metadata to attach to each chunk</span></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="co">            </span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="co">        Returns:</span></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="co">            List of Chunk objects</span></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="co">        """</span></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> TableChunker:</span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>):</span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""Splits table data into row-based chunks."""</span></span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> chunk_table(<span class="va">self</span>, </span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>                    data: List[List[<span class="bu">str</span>]], </span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>                    headers: List[<span class="bu">str</span>],</span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>                    metadata: Dict[<span class="bu">str</span>, Any]) <span class="op">-&gt;</span> List[Chunk]:</span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""</span></span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a><span class="co">        Split table rows into chunks.</span></span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a><span class="co">        </span></span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a><span class="co">        Args:</span></span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a><span class="co">            data: 2D list of cell values</span></span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a><span class="co">            headers: Column headers</span></span>
+<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a><span class="co">            metadata: File-level metadata</span></span>
+<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a><span class="co">            </span></span>
+<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a><span class="co">        Returns:</span></span>
+<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a><span class="co">            List of Chunk objects</span></span>
+<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a><span class="co">        """</span></span>
+<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Chunk:</span>
+<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a>    chunk_id: <span class="bu">str</span></span>
+<span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a>    content: <span class="bu">str</span></span>
+<span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a>    file_path: <span class="bu">str</span></span>
+<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a>    file_hash: <span class="bu">str</span></span>
+<span id="cb3-52"><a href="#cb3-52" aria-hidden="true" tabindex="-1"></a>    as_of: datetime</span>
+<span id="cb3-53"><a href="#cb3-53" aria-hidden="true" tabindex="-1"></a>    chunk_index: <span class="bu">int</span></span>
+<span id="cb3-54"><a href="#cb3-54" aria-hidden="true" tabindex="-1"></a>    total_chunks: <span class="bu">int</span></span>
+<span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a>    start_offset: <span class="bu">int</span></span>
+<span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a>    end_offset: <span class="bu">int</span></span>
+<span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a>    metadata: Dict[<span class="bu">str</span>, Any]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+</section>
+<section id="embedder-embedding.embedder.py" class="level4">
+<h4 class="anchored" data-anchor-id="embedder-embedding.embedder.py"><strong>2.2.3 Embedder (<code>embedding.embedder.py</code>)</strong></h4>
+<p><strong>Class</strong>: <code>Embedder</code></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Embedder:</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>,</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>                 model_name: <span class="bu">str</span> <span class="op">=</span> <span class="st">"all-MiniLM-L6-v2"</span>,</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>                 batch_size: <span class="bu">int</span> <span class="op">=</span> <span class="dv">32</span>):</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co">        Generates embeddings for text using local models.</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co">        </span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co">        Args:</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co">            model_name: Name of the embedding model</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co">            batch_size: Number of texts to embed in a single batch</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="co">        """</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> load_model(<span class="va">self</span>) <span class="op">-&gt;</span> <span class="va">None</span>:</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="co">        Load the embedding model.</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="co">        </span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="co">        Raises:</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="co">            ImportError: If required model package is not installed</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="co">            RuntimeError: If model cannot be loaded</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="co">        """</span></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> embed(<span class="va">self</span>, texts: List[<span class="bu">str</span>]) <span class="op">-&gt;</span> List[List[<span class="bu">float</span>]]:</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""</span></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a><span class="co">        Generate embeddings for a list of texts.</span></span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a><span class="co">        </span></span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a><span class="co">        Args:</span></span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a><span class="co">            texts: List of text strings to embed</span></span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a><span class="co">            </span></span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a><span class="co">        Returns:</span></span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a><span class="co">            List of embedding vectors (each vector is List[float])</span></span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a><span class="co">            </span></span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a><span class="co">        Raises:</span></span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a><span class="co">            ValueError: If texts list is empty</span></span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a><span class="co">        """</span></span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> embed_single(<span class="va">self</span>, text: <span class="bu">str</span>) <span class="op">-&gt;</span> List[<span class="bu">float</span>]:</span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""</span></span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a><span class="co">        Generate embedding for a single text.</span></span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a><span class="co">        </span></span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a><span class="co">        Args:</span></span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a><span class="co">            text: Text string to embed</span></span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a><span class="co">            </span></span>
+<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a><span class="co">        Returns:</span></span>
+<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a><span class="co">            Embedding vector (List[float])</span></span>
+<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a><span class="co">        """</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+</section>
+<section id="vector-searcher-retrieval.vector_searcher.py" class="level4">
+<h4 class="anchored" data-anchor-id="vector-searcher-retrieval.vector_searcher.py"><strong>2.2.4 Vector Searcher (<code>retrieval.vector_searcher.py</code>)</strong></h4>
+<p><strong>Class</strong>: <code>VectorSearcher</code></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> VectorSearcher:</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, </span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>                 collection_name: <span class="bu">str</span> <span class="op">=</span> <span class="st">"rag_deductions"</span>,</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>                 host: <span class="bu">str</span> <span class="op">=</span> <span class="st">"localhost"</span>,</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>                 port: <span class="bu">int</span> <span class="op">=</span> <span class="dv">6333</span>):</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co">        Interacts with Qdrant vector store.</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co">        </span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co">        Args:</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co">            collection_name: Name of the Qdrant collection</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="co">            host: Qdrant server host</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="co">            port: Qdrant server port</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="co">        """</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> initialize_collection(<span class="va">self</span>, </span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>                             vector_size: <span class="bu">int</span> <span class="op">=</span> <span class="dv">384</span>,</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>                             distance: <span class="bu">str</span> <span class="op">=</span> <span class="st">"Cosine"</span>) <span class="op">-&gt;</span> <span class="va">None</span>:</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""</span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="co">        Create or reconfigure the Qdrant collection.</span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="co">        </span></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a><span class="co">        Args:</span></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a><span class="co">            vector_size: Dimension of embedding vectors</span></span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a><span class="co">            distance: Distance metric (Cosine, Dot, Euclidean)</span></span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a><span class="co">        """</span></span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> index(<span class="va">self</span>, </span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>              vectors: List[List[<span class="bu">float</span>]],</span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>              payloads: List[Dict[<span class="bu">str</span>, Any]],</span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>              ids: Optional[List[<span class="bu">str</span>]] <span class="op">=</span> <span class="va">None</span>) <span class="op">-&gt;</span> <span class="va">None</span>:</span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""</span></span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a><span class="co">        Index embeddings with payloads.</span></span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a><span class="co">        </span></span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a><span class="co">        Args:</span></span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a><span class="co">            vectors: List of embedding vectors</span></span>
+<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a><span class="co">            payloads: List of payload dictionaries (one per vector)</span></span>
+<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a><span class="co">            ids: Optional list of IDs (generated if None)</span></span>
+<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a><span class="co">        """</span></span>
+<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> search(<span class="va">self</span>,</span>
+<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a>               query_vector: List[<span class="bu">float</span>],</span>
+<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a>               limit: <span class="bu">int</span> <span class="op">=</span> <span class="dv">10</span>,</span>
+<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a>               filters: Optional[Dict[<span class="bu">str</span>, Any]] <span class="op">=</span> <span class="va">None</span>) <span class="op">-&gt;</span> List[SearchResult]:</span>
+<span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""</span></span>
+<span id="cb5-44"><a href="#cb5-44" aria-hidden="true" tabindex="-1"></a><span class="co">        Search the vector index.</span></span>
+<span id="cb5-45"><a href="#cb5-45" aria-hidden="true" tabindex="-1"></a><span class="co">        </span></span>
+<span id="cb5-46"><a href="#cb5-46" aria-hidden="true" tabindex="-1"></a><span class="co">        Args:</span></span>
+<span id="cb5-47"><a href="#cb5-47" aria-hidden="true" tabindex="-1"></a><span class="co">            query_vector: Embedding of the query</span></span>
+<span id="cb5-48"><a href="#cb5-48" aria-hidden="true" tabindex="-1"></a><span class="co">            limit: Maximum number of results</span></span>
+<span id="cb5-49"><a href="#cb5-49" aria-hidden="true" tabindex="-1"></a><span class="co">            filters: Optional Qdrant filter expression</span></span>
+<span id="cb5-50"><a href="#cb5-50" aria-hidden="true" tabindex="-1"></a><span class="co">            </span></span>
+<span id="cb5-51"><a href="#cb5-51" aria-hidden="true" tabindex="-1"></a><span class="co">        Returns:</span></span>
+<span id="cb5-52"><a href="#cb5-52" aria-hidden="true" tabindex="-1"></a><span class="co">            List of SearchResult objects, sorted by similarity</span></span>
+<span id="cb5-53"><a href="#cb5-53" aria-hidden="true" tabindex="-1"></a><span class="co">        """</span></span>
+<span id="cb5-54"><a href="#cb5-54" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-55"><a href="#cb5-55" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> delete_by_file(<span class="va">self</span>, file_path: <span class="bu">str</span>) <span class="op">-&gt;</span> <span class="va">None</span>:</span>
+<span id="cb5-56"><a href="#cb5-56" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""</span></span>
+<span id="cb5-57"><a href="#cb5-57" aria-hidden="true" tabindex="-1"></a><span class="co">        Delete all entries for a specific file.</span></span>
+<span id="cb5-58"><a href="#cb5-58" aria-hidden="true" tabindex="-1"></a><span class="co">        </span></span>
+<span id="cb5-59"><a href="#cb5-59" aria-hidden="true" tabindex="-1"></a><span class="co">        Args:</span></span>
+<span id="cb5-60"><a href="#cb5-60" aria-hidden="true" tabindex="-1"></a><span class="co">            file_path: Path of the file to delete</span></span>
+<span id="cb5-61"><a href="#cb5-61" aria-hidden="true" tabindex="-1"></a><span class="co">        """</span></span>
+<span id="cb5-62"><a href="#cb5-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-63"><a href="#cb5-63" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> SearchResult:</span>
+<span id="cb5-64"><a href="#cb5-64" aria-hidden="true" tabindex="-1"></a>    <span class="bu">id</span>: <span class="bu">str</span></span>
+<span id="cb5-65"><a href="#cb5-65" aria-hidden="true" tabindex="-1"></a>    score: <span class="bu">float</span></span>
+<span id="cb5-66"><a href="#cb5-66" aria-hidden="true" tabindex="-1"></a>    payload: Dict[<span class="bu">str</span>, Any]</span>
+<span id="cb5-67"><a href="#cb5-67" aria-hidden="true" tabindex="-1"></a>    vector: Optional[List[<span class="bu">float</span>]]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+</section>
+<section id="fact-deducer-deduction.fact_deducer.py" class="level4">
+<h4 class="anchored" data-anchor-id="fact-deducer-deduction.fact_deducer.py"><strong>2.2.5 Fact Deducer (<code>deduction.fact_deducer.py</code>)</strong></h4>
+<p><strong>Class</strong>: <code>FactDeducer</code></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> FactDeducer:</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>,</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>                 predicate_map: Optional[Dict[<span class="bu">str</span>, <span class="bu">str</span>]] <span class="op">=</span> <span class="va">None</span>,</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>                 confidence_threshold: <span class="bu">float</span> <span class="op">=</span> <span class="fl">0.7</span>):</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co">        Extracts structured facts from chunks.</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co">        </span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co">        Args:</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co">            predicate_map: Custom mapping of keywords to predicates</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="co">            confidence_threshold: Minimum confidence for a deduction</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="co">        """</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> deduct(<span class="va">self</span>, chunk: Chunk) <span class="op">-&gt;</span> List[RAGDeduction]:</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="co">        Extract facts from a chunk.</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="co">        </span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="co">        Args:</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="co">            chunk: Chunk object to process</span></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="co">            </span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="co">        Returns:</span></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a><span class="co">            List of RAGDeduction objects</span></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a><span class="co">        """</span></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> deduct_batch(<span class="va">self</span>, chunks: List[Chunk]) <span class="op">-&gt;</span> List[RAGDeduction]:</span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""</span></span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a><span class="co">        Extract facts from multiple chunks.</span></span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a><span class="co">        </span></span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a><span class="co">        Args:</span></span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a><span class="co">            chunks: List of Chunk objects</span></span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a><span class="co">            </span></span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a><span class="co">        Returns:</span></span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a><span class="co">            List of RAGDeduction objects</span></span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a><span class="co">        """</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+</section>
+<section id="aligner-comparison.aligner.py" class="level4">
+<h4 class="anchored" data-anchor-id="aligner-comparison.aligner.py"><strong>2.2.6 Aligner (<code>comparison.aligner.py</code>)</strong></h4>
+<p><strong>Class</strong>: <code>Aligner</code></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Aligner:</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>,</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>                 similarity_threshold: <span class="bu">float</span> <span class="op">=</span> <span class="fl">0.85</span>,</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>                 confidence_threshold: <span class="bu">float</span> <span class="op">=</span> <span class="fl">0.9</span>):</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co">        Aligns RAG deductions with KG facts.</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co">        </span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co">        Args:</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="co">            similarity_threshold: Minimum similarity for semantic matching</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co">            confidence_threshold: Minimum confidence for fuzzy matching</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="co">        """</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> align(<span class="va">self</span>,</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>              rag_deductions: List[RAGDeduction],</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>              kg_facts: List[KGFact]) <span class="op">-&gt;</span> List[Alignment]:</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="co">        Find matches between RAG deductions and KG facts.</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="co">        </span></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="co">        Args:</span></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a><span class="co">            rag_deductions: List of RAG deduction objects</span></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a><span class="co">            kg_facts: List of KG fact objects (from Neo4j query)</span></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a><span class="co">            </span></span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a><span class="co">        Returns:</span></span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a><span class="co">            List of Alignment objects</span></span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a><span class="co">        """</span></span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Alignment:</span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>    rag_deduction: RAGDeduction</span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>    kg_fact: Optional[KGFact]  <span class="co"># None if no match</span></span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>    alignment_type: <span class="bu">str</span>  <span class="co"># "exact", "fuzzy", "semantic", "none"</span></span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>    confidence: <span class="bu">float</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+</section>
+<section id="inconsistency-detector-comparison.detectors.py" class="level4">
+<h4 class="anchored" data-anchor-id="inconsistency-detector-comparison.detectors.py"><strong>2.2.7 Inconsistency Detector (<code>comparison.detectors.py</code>)</strong></h4>
+<p><strong>Class</strong>: <code>InconsistencyDetector</code></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> InconsistencyDetector:</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> detect(<span class="va">self</span>,</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>               alignments: List[Alignment]) <span class="op">-&gt;</span> List[Inconsistency]:</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co">        Detect inconsistencies from alignments.</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co">        </span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co">        Args:</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="co">            alignments: List of Alignment objects</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="co">            </span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="co">        Returns:</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="co">            List of Inconsistency objects</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="co">        """</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Inconsistency:</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>    inconsistency_id: <span class="bu">str</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>    conflict_type: <span class="bu">str</span>  <span class="co"># "value_conflict", "rag_missing", "kg_missing", etc.</span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>    severity: <span class="bu">str</span>  <span class="co"># "high", "medium", "low"</span></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>    rag_deduction: Optional[RAGDeduction]</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>    kg_fact: Optional[KGFact]</span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>    details: Dict[<span class="bu">str</span>, Any]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+</section>
+<section id="resolver-resolution.resolver.py" class="level4">
+<h4 class="anchored" data-anchor-id="resolver-resolution.resolver.py"><strong>2.2.8 Resolver (<code>resolution.resolver.py</code>)</strong></h4>
+<p><strong>Class</strong>: <code>Resolver</code></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Resolver:</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>,</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>                 rules: Optional[Dict[<span class="bu">str</span>, ResolutionRule]] <span class="op">=</span> <span class="va">None</span>):</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co">        Resolves inconsistencies using rules or escalates to human.</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co">        </span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co">        Args:</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="co">            rules: Dict of rule_id -&gt; ResolutionRule</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="co">        """</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> resolve(<span class="va">self</span>,</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>                inconsistency: Inconsistency) <span class="op">-&gt;</span> ResolutionResult:</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="co">        Attempt to resolve an inconsistency.</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="co">        </span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="co">        Args:</span></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="co">            inconsistency: Inconsistency to resolve</span></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a><span class="co">            </span></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a><span class="co">        Returns:</span></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a><span class="co">            ResolutionResult object</span></span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a><span class="co">            </span></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a><span class="co">        Raises:</span></span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a><span class="co">            HumanEscalationError: If no auto-resolution possible (signals need for human)</span></span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a><span class="co">        """</span></span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> ResolutionRule:</span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>    rule_id: <span class="bu">str</span></span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>    priority: <span class="bu">int</span></span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>    condition: Callable[[Inconsistency], <span class="bu">bool</span>]</span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>    action: Callable[[Inconsistency], ResolutionAction]</span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> ResolutionResult:</span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a>    inconsistency_id: <span class="bu">str</span></span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a>    rule_applied: Optional[<span class="bu">str</span>]</span>
+<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a>    action: ResolutionAction</span>
+<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a>    resolved: <span class="bu">bool</span></span>
+<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a>    human_escalation: <span class="bu">bool</span></span>
+<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a>    report: Optional[Dict[<span class="bu">str</span>, Any]]</span>
+<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> ResolutionAction:</span>
+<span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a>    action_type: <span class="bu">str</span>  <span class="co"># "prefer_rag", "prefer_kg", "merge", "discard"</span></span>
+<span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a>    target: <span class="bu">str</span>  <span class="co"># "rag" or "kg"</span></span>
+<span id="cb9-43"><a href="#cb9-43" aria-hidden="true" tabindex="-1"></a>    details: Dict[<span class="bu">str</span>, Any]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+</section>
+<section id="reporter-resolution.reports.py" class="level4">
+<h4 class="anchored" data-anchor-id="reporter-resolution.reports.py"><strong>2.2.9 Reporter (<code>resolution.reports.py</code>)</strong></h4>
+<p><strong>Functions</strong>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> generate_escalation_report(inconsistency: Inconsistency,</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>                               rag_deduction: RAGDeduction,</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>                               kg_fact: KGFact) <span class="op">-&gt;</span> Dict[<span class="bu">str</span>, Any]:</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co">    Generate a human-readable escalation report.</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="co">    </span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="co">    Args:</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co">        inconsistency: The inconsistency object</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="co">        rag_deduction: The RAG deduction involved</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="co">        kg_fact: The KG fact involved</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="co">        </span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="co">    Returns:</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="co">        Dictionary containing the full report (can be serialized to markdown/JSON)</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> log_resolution(result: ResolutionResult) <span class="op">-&gt;</span> <span class="va">None</span>:</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a><span class="co">    Log a resolution to resolution_log.jsonl.</span></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a><span class="co">    </span></span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a><span class="co">    Args:</span></span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a><span class="co">        result: ResolutionResult to log</span></span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+</section>
+</section>
+</section>
+<section id="data-models-and-type-definitions" class="level2">
+<h2 class="anchored" data-anchor-id="data-models-and-type-definitions">3. Data Models and Type Definitions</h2>
+<section id="rag-deduction-schema-python-typeddict" class="level3">
+<h3 class="anchored" data-anchor-id="rag-deduction-schema-python-typeddict">3.1 RAG Deduction Schema (Python TypedDict)</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> typing <span class="im">import</span> TypedDict, Optional, List, Any</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> datetime <span class="im">import</span> datetime</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Provenance(TypedDict):</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    extraction_path: <span class="bu">str</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    model_used: <span class="bu">str</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    raw_text: <span class="bu">str</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> RAGDeduction(TypedDict, total<span class="op">=</span><span class="va">False</span>):</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>    deduction_id: <span class="bu">str</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>    source_file_path: <span class="bu">str</span></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>    chunk_id: <span class="bu">str</span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>    as_of: <span class="bu">str</span>  <span class="co"># ISO 8601 datetime string</span></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>    subject_entity: <span class="bu">str</span></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>    subject_entity_type: Optional[<span class="bu">str</span>]</span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>    predicate: <span class="bu">str</span></span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>    object_value: <span class="bu">str</span>  <span class="co"># or could be Union[str, int, float, bool] but stored as string</span></span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>    object_type: <span class="bu">str</span>  <span class="co"># "text", "numeric", "boolean", "date"</span></span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>    extraction_method: <span class="bu">str</span>  <span class="co"># "regex", "keyword", "table", "llm"</span></span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>    confidence: <span class="bu">float</span></span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>    provenance: Provenance</span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>    metadata: Dict[<span class="bu">str</span>, Any]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="kg-fact-schema-typeddict" class="level3">
+<h3 class="anchored" data-anchor-id="kg-fact-schema-typeddict">3.2 KG Fact Schema (TypedDict)</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> KGFact(TypedDict, total<span class="op">=</span><span class="va">False</span>):</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    fact_id: <span class="bu">str</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    entity_id: <span class="bu">str</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    predicate: <span class="bu">str</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    object_value: <span class="bu">str</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    as_of: <span class="bu">str</span>  <span class="co"># ISO 8601 datetime string</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    current: <span class="bu">bool</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    superseded_by: Optional[<span class="bu">str</span>]</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>    supersedes: Optional[List[<span class="bu">str</span>]]</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>    valid_from: Optional[<span class="bu">str</span>]</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>    valid_to: Optional[<span class="bu">str</span>]</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>    provenance_id: <span class="bu">str</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="json-schemas-for-validation" class="level3">
+<h3 class="anchored" data-anchor-id="json-schemas-for-validation">3.3 JSON Schemas (for validation)</h3>
+<p>See <code>RAG_data/schemas/</code> for full JSON Schema definitions for both RAG deduction and KG fact validation.</p>
+<hr>
+</section>
+</section>
+<section id="algorithms" class="level2">
+<h2 class="anchored" data-anchor-id="algorithms">4. Algorithms</h2>
+<section id="file-ingestion-algorithm" class="level3">
+<h3 class="anchored" data-anchor-id="file-ingestion-algorithm">4.1 File Ingestion Algorithm</h3>
+<pre><code>ALGORITHM: ingest_files(base_path: str, watch: bool)
+INPUT:
+    base_path: Directory containing source files
+    watch: If True, run in watch mode
+OUTPUT:
+    List[IngestionResult] for batch mode, or None for watch mode
+
+IF watch:
+    Initialize file system watcher on base_path
+    FOR each file change event:
+        IF event is MODIFY or CREATE:
+            result = ingest_single_file(event.src_path)
+            IF callback provided:
+                callback(event, result)
+    RETURN None
+
+ELSE:
+    results = []
+    FOR each file in base_path (recursive):
+        IF file.extension in allowed_extensions:
+            result = ingest_single_file(file)
+            results.append(result)
+    RETURN results
+
+FUNCTION ingest_single_file(file_path: str) -&gt; IngestionResult:
+    TRY:
+        file_hash = calculate_sha256(file_path)
+        as_of, timestamp_fallback = TimestampExtractor().get_as_of(file_path)
+        
+        IF file previously ingested AND file_hash unchanged:
+            RETURN IngestionResult(file_path, file_hash, as_of, timestamp_fallback, 
+                                   success=True, chunks=[], error=None)
+        
+        raw_text = extract_text(file_path)  // Use file-type-specific extractors
+        
+        chunker = SELECT_CHUNKER(file_path)  // TextChunker or TableChunker
+        chunks = chunker.chunk(raw_text, {
+            "file_path": file_path,
+            "file_hash": file_hash,
+            "as_of": as_of
+        })
+        
+        RETURN IngestionResult(file_path, file_hash, as_of, timestamp_fallback,
+                               success=True, chunks=chunks, error=None)
+    
+    CATCH Exception as e:
+        RETURN IngestionResult(file_path, file_hash, as_of, timestamp_fallback,
+                               success=False, chunks=[], error=str(e))</code></pre>
+<hr>
+</section>
+<section id="chunking-algorithm" class="level3">
+<h3 class="anchored" data-anchor-id="chunking-algorithm">4.2 Chunking Algorithm</h3>
+<pre><code>ALGORITHM: chunk_text(text: str, chunk_size: int, overlap: int, metadata: dict) -&gt; List[Chunk]
+INPUT:
+    text: Raw text content
+    chunk_size: Maximum tokens per chunk
+    overlap: Number of overlapping tokens
+    metadata: File-level metadata
+OUTPUT:
+    List[Chunk]
+
+tokens = TOKENIZE(text)
+effective_chunk_size = chunk_size - overlap
+chunks = []
+
+FOR i FROM 0 TO len(tokens) STEP effective_chunk_size:
+    start = i
+    end = min(i + chunk_size, len(tokens))
+    
+    IF end - start &lt; min_chunk_size AND i &gt; 0:
+        // Merge with previous chunk
+        continue
+    
+    chunk_text = DETOKENIZE(tokens[start:end])
+    
+    chunk = Chunk(
+        chunk_id = generate_id(metadata["file_path"], start),
+        content = chunk_text,
+        file_path = metadata["file_path"],
+        file_hash = metadata["file_hash"],
+        as_of = metadata["as_of"],
+        chunk_index = len(chunks),
+        start_offset = start,
+        end_offset = end,
+        metadata = metadata
+    )
+    chunks.append(chunk)
+
+RETURN chunks</code></pre>
+<hr>
+</section>
+<section id="table-chunking-algorithm" class="level3">
+<h3 class="anchored" data-anchor-id="table-chunking-algorithm">4.3 Table Chunking Algorithm</h3>
+<pre><code>ALGORITHM: chunk_table(data: List[List[str]], headers: List[str], metadata: dict) -&gt; List[Chunk]
+INPUT:
+    data: 2D list of cell values
+    headers: Column headers
+    metadata: File-level metadata
+OUTPUT:
+    List[Chunk]
+
+chunks = []
+
+FOR row_index, row in enumerate(data):
+    // Create markdown table row
+    content = "| " + " | ".join(row) + " |"
+    
+    chunk = Chunk(
+        chunk_id = generate_id(metadata["file_path"], row_index),
+        content = content,
+        file_path = metadata["file_path"],
+        file_hash = metadata["file_hash"],
+        as_of = metadata["as_of"],
+        chunk_index = row_index,
+        start_offset = row_index,
+        end_offset = row_index + 1,
+        metadata = {
+            **metadata,
+            "table_headers": headers,
+            "row_number": row_index,
+            "extraction_path": "excel_table"
+        }
+    )
+    chunks.append(chunk)
+
+RETURN chunks</code></pre>
+<hr>
+</section>
+<section id="embedding-algorithm" class="level3">
+<h3 class="anchored" data-anchor-id="embedding-algorithm">4.4 Embedding Algorithm</h3>
+<pre><code>ALGORITHM: embed_texts(texts: List[str], model: Embedder) -&gt; List[List[float]]
+INPUT:
+    texts: List of text strings
+    model: Loaded embedding model
+OUTPUT:
+    List[List[float]] (embeddings)
+
+IF model not loaded:
+    model.load_model()
+
+batches = SPLIT_INTO_BATCHES(texts, batch_size=32)
+embeddings = []
+
+FOR batch in batches:
+    batch_embeddings = model.encode(batch, normalize_embeddings=True)
+    embeddings.extend(batch_embeddings.tolist())
+
+RETURN embeddings</code></pre>
+<hr>
+</section>
+<section id="fact-deduction-algorithm" class="level3">
+<h3 class="anchored" data-anchor-id="fact-deduction-algorithm">4.5 Fact Deduction Algorithm</h3>
+<pre><code>ALGORITHM: deduct_facts(chunk: Chunk) -&gt; List[RAGDeduction]
+INPUT:
+    chunk: Chunk object with content and metadata
+OUTPUT:
+    List[RAGDeduction]
+
+deductions = []
+
+// Step 1: Extract entities and values using regex patterns
+patterns = [
+    (r"(?:price|cost|amount)[\s:]*[ $]?(\d+[.,]?\d*)", "has_price", "numeric"),
+    (r"headcount[\s:]*(\d+)", "has_headcount", "numeric"),
+    (r"budget[\s:]*[ $]?(\d+[.,]?\d*)", "has_budget", "numeric"),
+    (r"(?:date|as of|effective)[\s:]+(\d{4}-\d{2}-\d{2})", "has_date", "date"),
+    // Add more patterns as needed
+]
+
+FOR pattern, predicate, object_type in patterns:
+    matches = REGEX_FINDALL(pattern, chunk.content, re.IGNORECASE)
+    
+    FOR match in matches:
+        deduction = RAGDeduction(
+            deduction_id = generate_deduction_id(chunk, predicate, match),
+            source_file_path = chunk.file_path,
+            chunk_id = chunk.chunk_id,
+            as_of = chunk.as_of,
+            subject_entity = extract_subject_entity(chunk.content, predicate),
+            subject_entity_type = infer_entity_type(subject_entity),
+            predicate = predicate,
+            object_value = normalize_value(match, object_type),
+            object_type = object_type,
+            extraction_method = "regex",
+            confidence = 0.95,  // Default for regex
+            provenance = {
+                "extraction_path": chunk.metadata.get("extraction_path", "text"),
+                "model_used": "regex_patterns",
+                "raw_text": chunk.content
+            },
+            metadata = chunk.metadata
+        )
+        deductions.append(deduction)
+
+// Step 2: Table-based deduction (if chunk has table data)
+IF "table_headers" in chunk.metadata:
+    headers = chunk.metadata["table_headers"]
+    row_data = parse_table_row(chunk.content)
+    
+    FOR col_index, value in enumerate(row_data):
+        header = headers[col_index]
+        predicate = map_header_to_predicate(header)
+        
+        IF predicate IS NOT None:
+            deduction = RAGDeduction(
+                deduction_id = generate_deduction_id(chunk, predicate, value),
+                source_file_path = chunk.file_path,
+                chunk_id = chunk.chunk_id,
+                as_of = chunk.as_of,
+                subject_entity = headers[0] if headers else "unknown",  // First col = entity
+                predicate = predicate,
+                object_value = normalize_value(value, infer_type(value)),
+                object_type = infer_type(value),
+                extraction_method = "table",
+                confidence = 0.98,  // Higher confidence for tables
+                provenance = {
+                    "extraction_path": "excel_table",
+                    "model_used": "table_parser",
+                    "raw_text": chunk.content
+                },
+                metadata = chunk.metadata
+            )
+            deductions.append(deduction)
+
+RETURN deductions
+
+FUNCTION normalize_value(value: str, object_type: str) -&gt; str:
+    IF object_type == "numeric":
+        value = EXTRACT_NUMBER(value)
+    ELSE IF object_type == "date":
+        value = PARSE_DATE(value).isoformat()
+    ELSE:
+        value = value.strip().lower()
+    RETURN value</code></pre>
+<hr>
+</section>
+<section id="retrieval-algorithm" class="level3">
+<h3 class="anchored" data-anchor-id="retrieval-algorithm">4.6 Retrieval Algorithm</h3>
+<pre><code>ALGORITHM: retrieve(query: str, limit: int = 10) -&gt; List[RAGDeduction]
+INPUT:
+    query: User query string
+    limit: Maximum number of results
+OUTPUT:
+    List[RAGDeduction] sorted by relevance
+
+// Step 1: Embed query
+query_embedding = embedder.embed_single(query)
+
+// Step 2: Vector search
+search_results = vector_searcher.search(
+    query_vector=query_embedding,
+    limit=limit * 2,  // Retrieve extra for re-ranking
+    filters=None
+)
+
+// Step 3: Re-rank by temporal recency
+deductions = []
+FOR result in search_results:
+    payload = result.payload
+    chunk = Chunk(**payload["chunk"])
+    dests = load_deductions_for_chunk(chunk.chunk_id)
+    
+    FOR ded in dests:
+        ded.score = result.score
+        ded.as_of_dt = parse_iso(ded.as_of)
+        deductions.append(ded)
+
+// Step 4: Sort by composite score
+SORT deductions BY:
+    Primary: score (descending)
+    Secondary: as_of_dt (descending)
+
+RETURN deductions[:limit]</code></pre>
+<hr>
+</section>
+</section>
+<section id="vector-store-schema" class="level2">
+<h2 class="anchored" data-anchor-id="vector-store-schema">5. Vector Store Schema</h2>
+<section id="qdrant-collection-configuration" class="level3">
+<h3 class="anchored" data-anchor-id="qdrant-collection-configuration">5.1 Qdrant Collection Configuration</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"collection_name"</span><span class="fu">:</span> <span class="st">"rag_deductions"</span><span class="fu">,</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"vectors"</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"size"</span><span class="fu">:</span> <span class="dv">384</span><span class="fu">,</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"distance"</span><span class="fu">:</span> <span class="st">"Cosine"</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">},</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"optimizers_config"</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"default_segment_number"</span><span class="fu">:</span> <span class="dv">1</span><span class="fu">,</span></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"max_optimization_threads"</span><span class="fu">:</span> <span class="dv">4</span></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">},</span></span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"wal_config"</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"wal_capacity_mb"</span><span class="fu">:</span> <span class="dv">1024</span><span class="fu">,</span></span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"wal_segments_ahead"</span><span class="fu">:</span> <span class="dv">0</span></span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">}</span></span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="payload-schema" class="level3">
+<h3 class="anchored" data-anchor-id="payload-schema">5.2 Payload Schema</h3>
+<p>Each vector index entry <strong>shall</strong> have the following payload:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"chunk_id"</span><span class="fu">:</span> <span class="st">"INV-2024-001_abc123_0"</span><span class="fu">,</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"file_path"</span><span class="fu">:</span> <span class="st">"samples5/invoices/INV-2024-001.pdf"</span><span class="fu">,</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"file_hash"</span><span class="fu">:</span> <span class="st">"sha256:abc123..."</span><span class="fu">,</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"as_of"</span><span class="fu">:</span> <span class="st">"2024-09-01T10:00:00+00:00"</span><span class="fu">,</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"content"</span><span class="fu">:</span> <span class="st">"Invoice INV-2024-001..."</span><span class="fu">,</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"chunk_index"</span><span class="fu">:</span> <span class="dv">0</span><span class="fu">,</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"total_chunks"</span><span class="fu">:</span> <span class="dv">5</span><span class="fu">,</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"start_offset"</span><span class="fu">:</span> <span class="dv">0</span><span class="fu">,</span></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"end_offset"</span><span class="fu">:</span> <span class="dv">512</span><span class="fu">,</span></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"extraction_path"</span><span class="fu">:</span> <span class="st">"pdf_text"</span><span class="fu">,</span></span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"deductions"</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">{</span></span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"deduction_id"</span><span class="fu">:</span> <span class="st">"ded_abc123"</span><span class="fu">,</span></span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"subject_entity"</span><span class="fu">:</span> <span class="st">"Product_X"</span><span class="fu">,</span></span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"subject_entity_type"</span><span class="fu">:</span> <span class="st">"product"</span><span class="fu">,</span></span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"predicate"</span><span class="fu">:</span> <span class="st">"has_price"</span><span class="fu">,</span></span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"object_value"</span><span class="fu">:</span> <span class="st">"100"</span><span class="fu">,</span></span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"object_type"</span><span class="fu">:</span> <span class="st">"numeric"</span><span class="fu">,</span></span>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"extraction_method"</span><span class="fu">:</span> <span class="st">"regex"</span><span class="fu">,</span></span>
+<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"confidence"</span><span class="fu">:</span> <span class="fl">0.95</span></span>
+<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a>    <span class="fu">}</span></span>
+<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a>  <span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb20-26"><a href="#cb20-26" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"metadata"</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb20-27"><a href="#cb20-27" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"page_number"</span><span class="fu">:</span> <span class="dv">1</span><span class="fu">,</span></span>
+<span id="cb20-28"><a href="#cb20-28" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"table_headers"</span><span class="fu">:</span> <span class="kw">null</span><span class="fu">,</span></span>
+<span id="cb20-29"><a href="#cb20-29" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"row_number"</span><span class="fu">:</span> <span class="kw">null</span></span>
+<span id="cb20-30"><a href="#cb20-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">}</span></span>
+<span id="cb20-31"><a href="#cb20-31" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Indexing Strategy</strong>: - Primary vector: Embedding of <code>content</code> - Secondary index: <code>file_path</code> (for batch deletion) - Secondary index: <code>as_of</code> (for temporal filtering) - Secondary index: <code>subject_entity</code> (for entity-based queries)</p>
+<hr>
+</section>
+</section>
+<section id="comparison-and-resolution-algorithm" class="level2">
+<h2 class="anchored" data-anchor-id="comparison-and-resolution-algorithm">6. Comparison and Resolution Algorithm</h2>
+<section id="alignment-algorithm" class="level3">
+<h3 class="anchored" data-anchor-id="alignment-algorithm">6.1 Alignment Algorithm</h3>
+<pre><code>ALGORITHM: align_deductions(rag_deductions: List[RAGDeduction], 
+                           kg_facts: List[KGFact]) -&gt; List[Alignment]
+INPUT:
+    rag_deductions: List of RAG deductions
+    kg_facts: List of KG facts (from Neo4j query)
+OUTPUT:
+    List[Alignment]
+
+alignments = []
+
+// Step 1: Exact matching by key
+FOR rag in rag_deductions:
+    key = (rag.subject_entity, rag.predicate, rag.source_file_path)
+    
+    Matches = FILTER kg_facts WHERE
+        kg.entity_id == rag.subject_entity AND
+        kg.predicate == rag.predicate AND
+        (kg.provenance.source_file_path == rag.source_file_path OR
+         kg.provenance.source_file_path IS NULL)
+    
+    IF Matches NOT EMPTY:
+        best_kg = SELECT BEST from Matches:
+            WHERE current == True
+            ORDER BY as_of DESC
+            LIMIT 1
+        
+        alignment = Alignment(
+            rag_deduction = rag,
+            kg_fact = best_kg,
+            alignment_type = "exact",
+            confidence = 1.0
+        )
+        alignments.append(alignment)
+
+// Step 2: Fuzzy matching by entity + predicate
+unmatched_rag = FILTER rag_deductions NOT IN alignments
+unmatched_kg = FILTER kg_facts NOT IN alignments
+
+FOR rag in unmatched_rag:
+    Matches = FILTER kg_facts WHERE
+        kg.entity_id == rag.subject_entity AND
+        kg.predicate == rag.predicate
+    
+    IF Matches NOT EMPTY:
+        best_kg = SELECT BEST from Matches:
+            WHERE current == True
+            ORDER BY as_of DESC
+            LIMIT 1
+        
+        // Calculate confidence based on value similarity
+        confidence = calculate_value_similarity(rag.object_value, best_kg.object_value)
+        
+        IF confidence &gt;= 0.9:
+            alignment = Alignment(
+                rag_deduction = rag,
+                kg_fact = best_kg,
+                alignment_type = "fuzzy",
+                confidence = confidence
+            )
+            alignments.append(alignment)
+
+// Step 3: Semantic matching using embeddings
+still_unmatched_rag = FILTER rag_deductions NOT IN alignments
+still_unmatched_kg = FILTER kg_facts NOT IN alignments
+
+IF still_unmatched_rag NOT EMPTY AND still_unmatched_kg NOT EMPTY:
+    // Create embeddings for all unmatched items
+    rag_embeddings = embedder.embed([rag.subject_entity + " " + rag.predicate + " " + rag.object_value 
+                                    FOR rag IN still_unmatched_rag])
+    kg_embeddings = embedder.embed([kg.entity_id + " " + kg.predicate + " " + kg.object_value 
+                                   FOR kg IN still_unmatched_kg])
+    
+    // Calculate similarity matrix
+    FOR i, rag IN enumerate(still_unmatched_rag):
+        FOR j, kg IN enumerate(still_unmatched_kg):
+            sim = cosine_similarity(rag_embeddings[i], kg_embeddings[j])
+            
+            IF sim &gt;= 0.85:
+                alignment = Alignment(
+                    rag_deduction = rag,
+                    kg_fact = kg,
+                    alignment_type = "semantic",
+                    confidence = sim
+                )
+                alignments.append(alignment)
+
+// Step 4: Mark unmatched items
+FOR rag IN rag_deductions:
+    IF rag NOT IN alignments:
+        alignment = Alignment(
+            rag_deduction = rag,
+            kg_fact = None,
+            alignment_type = "none",
+            confidence = 0.0
+        )
+        alignments.append(alignment)
+
+RETURN alignments
+
+FUNCTION calculate_value_similarity(val1: str, val2: str) -&gt; float:
+    // Normalize both values
+    n1 = normalize_value(val1, infer_type(val1))
+    n2 = normalize_value(val2, infer_type(val2))
+    
+    IF n1 == n2:
+        RETURN 1.0
+    
+    // Try numeric comparison
+    TRY:
+        num1 = float(n1)
+        num2 = float(n2)
+        RETURN 1.0 - (abs(num1 - num2) / max(abs(num1), abs(num2), 1.0))
+    EXCEPT:
+        PASS
+    
+    // Fallback to string similarity
+    RETURN string_similarity(n1, n2)</code></pre>
+<hr>
+</section>
+<section id="inconsistency-detection-algorithm" class="level3">
+<h3 class="anchored" data-anchor-id="inconsistency-detection-algorithm">6.2 Inconsistency Detection Algorithm</h3>
+<pre><code>ALGORITHM: detect_inconsistencies(alignments: List[Alignment]) -&gt; List[Inconsistency]
+INPUT:
+    alignments: List of Alignment objects
+OUTPUT:
+    List[Inconsistency]
+
+inconsistencies = []
+
+FOR alignment IN alignments:
+    rag = alignment.rag_deduction
+    kg = alignment.kg_fact
+    
+    IF alignment.alignment_type == "none":
+        IF kg IS NOT None:
+            // RAG has no matching deduction for a KG fact
+            inconsistency = Inconsistency(
+                inconsistency_id = generate_id(),
+                conflict_type = "rag_missing",
+                severity = "medium",
+                rag_deduction = None,
+                kg_fact = kg,
+                details = {
+                    "missing_entity": rag.subject_entity,
+                    "missing_predicate": rag.predicate
+                }
+            )
+            inconsistencies.append(inconsistency)
+        ELSE:
+            // KG has no matching fact for a RAG deduction
+            inconsistency = Inconsistency(
+                inconsistency_id = generate_id(),
+                conflict_type = "kg_missing",
+                severity = "medium",
+                rag_deduction = rag,
+                kg_fact = None,
+                details = {}
+            )
+            inconsistencies.append(inconsistency)
+    
+    ELSE:
+        // Both exist - check for conflicts
+        rag_val = normalize_value(rag.object_value, rag.object_type)
+        kg_val = normalize_value(kg.object_value, "text")  // KG stores as string
+        
+        IF rag_val != kg_val:
+            inconsistency = Inconsistency(
+                inconsistency_id = generate_id(),
+                conflict_type = "value_conflict",
+                severity = "high",
+                rag_deduction = rag,
+                kg_fact = kg,
+                details = {
+                    "rag_value": rag_val,
+                    "kg_value": kg_val,
+                    "rag_as_of": rag.as_of,
+                    "kg_as_of": kg.as_of
+                }
+            )
+            inconsistencies.append(inconsistency)
+        
+        ELSE IF rag.as_of != kg.as_of:
+            inconsistency = Inconsistency(
+                inconsistency_id = generate_id(),
+                conflict_type = "temporal_conflict",
+                severity = "medium",
+                rag_deduction = rag,
+                kg_fact = kg,
+                details = {
+                    "rag_as_of": rag.as_of,
+                    "kg_as_of": kg.as_of
+                }
+            )
+            inconsistencies.append(inconsistency)
+
+RETURN inconsistencies</code></pre>
+<hr>
+</section>
+<section id="resolution-algorithm" class="level3">
+<h3 class="anchored" data-anchor-id="resolution-algorithm">6.3 Resolution Algorithm</h3>
+<pre><code>ALGORITHM: resolve_inconsistency(inconsistency: Inconsistency) -&gt; ResolutionResult
+INPUT:
+    inconsistency: Inconsistency to resolve
+OUTPUT:
+    ResolutionResult
+
+// Define resolution rules in priority order
+rules = [
+    ResolutionRule(
+        rule_id="R1",
+        priority=0,
+        condition=lambda ic: ic.conflict_type == "exact_match",
+        action=lambda ic: ResolutionAction(
+            action_type="no_action",
+            target=None,
+            details={"status": "consistent"}
+        )
+    ),
+    ResolutionRule(
+        rule_id="R2",
+        priority=1,
+        condition=lambda ic: (
+            ic.conflict_type == "value_conflict" OR 
+            ic.conflict_type == "temporal_conflict"
+        ) AND (
+            parse_iso(ic.details.get("rag_as_of", "")) &gt; 
+            parse_iso(ic.details.get("kg_as_of", ""))
+        ),
+        action=lambda ic: ResolutionAction(
+            action_type="prefer_rag",
+            target="rag",
+            details={"reason": "Temporal validity - RAG is newer"}
+        )
+    ),
+    ResolutionRule(
+        rule_id="R3",
+        priority=1,
+        condition=lambda ic: (
+            ic.conflict_type == "value_conflict" OR 
+            ic.conflict_type == "temporal_conflict"
+        ) AND (
+            parse_iso(ic.details.get("kg_as_of", "")) &gt; 
+            parse_iso(ic.details.get("rag_as_of", ""))
+        ),
+        action=lambda ic: ResolutionAction(
+            action_type="prefer_kg",
+            target="kg",
+            details={"reason": "Temporal validity - KG is newer"}
+        )
+    ),
+    ResolutionRule(
+        rule_id="R4",
+        priority=2,
+        condition=lambda ic: (
+            ic.conflict_type == "value_conflict" AND
+            ic.rag_deduction.metadata.get("extraction_path") == "excel_table"
+        ),
+        action=lambda ic: ResolutionAction(
+            action_type="prefer_rag",
+            target="rag",
+            details={"reason": "Structured table data &gt; text inference"}
+        )
+    ),
+    ResolutionRule(
+        rule_id="R5",
+        priority=2,
+        condition=lambda ic: (
+            ic.conflict_type == "value_conflict" AND
+            len(ic.kg_fact.get("supersedes", [])) &gt; 0
+        ),
+        action=lambda ic: ResolutionAction(
+            action_type="prefer_kg",
+            target="kg",
+            details={"reason": "KG has explicit provenance chain"}
+        )
+    ),
+    ResolutionRule(
+        rule_id="R6",
+        priority=3,
+        condition=lambda ic: (
+            ic.conflict_type == "value_conflict" AND
+            is_numeric(ic.rag_deduction.object_value) AND
+            not is_numeric(ic.kg_fact.object_value)
+        ),
+        action=lambda ic: ResolutionAction(
+            action_type="prefer_rag",
+            target="rag",
+            details={"reason": "RAG value is numeric, KG is text"}
+        )
+    ),
+    ResolutionRule(
+        rule_id="R7",
+        priority=3,
+        condition=lambda ic: (
+            ic.conflict_type == "value_conflict" AND
+            is_iso_date(ic.rag_deduction.object_value) AND
+            not is_iso_date(ic.kg_fact.object_value)
+        ),
+        action=lambda ic: ResolutionAction(
+            action_type="prefer_rag",
+            target="rag",
+            details={"reason": "RAG date is ISO format, KG is natural text"}
+        )
+    )
+]
+
+// Sort rules by priority (lower = higher priority)
+SORT rules BY priority ASCENDING
+
+FOR rule IN rules:
+    IF rule.condition(inconsistency):
+        action = rule.action(inconsistency)
+        
+        RETURN ResolutionResult(
+            inconsistency_id = inconsistency.inconsistency_id,
+            rule_applied = rule.rule_id,
+            action = action,
+            resolved = True,
+            human_escalation = False,
+            report = None
+        )
+
+// No rule matched - escalate to human
+report = generate_escalation_report(inconsistency)
+RAISE HumanEscalationError(report)
+
+// Note: HumanEscalationError should be caught by the caller and trigger report generation</code></pre>
+<hr>
+</section>
+</section>
+<section id="file-and-module-layout" class="level2">
+<h2 class="anchored" data-anchor-id="file-and-module-layout">7. File and Module Layout</h2>
+<pre><code>RAG_data/
+├── README.md
+├── 01_RAG_Proposal.md              # Stage 1
+├── 02_RAG_Requirements_Analysis.md # Stage 2
+├── 03_RAG_Specifications.md        # Stage 3 (this file)
+│
+├── schemas/
+│   ├── rag_deduction_schema.json
+│   └── kg_fact_schema.json
+│
+├── src/
+│   ├── __init__.py
+│   │
+│   ├── config.py                  # Global configuration
+│   │
+│   ├── ingestion/
+│   │   ├── __init__.py
+│   │   ├── file_ingestor.py
+│   │   └── watcher.py
+│   │
+│   ├── chunking/
+│   │   ├── __init__.py
+│   │   ├── text_chunkers.py
+│   │   ├── table_chunkers.py
+│   │   └── utils.py
+│   │
+│   ├── embedding/
+│   │   ├── __init__.py
+│   │   ├── embedder.py
+│   │   └── models.py
+│   │
+│   ├── retrieval/
+│   │   ├── __init__.py
+│   │   ├── vector_searcher.py
+│   │   └── retriever.py
+│   │
+│   ├── deduction/
+│   │   ├── __init__.py
+│   │   ├── fact_deducer.py
+│   │   ├── normalizer.py
+│   │   └── patterns.py
+│   │
+│   ├── comparison/
+│   │   ├── __init__.py
+│   │   ├── aligner.py
+│   │   ├── detectors.py
+│   │   └── comparators.py
+│   │
+│   ├── resolution/
+│   │   ├── __init__.py
+│   │   ├── resolver.py
+│   │   ├── reports.py
+│   │   └── actions.py
+│   │
+│   ├── storage/
+│   │   ├── __init__.py
+│   │   ├── qdrant_client.py
+│   │   └── jsonl_store.py
+│   │
+│   └── utils/
+│       ├── __init__.py
+│       ├── logging.py
+│       ├── tokens.py
+│       └── helpers.py
+│
+├── tests/
+│   ├── __init__.py
+│   ├── conftest.py
+│   ├── unit/
+│   │   ├── __init__.py
+│   │   ├── test_ingestor.py
+│   │   ├── test_chunkers.py
+│   │   ├── test_embedder.py
+│   │   ├── test_retriever.py
+│   │   ├── test_deducer.py
+│   │   ├── test_aligner.py
+│   │   ├── test_detectors.py
+│   │   └── test_resolver.py
+│   │
+│   ├── integration/
+│   │   ├── __init__.py
+│   │   ├── test_full_pipeline.py
+│   │   ├── test_comparison.py
+│   │   └── test_resolution.py
+│   │
+│   └── data/
+│       ├── sample_files/
+│       └── expected_outputs/
+│
+├── deductions.jsonl               # Persistent RAG deductions
+├── resolution_log.jsonl           # Resolution history
+├── config.yaml                    # Configuration
+└── requirements.txt               # Python dependencies</code></pre>
+<hr>
+</section>
+<section id="acceptance-criteria-and-test-scenarios" class="level2">
+<h2 class="anchored" data-anchor-id="acceptance-criteria-and-test-scenarios">8. Acceptance Criteria and Test Scenarios</h2>
+<section id="acceptance-criteria" class="level3">
+<h3 class="anchored" data-anchor-id="acceptance-criteria">8.1 Acceptance Criteria</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 14%">
+<col style="width: 37%">
+<col style="width: 48%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>ID</th>
+<th>Criteria</th>
+<th>Test Method</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>AC-001</strong></td>
+<td>System ingests all files in samples5/ without accessing Neo4j</td>
+<td>Integration test: <code>test_full_pipeline.py::test_ingest_without_kg</code></td>
+</tr>
+<tr class="even">
+<td><strong>AC-002</strong></td>
+<td>All files are chunked and indexed with metadata</td>
+<td>Unit test: <code>test_ingestor.py::test_chunking_complete</code></td>
+</tr>
+<tr class="odd">
+<td><strong>AC-003</strong></td>
+<td>Embeddings are generated for all chunks</td>
+<td>Unit test: <code>test_embedder.py::test_embedding_generation</code></td>
+</tr>
+<tr class="even">
+<td><strong>AC-004</strong></td>
+<td>RAG can retrieve relevant chunks for queries</td>
+<td>Integration test: <code>test_retriever.py::test_retrieval_relevance</code></td>
+</tr>
+<tr class="odd">
+<td><strong>AC-005</strong></td>
+<td>Fact deductions are extracted from chunks</td>
+<td>Unit test: <code>test_deducer.py::test_fact_extraction</code></td>
+</tr>
+<tr class="even">
+<td><strong>AC-006</strong></td>
+<td>RAG deductions align with KG facts at ≥90% rate</td>
+<td>Integration test: <code>test_comparison.py::test_alignment_rate</code></td>
+</tr>
+<tr class="odd">
+<td><strong>AC-007</strong></td>
+<td>Inconsistencies are detected for intentionally conflicting data</td>
+<td>Integration test: <code>test_comparison.py::test_inconsistency_detection</code></td>
+</tr>
+<tr class="even">
+<td><strong>AC-008</strong></td>
+<td>≥80% of inconsistencies are auto-resolved</td>
+<td>Integration test: <code>test_resolution.py::test_auto_resolution_rate</code></td>
+</tr>
+<tr class="odd">
+<td><strong>AC-009</strong></td>
+<td>Human escalation reports are generated for unresolved inconsistencies</td>
+<td>Unit test: <code>test_resolver.py::test_human_escalation</code></td>
+</tr>
+<tr class="even">
+<td><strong>AC-010</strong></td>
+<td>System handles malformed files without crashing</td>
+<td>Unit test: <code>test_ingestor.py::test_error_handling</code></td>
+</tr>
+<tr class="odd">
+<td><strong>AC-011</strong></td>
+<td>Performance meets targets (ingestion, indexing, query)</td>
+<td>Integration test: <code>test_full_pipeline.py::test_performance</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="test-scenarios" class="level3">
+<h3 class="anchored" data-anchor-id="test-scenarios">8.2 Test Scenarios</h3>
+<section id="scenario-1-basic-ingestion-and-retrieval" class="level4">
+<h4 class="anchored" data-anchor-id="scenario-1-basic-ingestion-and-retrieval"><strong>Scenario 1: Basic Ingestion and Retrieval</strong></h4>
+<ol type="1">
+<li>Place test files in <code>samples5/</code></li>
+<li>Run ingestion pipeline</li>
+<li>Query for “price”</li>
+<li>Verify results contain price-related deductions</li>
+</ol>
+</section>
+<section id="scenario-2-inconsistency-detection" class="level4">
+<h4 class="anchored" data-anchor-id="scenario-2-inconsistency-detection"><strong>Scenario 2: Inconsistency Detection</strong></h4>
+<ol type="1">
+<li>Create two versions of a file with conflicting price values</li>
+<li>Run both KG and RAG pipelines</li>
+<li>Run comparison</li>
+<li>Verify inconsistency is detected</li>
+<li>Verify auto-resolution selects the newer version</li>
+</ol>
+</section>
+<section id="scenario-3-human-escalation" class="level4">
+<h4 class="anchored" data-anchor-id="scenario-3-human-escalation"><strong>Scenario 3: Human Escalation</strong></h4>
+<ol type="1">
+<li>Create a file with ambiguous interpretation</li>
+<li>Run both pipelines</li>
+<li>Verify human escalation report is generated</li>
+<li>Verify report contains both sides and recommendations</li>
+</ol>
+</section>
+<section id="scenario-4-temporal-supersession" class="level4">
+<h4 class="anchored" data-anchor-id="scenario-4-temporal-supersession"><strong>Scenario 4: Temporal Supersession</strong></h4>
+<ol type="1">
+<li>Create file v1 with price=100 (timestamp T1)</li>
+<li>Create file v2 with price=120 (timestamp T2 &gt; T1)</li>
+<li>Run ingestion</li>
+<li>Verify RAG returns price=120 as current</li>
+<li>Verify KG also returns price=120</li>
+<li>Verify comparison shows consistency</li>
+</ol>
+</section>
+<section id="scenario-5-missing-data" class="level4">
+<h4 class="anchored" data-anchor-id="scenario-5-missing-data"><strong>Scenario 5: Missing Data</strong></h4>
+<ol type="1">
+<li>Remove a file from RAG ingestion</li>
+<li>Run comparison</li>
+<li>Verify “RAG missing” inconsistency is detected</li>
+<li>Verify report identifies the missing fact</li>
+</ol>
+<hr>
+</section>
+</section>
+</section>
+<section id="configuration-parameters" class="level2">
+<h2 class="anchored" data-anchor-id="configuration-parameters">9. Configuration Parameters</h2>
+<p>All parameters <strong>shall</strong> be configurable via <code>RAG_data/config.yaml</code> and environment variables.</p>
+<section id="configuration-file-config.yaml" class="level3">
+<h3 class="anchored" data-anchor-id="configuration-file-config.yaml">9.1 Configuration File (<code>config.yaml</code>)</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># File Ingestion</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ingestion</span><span class="kw">:</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">base_path</span><span class="kw">:</span><span class="at"> </span><span class="st">"samples5"</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">watch_mode</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">allowed_extensions</span><span class="kw">:</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">".txt"</span></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">".pdf"</span></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">".docx"</span></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">".xlsx"</span></span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">".pptx"</span></span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">batch_size</span><span class="kw">:</span><span class="at"> </span><span class="dv">100</span></span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Chunking</span></span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a><span class="fu">chunking</span><span class="kw">:</span></span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">chunk_size</span><span class="kw">:</span><span class="at"> </span><span class="dv">512</span></span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">overlap</span><span class="kw">:</span><span class="at"> </span><span class="dv">102</span></span>
+<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">min_chunk_size</span><span class="kw">:</span><span class="at"> </span><span class="dv">50</span></span>
+<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Embedding</span></span>
+<span id="cb25-20"><a href="#cb25-20" aria-hidden="true" tabindex="-1"></a><span class="fu">embedding</span><span class="kw">:</span></span>
+<span id="cb25-21"><a href="#cb25-21" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">model_name</span><span class="kw">:</span><span class="at"> </span><span class="st">"all-MiniLM-L6-v2"</span></span>
+<span id="cb25-22"><a href="#cb25-22" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">fallback_model</span><span class="kw">:</span><span class="at"> </span><span class="st">"BAAI/bge-small-en-v1.5"</span></span>
+<span id="cb25-23"><a href="#cb25-23" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">batch_size</span><span class="kw">:</span><span class="at"> </span><span class="dv">32</span></span>
+<span id="cb25-24"><a href="#cb25-24" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">normalize</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb25-25"><a href="#cb25-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-26"><a href="#cb25-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Vector Store</span></span>
+<span id="cb25-27"><a href="#cb25-27" aria-hidden="true" tabindex="-1"></a><span class="fu">vector_store</span><span class="kw">:</span></span>
+<span id="cb25-28"><a href="#cb25-28" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">host</span><span class="kw">:</span><span class="at"> </span><span class="st">"localhost"</span></span>
+<span id="cb25-29"><a href="#cb25-29" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">port</span><span class="kw">:</span><span class="at"> </span><span class="dv">6333</span></span>
+<span id="cb25-30"><a href="#cb25-30" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">collection_name</span><span class="kw">:</span><span class="at"> </span><span class="st">"rag_deductions"</span></span>
+<span id="cb25-31"><a href="#cb25-31" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">vector_size</span><span class="kw">:</span><span class="at"> </span><span class="dv">384</span></span>
+<span id="cb25-32"><a href="#cb25-32" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">distance</span><span class="kw">:</span><span class="at"> </span><span class="st">"Cosine"</span></span>
+<span id="cb25-33"><a href="#cb25-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-34"><a href="#cb25-34" aria-hidden="true" tabindex="-1"></a><span class="co"># Fact Deduction</span></span>
+<span id="cb25-35"><a href="#cb25-35" aria-hidden="true" tabindex="-1"></a><span class="fu">deduction</span><span class="kw">:</span></span>
+<span id="cb25-36"><a href="#cb25-36" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">confidence_threshold</span><span class="kw">:</span><span class="at"> </span><span class="fl">0.7</span></span>
+<span id="cb25-37"><a href="#cb25-37" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">predicate_map</span><span class="kw">:</span></span>
+<span id="cb25-38"><a href="#cb25-38" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">price</span><span class="kw">:</span><span class="at"> </span><span class="st">"has_price"</span></span>
+<span id="cb25-39"><a href="#cb25-39" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">cost</span><span class="kw">:</span><span class="at"> </span><span class="st">"has_price"</span></span>
+<span id="cb25-40"><a href="#cb25-40" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">amount</span><span class="kw">:</span><span class="at"> </span><span class="st">"has_price"</span></span>
+<span id="cb25-41"><a href="#cb25-41" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">headcount</span><span class="kw">:</span><span class="at"> </span><span class="st">"has_headcount"</span></span>
+<span id="cb25-42"><a href="#cb25-42" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">employees</span><span class="kw">:</span><span class="at"> </span><span class="st">"has_headcount"</span></span>
+<span id="cb25-43"><a href="#cb25-43" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">budget</span><span class="kw">:</span><span class="at"> </span><span class="st">"has_budget"</span></span>
+<span id="cb25-44"><a href="#cb25-44" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">date</span><span class="kw">:</span><span class="at"> </span><span class="st">"has_date"</span></span>
+<span id="cb25-45"><a href="#cb25-45" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">"as of"</span><span class="kw">:</span><span class="at"> </span><span class="st">"has_date"</span></span>
+<span id="cb25-46"><a href="#cb25-46" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">effective</span><span class="kw">:</span><span class="at"> </span><span class="st">"has_date"</span></span>
+<span id="cb25-47"><a href="#cb25-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-48"><a href="#cb25-48" aria-hidden="true" tabindex="-1"></a><span class="co"># Comparison</span></span>
+<span id="cb25-49"><a href="#cb25-49" aria-hidden="true" tabindex="-1"></a><span class="fu">comparison</span><span class="kw">:</span></span>
+<span id="cb25-50"><a href="#cb25-50" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">similarity_threshold</span><span class="kw">:</span><span class="at"> </span><span class="fl">0.85</span></span>
+<span id="cb25-51"><a href="#cb25-51" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">confidence_threshold</span><span class="kw">:</span><span class="at"> </span><span class="fl">0.9</span></span>
+<span id="cb25-52"><a href="#cb25-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-53"><a href="#cb25-53" aria-hidden="true" tabindex="-1"></a><span class="co"># Resolution</span></span>
+<span id="cb25-54"><a href="#cb25-54" aria-hidden="true" tabindex="-1"></a><span class="fu">resolution</span><span class="kw">:</span></span>
+<span id="cb25-55"><a href="#cb25-55" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">rules</span><span class="kw">:</span></span>
+<span id="cb25-56"><a href="#cb25-56" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> R1</span></span>
+<span id="cb25-57"><a href="#cb25-57" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> R2</span></span>
+<span id="cb25-58"><a href="#cb25-58" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> R3</span></span>
+<span id="cb25-59"><a href="#cb25-59" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> R4</span></span>
+<span id="cb25-60"><a href="#cb25-60" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> R5</span></span>
+<span id="cb25-61"><a href="#cb25-61" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> R6</span></span>
+<span id="cb25-62"><a href="#cb25-62" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> R7</span></span>
+<span id="cb25-63"><a href="#cb25-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-64"><a href="#cb25-64" aria-hidden="true" tabindex="-1"></a><span class="co"># Directories</span></span>
+<span id="cb25-65"><a href="#cb25-65" aria-hidden="true" tabindex="-1"></a><span class="fu">directories</span><span class="kw">:</span></span>
+<span id="cb25-66"><a href="#cb25-66" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">output</span><span class="kw">:</span><span class="at"> </span><span class="st">"RAG_data/output"</span></span>
+<span id="cb25-67"><a href="#cb25-67" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">logs</span><span class="kw">:</span><span class="at"> </span><span class="st">"RAG_data/logs"</span></span>
+<span id="cb25-68"><a href="#cb25-68" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">deductions_file</span><span class="kw">:</span><span class="at"> </span><span class="st">"RAG_data/deductions.jsonl"</span></span>
+<span id="cb25-69"><a href="#cb25-69" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">resolution_log</span><span class="kw">:</span><span class="at"> </span><span class="st">"RAG_data/resolution_log.jsonl"</span></span>
+<span id="cb25-70"><a href="#cb25-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-71"><a href="#cb25-71" aria-hidden="true" tabindex="-1"></a><span class="co"># Performance</span></span>
+<span id="cb25-72"><a href="#cb25-72" aria-hidden="true" tabindex="-1"></a><span class="fu">performance</span><span class="kw">:</span></span>
+<span id="cb25-73"><a href="#cb25-73" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">max_file_size_mb</span><span class="kw">:</span><span class="at"> </span><span class="dv">100</span></span>
+<span id="cb25-74"><a href="#cb25-74" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">max_concurrent_files</span><span class="kw">:</span><span class="at"> </span><span class="dv">10</span></span>
+<span id="cb25-75"><a href="#cb25-75" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">query_timeout_ms</span><span class="kw">:</span><span class="at"> </span><span class="dv">500</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="environment-variables" class="level3">
+<h3 class="anchored" data-anchor-id="environment-variables">9.2 Environment Variables</h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Variable</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>RAG_BASE_PATH</code></td>
+<td>Override base_path</td>
+<td><code>samples5</code></td>
+</tr>
+<tr class="even">
+<td><code>RAG_WATCH_MODE</code></td>
+<td>Enable watch mode</td>
+<td><code>false</code></td>
+</tr>
+<tr class="odd">
+<td><code>RAG_MODEL</code></td>
+<td>Embedding model</td>
+<td><code>all-MiniLM-L6-v2</code></td>
+</tr>
+<tr class="even">
+<td><code>RAG_VECTOR_HOST</code></td>
+<td>Vector store host</td>
+<td><code>localhost</code></td>
+</tr>
+<tr class="odd">
+<td><code>RAG_VECTOR_PORT</code></td>
+<td>Vector store port</td>
+<td><code>6333</code></td>
+</tr>
+<tr class="even">
+<td><code>RAG_CHUNK_SIZE</code></td>
+<td>Chunk size in tokens</td>
+<td><code>512</code></td>
+</tr>
+<tr class="odd">
+<td><code>RAG_OVERLAP</code></td>
+<td>Overlap in tokens</td>
+<td><code>102</code></td>
+</tr>
+<tr class="even">
+<td><code>RAG_CONFIDENCE_THRESHOLD</code></td>
+<td>Min confidence</td>
+<td><code>0.7</code></td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+</section>
+<section id="next-stage" class="level2">
+<h2 class="anchored" data-anchor-id="next-stage">10. Next Stage</h2>
+<p><strong>Awaiting human validation</strong> of this specification before proceeding to <strong>Stage 4 – Architect / Design</strong> (<code>04_RAG_Architecture.md</code>).</p>
+<hr>
+<p><strong>Status</strong>: Draft awaiting explicit human approval</p>
+
+
+</section>
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a></div></div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/KarthikeanJuttumahadevan4\.github\.io\/target_staleness\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>© 2026 United States Military Academy</p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+<script src="../../../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>
