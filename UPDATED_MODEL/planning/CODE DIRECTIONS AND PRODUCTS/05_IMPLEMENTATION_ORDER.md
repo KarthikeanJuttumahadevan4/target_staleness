@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # 05_IMPLEMENTATION_ORDER — Dependency-Ordered Task List
 
 ## Step 0 — Vendored environment (Day 0)

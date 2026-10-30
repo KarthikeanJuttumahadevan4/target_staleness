@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # SETUP_PHASE1_PART3.md – Phase 1 Remaining Files
 
 **Purpose**: Final set of Phase 1 files - the pipeline script that ties everything together.

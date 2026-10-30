@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # Validation Script
 
 ## File: `tests/validate.py`

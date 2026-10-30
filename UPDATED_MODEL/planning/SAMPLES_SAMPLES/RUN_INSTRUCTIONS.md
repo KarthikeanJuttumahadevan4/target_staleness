@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # Complete Run Instructions
 
 ## How to Create All Sample Files, Run Extraction, and Reproduce Results

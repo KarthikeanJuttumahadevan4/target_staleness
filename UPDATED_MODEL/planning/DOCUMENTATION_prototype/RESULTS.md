@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # Expected Results
 
 This document describes the expected output for each sample file when processed by the extractor.

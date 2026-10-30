@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # 🚀 RUN THE DEMO - FINAL INSTRUCTIONS
 
 ## 🎯 **THE SYSTEM IS READY!**

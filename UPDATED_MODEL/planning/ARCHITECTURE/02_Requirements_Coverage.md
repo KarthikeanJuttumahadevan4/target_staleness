@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # 02_Requirements_Coverage — Proposal → Implementation Mapping
 
 Maps `01_Proposal.md` requirements to implementation decisions.

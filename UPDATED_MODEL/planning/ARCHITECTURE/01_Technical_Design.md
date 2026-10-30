@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # 01_Technical_Design — System Architecture
 
 ## 1. System Boundaries

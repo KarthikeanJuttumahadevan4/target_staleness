@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # 🚀 Quick Start: Test the Temporal KG-RAG Model
 
 ## What's Ready to Test

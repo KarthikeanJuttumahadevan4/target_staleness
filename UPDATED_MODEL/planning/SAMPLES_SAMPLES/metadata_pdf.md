@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # PDF with Metadata
 
 **Filename**: `metadata.pdf`  

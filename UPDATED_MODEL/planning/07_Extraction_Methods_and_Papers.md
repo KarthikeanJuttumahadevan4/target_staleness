@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # 07_Extraction_Methods_and_Papers
 
 ## Purpose

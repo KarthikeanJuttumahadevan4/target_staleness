@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # 03_VLM_Enrichment — Visual Content Enrichment
 
 ## Purpose

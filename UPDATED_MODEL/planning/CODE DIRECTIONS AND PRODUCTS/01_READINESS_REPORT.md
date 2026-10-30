@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # 01_READINESS_REPORT — Architecture Verification
 
 Verified each ARCHITECTURE document's completeness against a "can a developer

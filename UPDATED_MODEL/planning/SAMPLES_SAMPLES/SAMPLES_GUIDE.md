@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # samples4 Directory - Complete Sample File Guide
 
 This directory contains **sample files for testing** the Universal File Metadata & Version History Extractor.

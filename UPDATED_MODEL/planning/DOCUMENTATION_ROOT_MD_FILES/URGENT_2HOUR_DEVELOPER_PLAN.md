@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # ⚡ URGENT 2-HOUR DEVELOPER PLAN - Get UI Working NOW
 
 ## ⏰ SITUATION: We Have Hours, Not Days

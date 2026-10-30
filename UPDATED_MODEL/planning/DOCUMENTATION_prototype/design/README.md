@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # Design Documents
 
 This directory contains all design documentation for the Universal File Metadata & Version History Extractor.

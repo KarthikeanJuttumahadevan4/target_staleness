@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # NEW PROJECT: Universal File Metadata & Version History Extractor
 
 **Status**: ✅ DESIGN COMPLETE - Ready for Implementation  

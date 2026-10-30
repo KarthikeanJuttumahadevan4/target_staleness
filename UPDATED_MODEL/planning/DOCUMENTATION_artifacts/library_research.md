@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # Library Research - Context7 Findings
 
 This document contains research findings from Context7 for docling, dspy, and uv libraries.

@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # DEV-P0-06 Implementation Specification - Pure RAG Retriever with Temporal Filter
 
 ## Ticket Summary

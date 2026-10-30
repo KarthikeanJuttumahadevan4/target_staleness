@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # 03_Specifications.md - Technical Specification
 
 ## 1. Purpose and Scope

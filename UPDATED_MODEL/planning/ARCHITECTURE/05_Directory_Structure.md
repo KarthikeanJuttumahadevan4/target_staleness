@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # 05_Directory_Structure — Final Repo Layout
 
 ```

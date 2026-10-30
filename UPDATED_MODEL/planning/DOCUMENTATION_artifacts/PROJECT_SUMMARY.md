@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # Project Summary: Universal File Metadata & Version History Extractor
 
 ## 🎉 What Has Been Created

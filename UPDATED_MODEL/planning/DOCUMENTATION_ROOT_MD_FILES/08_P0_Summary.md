@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # P0 Specifications Summary
 
 All P0 Developer tickets have been completed with implementation specifications.

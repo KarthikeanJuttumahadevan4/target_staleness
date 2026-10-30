@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # 04_Reconstruction — Temporal KG Construction & Conflict Resolution
 
 ## Purpose

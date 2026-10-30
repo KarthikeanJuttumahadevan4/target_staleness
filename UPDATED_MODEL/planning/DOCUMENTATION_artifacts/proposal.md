@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # Temporal-Valid Knowledge Graph Retrieval-Augmented Generation for Stale Data Renewal and Uncertainty Detection in Decision Support
 
 ## Abstract

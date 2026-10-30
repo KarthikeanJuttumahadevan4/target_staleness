@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # DEV-P1-11 Implementation Specification - VLM Enrichment & Reconstruction
 
 ## Ticket Summary

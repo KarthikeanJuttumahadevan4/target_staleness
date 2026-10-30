@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # User Interface for Temporal-Valid KG RAG System
 
 ## Overview

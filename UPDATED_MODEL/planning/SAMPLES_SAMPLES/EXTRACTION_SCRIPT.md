@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # Complete Extraction Script
 
 **File**: This would be `extract.py` in the project root

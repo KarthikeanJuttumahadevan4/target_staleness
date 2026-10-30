@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # REV-P0-01 Implementation Specification - Temporal Correctness Review
 
 ## Ticket Summary

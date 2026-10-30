@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # 11_Handoff_Checklist — Tech Lead Kickoff (post-Architect)
 
 > Status: **Ready for tech lead** (pending human sign-off of open security items).

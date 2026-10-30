@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # Version History Extractor Module
 
 ## Overview

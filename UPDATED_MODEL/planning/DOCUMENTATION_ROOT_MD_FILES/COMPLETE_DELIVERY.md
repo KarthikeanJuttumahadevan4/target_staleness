@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # 🎉 COMPLETE DELIVERY: Universal File Metadata & Version History Extractor
 
 ## What Has Been Delivered

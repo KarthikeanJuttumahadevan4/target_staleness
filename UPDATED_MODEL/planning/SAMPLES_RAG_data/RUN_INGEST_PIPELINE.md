@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # RUN_INGEST_PIPELINE.md – Run Ingestion and Verify
 
 After running RUN_ALL_PHASE1.md, execute these commands to test the pipeline.

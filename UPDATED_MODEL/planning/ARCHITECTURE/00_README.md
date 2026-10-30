@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # ARCHITECTURE — README & Index
 
 This directory contains the **technical design, planning artifacts, and implementation

@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # Run Instructions
 
 ## Quick Start (30 Seconds)

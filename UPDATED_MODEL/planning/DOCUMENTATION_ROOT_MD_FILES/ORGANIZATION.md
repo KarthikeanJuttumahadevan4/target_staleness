@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # 🗂️ Project Organization - Old vs New Information
 
 This document explains how all files are organized to **clearly differentiate** between:

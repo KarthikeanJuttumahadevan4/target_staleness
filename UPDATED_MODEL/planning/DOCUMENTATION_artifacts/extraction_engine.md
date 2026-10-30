@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # Universal File Extraction Engine
 
 ## Overview

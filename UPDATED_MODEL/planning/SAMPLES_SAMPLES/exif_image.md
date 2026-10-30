@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # Image with EXIF Metadata
 
 **Filename**: `exif_image.jpg` (or `.png`)  

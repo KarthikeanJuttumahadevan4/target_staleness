@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # Invoice Extractor - Specification
 
 ## Problem Statement

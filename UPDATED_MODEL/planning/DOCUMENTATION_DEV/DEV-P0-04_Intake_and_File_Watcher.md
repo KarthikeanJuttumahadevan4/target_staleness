@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # DEV-P0-04 Implementation Specification - Intake & File Watcher
 
 ## Ticket Summary

@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # Test Data Report - Mock Extractions for extract.py & Knowledge Graph Prototype
 
 ## Overview

@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # 03_RAG_Specifications.md – Independent RAG Technical Specifications
 
 ## 1. Overview

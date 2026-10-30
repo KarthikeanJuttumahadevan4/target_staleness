@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # DEV-P0-01: Create RAG_data Directory Structure
 
 **Ticket**: DEV-P0-01: Create RAG_data Directory Structure  

@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # 📋 TECH LEAD EXECUTIVE ORDER
 
 ## MISSION

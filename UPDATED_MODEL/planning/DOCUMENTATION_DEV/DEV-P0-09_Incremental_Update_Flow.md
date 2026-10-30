@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # DEV-P0-09 Implementation Specification - End-to-End Incremental Update Flow
 
 ## Ticket Summary

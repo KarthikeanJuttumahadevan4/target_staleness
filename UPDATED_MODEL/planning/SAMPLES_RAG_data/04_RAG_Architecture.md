@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # 04_RAG_Architecture.md – Independent RAG Architecture & Design
 
 ## 1. Overview

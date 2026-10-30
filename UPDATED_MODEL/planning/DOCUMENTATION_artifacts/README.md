@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # Artifacts Directory Index
 
 This directory contains documentation for **two different projects**:

@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # 01_Architecture — Assembled Pipeline
 
 ## End-to-End Pipeline (from Proposal, assembled)

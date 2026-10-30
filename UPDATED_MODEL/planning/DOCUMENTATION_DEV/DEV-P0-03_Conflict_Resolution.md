@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # DEV-P0-03 Implementation Specification - Temporal Conflict Resolution Engine
 
 ## Ticket Summary

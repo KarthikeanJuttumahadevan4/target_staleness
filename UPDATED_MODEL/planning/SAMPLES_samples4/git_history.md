@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # Git Version History
 
 **Filename**: `samples4_git/evolution.txt` (file in git repo)  

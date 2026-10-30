@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # Planning Documents
 
 This directory contains all planning documentation for the Temporal-Valid KG RAG System.

@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # Sample File: test.txt Template
 
 This file is a **template** for creating `test.txt`. Copy the content below and save it as `samples/test.txt`.

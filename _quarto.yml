@@ -3,7 +3,8 @@ project:
   render:
     - index.qmd
     - lessons/
-    - UPDATED_MODEL/
+    - UPDATED_MODEL/index.qmd
+    - UPDATED_MODEL/planning/
   resources:
     - CNAME
     - robots.txt

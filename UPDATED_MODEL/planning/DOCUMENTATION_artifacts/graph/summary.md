@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # Knowledge Graph Prototype Summary
 Nodes: 44, Edges: 63
 ## Vendors

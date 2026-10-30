@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # DEV-P0-01 Status Update - Locate and Wrap extract.py
 
 ## Finding

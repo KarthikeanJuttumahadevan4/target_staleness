@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # 07_Milestones — Plan with Exit Criteria
 
 | # | Milestone | Exit Criteria |

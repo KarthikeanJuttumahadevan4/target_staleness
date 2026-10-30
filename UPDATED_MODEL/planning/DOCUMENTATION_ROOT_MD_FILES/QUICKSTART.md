@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # 🚀 Quick Start Guide
 
 ## Get the Universal File Metadata & Version History Extractor Running in 2 Hours

@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # 06_RAG_Tickets.md – Implementation Tickets
 
 ---

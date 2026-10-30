@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # DEV-P0-02 Implementation Specification - Knowledge Graph Schema Setup
 
 ## Ticket Summary

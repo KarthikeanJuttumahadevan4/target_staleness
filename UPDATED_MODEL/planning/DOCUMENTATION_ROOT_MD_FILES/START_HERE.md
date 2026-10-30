@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # START HERE 🚀
 
 ## You Want to Test the Universal File Metadata & Version History Extractor

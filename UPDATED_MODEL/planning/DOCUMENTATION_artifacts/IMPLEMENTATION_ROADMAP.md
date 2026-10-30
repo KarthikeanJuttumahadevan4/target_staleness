@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # Implementation Roadmap
 
 ## Project: Universal File Metadata & Version History Extractor

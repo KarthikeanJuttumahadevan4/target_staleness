@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # 01_RAG_Proposal.md – Independent RAG System Proposal
 
 ## Project Name

@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 Unified pipeline script
 
 Create run_pipeline.py with the following content to run batch_extract -> build_graph -> open HTML automatically.

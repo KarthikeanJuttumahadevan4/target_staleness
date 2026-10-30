@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # 02_Intake_Extraction — Document Intake & Multi-Path Extraction
 
 ## Problem Statement (from Proposal)

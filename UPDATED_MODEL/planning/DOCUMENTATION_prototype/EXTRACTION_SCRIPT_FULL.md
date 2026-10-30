@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # Universal File Extraction Script - Full Version
 
 This is the **complete Python script** with PDF and Excel support for the Universal File Metadata & Version History Extractor.

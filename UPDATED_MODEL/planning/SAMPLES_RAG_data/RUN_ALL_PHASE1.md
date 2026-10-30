@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # RUN_ALL_PHASE1.md – Execute All Phase 1 Creation Commands
 
 This is a **single unified script** that creates all Phase 1 files in one go. 

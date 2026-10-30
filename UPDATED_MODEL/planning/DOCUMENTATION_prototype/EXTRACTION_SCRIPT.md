@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # Universal File Extraction Script
 
 This is the main Python script template for the Universal File Metadata & Version History Extractor.

@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # samples4 Directory
 
 ## Purpose

@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # SETUP_PHASE1_PART2.md – Phase 1 Implementation Files (Part 2)
 
 **Purpose**: Continuation of Phase 1 file creation. Run these commands **after** completing SETUP_PHASE1.md.

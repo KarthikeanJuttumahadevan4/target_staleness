@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # 04_Database_Design — Neo4j + Qdrant Schema
 
 ## 1. Graph Backend Decision: **Neo4j**

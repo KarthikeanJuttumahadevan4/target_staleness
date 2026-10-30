@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # Expected Results for All Sample Files
 
 This document shows the **expected extraction output** for each sample file type. Use this to verify your implementation is working correctly.

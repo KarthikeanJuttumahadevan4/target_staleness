@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # batch_extract.py
 ```python
 #!/usr/bin/env python3

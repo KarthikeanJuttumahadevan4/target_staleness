@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # Text File Samples (3 files)
 
 Use these commands to create the 3 text sample files for testing.

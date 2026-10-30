@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # multi_edit_text.history.json - Expected Edit History
 
 This file contains the **expected knowledge graph structure** for `multi_edit_text.txt`.

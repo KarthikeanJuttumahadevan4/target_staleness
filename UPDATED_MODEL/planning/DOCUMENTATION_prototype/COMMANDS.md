@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # EXACT Commands to Create Everything
 
 This file contains the **exact step-by-step commands** to create the full prototype with PDF + Excel support and all 9 sample files.

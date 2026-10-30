@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # TEST-P0-02 Implementation Specification - Retrieval Mode Temporal Tests
 
 ## Ticket Summary

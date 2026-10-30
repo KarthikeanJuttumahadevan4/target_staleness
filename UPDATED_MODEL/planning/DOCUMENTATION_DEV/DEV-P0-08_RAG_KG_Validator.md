@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # DEV-P0-08 Implementation Specification - RAG + KG Validator Retriever
 
 ## Ticket Summary

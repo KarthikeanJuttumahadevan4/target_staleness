@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # 02_MODULE_SPECS — Per-Module Developer Contract
 
 > All paths relative to repo root. Python ≥3.10. Pydantic v2. All code thread-safe

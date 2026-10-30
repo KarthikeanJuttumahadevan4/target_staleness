@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # 01_Proposal.md - Project Proposal
 
 ## Project Name

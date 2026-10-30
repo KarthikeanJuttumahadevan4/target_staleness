@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # 08_DEVELOPER_TASKS — Implementation Task List
 
 ## Phase 0 — Vendored environment

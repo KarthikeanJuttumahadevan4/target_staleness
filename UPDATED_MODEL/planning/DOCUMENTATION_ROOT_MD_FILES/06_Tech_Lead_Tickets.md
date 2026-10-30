@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # 06_Tech_Lead_Tickets.md - Tech Lead Implementation Tickets
 
 ## Gating Policy

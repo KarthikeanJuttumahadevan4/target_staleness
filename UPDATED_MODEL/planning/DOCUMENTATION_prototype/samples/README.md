@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # Sample Files
 
 This directory should contain **9 sample files** for testing the extractor:

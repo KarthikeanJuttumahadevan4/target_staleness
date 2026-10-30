@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # DEV-P0-01 Implementation Specification - Locate and Wrap extract.py
 
 ## Ticket Summary

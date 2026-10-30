@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # IMPLEMENTATION COMPLETE — Handoff Summary
 
 ## What Was Delivered

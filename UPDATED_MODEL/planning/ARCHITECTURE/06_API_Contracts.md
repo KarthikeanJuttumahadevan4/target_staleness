@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # 06_API_Contracts — Internal Interfaces
 
 ## Intake

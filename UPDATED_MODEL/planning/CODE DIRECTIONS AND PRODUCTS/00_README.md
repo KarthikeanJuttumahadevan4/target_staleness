@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # CODE DIRECTIONS AND PRODUCTS — Coder Implementation Kit
 
 ## Purpose

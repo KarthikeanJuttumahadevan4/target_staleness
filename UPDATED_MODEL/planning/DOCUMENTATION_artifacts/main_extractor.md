@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # Main Extractor Module (extract.py)
 
 ## Overview

@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # Requirements for Knowledge Graph Prototype
 
 ## Existing extraction stack

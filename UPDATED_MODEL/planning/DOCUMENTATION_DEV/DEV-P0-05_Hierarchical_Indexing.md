@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # DEV-P0-05 Implementation Specification - Hierarchical Indexing with Temporal Payload
 
 ## Ticket Summary

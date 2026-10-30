@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # Video File with Metadata
 
 **Filename**: `sample_video.mp4` (or `.mov`, `.avi`)  

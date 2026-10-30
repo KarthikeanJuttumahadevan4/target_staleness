@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # 06_Model_Inventory — Git Projects Used & Developers
 
 ## Purpose

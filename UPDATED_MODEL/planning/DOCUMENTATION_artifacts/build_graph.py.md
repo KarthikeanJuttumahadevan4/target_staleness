@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # build_graph.py
 ```python
 #!/usr/bin/env python3

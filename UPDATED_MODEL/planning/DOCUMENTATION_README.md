@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # Temporal-Valid Knowledge Graph RAG System with Multi-Path Extraction
 
 > **A production system for ingesting, versioning, and querying heterogeneous

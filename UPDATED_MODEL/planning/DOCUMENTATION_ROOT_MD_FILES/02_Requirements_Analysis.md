@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # 02_Requirements_Analysis.md - Requirements Analysis
 
 ## Purpose

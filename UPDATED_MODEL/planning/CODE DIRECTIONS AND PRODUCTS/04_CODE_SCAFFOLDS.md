@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # 04_CODE_SCAFFOLDS — Copy-Paste Skeletons per File
 
 > Replace `pass` / `raise NotImplementedError` bodies with real implementation.

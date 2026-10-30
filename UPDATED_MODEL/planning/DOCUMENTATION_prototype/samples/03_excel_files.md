@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # Excel File Samples (3 files)
 
 Use these commands to create the 3 Excel sample files for testing.

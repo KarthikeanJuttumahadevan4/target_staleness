@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # 05_RAG_Task_Breakdown.md – Implementation Task Breakdown
 
 ## 1. Overview

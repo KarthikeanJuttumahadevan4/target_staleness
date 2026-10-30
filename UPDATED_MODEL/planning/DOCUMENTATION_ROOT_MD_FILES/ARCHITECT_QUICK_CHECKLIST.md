@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # ✅ ARCHITECT QUICK CHECKLIST - Query-to-Output
 
 ## The Problem

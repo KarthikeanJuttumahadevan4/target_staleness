@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # 07_ACCEPTANCE_CHECKS — Per-Module Test Recipes
 
 | Module | Test file | Check |

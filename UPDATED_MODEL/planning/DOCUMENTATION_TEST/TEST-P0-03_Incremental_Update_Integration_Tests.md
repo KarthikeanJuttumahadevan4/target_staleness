@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # TEST-P0-03 Implementation Specification - Incremental Update Integration Tests
 
 ## Ticket Summary

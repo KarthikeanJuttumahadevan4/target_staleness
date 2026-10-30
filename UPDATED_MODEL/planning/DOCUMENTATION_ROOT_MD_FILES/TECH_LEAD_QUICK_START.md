@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # 🚀 TECH LEAD QUICK START - Working UI in 2 Weeks
 
 ## Your Mission

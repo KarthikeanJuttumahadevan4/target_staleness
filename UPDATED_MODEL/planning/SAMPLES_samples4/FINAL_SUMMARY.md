@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # Final Summary: All Sample Files Ready for Testing
 
 ## 🎉 You're Ready to Go!

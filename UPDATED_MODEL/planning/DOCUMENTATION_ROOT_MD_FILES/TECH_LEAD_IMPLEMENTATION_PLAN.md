@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # 🚀 TECH LEAD IMPLEMENTATION PLAN - Working UI with Proper Outputs
 
 ## Executive Summary

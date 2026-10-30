@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 % Universal File Metadata & Version History Extractor
 % Workshop Slideshow
 %!

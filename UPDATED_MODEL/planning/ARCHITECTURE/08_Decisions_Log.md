@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # 08_Decisions_Log — Question Answers
 
 Each row: Question → Decision → Military Rationale.

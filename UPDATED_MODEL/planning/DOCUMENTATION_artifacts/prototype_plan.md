@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # Knowledge Graph Prototype – Tonight Plan
 
 ## Current capability

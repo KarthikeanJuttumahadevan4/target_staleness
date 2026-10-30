@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # 03_Coding_Implementation_Plan
 
 ## Phase 0 — Foundation (1 day)

@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # multi_edit_text.txt - Test File Content
 
 This file contains the content for `samples4/text_files/multi_edit_text.txt`.

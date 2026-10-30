@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # DEV-P0-07 Implementation Specification - KG-only Retriever
 
 ## Ticket Summary

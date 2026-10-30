@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # Task Tracker
 
 ## Status Legend

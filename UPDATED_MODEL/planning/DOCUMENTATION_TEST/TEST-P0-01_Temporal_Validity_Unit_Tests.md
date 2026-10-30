@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # TEST-P0-01 Implementation Specification - Temporal Validity Unit Tests
 
 ## Ticket Summary

@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # 02_RAG_Requirements_Analysis.md – Independent RAG Requirements Analysis
 
 ## 1. Introduction

@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # 03_INTERFACES_MODELS — Copy-Paste Pydantic Models
 
 > Place in `src/models.py` (or `src/models/__init__.py`). All module IO uses these.

@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # SETUP_PHASE1.md – Complete Phase 1 File Creation Script
 
 **Purpose**: This document contains **all fish-compatible commands** needed to create every file for Phase 1 of the Independent RAG System implementation.  

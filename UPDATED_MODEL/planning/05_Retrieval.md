@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # 05_Retrieval — Hybrid Retrieval (3 Modes, Temporal-Aware)
 
 ## Purpose (from Proposal)

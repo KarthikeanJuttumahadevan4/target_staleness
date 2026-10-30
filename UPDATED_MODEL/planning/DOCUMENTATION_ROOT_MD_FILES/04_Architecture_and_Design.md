@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # 04_Architecture_and_Design.md - Architecture and Design
 
 ## 1. High-Level Architecture Overview

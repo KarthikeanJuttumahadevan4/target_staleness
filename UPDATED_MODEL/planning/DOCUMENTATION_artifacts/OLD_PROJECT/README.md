@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # OLD PROJECT: Invoice Extractor
 
 **Status**: ✅ COMPLETED (Original Project)  

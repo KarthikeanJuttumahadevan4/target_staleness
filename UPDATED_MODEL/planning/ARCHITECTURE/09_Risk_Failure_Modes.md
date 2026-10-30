@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # 09_Risk_Failure_Modes — Military Systems View
 
 ## Failure Modes

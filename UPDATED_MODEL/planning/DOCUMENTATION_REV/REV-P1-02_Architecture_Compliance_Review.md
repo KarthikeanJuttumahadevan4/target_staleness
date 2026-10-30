@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # REV-P1-02 Implementation Specification - Architecture Compliance Review
 
 ## Ticket Summary

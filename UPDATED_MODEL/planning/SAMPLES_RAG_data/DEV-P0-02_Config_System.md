@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # DEV-P0-02: Implement Configuration System
 
 **Ticket**: DEV-P0-02: Implement Configuration System  

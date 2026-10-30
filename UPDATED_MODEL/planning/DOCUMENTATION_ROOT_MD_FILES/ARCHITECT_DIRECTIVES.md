@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # 📋 ARCHITECT DIRECTIVES - Actions Required Before Query-to-Output
 
 ## Purpose

@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # 🚀 Real-Time Demo Test Guide for Temporal-Valid KG-RAG System
 
 ## Overview

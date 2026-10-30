@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # ⚡ URGENT: COMMAND-BY-COMMAND (Copy-Paste These)
 
 ## NO READING. NO THINKING. JUST DO IT.

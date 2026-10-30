@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # Word Document with Track Changes
 
 **Filename**: `tracked_changes.docx`  

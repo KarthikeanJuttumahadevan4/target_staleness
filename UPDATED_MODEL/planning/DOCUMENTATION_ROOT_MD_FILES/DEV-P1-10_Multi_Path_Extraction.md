@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # DEV-P1-10 Implementation Specification - Multi-path Extraction
 
 ## Ticket Summary
