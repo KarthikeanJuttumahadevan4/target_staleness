@@ -3,6 +3,7 @@ project:
   render:
     - index.qmd
     - lessons/
+    - UPDATED_MODEL/
   resources:
     - CNAME
     - robots.txt
@@ -26,6 +27,11 @@ website:
   navbar:
     foreground: black
     background: "#d3bc8d"
+    left:
+      - href: index.qmd
+        text: Home
+      - href: UPDATED_MODEL/index.qmd
+        text: Model Docs
 
 format:
   html:
@@ -48,7 +54,7 @@ format:
     grid:
       body-width: 1800px
   revealjs:
-    author: Dr. Joe Snuffy
+    author: Karthik
     center: true
     date-format: full
     transition: fade

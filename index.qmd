@@ -1,5 +1,5 @@
 ---
-title: "My Course Website"
+title: "My Project Website"
 lightbox: true
 format: html
 listing:
@@ -12,12 +12,12 @@ listing:
         - lessons/*.qmd
 ---
 
-# Course Website
+# Project Website
 
-Source code for a course website. The slides are written in [Markdown](https://www.markdownguide.org/) and converted into a functional website using [Quarto](https://quarto.org/) and [reveal.js](https://revealjs.com/).
+Source code for a Project website. The slides are written in [Markdown](https://www.markdownguide.org/) and converted into a functional website using [Quarto](https://quarto.org/) and [reveal.js](https://revealjs.com/).
 
 
-## Course Objectives
+## Project Objectives
 
 1. Understand and apply fundamental programming concepts.
 1. Develop problem-solving and algorithmic thinking skills.
@@ -28,16 +28,3 @@ Source code for a course website. The slides are written in [Markdown](https://w
 ::: {#lessons}
 :::
 
-
-## Official Resources
-
-- [Python 3](https://www.python.org/)
-- [Visual Studio Code](https://code.visualstudio.com/)
-
-
-### Documentation and Tutorials
-
-- [DevDocs.io](https://devdocs.io/python~3.12/)
-- [Python Notes for Professionals](https://goalkicker.com/PythonBook/)
-- [Official Python Documentation](https://docs.python.org/)
-- [How to Python in VS Code](https://py-vscode.readthedocs.io/)
