@@ -1,0 +1,5 @@
+Invoice
+Vendor: Test Vendor Inc
+Invoice Date: Jan 9 1976
+Total: 1234.56
+Notes: This is a test invoice for validation. The invoice date is Jan 9 1976 and the total amount is 1234.56. Please process accordingly.

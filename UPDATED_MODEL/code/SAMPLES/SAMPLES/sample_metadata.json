@@ -1,0 +1,15 @@
+{
+  "document": {
+    "title": "Test Configuration Document",
+    "version": "1.0",
+    "created": "2024-01-15T10:30:00Z",
+    "modified": "2024-01-15T10:30:00Z"
+  },
+  "entities": [
+    {"id": "emp1", "name": "John Smith", "role": "CEO"},
+    {"id": "org1", "name": "Acme Corporation"}
+  ],
+  "relationships": [
+    {"source": "emp1", "target": "org1", "type": "WORKS_AT"}
+  ]
+}

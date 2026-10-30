@@ -1,0 +1,117 @@
+"""
+FastAPI server for the Temporal-Valid KG RAG System.
+
+This module provides the HTTP API endpoints for querying the
+knowledge graph. It implements the three retrieval modes and
+provides health check endpoints.
+
+Usage:
+    from src.api.server import app
+    import uvicorn
+
+    uvicorn.run(app, host="0.0.0.0", port=8000)
+"""
+
+from __future__ import annotations
+
+from fastapi import FastAPI, HTTPException, Depends
+from fastapi.responses import JSONResponse
+
+from src.models import QueryRequest, AnswerResponse
+from src.retrieval.hybrid import query
+from src.config import get_settings
+
+# Initialize FastAPI app
+app = FastAPI(
+    title="Temporal-Valid KG RAG API",
+    description="API for querying temporal knowledge graphs with three retrieval modes",
+    version="2.0.0",
+)
+
+
+@app.get("/health")
+async def health_check():
+    """
+    Health check endpoint.
+
+    Returns basic health status for load balancers and monitoring.
+    """
+    return {"status": "ok", "service": "temporal-kg-rag"}
+
+
+@app.get("/ready")
+async def readiness_check():
+    """
+    Readiness check endpoint.
+
+    Checks if the service is ready to accept traffic.
+    Verifies database connections are established.
+    """
+    # TODO: Tech lead - add actual DB connectivity checks
+    return {"ready": True, "checks": {"databases": "connected"}}
+
+
+@app.post("/query")
+async def query_endpoint(request: QueryRequest, settings=Depends(get_settings)):
+    """
+    Query the knowledge graph.
+
+    Supports three retrieval modes:
+    - pure_rag: Vector similarity search only
+    - rag_kg_validator: Hybrid with KG validation
+    - kg_only: Graph traversal only
+
+    Query Parameters:
+    - question: The natural language question to answer
+    - mode: Retrieval mode (default: pure_rag)
+    - as_of: ISO timestamp for historical query (optional)
+    - include_history: Include superseded facts in results
+    - k: Number of results to retrieve
+
+    Returns:
+    - answer: Generated answer with citations
+    - facts: List of supporting facts
+    - confidence: Overall confidence score
+    - audit_id: ID for audit trail
+    """
+    try:
+        # Execute retrieval
+        results = query(
+            question=request.question,
+            mode=request.mode,
+            as_of=request.as_of,
+            include_history=request.include_history,
+            k=request.k,
+            org_unit=request.org_unit,
+        )
+
+        # TODO: Tech lead - add answer generation with DSPy
+        # For now, return raw facts
+        return AnswerResponse(
+            answer="[ANSWER PENDING IMPLEMENTATION - add DSPy answer generation]",
+            facts=results.facts,
+            mode=results.mode,
+            confidence=0.0,
+            audit_id=results.audit_id,
+            supported_claims=[f.content for f in results.facts[:5]],
+            unsupported_claims=[],
+        )
+
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.post("/health/detailed")
+async def detailed_health(settings=Depends(get_settings)):
+    """
+    Detailed health check with component status.
+    """
+    return {
+        "status": "detailed",
+        "components": {
+            "config": "loaded",
+            "neo4j": "pending_connection_check",
+            "qdrant": "pending_connection_check",
+            "llm_gateway": "configured",
+        },
+    }

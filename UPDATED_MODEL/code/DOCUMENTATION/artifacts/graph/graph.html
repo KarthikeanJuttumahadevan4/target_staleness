@@ -1,0 +1,155 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        
+            <script src="lib/bindings/utils.js"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/dist/vis-network.min.css" integrity="sha512-WgxfT5LWjfszlPHXRmBWHkV2eceiWTOBvrKCNbdgDYTHrT2AeLCGbF4sZlZw3UMN3WtL0tGUoIAKsu8mllg/XA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/vis-network.min.js" integrity="sha512-LnvoEWDFrqGHlHmDD2101OrLcbsfkrzoSpvtSQtxK3RMnRV0eOkhhBN2dXHKRrUU8p2DGRTk35n4O8nWSVe1mQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            
+        
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+          crossorigin="anonymous"
+        />
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+          crossorigin="anonymous"
+        ></script>
+
+
+        <center>
+          <h1></h1>
+        </center>
+        <style type="text/css">
+
+             #mynetwork {
+                 width: 100%;
+                 height: 800px;
+                 background-color: #ffffff;
+                 border: 1px solid lightgray;
+                 position: relative;
+                 float: left;
+             }
+
+             
+
+             
+
+             
+        </style>
+    </head>
+
+
+    <body>
+        <div class="card" style="width: 100%">
+            
+            
+            <div id="mynetwork" class="card-body"></div>
+        </div>
+
+        
+        
+
+        <script type="text/javascript">
+
+              // initialize global variables.
+              var edges;
+              var nodes;
+              var allNodes;
+              var allEdges;
+              var nodeColors;
+              var originalNodes;
+              var network;
+              var container;
+              var options, data;
+              var filter = {
+                  item : '',
+                  property : '',
+                  value : []
+              };
+
+              
+
+              
+
+              // This method is responsible for drawing the graph, returns the drawn network
+              function drawGraph() {
+                  var container = document.getElementById('mynetwork');
+
+                  
+
+                  // parsing and collecting nodes and edges from the python
+                  nodes = new vis.DataSet([{"color": "#6baed6", "id": "invoice:audio_1.wav", "label": "invoice:audio_1.wav", "shape": "dot", "title": "{\"type\": \"Invoice\", \"vendor\": \"Unknown Vendor\", \"invoice_date\": \"\", \"total\": null, \"recency\": \"last_30d\", \"file\": \"audio_1.wav\", \"suffix\": \".wav\"}"}, {"color": "#fd8d3c", "id": "vendor:Unknown Vendor", "label": "Unknown Vendor", "shape": "dot", "title": "{\"type\": \"Vendor\", \"name\": \"Unknown Vendor\"}"}, {"color": "#74c476", "id": "file:audio_1.wav", "label": "audio_1.wav", "shape": "dot", "title": "{\"type\": \"File\", \"name\": \"audio_1.wav\", \"path\": \"/home/karthikean.juttumaha/mini-extract/samples/audio_1.wav\", \"suffix\": \".wav\", \"mtime\": \"2026-09-23 21:07:13.968097+00:00\"}"}, {"color": "#9e9ac8", "id": "month:2026-09", "label": "2026-09", "shape": "dot", "title": "{\"type\": \"Month\", \"name\": \"2026-09\"}"}, {"color": "#6baed6", "id": "invoice:audio_2.wav", "label": "invoice:audio_2.wav", "shape": "dot", "title": "{\"type\": \"Invoice\", \"vendor\": \"Unknown Vendor\", \"invoice_date\": \"\", \"total\": null, \"recency\": \"last_30d\", \"file\": \"audio_2.wav\", \"suffix\": \".wav\"}"}, {"color": "#74c476", "id": "file:audio_2.wav", "label": "audio_2.wav", "shape": "dot", "title": "{\"type\": \"File\", \"name\": \"audio_2.wav\", \"path\": \"/home/karthikean.juttumaha/mini-extract/samples/audio_2.wav\", \"suffix\": \".wav\", \"mtime\": \"2026-09-23 21:07:14.010482+00:00\"}"}, {"color": "#6baed6", "id": "invoice:audio_3.wav", "label": "invoice:audio_3.wav", "shape": "dot", "title": "{\"type\": \"Invoice\", \"vendor\": \"Unknown Vendor\", \"invoice_date\": \"\", \"total\": null, \"recency\": \"last_30d\", \"file\": \"audio_3.wav\", \"suffix\": \".wav\"}"}, {"color": "#74c476", "id": "file:audio_3.wav", "label": "audio_3.wav", "shape": "dot", "title": "{\"type\": \"File\", \"name\": \"audio_3.wav\", \"path\": \"/home/karthikean.juttumaha/mini-extract/samples/audio_3.wav\", \"suffix\": \".wav\", \"mtime\": \"2026-09-23 21:07:14.052482+00:00\"}"}, {"color": "#6baed6", "id": "invoice:audio_4.wav", "label": "invoice:audio_4.wav", "shape": "dot", "title": "{\"type\": \"Invoice\", \"vendor\": \"Unknown Vendor\", \"invoice_date\": \"\", \"total\": null, \"recency\": \"last_30d\", \"file\": \"audio_4.wav\", \"suffix\": \".wav\"}"}, {"color": "#74c476", "id": "file:audio_4.wav", "label": "audio_4.wav", "shape": "dot", "title": "{\"type\": \"File\", \"name\": \"audio_4.wav\", \"path\": \"/home/karthikean.juttumaha/mini-extract/samples/audio_4.wav\", \"suffix\": \".wav\", \"mtime\": \"2026-09-23 21:07:14.093776+00:00\"}"}, {"color": "#6baed6", "id": "invoice:audio_5.wav", "label": "invoice:audio_5.wav", "shape": "dot", "title": "{\"type\": \"Invoice\", \"vendor\": \"Unknown Vendor\", \"invoice_date\": \"\", \"total\": null, \"recency\": \"last_30d\", \"file\": \"audio_5.wav\", \"suffix\": \".wav\"}"}, {"color": "#74c476", "id": "file:audio_5.wav", "label": "audio_5.wav", "shape": "dot", "title": "{\"type\": \"File\", \"name\": \"audio_5.wav\", \"path\": \"/home/karthikean.juttumaha/mini-extract/samples/audio_5.wav\", \"suffix\": \".wav\", \"mtime\": \"2026-09-23 21:07:14.135799+00:00\"}"}, {"color": "#6baed6", "id": "invoice:data_1.xlsx", "label": "invoice:data_1.xlsx", "shape": "dot", "title": "{\"type\": \"Invoice\", \"vendor\": \"Unknown Vendor\", \"invoice_date\": \"\", \"total\": null, \"recency\": \"last_30d\", \"file\": \"data_1.xlsx\", \"suffix\": \".xlsx\"}"}, {"color": "#74c476", "id": "file:data_1.xlsx", "label": "data_1.xlsx", "shape": "dot", "title": "{\"type\": \"File\", \"name\": \"data_1.xlsx\", \"path\": \"/home/karthikean.juttumaha/mini-extract/samples/data_1.xlsx\", \"suffix\": \".xlsx\", \"mtime\": \"2026-09-23 21:06:58.872099+00:00\"}"}, {"color": "#6baed6", "id": "invoice:data_2.xlsx", "label": "invoice:data_2.xlsx", "shape": "dot", "title": "{\"type\": \"Invoice\", \"vendor\": \"Unknown Vendor\", \"invoice_date\": \"\", \"total\": null, \"recency\": \"last_30d\", \"file\": \"data_2.xlsx\", \"suffix\": \".xlsx\"}"}, {"color": "#74c476", "id": "file:data_2.xlsx", "label": "data_2.xlsx", "shape": "dot", "title": "{\"type\": \"File\", \"name\": \"data_2.xlsx\", \"path\": \"/home/karthikean.juttumaha/mini-extract/samples/data_2.xlsx\", \"suffix\": \".xlsx\", \"mtime\": \"2026-09-23 21:06:58.874712+00:00\"}"}, {"color": "#6baed6", "id": "invoice:data_3.xlsx", "label": "invoice:data_3.xlsx", "shape": "dot", "title": "{\"type\": \"Invoice\", \"vendor\": \"Unknown Vendor\", \"invoice_date\": \"\", \"total\": null, \"recency\": \"last_30d\", \"file\": \"data_3.xlsx\", \"suffix\": \".xlsx\"}"}, {"color": "#74c476", "id": "file:data_3.xlsx", "label": "data_3.xlsx", "shape": "dot", "title": "{\"type\": \"File\", \"name\": \"data_3.xlsx\", \"path\": \"/home/karthikean.juttumaha/mini-extract/samples/data_3.xlsx\", \"suffix\": \".xlsx\", \"mtime\": \"2026-09-23 21:06:58.876238+00:00\"}"}, {"color": "#6baed6", "id": "invoice:data_4.xlsx", "label": "invoice:data_4.xlsx", "shape": "dot", "title": "{\"type\": \"Invoice\", \"vendor\": \"Unknown Vendor\", \"invoice_date\": \"\", \"total\": null, \"recency\": \"last_30d\", \"file\": \"data_4.xlsx\", \"suffix\": \".xlsx\"}"}, {"color": "#74c476", "id": "file:data_4.xlsx", "label": "data_4.xlsx", "shape": "dot", "title": "{\"type\": \"File\", \"name\": \"data_4.xlsx\", \"path\": \"/home/karthikean.juttumaha/mini-extract/samples/data_4.xlsx\", \"suffix\": \".xlsx\", \"mtime\": \"2026-09-23 21:06:58.877871+00:00\"}"}, {"color": "#6baed6", "id": "invoice:data_5.xlsx", "label": "invoice:data_5.xlsx", "shape": "dot", "title": "{\"type\": \"Invoice\", \"vendor\": \"Unknown Vendor\", \"invoice_date\": \"\", \"total\": null, \"recency\": \"last_30d\", \"file\": \"data_5.xlsx\", \"suffix\": \".xlsx\"}"}, {"color": "#74c476", "id": "file:data_5.xlsx", "label": "data_5.xlsx", "shape": "dot", "title": "{\"type\": \"File\", \"name\": \"data_5.xlsx\", \"path\": \"/home/karthikean.juttumaha/mini-extract/samples/data_5.xlsx\", \"suffix\": \".xlsx\", \"mtime\": \"2026-09-23 21:06:58.879605+00:00\"}"}, {"color": "#6baed6", "id": "invoice:invoice_1.pdf", "label": "invoice:invoice_1.pdf", "shape": "dot", "title": "{\"type\": \"Invoice\", \"vendor\": \"Unknown Vendor\", \"invoice_date\": \"\", \"total\": null, \"recency\": \"last_30d\", \"file\": \"invoice_1.pdf\", \"suffix\": \".pdf\"}"}, {"color": "#74c476", "id": "file:invoice_1.pdf", "label": "invoice_1.pdf", "shape": "dot", "title": "{\"type\": \"File\", \"name\": \"invoice_1.pdf\", \"path\": \"/home/karthikean.juttumaha/mini-extract/samples/invoice_1.pdf\", \"suffix\": \".pdf\", \"mtime\": \"2026-09-23 21:04:24.599896+00:00\"}"}, {"color": "#6baed6", "id": "invoice:invoice_1.txt", "label": "invoice:invoice_1.txt", "shape": "dot", "title": "{\"type\": \"Invoice\", \"vendor\": \"Unknown Vendor\", \"invoice_date\": \"\", \"total\": null, \"recency\": \"last_30d\", \"file\": \"invoice_1.txt\", \"suffix\": \".txt\"}"}, {"color": "#74c476", "id": "file:invoice_1.txt", "label": "invoice_1.txt", "shape": "dot", "title": "{\"type\": \"File\", \"name\": \"invoice_1.txt\", \"path\": \"/home/karthikean.juttumaha/mini-extract/samples/invoice_1.txt\", \"suffix\": \".txt\", \"mtime\": \"2026-09-23 21:06:49.321174+00:00\"}"}, {"color": "#6baed6", "id": "invoice:invoice_2.pdf", "label": "invoice:invoice_2.pdf", "shape": "dot", "title": "{\"type\": \"Invoice\", \"vendor\": \"Unknown Vendor\", \"invoice_date\": \"\", \"total\": null, \"recency\": \"last_30d\", \"file\": \"invoice_2.pdf\", \"suffix\": \".pdf\"}"}, {"color": "#74c476", "id": "file:invoice_2.pdf", "label": "invoice_2.pdf", "shape": "dot", "title": "{\"type\": \"File\", \"name\": \"invoice_2.pdf\", \"path\": \"/home/karthikean.juttumaha/mini-extract/samples/invoice_2.pdf\", \"suffix\": \".pdf\", \"mtime\": \"2026-09-23 21:04:24.603648+00:00\"}"}, {"color": "#6baed6", "id": "invoice:invoice_2.txt", "label": "invoice:invoice_2.txt", "shape": "dot", "title": "{\"type\": \"Invoice\", \"vendor\": \"Unknown Vendor\", \"invoice_date\": \"\", \"total\": null, \"recency\": \"last_30d\", \"file\": \"invoice_2.txt\", \"suffix\": \".txt\"}"}, {"color": "#74c476", "id": "file:invoice_2.txt", "label": "invoice_2.txt", "shape": "dot", "title": "{\"type\": \"File\", \"name\": \"invoice_2.txt\", \"path\": \"/home/karthikean.juttumaha/mini-extract/samples/invoice_2.txt\", \"suffix\": \".txt\", \"mtime\": \"2026-09-23 21:06:49.321263+00:00\"}"}, {"color": "#6baed6", "id": "invoice:invoice_3.pdf", "label": "invoice:invoice_3.pdf", "shape": "dot", "title": "{\"type\": \"Invoice\", \"vendor\": \"Unknown Vendor\", \"invoice_date\": \"\", \"total\": null, \"recency\": \"last_30d\", \"file\": \"invoice_3.pdf\", \"suffix\": \".pdf\"}"}, {"color": "#74c476", "id": "file:invoice_3.pdf", "label": "invoice_3.pdf", "shape": "dot", "title": "{\"type\": \"File\", \"name\": \"invoice_3.pdf\", \"path\": \"/home/karthikean.juttumaha/mini-extract/samples/invoice_3.pdf\", \"suffix\": \".pdf\", \"mtime\": \"2026-09-23 21:04:24.606544+00:00\"}"}, {"color": "#6baed6", "id": "invoice:invoice_3.txt", "label": "invoice:invoice_3.txt", "shape": "dot", "title": "{\"type\": \"Invoice\", \"vendor\": \"Unknown Vendor\", \"invoice_date\": \"\", \"total\": null, \"recency\": \"last_30d\", \"file\": \"invoice_3.txt\", \"suffix\": \".txt\"}"}, {"color": "#74c476", "id": "file:invoice_3.txt", "label": "invoice_3.txt", "shape": "dot", "title": "{\"type\": \"File\", \"name\": \"invoice_3.txt\", \"path\": \"/home/karthikean.juttumaha/mini-extract/samples/invoice_3.txt\", \"suffix\": \".txt\", \"mtime\": \"2026-09-23 21:06:49.321307+00:00\"}"}, {"color": "#6baed6", "id": "invoice:invoice_4.pdf", "label": "invoice:invoice_4.pdf", "shape": "dot", "title": "{\"type\": \"Invoice\", \"vendor\": \"Unknown Vendor\", \"invoice_date\": \"\", \"total\": null, \"recency\": \"last_30d\", \"file\": \"invoice_4.pdf\", \"suffix\": \".pdf\"}"}, {"color": "#74c476", "id": "file:invoice_4.pdf", "label": "invoice_4.pdf", "shape": "dot", "title": "{\"type\": \"File\", \"name\": \"invoice_4.pdf\", \"path\": \"/home/karthikean.juttumaha/mini-extract/samples/invoice_4.pdf\", \"suffix\": \".pdf\", \"mtime\": \"2026-09-23 21:04:24.609093+00:00\"}"}, {"color": "#6baed6", "id": "invoice:invoice_4.txt", "label": "invoice:invoice_4.txt", "shape": "dot", "title": "{\"type\": \"Invoice\", \"vendor\": \"Unknown Vendor\", \"invoice_date\": \"\", \"total\": null, \"recency\": \"last_30d\", \"file\": \"invoice_4.txt\", \"suffix\": \".txt\"}"}, {"color": "#74c476", "id": "file:invoice_4.txt", "label": "invoice_4.txt", "shape": "dot", "title": "{\"type\": \"File\", \"name\": \"invoice_4.txt\", \"path\": \"/home/karthikean.juttumaha/mini-extract/samples/invoice_4.txt\", \"suffix\": \".txt\", \"mtime\": \"2026-09-23 21:06:49.321341+00:00\"}"}, {"color": "#6baed6", "id": "invoice:invoice_5.pdf", "label": "invoice:invoice_5.pdf", "shape": "dot", "title": "{\"type\": \"Invoice\", \"vendor\": \"Unknown Vendor\", \"invoice_date\": \"\", \"total\": null, \"recency\": \"last_30d\", \"file\": \"invoice_5.pdf\", \"suffix\": \".pdf\"}"}, {"color": "#74c476", "id": "file:invoice_5.pdf", "label": "invoice_5.pdf", "shape": "dot", "title": "{\"type\": \"File\", \"name\": \"invoice_5.pdf\", \"path\": \"/home/karthikean.juttumaha/mini-extract/samples/invoice_5.pdf\", \"suffix\": \".pdf\", \"mtime\": \"2026-09-23 21:04:24.611388+00:00\"}"}, {"color": "#6baed6", "id": "invoice:invoice_5.txt", "label": "invoice:invoice_5.txt", "shape": "dot", "title": "{\"type\": \"Invoice\", \"vendor\": \"Unknown Vendor\", \"invoice_date\": \"\", \"total\": null, \"recency\": \"last_30d\", \"file\": \"invoice_5.txt\", \"suffix\": \".txt\"}"}, {"color": "#74c476", "id": "file:invoice_5.txt", "label": "invoice_5.txt", "shape": "dot", "title": "{\"type\": \"File\", \"name\": \"invoice_5.txt\", \"path\": \"/home/karthikean.juttumaha/mini-extract/samples/invoice_5.txt\", \"suffix\": \".txt\", \"mtime\": \"2026-09-23 21:06:49.321373+00:00\"}"}, {"color": "#6baed6", "id": "invoice:small_text.pdf", "label": "invoice:small_text.pdf", "shape": "dot", "title": "{\"type\": \"Invoice\", \"vendor\": \"Unknown Vendor\", \"invoice_date\": \"\", \"total\": null, \"recency\": \"last_30d\", \"file\": \"small_text.pdf\", \"suffix\": \".pdf\"}"}, {"color": "#74c476", "id": "file:small_text.pdf", "label": "small_text.pdf", "shape": "dot", "title": "{\"type\": \"File\", \"name\": \"small_text.pdf\", \"path\": \"/home/karthikean.juttumaha/mini-extract/samples/small_text.pdf\", \"suffix\": \".pdf\", \"mtime\": \"2026-09-24 19:03:04.168361+00:00\"}"}]);
+                  edges = new vis.DataSet([{"arrows": "to", "from": "invoice:audio_1.wav", "title": "in_month", "to": "month:2026-09"}, {"arrows": "to", "from": "invoice:audio_1.wav", "title": "from_vendor", "to": "vendor:Unknown Vendor"}, {"arrows": "to", "from": "invoice:audio_1.wav", "title": "stored_in", "to": "file:audio_1.wav"}, {"arrows": "to", "from": "invoice:audio_2.wav", "title": "in_month", "to": "month:2026-09"}, {"arrows": "to", "from": "invoice:audio_2.wav", "title": "from_vendor", "to": "vendor:Unknown Vendor"}, {"arrows": "to", "from": "invoice:audio_2.wav", "title": "stored_in", "to": "file:audio_2.wav"}, {"arrows": "to", "from": "invoice:audio_3.wav", "title": "in_month", "to": "month:2026-09"}, {"arrows": "to", "from": "invoice:audio_3.wav", "title": "from_vendor", "to": "vendor:Unknown Vendor"}, {"arrows": "to", "from": "invoice:audio_3.wav", "title": "stored_in", "to": "file:audio_3.wav"}, {"arrows": "to", "from": "invoice:audio_4.wav", "title": "in_month", "to": "month:2026-09"}, {"arrows": "to", "from": "invoice:audio_4.wav", "title": "from_vendor", "to": "vendor:Unknown Vendor"}, {"arrows": "to", "from": "invoice:audio_4.wav", "title": "stored_in", "to": "file:audio_4.wav"}, {"arrows": "to", "from": "invoice:audio_5.wav", "title": "in_month", "to": "month:2026-09"}, {"arrows": "to", "from": "invoice:audio_5.wav", "title": "from_vendor", "to": "vendor:Unknown Vendor"}, {"arrows": "to", "from": "invoice:audio_5.wav", "title": "stored_in", "to": "file:audio_5.wav"}, {"arrows": "to", "from": "invoice:data_1.xlsx", "title": "in_month", "to": "month:2026-09"}, {"arrows": "to", "from": "invoice:data_1.xlsx", "title": "from_vendor", "to": "vendor:Unknown Vendor"}, {"arrows": "to", "from": "invoice:data_1.xlsx", "title": "stored_in", "to": "file:data_1.xlsx"}, {"arrows": "to", "from": "invoice:data_2.xlsx", "title": "in_month", "to": "month:2026-09"}, {"arrows": "to", "from": "invoice:data_2.xlsx", "title": "from_vendor", "to": "vendor:Unknown Vendor"}, {"arrows": "to", "from": "invoice:data_2.xlsx", "title": "stored_in", "to": "file:data_2.xlsx"}, {"arrows": "to", "from": "invoice:data_3.xlsx", "title": "in_month", "to": "month:2026-09"}, {"arrows": "to", "from": "invoice:data_3.xlsx", "title": "from_vendor", "to": "vendor:Unknown Vendor"}, {"arrows": "to", "from": "invoice:data_3.xlsx", "title": "stored_in", "to": "file:data_3.xlsx"}, {"arrows": "to", "from": "invoice:data_4.xlsx", "title": "in_month", "to": "month:2026-09"}, {"arrows": "to", "from": "invoice:data_4.xlsx", "title": "from_vendor", "to": "vendor:Unknown Vendor"}, {"arrows": "to", "from": "invoice:data_4.xlsx", "title": "stored_in", "to": "file:data_4.xlsx"}, {"arrows": "to", "from": "invoice:data_5.xlsx", "title": "in_month", "to": "month:2026-09"}, {"arrows": "to", "from": "invoice:data_5.xlsx", "title": "from_vendor", "to": "vendor:Unknown Vendor"}, {"arrows": "to", "from": "invoice:data_5.xlsx", "title": "stored_in", "to": "file:data_5.xlsx"}, {"arrows": "to", "from": "invoice:invoice_1.pdf", "title": "in_month", "to": "month:2026-09"}, {"arrows": "to", "from": "invoice:invoice_1.pdf", "title": "from_vendor", "to": "vendor:Unknown Vendor"}, {"arrows": "to", "from": "invoice:invoice_1.pdf", "title": "stored_in", "to": "file:invoice_1.pdf"}, {"arrows": "to", "from": "invoice:invoice_1.txt", "title": "in_month", "to": "month:2026-09"}, {"arrows": "to", "from": "invoice:invoice_1.txt", "title": "from_vendor", "to": "vendor:Unknown Vendor"}, {"arrows": "to", "from": "invoice:invoice_1.txt", "title": "stored_in", "to": "file:invoice_1.txt"}, {"arrows": "to", "from": "invoice:invoice_2.pdf", "title": "in_month", "to": "month:2026-09"}, {"arrows": "to", "from": "invoice:invoice_2.pdf", "title": "from_vendor", "to": "vendor:Unknown Vendor"}, {"arrows": "to", "from": "invoice:invoice_2.pdf", "title": "stored_in", "to": "file:invoice_2.pdf"}, {"arrows": "to", "from": "invoice:invoice_2.txt", "title": "in_month", "to": "month:2026-09"}, {"arrows": "to", "from": "invoice:invoice_2.txt", "title": "from_vendor", "to": "vendor:Unknown Vendor"}, {"arrows": "to", "from": "invoice:invoice_2.txt", "title": "stored_in", "to": "file:invoice_2.txt"}, {"arrows": "to", "from": "invoice:invoice_3.pdf", "title": "in_month", "to": "month:2026-09"}, {"arrows": "to", "from": "invoice:invoice_3.pdf", "title": "from_vendor", "to": "vendor:Unknown Vendor"}, {"arrows": "to", "from": "invoice:invoice_3.pdf", "title": "stored_in", "to": "file:invoice_3.pdf"}, {"arrows": "to", "from": "invoice:invoice_3.txt", "title": "in_month", "to": "month:2026-09"}, {"arrows": "to", "from": "invoice:invoice_3.txt", "title": "from_vendor", "to": "vendor:Unknown Vendor"}, {"arrows": "to", "from": "invoice:invoice_3.txt", "title": "stored_in", "to": "file:invoice_3.txt"}, {"arrows": "to", "from": "invoice:invoice_4.pdf", "title": "in_month", "to": "month:2026-09"}, {"arrows": "to", "from": "invoice:invoice_4.pdf", "title": "from_vendor", "to": "vendor:Unknown Vendor"}, {"arrows": "to", "from": "invoice:invoice_4.pdf", "title": "stored_in", "to": "file:invoice_4.pdf"}, {"arrows": "to", "from": "invoice:invoice_4.txt", "title": "in_month", "to": "month:2026-09"}, {"arrows": "to", "from": "invoice:invoice_4.txt", "title": "from_vendor", "to": "vendor:Unknown Vendor"}, {"arrows": "to", "from": "invoice:invoice_4.txt", "title": "stored_in", "to": "file:invoice_4.txt"}, {"arrows": "to", "from": "invoice:invoice_5.pdf", "title": "in_month", "to": "month:2026-09"}, {"arrows": "to", "from": "invoice:invoice_5.pdf", "title": "from_vendor", "to": "vendor:Unknown Vendor"}, {"arrows": "to", "from": "invoice:invoice_5.pdf", "title": "stored_in", "to": "file:invoice_5.pdf"}, {"arrows": "to", "from": "invoice:invoice_5.txt", "title": "in_month", "to": "month:2026-09"}, {"arrows": "to", "from": "invoice:invoice_5.txt", "title": "from_vendor", "to": "vendor:Unknown Vendor"}, {"arrows": "to", "from": "invoice:invoice_5.txt", "title": "stored_in", "to": "file:invoice_5.txt"}, {"arrows": "to", "from": "invoice:small_text.pdf", "title": "in_month", "to": "month:2026-09"}, {"arrows": "to", "from": "invoice:small_text.pdf", "title": "from_vendor", "to": "vendor:Unknown Vendor"}, {"arrows": "to", "from": "invoice:small_text.pdf", "title": "stored_in", "to": "file:small_text.pdf"}]);
+
+                  nodeColors = {};
+                  allNodes = nodes.get({ returnType: "Object" });
+                  for (nodeId in allNodes) {
+                    nodeColors[nodeId] = allNodes[nodeId].color;
+                  }
+                  allEdges = edges.get({ returnType: "Object" });
+                  // adding nodes and edges to the graph
+                  data = {nodes: nodes, edges: edges};
+
+                  var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": true,
+            "type": "dynamic"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+
+                  
+
+
+                  
+
+                  network = new vis.Network(container, data, options);
+
+                  
+
+                  
+
+                  
+
+
+                  
+
+                  return network;
+
+              }
+              drawGraph();
+        </script>
+    </body>
+</html>

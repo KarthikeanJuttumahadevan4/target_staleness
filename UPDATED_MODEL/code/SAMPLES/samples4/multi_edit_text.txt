@@ -1,0 +1,338 @@
+# Text File with Embedded Markers
+
+**Filename**: `multi_edit_text.txt`  
+**Type**: Plain text file  
+**Extraction Method**: Embedded markers  
+**Expected Edits**: 5  
+**Expected Nodes**: 5  
+**Expected Edges**: 4  
+**Confidence**: High  
+**Creation Difficulty**: ⭐ Easy
+
+---
+
+## 📋 File Content
+
+Copy the following content **exactly** to create `multi_edit_text.txt`:
+
+```text
+<!-- EDIT: 2024-02-02T20:31:00Z | AUTHOR: alice | TYPE: create | SECTION: header | DESCRIPTION: Initial document creation -->
+# Project Report
+
+This is the initial version of the project documentation.
+
+The project aims to create a universal file metadata extractor.
+
+<!-- EDIT: 2024-02-03T19:29:00Z | AUTHOR: bob | TYPE: add | SECTION: introduction | DESCRIPTION: Added introduction section -->
+## Introduction
+
+This section provides an overview of the Universal File Metadata Extractor project.
+
+The extractor can handle multiple file types including text, documents, and media.
+
+<!-- EDIT: 2024-02-04T10:15:00Z | AUTHOR: alice | TYPE: modify | SECTION: title | DESCRIPTION: Updated title to include version -->
+# Project Report v1.0
+
+This is the UPDATED version of the project documentation.
+
+The project aims to create a universal file metadata extractor.
+
+## Introduction
+
+This section provides an overview of the Universal File Metadata Extractor project.
+
+The extractor can handle multiple file types including text, documents, and media.
+
+<!-- EDIT: 2024-02-04T14:29:00Z | AUTHOR: alice | TYPE: add | SECTION: images | DESCRIPTION: Added image references with timestamps -->
+## Media Assets
+
+This section documents the images used in the project:
+
+- Image 1: logo.png - Added on 2024-02-04T14:29:00Z
+- Image 2: diagram.png - Added on 2024-02-04T14:29:00Z
+
+![Project Logo](logo.png)
+![Diagram](diagram.png)
+
+<!-- EDIT: 2024-02-05T09:00:00Z | AUTHOR: bob | TYPE: add | SECTION: audio_video | DESCRIPTION: Added audio and video references -->
+## Audio and Video Assets
+
+- Audio 1: intro.mp3 - Narrator: alice, Duration: 30s
+- Audio 2: demo.wav - Narrator: bob, Duration: 45s
+
+- Video 1: tutorial.mp4 - Duration: 2min 30s
+- Video 2: demo.mov - Duration: 1min
+
+## Conclusion
+
+This is the final content.
+```
+
+---
+
+## 🎯 Creation Steps
+
+### Method 1: Command Line (Fastest)
+
+```bash
+# Navigate to samples4 directory
+cd /path/to/mini-extract/samples4
+
+# Create the file with cat (Unix/Linux/macOS)
+cat > multi_edit_text.txt << 'EOF'
+<!-- EDIT: 2024-02-02T20:31:00Z | AUTHOR: alice | TYPE: create | SECTION: header | DESCRIPTION: Initial document creation -->
+# Project Report
+
+This is the initial version of the project documentation.
+
+The project aims to create a universal file metadata extractor.
+
+<!-- EDIT: 2024-02-03T19:29:00Z | AUTHOR: bob | TYPE: add | SECTION: introduction | DESCRIPTION: Added introduction section -->
+## Introduction
+
+This section provides an overview of the Universal File Metadata Extractor project.
+
+The extractor can handle multiple file types including text, documents, and media.
+
+<!-- EDIT: 2024-02-04T10:15:00Z | AUTHOR: alice | TYPE: modify | SECTION: title | DESCRIPTION: Updated title to include version -->
+# Project Report v1.0
+
+This is the UPDATED version of the project documentation.
+
+The project aims to create a universal file metadata extractor.
+
+## Introduction
+
+This section provides an overview of the Universal File Metadata Extractor project.
+
+The extractor can handle multiple file types including text, documents, and media.
+
+<!-- EDIT: 2024-02-04T14:29:00Z | AUTHOR: alice | TYPE: add | SECTION: images | DESCRIPTION: Added image references with timestamps -->
+## Media Assets
+
+This section documents the images used in the project:
+
+- Image 1: logo.png - Added on 2024-02-04T14:29:00Z
+- Image 2: diagram.png - Added on 2024-02-04T14:29:00Z
+
+![Project Logo](logo.png)
+![Diagram](diagram.png)
+
+<!-- EDIT: 2024-02-05T09:00:00Z | AUTHOR: bob | TYPE: add | SECTION: audio_video | DESCRIPTION: Added audio and video references -->
+## Audio and Video Assets
+
+- Audio 1: intro.mp3 - Narrator: alice, Duration: 30s
+- Audio 2: demo.wav - Narrator: bob, Duration: 45s
+
+- Video 1: tutorial.mp4 - Duration: 2min 30s
+- Video 2: demo.mov - Duration: 1min
+EOF
+```
+
+### Method 2: Text Editor (Any OS)
+
+1. Open your text editor (Notepad, VS Code, Sublime, etc.)
+2. Copy the content above (starting from the first `<!-- EDIT:` line)
+3. Save as `multi_edit_text.txt` in the `samples4` directory
+4. Ensure file extension is `.txt`, not `.txt.md`
+
+---
+
+## ✅ Verification
+
+After creating the file, verify it:
+
+```bash
+# Check file exists
+ls -la samples4/multi_edit_text.txt
+
+# Check edit markers are present
+grep -c "EDIT:" samples4/multi_edit_text.txt  # Should return 5
+
+# Check file size
+wc -l samples4/multi_edit_text.txt  # Should be ~30 lines
+```
+
+---
+
+## 🔍 Expected Extraction Results
+
+### Command to Run
+
+```bash
+python extract.py samples4/multi_edit_text.txt --output results/multi_edit_text.json
+```
+
+### Expected Output Structure
+
+```json
+{
+  "extraction_metadata": {
+    "file": "samples4/multi_edit_text.txt",
+    "timestamp": "2026-10-05T...",
+    "extractor_version": "1.0.0"
+  },
+  "version_history": {
+    "edits": [
+      {
+        "node_id": "edit_20240202T203100Z_001",
+        "timestamp": "2024-02-02T20:31:00Z",
+        "author": "alice",
+        "edit_type": "create",
+        "description": "Initial document creation",
+        "source": "embedded_marker",
+        "evaluation_band": "high"
+      },
+      {
+        "node_id": "edit_20240203T192900Z_002",
+        "timestamp": "2024-02-03T19:29:00Z",
+        "author": "bob",
+        "edit_type": "add",
+        "description": "Added introduction section",
+        "source": "embedded_marker",
+        "evaluation_band": "high"
+      },
+      {
+        "node_id": "edit_20240204T101500Z_003",
+        "timestamp": "2024-02-04T10:15:00Z",
+        "author": "alice",
+        "edit_type": "modify",
+        "description": "Updated title to include version",
+        "source": "embedded_marker",
+        "evaluation_band": "high"
+      },
+      {
+        "node_id": "edit_20240204T142900Z_004",
+        "timestamp": "2024-02-04T14:29:00Z",
+        "author": "alice",
+        "edit_type": "add",
+        "description": "Added image references with timestamps",
+        "source": "embedded_marker",
+        "evaluation_band": "high"
+      },
+      {
+        "node_id": "edit_20240205T090000Z_005",
+        "timestamp": "2024-02-05T09:00:00Z",
+        "author": "bob",
+        "edit_type": "add",
+        "description": "Added audio and video references",
+        "source": "embedded_marker",
+        "evaluation_band": "high"
+      }
+    ]
+  },
+  "knowledge_graph": {
+    "nodes": 5,
+    "edges": 4,
+    "total_nodes": 5,
+    "total_edges": 4
+  },
+  "summary": {
+    "total_edits": 5,
+    "total_nodes": 5,
+    "total_edges": 4,
+    "sources_used": ["embedded_marker"],
+    "confidence_distribution": {
+      "high": 5,
+      "medium": 0,
+      "low": 0
+    }
+  }
+}
+```
+
+---
+
+## 📊 Validation Rules
+
+| Check | Expected | Actual | Status |
+|-------|----------|--------|--------|
+| Number of edits | 5 | | ✅/❌ |
+| Number of nodes | 5 | | ✅/❌ |
+| Number of edges | 4 | | ✅/❌ |
+| First timestamp | 2024-02-02T20:31:00Z | | ✅/❌ |
+| Last timestamp | 2024-02-05T09:00:00Z | | ✅/❌ |
+| All authors present | alice, bob | | ✅/❌ |
+| All edit types present | create, add, modify | | ✅/❌ |
+| All confidence high | 5 high | | ✅/❌ |
+
+---
+
+## 🔧 Troubleshooting
+
+### Issue: File not found
+**Error**: `FileNotFoundError: [Errno 2] No such file or directory: 'samples4/multi_edit_text.txt'`
+
+**Solution**: 
+```bash
+# Check current directory
+pwd
+
+# Navigate to project root
+cd /path/to/mini-extract
+
+# Verify file exists
+ls -la samples4/multi_edit_text.txt
+
+# Run from correct directory
+python extract.py samples4/multi_edit_text.txt
+```
+
+### Issue: No edits extracted
+**Error**: `"edits": []` in output
+
+**Solution**: 
+```bash
+# Check markers are present
+grep "EDIT:" samples4/multi_edit_text.txt
+
+# If no output, markers were not copied correctly
+# Recreate the file using the command line method above
+```
+
+### Issue: Wrong number of edits
+**Error**: Expected 5 edits, got N
+
+**Solution**: 
+```bash
+# Count markers
+grep -c "EDIT:" samples4/multi_edit_text.txt
+
+# If count != 5, the file was not created correctly
+# Recreate the file
+```
+
+---
+
+## 🎓 Key Concepts Demonstrated
+
+This test file demonstrates:
+
+1. **Embedded marker detection** - Finding `<!-- EDIT: -->` comments
+2. **Timestamp extraction** - Parsing ISO 8601 timestamps
+3. **Author extraction** - Getting author from markers
+4. **Edit type classification** - create, add, modify
+5. **Section tracking** - Which section was affected
+6. **Temporal ordering** - Edits sorted by timestamp
+7. **Content extraction** - Text between markers
+8. **Knowledge graph construction** - Nodes and edges
+9. **Evaluation band assignment** - High confidence for markers
+10. **Multi-edit tracking** - 5 distinct edits tracked
+
+---
+
+## 🚀 Next Steps
+
+After this file works:
+
+1. ✅ **Current**: Text file with embedded markers
+2. **Next**: [Word Document with Track Changes](tracked_changes_docx.md)
+3. **Then**: [PDF with Metadata](metadata_pdf.md)
+4. **Then**: [Image with EXIF](exif_image.md)
+5. **Then**: [Audio with ID3 Tags](sample_audio.md)
+6. **Then**: [Video with Metadata](sample_video.md)
+7. **Then**: [Git Version History](git_history.md)
+
+---
+
+**This is the easiest sample file. If this doesn't work, none of the others will. Start here!**

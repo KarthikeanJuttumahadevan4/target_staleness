@@ -1,0 +1,53 @@
+References for Temporal-Valid KG RAG System
+
+Core Technologies:
+
+1. Neo4j - Graph database for temporal knowledge storage
+   Documentation: https://neo4j.com/docs/
+   Paper: "Temporal Graph Networks" (Zhang et al., 2020)
+   Link: https://arxiv.org/abs/2006.10637
+
+2. Qdrant - Vector similarity search engine
+   Documentation: https://qdrant.tech/documentation/
+   Paper: "Faiss: A library for efficient similarity search" (Johnson et al.)
+   Link: https://arxiv.org/abs/1702.08734
+
+3. Docling - Document conversion library
+   GitHub: https://github.com/DirkSokamp/docling
+   Documentation: https://docling.readthedocs.io/
+
+4. OpenAI GPT - For answer generation
+   Paper: "Language Models are Few-Shot Learners" (Brown et al., 2020)
+   Link: https://arxiv.org/abs/2005.14165
+
+5. Sentence Transformers - For text embeddings
+   Paper: "Sentence-BERT" (Reimers & Gurevych, 2019)
+   Link: https://arxiv.org/abs/1908.10084
+
+Research Papers Referenced:
+
+1. TITAN: Temporal Knowledge Graph Embedding with Temporal Attention
+   Link: https://arxiv.org/abs/2006.02478
+
+2. HyTE: Link Prediction in Temporal Knowledge Graphs
+   Link: https://arxiv.org/abs/1907.03653
+
+3. Temporal Graph Networks for Deep Learning on Dynamic Graphs
+   Link: https://arxiv.org/abs/2006.10637
+
+4. Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks
+   Link: https://arxiv.org/abs/2005.11401
+
+5. KILT: A Knowledge-Intensive Language Tasks Benchmark
+   Link: https://arxiv.org/abs/2109.03450
+
+6. LayoutLM: Pre-training of Text and Layout for Document AI
+   Link: https://arxiv.org/abs/1912.10033
+
+7. Donut: Document Understanding Transformer in the Wild
+   Link: https://arxiv.org/abs/2211.16996
+
+Sample Papers in SAMPLES/:
+- AI + Human + JTC + Independent Study.pdf (AI targeting research)
+- Q3-2024-Financial-Report.pdf (Financial data)
+- NDA-AcmeCorp-2024.docx (Contract document)

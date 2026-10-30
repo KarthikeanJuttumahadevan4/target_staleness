@@ -1,0 +1,15 @@
+This is a test document for the Temporal-Valid KG RAG System.
+
+Created: 2024-01-15
+Author: Test User
+Version: 1.0
+
+Content:
+- Entity: Acme Corporation
+- Entity: John Smith
+- Entity: CEO
+- Relationship: John Smith is CEO of Acme Corporation
+
+<!-- EDIT: 2024-02-01T10:00:00Z | AUTHOR: admin | TYPE: add | SECTION: updates -->
+- Update: Jane Doe became CEO in 2024
+

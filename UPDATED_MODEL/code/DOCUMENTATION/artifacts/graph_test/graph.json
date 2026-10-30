@@ -1,0 +1,266 @@
+{
+  "nodes": [
+    {
+      "id": "invoice:audio_1.wav",
+      "type": "Invoice",
+      "vendor": "Delta Services",
+      "invoice_date": "2026-09-29",
+      "total": 320.0,
+      "recency": "last_7d",
+      "file": "audio_1.wav",
+      "suffix": ".wav"
+    },
+    {
+      "id": "vendor:Delta Services",
+      "type": "Vendor",
+      "name": "Delta Services"
+    },
+    {
+      "id": "file:audio_1.wav",
+      "type": "File",
+      "name": "audio_1.wav",
+      "path": "/home/karthikean.juttumaha/mini-extract/samples/audio_1.wav",
+      "suffix": ".wav",
+      "mtime": "2026-09-30 09:00:00+00:00"
+    },
+    {
+      "id": "month:2026-09",
+      "type": "Month",
+      "name": "2026-09"
+    },
+    {
+      "id": "invoice:data_1.xlsx",
+      "type": "Invoice",
+      "vendor": "Gamma Industries",
+      "invoice_date": "2026-08-10",
+      "total": 4520.5,
+      "recency": "older",
+      "file": "data_1.xlsx",
+      "suffix": ".xlsx"
+    },
+    {
+      "id": "vendor:Gamma Industries",
+      "type": "Vendor",
+      "name": "Gamma Industries"
+    },
+    {
+      "id": "file:data_1.xlsx",
+      "type": "File",
+      "name": "data_1.xlsx",
+      "path": "/home/karthikean.juttumaha/mini-extract/samples/data_1.xlsx",
+      "suffix": ".xlsx",
+      "mtime": "2026-08-15 14:20:00+00:00"
+    },
+    {
+      "id": "month:2026-08",
+      "type": "Month",
+      "name": "2026-08"
+    },
+    {
+      "id": "invoice:invoice_1.pdf",
+      "type": "Invoice",
+      "vendor": "Acme Corp",
+      "invoice_date": "2026-09-28",
+      "total": 1250.75,
+      "recency": "last_7d",
+      "file": "invoice_1.pdf",
+      "suffix": ".pdf"
+    },
+    {
+      "id": "vendor:Acme Corp",
+      "type": "Vendor",
+      "name": "Acme Corp"
+    },
+    {
+      "id": "file:invoice_1.pdf",
+      "type": "File",
+      "name": "invoice_1.pdf",
+      "path": "/home/karthikean.juttumaha/mini-extract/samples/invoice_1.pdf",
+      "suffix": ".pdf",
+      "mtime": "2026-09-29 10:15:00+00:00"
+    },
+    {
+      "id": "invoice:invoice_3.txt",
+      "type": "Invoice",
+      "vendor": "Beta Supplies",
+      "invoice_date": "2026-09-19",
+      "total": 899.0,
+      "recency": "last_30d",
+      "file": "invoice_3.txt",
+      "suffix": ".txt"
+    },
+    {
+      "id": "vendor:Beta Supplies",
+      "type": "Vendor",
+      "name": "Beta Supplies"
+    },
+    {
+      "id": "file:invoice_3.txt",
+      "type": "File",
+      "name": "invoice_3.txt",
+      "path": "/home/karthikean.juttumaha/mini-extract/samples/invoice_3.txt",
+      "suffix": ".txt",
+      "mtime": "2026-09-20 08:30:00+00:00"
+    },
+    {
+      "id": "invoice:invoice_5.pdf",
+      "type": "Invoice",
+      "vendor": "Unknown Vendor",
+      "invoice_date": "",
+      "total": null,
+      "recency": "last_7d",
+      "file": "invoice_5.pdf",
+      "suffix": ".pdf"
+    },
+    {
+      "id": "vendor:Unknown Vendor",
+      "type": "Vendor",
+      "name": "Unknown Vendor"
+    },
+    {
+      "id": "file:invoice_5.pdf",
+      "type": "File",
+      "name": "invoice_5.pdf",
+      "path": "/home/karthikean.juttumaha/mini-extract/samples/invoice_5.pdf",
+      "suffix": ".pdf",
+      "mtime": "2026-09-25 11:00:00+00:00"
+    },
+    {
+      "id": "invoice:video_1.avi",
+      "type": "Invoice",
+      "vendor": "Epsilon Ltd",
+      "invoice_date": "2025-11-28",
+      "total": 7800.25,
+      "recency": "older",
+      "file": "video_1.avi",
+      "suffix": ".avi"
+    },
+    {
+      "id": "vendor:Epsilon Ltd",
+      "type": "Vendor",
+      "name": "Epsilon Ltd"
+    },
+    {
+      "id": "file:video_1.avi",
+      "type": "File",
+      "name": "video_1.avi",
+      "path": "/home/karthikean.juttumaha/mini-extract/samples/video_1.avi",
+      "suffix": ".avi",
+      "mtime": "2025-12-01 12:00:00+00:00"
+    },
+    {
+      "id": "month:2025-11",
+      "type": "Month",
+      "name": "2025-11"
+    }
+  ],
+  "edges": [
+    {
+      "source": "invoice:audio_1.wav",
+      "target": "month:2026-09",
+      "rel": "in_month"
+    },
+    {
+      "source": "invoice:audio_1.wav",
+      "target": "vendor:Delta Services",
+      "rel": "from_vendor"
+    },
+    {
+      "source": "invoice:audio_1.wav",
+      "target": "file:audio_1.wav",
+      "rel": "stored_in"
+    },
+    {
+      "source": "invoice:data_1.xlsx",
+      "target": "month:2026-08",
+      "rel": "in_month"
+    },
+    {
+      "source": "invoice:data_1.xlsx",
+      "target": "vendor:Gamma Industries",
+      "rel": "from_vendor"
+    },
+    {
+      "source": "invoice:data_1.xlsx",
+      "target": "file:data_1.xlsx",
+      "rel": "stored_in"
+    },
+    {
+      "source": "invoice:invoice_1.pdf",
+      "target": "month:2026-09",
+      "rel": "in_month"
+    },
+    {
+      "source": "invoice:invoice_1.pdf",
+      "target": "vendor:Acme Corp",
+      "rel": "from_vendor"
+    },
+    {
+      "source": "invoice:invoice_1.pdf",
+      "target": "file:invoice_1.pdf",
+      "rel": "stored_in"
+    },
+    {
+      "source": "invoice:invoice_3.txt",
+      "target": "month:2026-09",
+      "rel": "in_month"
+    },
+    {
+      "source": "invoice:invoice_3.txt",
+      "target": "vendor:Beta Supplies",
+      "rel": "from_vendor"
+    },
+    {
+      "source": "invoice:invoice_3.txt",
+      "target": "file:invoice_3.txt",
+      "rel": "stored_in"
+    },
+    {
+      "source": "invoice:invoice_5.pdf",
+      "target": "month:2026-09",
+      "rel": "in_month"
+    },
+    {
+      "source": "invoice:invoice_5.pdf",
+      "target": "vendor:Unknown Vendor",
+      "rel": "from_vendor"
+    },
+    {
+      "source": "invoice:invoice_5.pdf",
+      "target": "file:invoice_5.pdf",
+      "rel": "stored_in"
+    },
+    {
+      "source": "invoice:video_1.avi",
+      "target": "month:2025-11",
+      "rel": "in_month"
+    },
+    {
+      "source": "invoice:video_1.avi",
+      "target": "vendor:Epsilon Ltd",
+      "rel": "from_vendor"
+    },
+    {
+      "source": "invoice:video_1.avi",
+      "target": "file:video_1.avi",
+      "rel": "stored_in"
+    }
+  ],
+  "stats": {
+    "node_count": 21,
+    "edge_count": 18,
+    "vendors": {
+      "Delta Services": 1,
+      "Gamma Industries": 1,
+      "Acme Corp": 1,
+      "Beta Supplies": 1,
+      "Unknown Vendor": 1,
+      "Epsilon Ltd": 1
+    },
+    "months": {
+      "2026-09": 4,
+      "2026-08": 1,
+      "2025-11": 1
+    }
+  }
+}

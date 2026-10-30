@@ -1,0 +1,11 @@
+Invoice #INV-2024-001
+Date: 2024-01-20
+Vendor: Acme Supplies Inc.
+Total: $1,250.00
+
+Items:
+- Office Supplies: $500.00
+- Equipment: $750.00
+
+Terms: Net 30
+Status: Paid

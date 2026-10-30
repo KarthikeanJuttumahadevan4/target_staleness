@@ -1,0 +1,89 @@
+{
+  "test_summary": {
+    "description": "Expected outputs for unit tests of Temporal-Valid KG RAG System",
+    "timestamp": "2024-01-15T10:30:00Z",
+    "version": "2.0.0"
+  },
+  "config_tests": {
+    "settings_defaults": {
+      "openai_base_url": "http://llm-gateway.internal/v1",
+      "model": "gpt-4-turbo",
+      "vlm_model": "gpt-4o",
+      "watch_dir": "./samples5"
+    },
+    "settings_cache": {
+      "expected": "singleton",
+      "description": "get_settings() should return same instance"
+    }
+  },
+  "timestamp_extractor_tests": {
+    "get_as_of": {
+      "returns_datetime": true,
+      "fallback_on_missing": true
+    },
+    "get_mtime": {
+      "returns_datetime": true
+    },
+    "file_not_found": {
+      "raises": "FileNotFoundError"
+    }
+  },
+  "router_tests": {
+    "text_files": ["text", "json", "xml"],
+    "pdf": "text",
+    "excel": "text",
+    "pptx": "text",
+    "audio": ["mp3", "wav", "m4a"],
+    "video": ["mp4", "avi", "mov"],
+    "images": ["png", "jpg", "tiff"],
+    "archives": ["zip", "tar.gz", "7z"],
+    "unsupported": ["xyz", "unknown"]
+  },
+  "conflict_resolver_tests": {
+    "no_conflict": {
+      "action": "keep",
+      "reason": "No existing conflict found"
+    },
+    "newer_supersedes": {
+      "action": "supersede",
+      "superseded_fact_id": "fact123"
+    },
+    "older_kept": {
+      "action": "keep"
+    },
+    "same_timestamp": {
+      "action": "keep"
+    }
+  },
+  "models_tests": {
+    "fact_creation": {
+      "current_default": true,
+      "confidence_default": 1.0
+    },
+    "query_request_defaults": {
+      "mode": "pure_rag",
+      "k": 10,
+      "include_history": false
+    }
+  },
+  "sample_files": {
+    "text": "SAMPLES/sample_text.txt",
+    "invoice": "SAMPLES/sample_invoice.txt",
+    "json": "SAMPLES/sample_metadata.json",
+    "xml": "SAMPLES/sample_config.xml"
+  },
+  "expected_outputs": {
+    "timestamp_extractor": {
+      "sample_text_txt": {
+        "valid_at": "2024-01-15T10:30:00Z",
+        "fallback_used": true
+      }
+    },
+    "router": {
+      "sample_text_txt": "text",
+      "sample_invoice_txt": "text",
+      "sample_metadata_json": "text",
+      "sample_config_xml": "text"
+    }
+  }
+}

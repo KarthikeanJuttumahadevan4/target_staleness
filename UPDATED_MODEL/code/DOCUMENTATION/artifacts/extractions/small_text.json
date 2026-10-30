@@ -1,0 +1,11 @@
+{
+  "file_path": "/home/karthikean.juttumaha/mini-extract/samples/small_text.pdf",
+  "file_name": "small_text.pdf",
+  "suffix": ".pdf",
+  "file_size": 1027,
+  "file_mtime": "2026-09-24T19:03:04.168361+00:00",
+  "file_ctime": "2026-09-24T19:03:04.168361+00:00",
+  "stderr": "INGEST=pdfplumber CHARS=34\nThis PDF looks scanned. VLM/OCR not in v1. Use a text PDF.",
+  "exit_code": 2,
+  "extracted_at": "2026-10-02T13:24:51.307095+00:00"
+}

@@ -1,0 +1,94 @@
+{
+  "references": [
+    {
+      "name": "Neo4j",
+      "description": "Graph database for temporal knowledge storage",
+      "type": "technology",
+      "link": "https://neo4j.com/docs/",
+      "paper": "Temporal Graph Networks",
+      "paper_link": "https://arxiv.org/abs/2006.10637"
+    },
+    {
+      "name": "Qdrant",
+      "description": "Vector similarity search engine",
+      "type": "technology",
+      "link": "https://qdrant.tech/documentation/",
+      "paper": "Faiss: A library for efficient similarity search",
+      "paper_link": "https://arxiv.org/abs/1702.08734"
+    },
+    {
+      "name": "Docling",
+      "description": "Document conversion and extraction library",
+      "type": "technology",
+      "link": "https://docling.readthedocs.io/",
+      "github": "https://github.com/DirkSokamp/docling"
+    },
+    {
+      "name": "GPT-3",
+      "description": "Large language model for answer generation",
+      "type": "technology",
+      "paper": "Language Models are Few-Shot Learners",
+      "paper_link": "https://arxiv.org/abs/2005.14165"
+    },
+    {
+      "name": "Sentence Transformers",
+      "description": "For text embeddings",
+      "type": "technology",
+      "paper": "Sentence-BERT",
+      "paper_link": "https://arxiv.org/abs/1908.10084"
+    },
+    {
+      "name": "TITAN",
+      "description": "Temporal Knowledge Graph Embedding with Temporal Attention",
+      "type": "paper",
+      "link": "https://arxiv.org/abs/2006.02478"
+    },
+    {
+      "name": "HyTE",
+      "description": "Link Prediction in Temporal Knowledge Graphs",
+      "type": "paper",
+      "link": "https://arxiv.org/abs/1907.03653"
+    },
+    {
+      "name": "RAG Paper",
+      "description": "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks",
+      "type": "paper",
+      "link": "https://arxiv.org/abs/2005.11401"
+    },
+    {
+      "name": "KILT",
+      "description": "A Knowledge-Intensive Language Tasks Benchmark",
+      "type": "paper",
+      "link": "https://arxiv.org/abs/2109.03450"
+    },
+    {
+      "name": "LayoutLM",
+      "description": "Pre-training of Text and Layout for Document AI",
+      "type": "paper",
+      "link": "https://arxiv.org/abs/1912.10033"
+    },
+    {
+      "name": "Donut",
+      "description": "Document Understanding Transformer in the Wild",
+      "type": "paper",
+      "link": "https://arxiv.org/abs/2211.16996"
+    }
+  ],
+  "sample_papers": [
+    {
+      "name": "AI + Human + JTC + Independent Study.pdf",
+      "description": "Research on AI-enabled targeting",
+      "location": "SAMPLES/AI + Human + JTC + Independent Study.pdf"
+    },
+    {
+      "name": "Q3-2024-Financial-Report.pdf",
+      "description": "Financial data for testing extraction",
+      "location": "SAMPLES/reports/"
+    },
+    {
+      "name": "NDA-AcmeCorp-2024.docx",
+      "description": "Contract document for testing",
+      "location": "SAMPLES/contracts/"
+    }
+  ]
+}

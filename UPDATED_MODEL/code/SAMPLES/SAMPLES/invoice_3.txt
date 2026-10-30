@@ -1,0 +1,5 @@
+Invoice #3:
+Vendor: Acme Corp
+Invoice Date: 2026-13-08
+Total: $80.00
+Notes: Net 30 terms

@@ -1,0 +1,26 @@
+{
+  "test_summary": {
+    "total_tests": 39,
+    "passed": 39,
+    "failed": 0,
+    "status": "PASSED"
+  },
+  "consolidation": {
+    "original_directories": ["samples", "samples2", "samples3", "samples5", "SAMPLE6"],
+    "consolidated_into": "SAMPLES",
+    "files_consolidated": 71,
+    "directories_removed": 5,
+    "kept_directories": ["samples4"]
+  },
+  "sample_data_location": "SAMPLES/",
+  "sample_data_types": [
+    "PDF documents (invoices, reports, contracts)",
+    "Excel spreadsheets",
+    "Word documents",
+    "PowerPoint presentations",
+    "Audio files",
+    "Video files",
+    "Text files",
+    "Documentation"
+  ]
+}

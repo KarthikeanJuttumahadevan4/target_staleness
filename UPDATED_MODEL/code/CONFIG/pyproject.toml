@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mini-extract"
+version = "0.1.0"
+requires-python = ">=3.10"
+dependencies = [
+    "pdfplumber",
+    "openpyxl",
+    "python-dotenv",
+    "openai",
+    "anthropic",
+    "dspy==3.4.0",
+    "docling==2.132.0",
+    "pydantic",
+    "pydantic-settings",
+    "fastapi",
+    "uvicorn",
+    "watchdog",
+    "neo4j",
+    "qdrant-client",
+    "sentence-transformers",
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["src*"]
+exclude = ["samples*", "artifacts*", ".venv*", "TESTING*", "SAMPLES*"]

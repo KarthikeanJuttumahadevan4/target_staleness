@@ -1,0 +1,6 @@
+# Temporal-Valid KG RAG System - User Interface
+# Requirements for UI dependencies
+
+streamlit>=1.30.0
+python-multipart>=0.0.7
+requests>=2.31.0

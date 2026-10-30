@@ -1,0 +1,7 @@
+<!-- EDIT: 2024-01-01T10:00:00Z | AUTHOR: alice | TYPE: create -->
+# Quarterly Report
+Project Status: Active
+
+<!-- EDIT: 2024-01-02T14:30:00Z | AUTHOR: bob | TYPE: add -->
+## Phase 1 Complete
+All milestones achieved.

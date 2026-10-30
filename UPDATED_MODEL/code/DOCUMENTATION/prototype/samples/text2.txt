@@ -1,0 +1,6 @@
+<!-- EDIT: 2024-02-01T08:00:00Z | AUTHOR: charlie | TYPE: create -->
+# Technical Spec
+Requirements
+
+<!-- EDIT: 2024-02-01T10:00:00Z | AUTHOR: charlie | TYPE: add -->
+Hardware specs

@@ -1,0 +1,45 @@
+{
+  "pdf_processing_results": {
+    "input": {
+      "file": "Exploring AI for Decision Support in Targeting",
+      "type": "PDF academic paper",
+      "note": "Model does not support direct PDF input - requires text extraction"
+    },
+    "expected_processing": {
+      "intake": {
+        "router": "text",
+        "method": "pdf_text",
+        "description": "PDF routed to text extraction path via Docling"
+      },
+      "extraction": {
+        "tool": "Docling",
+        "capabilities": ["text extraction", "table parsing", "OCR (if scanned)"],
+        "output_format": "NormalizedExtract"
+      },
+      "vlm_enrichment": {
+        "applies_to": ["figures", "tables", "charts"],
+        "models": ["Qwen2.5-VL-7B-SFT", "GPT-4o Vision"]
+      }
+    },
+    "sample_output": {
+      "query": "What is the main application of AI discussed?",
+      "response": "The paper discusses 'Decision Support in Targeting' as the primary AI application.",
+      "citation": {
+        "page": 1,
+        "section": "Introduction",
+        "source_file": "Exploring_AI_for_Decision_Support_in_Targeting.pdf"
+      },
+      "confidence": 0.95,
+      "mode": "rag_kg_validator"
+    },
+    "how_to_test": {
+      "steps": [
+        "Copy PDF to SAMPLES/ directory",
+        "Run: from src.temporal.timestamp_extractor import TimestampExtractor",
+        "Run: extractor.get_as_of('SAMPLES/Exploring_AI_for_Decision_Support_in_Targeting-3.pdf')",
+        "Run: from src.intake.router import route, get_ingest_method",
+        "Run: python3 -m pytest TESTING/test_modules.py -v"
+      ]
+    }
+  }
+}

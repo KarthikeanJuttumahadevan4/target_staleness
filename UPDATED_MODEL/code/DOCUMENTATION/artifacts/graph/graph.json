@@ -1,0 +1,719 @@
+{
+  "nodes": [
+    {
+      "id": "invoice:audio_1.wav",
+      "type": "Invoice",
+      "vendor": "Unknown Vendor",
+      "invoice_date": "",
+      "total": null,
+      "recency": "last_30d",
+      "file": "audio_1.wav",
+      "suffix": ".wav"
+    },
+    {
+      "id": "vendor:Unknown Vendor",
+      "type": "Vendor",
+      "name": "Unknown Vendor"
+    },
+    {
+      "id": "file:audio_1.wav",
+      "type": "File",
+      "name": "audio_1.wav",
+      "path": "/home/karthikean.juttumaha/mini-extract/samples/audio_1.wav",
+      "suffix": ".wav",
+      "mtime": "2026-09-23 21:07:13.968097+00:00"
+    },
+    {
+      "id": "month:2026-09",
+      "type": "Month",
+      "name": "2026-09"
+    },
+    {
+      "id": "invoice:audio_2.wav",
+      "type": "Invoice",
+      "vendor": "Unknown Vendor",
+      "invoice_date": "",
+      "total": null,
+      "recency": "last_30d",
+      "file": "audio_2.wav",
+      "suffix": ".wav"
+    },
+    {
+      "id": "file:audio_2.wav",
+      "type": "File",
+      "name": "audio_2.wav",
+      "path": "/home/karthikean.juttumaha/mini-extract/samples/audio_2.wav",
+      "suffix": ".wav",
+      "mtime": "2026-09-23 21:07:14.010482+00:00"
+    },
+    {
+      "id": "invoice:audio_3.wav",
+      "type": "Invoice",
+      "vendor": "Unknown Vendor",
+      "invoice_date": "",
+      "total": null,
+      "recency": "last_30d",
+      "file": "audio_3.wav",
+      "suffix": ".wav"
+    },
+    {
+      "id": "file:audio_3.wav",
+      "type": "File",
+      "name": "audio_3.wav",
+      "path": "/home/karthikean.juttumaha/mini-extract/samples/audio_3.wav",
+      "suffix": ".wav",
+      "mtime": "2026-09-23 21:07:14.052482+00:00"
+    },
+    {
+      "id": "invoice:audio_4.wav",
+      "type": "Invoice",
+      "vendor": "Unknown Vendor",
+      "invoice_date": "",
+      "total": null,
+      "recency": "last_30d",
+      "file": "audio_4.wav",
+      "suffix": ".wav"
+    },
+    {
+      "id": "file:audio_4.wav",
+      "type": "File",
+      "name": "audio_4.wav",
+      "path": "/home/karthikean.juttumaha/mini-extract/samples/audio_4.wav",
+      "suffix": ".wav",
+      "mtime": "2026-09-23 21:07:14.093776+00:00"
+    },
+    {
+      "id": "invoice:audio_5.wav",
+      "type": "Invoice",
+      "vendor": "Unknown Vendor",
+      "invoice_date": "",
+      "total": null,
+      "recency": "last_30d",
+      "file": "audio_5.wav",
+      "suffix": ".wav"
+    },
+    {
+      "id": "file:audio_5.wav",
+      "type": "File",
+      "name": "audio_5.wav",
+      "path": "/home/karthikean.juttumaha/mini-extract/samples/audio_5.wav",
+      "suffix": ".wav",
+      "mtime": "2026-09-23 21:07:14.135799+00:00"
+    },
+    {
+      "id": "invoice:data_1.xlsx",
+      "type": "Invoice",
+      "vendor": "Unknown Vendor",
+      "invoice_date": "",
+      "total": null,
+      "recency": "last_30d",
+      "file": "data_1.xlsx",
+      "suffix": ".xlsx"
+    },
+    {
+      "id": "file:data_1.xlsx",
+      "type": "File",
+      "name": "data_1.xlsx",
+      "path": "/home/karthikean.juttumaha/mini-extract/samples/data_1.xlsx",
+      "suffix": ".xlsx",
+      "mtime": "2026-09-23 21:06:58.872099+00:00"
+    },
+    {
+      "id": "invoice:data_2.xlsx",
+      "type": "Invoice",
+      "vendor": "Unknown Vendor",
+      "invoice_date": "",
+      "total": null,
+      "recency": "last_30d",
+      "file": "data_2.xlsx",
+      "suffix": ".xlsx"
+    },
+    {
+      "id": "file:data_2.xlsx",
+      "type": "File",
+      "name": "data_2.xlsx",
+      "path": "/home/karthikean.juttumaha/mini-extract/samples/data_2.xlsx",
+      "suffix": ".xlsx",
+      "mtime": "2026-09-23 21:06:58.874712+00:00"
+    },
+    {
+      "id": "invoice:data_3.xlsx",
+      "type": "Invoice",
+      "vendor": "Unknown Vendor",
+      "invoice_date": "",
+      "total": null,
+      "recency": "last_30d",
+      "file": "data_3.xlsx",
+      "suffix": ".xlsx"
+    },
+    {
+      "id": "file:data_3.xlsx",
+      "type": "File",
+      "name": "data_3.xlsx",
+      "path": "/home/karthikean.juttumaha/mini-extract/samples/data_3.xlsx",
+      "suffix": ".xlsx",
+      "mtime": "2026-09-23 21:06:58.876238+00:00"
+    },
+    {
+      "id": "invoice:data_4.xlsx",
+      "type": "Invoice",
+      "vendor": "Unknown Vendor",
+      "invoice_date": "",
+      "total": null,
+      "recency": "last_30d",
+      "file": "data_4.xlsx",
+      "suffix": ".xlsx"
+    },
+    {
+      "id": "file:data_4.xlsx",
+      "type": "File",
+      "name": "data_4.xlsx",
+      "path": "/home/karthikean.juttumaha/mini-extract/samples/data_4.xlsx",
+      "suffix": ".xlsx",
+      "mtime": "2026-09-23 21:06:58.877871+00:00"
+    },
+    {
+      "id": "invoice:data_5.xlsx",
+      "type": "Invoice",
+      "vendor": "Unknown Vendor",
+      "invoice_date": "",
+      "total": null,
+      "recency": "last_30d",
+      "file": "data_5.xlsx",
+      "suffix": ".xlsx"
+    },
+    {
+      "id": "file:data_5.xlsx",
+      "type": "File",
+      "name": "data_5.xlsx",
+      "path": "/home/karthikean.juttumaha/mini-extract/samples/data_5.xlsx",
+      "suffix": ".xlsx",
+      "mtime": "2026-09-23 21:06:58.879605+00:00"
+    },
+    {
+      "id": "invoice:invoice_1.pdf",
+      "type": "Invoice",
+      "vendor": "Unknown Vendor",
+      "invoice_date": "",
+      "total": null,
+      "recency": "last_30d",
+      "file": "invoice_1.pdf",
+      "suffix": ".pdf"
+    },
+    {
+      "id": "file:invoice_1.pdf",
+      "type": "File",
+      "name": "invoice_1.pdf",
+      "path": "/home/karthikean.juttumaha/mini-extract/samples/invoice_1.pdf",
+      "suffix": ".pdf",
+      "mtime": "2026-09-23 21:04:24.599896+00:00"
+    },
+    {
+      "id": "invoice:invoice_1.txt",
+      "type": "Invoice",
+      "vendor": "Unknown Vendor",
+      "invoice_date": "",
+      "total": null,
+      "recency": "last_30d",
+      "file": "invoice_1.txt",
+      "suffix": ".txt"
+    },
+    {
+      "id": "file:invoice_1.txt",
+      "type": "File",
+      "name": "invoice_1.txt",
+      "path": "/home/karthikean.juttumaha/mini-extract/samples/invoice_1.txt",
+      "suffix": ".txt",
+      "mtime": "2026-09-23 21:06:49.321174+00:00"
+    },
+    {
+      "id": "invoice:invoice_2.pdf",
+      "type": "Invoice",
+      "vendor": "Unknown Vendor",
+      "invoice_date": "",
+      "total": null,
+      "recency": "last_30d",
+      "file": "invoice_2.pdf",
+      "suffix": ".pdf"
+    },
+    {
+      "id": "file:invoice_2.pdf",
+      "type": "File",
+      "name": "invoice_2.pdf",
+      "path": "/home/karthikean.juttumaha/mini-extract/samples/invoice_2.pdf",
+      "suffix": ".pdf",
+      "mtime": "2026-09-23 21:04:24.603648+00:00"
+    },
+    {
+      "id": "invoice:invoice_2.txt",
+      "type": "Invoice",
+      "vendor": "Unknown Vendor",
+      "invoice_date": "",
+      "total": null,
+      "recency": "last_30d",
+      "file": "invoice_2.txt",
+      "suffix": ".txt"
+    },
+    {
+      "id": "file:invoice_2.txt",
+      "type": "File",
+      "name": "invoice_2.txt",
+      "path": "/home/karthikean.juttumaha/mini-extract/samples/invoice_2.txt",
+      "suffix": ".txt",
+      "mtime": "2026-09-23 21:06:49.321263+00:00"
+    },
+    {
+      "id": "invoice:invoice_3.pdf",
+      "type": "Invoice",
+      "vendor": "Unknown Vendor",
+      "invoice_date": "",
+      "total": null,
+      "recency": "last_30d",
+      "file": "invoice_3.pdf",
+      "suffix": ".pdf"
+    },
+    {
+      "id": "file:invoice_3.pdf",
+      "type": "File",
+      "name": "invoice_3.pdf",
+      "path": "/home/karthikean.juttumaha/mini-extract/samples/invoice_3.pdf",
+      "suffix": ".pdf",
+      "mtime": "2026-09-23 21:04:24.606544+00:00"
+    },
+    {
+      "id": "invoice:invoice_3.txt",
+      "type": "Invoice",
+      "vendor": "Unknown Vendor",
+      "invoice_date": "",
+      "total": null,
+      "recency": "last_30d",
+      "file": "invoice_3.txt",
+      "suffix": ".txt"
+    },
+    {
+      "id": "file:invoice_3.txt",
+      "type": "File",
+      "name": "invoice_3.txt",
+      "path": "/home/karthikean.juttumaha/mini-extract/samples/invoice_3.txt",
+      "suffix": ".txt",
+      "mtime": "2026-09-23 21:06:49.321307+00:00"
+    },
+    {
+      "id": "invoice:invoice_4.pdf",
+      "type": "Invoice",
+      "vendor": "Unknown Vendor",
+      "invoice_date": "",
+      "total": null,
+      "recency": "last_30d",
+      "file": "invoice_4.pdf",
+      "suffix": ".pdf"
+    },
+    {
+      "id": "file:invoice_4.pdf",
+      "type": "File",
+      "name": "invoice_4.pdf",
+      "path": "/home/karthikean.juttumaha/mini-extract/samples/invoice_4.pdf",
+      "suffix": ".pdf",
+      "mtime": "2026-09-23 21:04:24.609093+00:00"
+    },
+    {
+      "id": "invoice:invoice_4.txt",
+      "type": "Invoice",
+      "vendor": "Unknown Vendor",
+      "invoice_date": "",
+      "total": null,
+      "recency": "last_30d",
+      "file": "invoice_4.txt",
+      "suffix": ".txt"
+    },
+    {
+      "id": "file:invoice_4.txt",
+      "type": "File",
+      "name": "invoice_4.txt",
+      "path": "/home/karthikean.juttumaha/mini-extract/samples/invoice_4.txt",
+      "suffix": ".txt",
+      "mtime": "2026-09-23 21:06:49.321341+00:00"
+    },
+    {
+      "id": "invoice:invoice_5.pdf",
+      "type": "Invoice",
+      "vendor": "Unknown Vendor",
+      "invoice_date": "",
+      "total": null,
+      "recency": "last_30d",
+      "file": "invoice_5.pdf",
+      "suffix": ".pdf"
+    },
+    {
+      "id": "file:invoice_5.pdf",
+      "type": "File",
+      "name": "invoice_5.pdf",
+      "path": "/home/karthikean.juttumaha/mini-extract/samples/invoice_5.pdf",
+      "suffix": ".pdf",
+      "mtime": "2026-09-23 21:04:24.611388+00:00"
+    },
+    {
+      "id": "invoice:invoice_5.txt",
+      "type": "Invoice",
+      "vendor": "Unknown Vendor",
+      "invoice_date": "",
+      "total": null,
+      "recency": "last_30d",
+      "file": "invoice_5.txt",
+      "suffix": ".txt"
+    },
+    {
+      "id": "file:invoice_5.txt",
+      "type": "File",
+      "name": "invoice_5.txt",
+      "path": "/home/karthikean.juttumaha/mini-extract/samples/invoice_5.txt",
+      "suffix": ".txt",
+      "mtime": "2026-09-23 21:06:49.321373+00:00"
+    },
+    {
+      "id": "invoice:small_text.pdf",
+      "type": "Invoice",
+      "vendor": "Unknown Vendor",
+      "invoice_date": "",
+      "total": null,
+      "recency": "last_30d",
+      "file": "small_text.pdf",
+      "suffix": ".pdf"
+    },
+    {
+      "id": "file:small_text.pdf",
+      "type": "File",
+      "name": "small_text.pdf",
+      "path": "/home/karthikean.juttumaha/mini-extract/samples/small_text.pdf",
+      "suffix": ".pdf",
+      "mtime": "2026-09-24 19:03:04.168361+00:00"
+    }
+  ],
+  "edges": [
+    {
+      "source": "invoice:audio_1.wav",
+      "target": "month:2026-09",
+      "rel": "in_month"
+    },
+    {
+      "source": "invoice:audio_1.wav",
+      "target": "vendor:Unknown Vendor",
+      "rel": "from_vendor"
+    },
+    {
+      "source": "invoice:audio_1.wav",
+      "target": "file:audio_1.wav",
+      "rel": "stored_in"
+    },
+    {
+      "source": "invoice:audio_2.wav",
+      "target": "month:2026-09",
+      "rel": "in_month"
+    },
+    {
+      "source": "invoice:audio_2.wav",
+      "target": "vendor:Unknown Vendor",
+      "rel": "from_vendor"
+    },
+    {
+      "source": "invoice:audio_2.wav",
+      "target": "file:audio_2.wav",
+      "rel": "stored_in"
+    },
+    {
+      "source": "invoice:audio_3.wav",
+      "target": "month:2026-09",
+      "rel": "in_month"
+    },
+    {
+      "source": "invoice:audio_3.wav",
+      "target": "vendor:Unknown Vendor",
+      "rel": "from_vendor"
+    },
+    {
+      "source": "invoice:audio_3.wav",
+      "target": "file:audio_3.wav",
+      "rel": "stored_in"
+    },
+    {
+      "source": "invoice:audio_4.wav",
+      "target": "month:2026-09",
+      "rel": "in_month"
+    },
+    {
+      "source": "invoice:audio_4.wav",
+      "target": "vendor:Unknown Vendor",
+      "rel": "from_vendor"
+    },
+    {
+      "source": "invoice:audio_4.wav",
+      "target": "file:audio_4.wav",
+      "rel": "stored_in"
+    },
+    {
+      "source": "invoice:audio_5.wav",
+      "target": "month:2026-09",
+      "rel": "in_month"
+    },
+    {
+      "source": "invoice:audio_5.wav",
+      "target": "vendor:Unknown Vendor",
+      "rel": "from_vendor"
+    },
+    {
+      "source": "invoice:audio_5.wav",
+      "target": "file:audio_5.wav",
+      "rel": "stored_in"
+    },
+    {
+      "source": "invoice:data_1.xlsx",
+      "target": "month:2026-09",
+      "rel": "in_month"
+    },
+    {
+      "source": "invoice:data_1.xlsx",
+      "target": "vendor:Unknown Vendor",
+      "rel": "from_vendor"
+    },
+    {
+      "source": "invoice:data_1.xlsx",
+      "target": "file:data_1.xlsx",
+      "rel": "stored_in"
+    },
+    {
+      "source": "invoice:data_2.xlsx",
+      "target": "month:2026-09",
+      "rel": "in_month"
+    },
+    {
+      "source": "invoice:data_2.xlsx",
+      "target": "vendor:Unknown Vendor",
+      "rel": "from_vendor"
+    },
+    {
+      "source": "invoice:data_2.xlsx",
+      "target": "file:data_2.xlsx",
+      "rel": "stored_in"
+    },
+    {
+      "source": "invoice:data_3.xlsx",
+      "target": "month:2026-09",
+      "rel": "in_month"
+    },
+    {
+      "source": "invoice:data_3.xlsx",
+      "target": "vendor:Unknown Vendor",
+      "rel": "from_vendor"
+    },
+    {
+      "source": "invoice:data_3.xlsx",
+      "target": "file:data_3.xlsx",
+      "rel": "stored_in"
+    },
+    {
+      "source": "invoice:data_4.xlsx",
+      "target": "month:2026-09",
+      "rel": "in_month"
+    },
+    {
+      "source": "invoice:data_4.xlsx",
+      "target": "vendor:Unknown Vendor",
+      "rel": "from_vendor"
+    },
+    {
+      "source": "invoice:data_4.xlsx",
+      "target": "file:data_4.xlsx",
+      "rel": "stored_in"
+    },
+    {
+      "source": "invoice:data_5.xlsx",
+      "target": "month:2026-09",
+      "rel": "in_month"
+    },
+    {
+      "source": "invoice:data_5.xlsx",
+      "target": "vendor:Unknown Vendor",
+      "rel": "from_vendor"
+    },
+    {
+      "source": "invoice:data_5.xlsx",
+      "target": "file:data_5.xlsx",
+      "rel": "stored_in"
+    },
+    {
+      "source": "invoice:invoice_1.pdf",
+      "target": "month:2026-09",
+      "rel": "in_month"
+    },
+    {
+      "source": "invoice:invoice_1.pdf",
+      "target": "vendor:Unknown Vendor",
+      "rel": "from_vendor"
+    },
+    {
+      "source": "invoice:invoice_1.pdf",
+      "target": "file:invoice_1.pdf",
+      "rel": "stored_in"
+    },
+    {
+      "source": "invoice:invoice_1.txt",
+      "target": "month:2026-09",
+      "rel": "in_month"
+    },
+    {
+      "source": "invoice:invoice_1.txt",
+      "target": "vendor:Unknown Vendor",
+      "rel": "from_vendor"
+    },
+    {
+      "source": "invoice:invoice_1.txt",
+      "target": "file:invoice_1.txt",
+      "rel": "stored_in"
+    },
+    {
+      "source": "invoice:invoice_2.pdf",
+      "target": "month:2026-09",
+      "rel": "in_month"
+    },
+    {
+      "source": "invoice:invoice_2.pdf",
+      "target": "vendor:Unknown Vendor",
+      "rel": "from_vendor"
+    },
+    {
+      "source": "invoice:invoice_2.pdf",
+      "target": "file:invoice_2.pdf",
+      "rel": "stored_in"
+    },
+    {
+      "source": "invoice:invoice_2.txt",
+      "target": "month:2026-09",
+      "rel": "in_month"
+    },
+    {
+      "source": "invoice:invoice_2.txt",
+      "target": "vendor:Unknown Vendor",
+      "rel": "from_vendor"
+    },
+    {
+      "source": "invoice:invoice_2.txt",
+      "target": "file:invoice_2.txt",
+      "rel": "stored_in"
+    },
+    {
+      "source": "invoice:invoice_3.pdf",
+      "target": "month:2026-09",
+      "rel": "in_month"
+    },
+    {
+      "source": "invoice:invoice_3.pdf",
+      "target": "vendor:Unknown Vendor",
+      "rel": "from_vendor"
+    },
+    {
+      "source": "invoice:invoice_3.pdf",
+      "target": "file:invoice_3.pdf",
+      "rel": "stored_in"
+    },
+    {
+      "source": "invoice:invoice_3.txt",
+      "target": "month:2026-09",
+      "rel": "in_month"
+    },
+    {
+      "source": "invoice:invoice_3.txt",
+      "target": "vendor:Unknown Vendor",
+      "rel": "from_vendor"
+    },
+    {
+      "source": "invoice:invoice_3.txt",
+      "target": "file:invoice_3.txt",
+      "rel": "stored_in"
+    },
+    {
+      "source": "invoice:invoice_4.pdf",
+      "target": "month:2026-09",
+      "rel": "in_month"
+    },
+    {
+      "source": "invoice:invoice_4.pdf",
+      "target": "vendor:Unknown Vendor",
+      "rel": "from_vendor"
+    },
+    {
+      "source": "invoice:invoice_4.pdf",
+      "target": "file:invoice_4.pdf",
+      "rel": "stored_in"
+    },
+    {
+      "source": "invoice:invoice_4.txt",
+      "target": "month:2026-09",
+      "rel": "in_month"
+    },
+    {
+      "source": "invoice:invoice_4.txt",
+      "target": "vendor:Unknown Vendor",
+      "rel": "from_vendor"
+    },
+    {
+      "source": "invoice:invoice_4.txt",
+      "target": "file:invoice_4.txt",
+      "rel": "stored_in"
+    },
+    {
+      "source": "invoice:invoice_5.pdf",
+      "target": "month:2026-09",
+      "rel": "in_month"
+    },
+    {
+      "source": "invoice:invoice_5.pdf",
+      "target": "vendor:Unknown Vendor",
+      "rel": "from_vendor"
+    },
+    {
+      "source": "invoice:invoice_5.pdf",
+      "target": "file:invoice_5.pdf",
+      "rel": "stored_in"
+    },
+    {
+      "source": "invoice:invoice_5.txt",
+      "target": "month:2026-09",
+      "rel": "in_month"
+    },
+    {
+      "source": "invoice:invoice_5.txt",
+      "target": "vendor:Unknown Vendor",
+      "rel": "from_vendor"
+    },
+    {
+      "source": "invoice:invoice_5.txt",
+      "target": "file:invoice_5.txt",
+      "rel": "stored_in"
+    },
+    {
+      "source": "invoice:small_text.pdf",
+      "target": "month:2026-09",
+      "rel": "in_month"
+    },
+    {
+      "source": "invoice:small_text.pdf",
+      "target": "vendor:Unknown Vendor",
+      "rel": "from_vendor"
+    },
+    {
+      "source": "invoice:small_text.pdf",
+      "target": "file:small_text.pdf",
+      "rel": "stored_in"
+    }
+  ],
+  "stats": {
+    "node_count": 44,
+    "edge_count": 63,
+    "vendors": {
+      "Unknown Vendor": 21
+    },
+    "months": {
+      "2026-09": 21
+    }
+  }
+}

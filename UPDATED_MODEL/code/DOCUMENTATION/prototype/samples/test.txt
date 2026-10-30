@@ -1,0 +1,9 @@
+<!-- EDIT: 2024-01-01T10:00:00Z | AUTHOR: alice | TYPE: create -->
+# Test Document
+Initial content here.
+
+<!-- EDIT: 2024-01-02T14:30:00Z | AUTHOR: bob | TYPE: add -->
+Added new section.
+
+<!-- EDIT: 2024-01-03T09:15:00Z | AUTHOR: alice | TYPE: modify -->
+Modified the content.

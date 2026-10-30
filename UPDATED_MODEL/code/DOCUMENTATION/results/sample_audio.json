@@ -1,0 +1,74 @@
+{
+  "extraction_metadata": {
+    "file": "samples4/sample_audio.md",
+    "timestamp": "2026-10-08T14:32:40.296042Z",
+    "extractor_version": "1.0.0"
+  },
+  "file_metadata": {
+    "filesystem": {
+      "size_bytes": 8402,
+      "created_time": "2026-10-05T22:15:39.112292Z",
+      "modified_time": "2026-10-05T22:15:39.112292Z",
+      "accessed_time": "2026-10-08T10:10:23.522924Z"
+    },
+    "file_type": "text/markdown",
+    "text": {
+      "character_count": 8362,
+      "line_count": 349,
+      "word_count": 984
+    }
+  },
+  "version_history": {
+    "edits": [
+      {
+        "node_id": "fs_sample_audio.md",
+        "node_type": "edit",
+        "timestamp": "2026-10-05T22:15:39.112292Z",
+        "author": null,
+        "edit_type": "create",
+        "content_before": null,
+        "content_after": "# Audio File with Metadata\n\n**Filename**: `sample_audio.mp3` (or `.wav`)  \n**Type**: Audio File (MP3, WAV, etc.)  \n**Extraction Method**: Audio metadata parsing  \n**Expected Nodes**: 1  \n**Expected Edges**: 0  \n**Confidence**: Medium  \n**Creation Difficulty**: \u2b50\u2b50 Easy\n\n---\n\n## \ud83d\udccb Overview\n\nAudio files contain **metadata** that includes:\n- Duration\n- Bit rate\n- Sample rate\n- Channels (mono/stereo)\n- ID3 tags (for MP3): Title, Artist, Album, Year, Genre\n- Other formats have similar metadata\n\nThe ex...",
+        "affected_sections": [],
+        "description": "",
+        "file_version": "1.0",
+        "source": "filesystem",
+        "evaluation_band": "low"
+      }
+    ],
+    "edit_count": 1
+  },
+  "knowledge_graph": {
+    "nodes": [
+      {
+        "node_id": "fs_sample_audio.md",
+        "node_type": "edit",
+        "timestamp": "2026-10-05T22:15:39.112292Z",
+        "author": null,
+        "edit_type": "create",
+        "content_before": null,
+        "content_after": "# Audio File with Metadata\n\n**Filename**: `sample_audio.mp3` (or `.wav`)  \n**Type**: Audio File (MP3, WAV, etc.)  \n**Extraction Method**: Audio metadata parsing  \n**Expected Nodes**: 1  \n**Expected Edges**: 0  \n**Confidence**: Medium  \n**Creation Difficulty**: \u2b50\u2b50 Easy\n\n---\n\n## \ud83d\udccb Overview\n\nAudio files contain **metadata** that includes:\n- Duration\n- Bit rate\n- Sample rate\n- Channels (mono/stereo)\n- ID3 tags (for MP3): Title, Artist, Album, Year, Genre\n- Other formats have similar metadata\n\nThe ex...",
+        "affected_sections": [],
+        "description": "",
+        "file_version": "1.0",
+        "source": "filesystem",
+        "evaluation_band": "low"
+      }
+    ],
+    "edges": [],
+    "total_nodes": 1,
+    "total_edges": 0
+  },
+  "summary": {
+    "total_edits": 1,
+    "total_nodes": 1,
+    "total_edges": 0,
+    "sources_used": [
+      "filesystem"
+    ],
+    "confidence_distribution": {
+      "high": 0,
+      "medium": 0,
+      "low": 1
+    }
+  }
+}

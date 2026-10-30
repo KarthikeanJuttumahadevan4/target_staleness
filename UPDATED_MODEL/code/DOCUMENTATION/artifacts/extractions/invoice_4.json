@@ -1,0 +1,17 @@
+{
+  "vendor": null,
+  "invoice_date": null,
+  "total": null,
+  "notes": null,
+  "extracted_at": "2026-10-02T13:24:44.313657+00:00",
+  "ingest_path": "pdfplumber",
+  "source": "invoice_4.pdf",
+  "file_path": "/home/karthikean.juttumaha/mini-extract/samples/invoice_4.pdf",
+  "file_name": "invoice_4.pdf",
+  "suffix": ".pdf",
+  "file_size": 1206,
+  "file_mtime": "2026-09-23T21:04:24.609093+00:00",
+  "file_ctime": "2026-09-23T21:04:24.609093+00:00",
+  "stderr": "INGEST=pdfplumber CHARS=84",
+  "exit_code": 0
+}
